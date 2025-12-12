@@ -69,7 +69,7 @@
   
   /* Dégradé principal pour les événements du calendrier */
   --gradient-brand-green-blue: linear-gradient(135deg, #CCE3C3 0%, #CDE8FA 100%);
-}
+  }
 
 /* ========== STYLES DE BASE ========== */
 html {

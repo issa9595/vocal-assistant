@@ -132,7 +132,7 @@ export default function Home() {
                     tracking-tight
                   ">
                     Helpiya
-                  </h1>
+          </h1>
                   <p className="
                     text-sm md:text-base lg:text-lg
                     text-[#3D3D3D80] 
@@ -140,8 +140,8 @@ export default function Home() {
                     font-medium
                   ">
                     Votre assistant personnel vocal
-                  </p>
-                </div>
+          </p>
+        </div>
                 
                 {/* Sélecteur de vue - aligné à droite sur desktop */}
                 <div className="w-full md:w-auto">
@@ -169,10 +169,10 @@ export default function Home() {
               {viewMode === "month" && <MonthView />}
               {viewMode === "year" && <YearView />}
             </div>
-          </div>
+        </div>
 
-        </main>
-      </div>
+      </main>
+    </div>
 
       {/* ========== BOUTON FLOTTANT IA (FAB) ========== */}
       {/* 
