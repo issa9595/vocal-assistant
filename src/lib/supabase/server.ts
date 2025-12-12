@@ -15,12 +15,6 @@ import type { Database } from "./types";
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error(
-    "Supabase non configuré : définissez NEXT_PUBLIC_SUPABASE_URL et NEXT_PUBLIC_SUPABASE_ANON_KEY"
-  );
-}
-
 /**
  * Client Supabase pour le côté serveur
  * Utilise la clé anonyme (anon key) pour les opérations côté serveur
@@ -35,8 +29,8 @@ if (!supabaseUrl || !supabaseAnonKey) {
  * Note: Les variables d'environnement doivent être configurées dans .env.local
  */
 export const supabase = createClient<Database>(
-  supabaseUrl,
-  supabaseAnonKey,
+  supabaseUrl || "https://placeholder.supabase.co",
+  supabaseAnonKey || "placeholder-key",
   {
     auth: {
       persistSession: false,
