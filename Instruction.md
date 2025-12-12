@@ -805,4 +805,89 @@ L'assistant peut maintenant :
 
 ---
 
-*Fichier mis à jour automatiquement - Session 13 du 11/12/2025*
+### Session 14 du 11/12/2025 - Correction de l'erreur "Rendered fewer hooks than expected" dans YearView
+
+#### 1. Problème identifié
+- **Erreur** : "Rendered fewer hooks than expected" lors du changement d'année dans la vue année
+- **Cause** : Utilisation de `useMemo` à l'intérieur d'un `.map()` (ligne 225)
+  - Le nombre de hooks appelés variait selon le nombre d'événements
+  - Quand on changeait d'année, le nombre d'événements changeait, donc le nombre de hooks changeait
+  - React exige que le nombre de hooks soit constant entre les rendus
+
+#### 2. Solution appliquée
+- **Remplacement de `useMemo` par un calcul simple** :
+  - Le calcul `isToday` est très rapide et ne nécessite pas de mémorisation
+  - Suppression de `useMemo` dans le `.map()` pour éviter les hooks conditionnels
+  - Calcul direct : `const isToday = today.getTime() === dayStart.getTime()`
+- **Principe respecté** : Les hooks doivent toujours être appelés dans le même ordre et en même nombre à chaque rendu
+
+#### 3. Code corrigé
+```typescript
+// Avant (problématique)
+const isToday = useMemo(() => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const dayStart = new Date(date);
+  dayStart.setHours(0, 0, 0, 0);
+  return today.getTime() === dayStart.getTime();
+}, [date]);
+
+// Après (corrigé)
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const dayStart = new Date(date);
+dayStart.setHours(0, 0, 0, 0);
+const isToday = today.getTime() === dayStart.getTime();
+```
+
+#### 4. Principes appliqués
+- **Règles des hooks React** : Les hooks doivent être appelés au même niveau, dans le même ordre, à chaque rendu
+- **Performance** : Le calcul simple est suffisant pour cette vérification
+- **Maintenabilité** : Code plus simple et plus lisible
+
+---
+
+### Session 15 du 11/12/2025 - Correction de l'erreur "Rendered fewer hooks than expected" dans MonthView
+
+#### 1. Problème identifié
+- **Erreur** : "Rendered fewer hooks than expected" lors du changement de mois dans la vue mois
+- **Cause** : Utilisation de `useMemo` à l'intérieur d'un `.map()` (ligne 224)
+  - Le nombre de hooks appelés variait selon le nombre de jours avec événements
+  - Quand on changeait de mois, le nombre de jours avec événements changeait, donc le nombre de hooks changeait
+  - React exige que le nombre de hooks soit constant entre les rendus
+
+#### 2. Solution appliquée
+- **Remplacement de `useMemo` par un calcul simple** :
+  - Le calcul `isToday` est très rapide et ne nécessite pas de mémorisation
+  - Suppression de `useMemo` dans le `.map()` pour éviter les hooks conditionnels
+  - Calcul direct : `const isToday = today.getTime() === dayStart.getTime()`
+- **Principe respecté** : Les hooks doivent toujours être appelés dans le même ordre et en même nombre à chaque rendu
+
+#### 3. Code corrigé
+```typescript
+// Avant (problématique)
+const isToday = useMemo(() => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const dayStart = new Date(date);
+  dayStart.setHours(0, 0, 0, 0);
+  return today.getTime() === dayStart.getTime();
+}, [date]);
+
+// Après (corrigé)
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const dayStart = new Date(date);
+dayStart.setHours(0, 0, 0, 0);
+const isToday = today.getTime() === dayStart.getTime();
+```
+
+#### 4. Principes appliqués
+- **Règles des hooks React** : Les hooks doivent être appelés au même niveau, dans le même ordre, à chaque rendu
+- **Performance** : Le calcul simple est suffisant pour cette vérification
+- **Maintenabilité** : Code plus simple et plus lisible
+- **Cohérence** : Même correction que pour YearView pour maintenir la cohérence du code
+
+---
+
+*Fichier mis à jour automatiquement - Session 15 du 11/12/2025*

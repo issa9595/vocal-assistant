@@ -222,13 +222,12 @@ export function YearView() {
                       .sort(([dateA], [dateB]) => dateA.localeCompare(dateB))
                       .map(([dayKey, dayEvents]) => {
                         const date = new Date(dayKey);
-                        const isToday = useMemo(() => {
-                          const today = new Date();
-                          today.setHours(0, 0, 0, 0);
-                          const dayStart = new Date(date);
-                          dayStart.setHours(0, 0, 0, 0);
-                          return today.getTime() === dayStart.getTime();
-                        }, [date]);
+                        // Calcul simple sans useMemo pour éviter les problèmes de hooks conditionnels
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+                        const dayStart = new Date(date);
+                        dayStart.setHours(0, 0, 0, 0);
+                        const isToday = today.getTime() === dayStart.getTime();
 
                         return (
                           <div key={dayKey} className="flex flex-col">

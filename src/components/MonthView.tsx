@@ -221,13 +221,12 @@ export function MonthView() {
             mx-auto
           ">
             {daysWithEvents.map(({ date, events: dayEvents }) => {
-              const isToday = useMemo(() => {
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-                const dayStart = new Date(date);
-                dayStart.setHours(0, 0, 0, 0);
-                return today.getTime() === dayStart.getTime();
-              }, [date]);
+              // Calcul simple sans useMemo pour éviter les problèmes de hooks conditionnels
+              const today = new Date();
+              today.setHours(0, 0, 0, 0);
+              const dayStart = new Date(date);
+              dayStart.setHours(0, 0, 0, 0);
+              const isToday = today.getTime() === dayStart.getTime();
 
               return (
                 <div key={date.toISOString()} className="flex flex-col">
