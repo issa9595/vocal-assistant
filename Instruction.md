@@ -746,4 +746,63 @@ L'assistant peut maintenant :
 
 ---
 
-*Fichier mis à jour automatiquement - Session 11 du 11/12/2025*
+---
+
+### Session 12 du 11/12/2025 - Réduction et alignement de la section de navigation
+
+#### 1. Section de navigation compacte dans DailyCalendar
+- **Header réduit** :
+  - Padding réduit : `px-3 md:px-4` (au lieu de `px-4 md:px-6 lg:px-8`)
+  - Padding vertical réduit : `py-3 md:py-4` (au lieu de `py-4 md:py-6`)
+  - Largeur sidebar réduite : `md:w-48 lg:w-56` (au lieu de `md:w-64 lg:w-80`)
+- **Boutons de navigation** :
+  - Taille réduite : `w-8 h-8 md:w-9 md:h-9` (au lieu de `w-10 h-10 md:w-12 md:h-12`)
+  - Icônes réduites : `w-4 h-4` (au lieu de `w-5 h-5 md:w-6 md:h-6`)
+  - Ajout de `flex-shrink-0` pour un meilleur alignement
+- **Date et texte** :
+  - Taille de date réduite : `text-base md:text-lg` (au lieu de `text-xl md:text-2xl lg:text-3xl`)
+  - Texte "Aujourd'hui" réduit : `text-[10px]` (au lieu de `text-xs md:text-sm`)
+  - Padding horizontal réduit : `px-2 md:px-0`
+  - `leading-tight` pour un meilleur espacement vertical
+- **Espacements réduits** :
+  - Gaps : `gap-3 md:gap-3` (au lieu de `gap-4 md:gap-6`)
+  - Marges : `mb-2 md:mb-4` (au lieu de `mb-3 md:mb-6`)
+- **Bouton "Aujourd'hui"** :
+  - Padding réduit : `py-2 px-3` (au lieu de `py-3 px-4`)
+  - Texte réduit : `text-xs` (au lieu de `text-sm`)
+  - Marge top : `mt-2 md:mt-2`
+
+#### 2. Principes appliqués
+- **Section compacte** : La navigation prend moins d'espace tout en restant fonctionnelle
+- **Alignement amélioré** : Utilisation de `flex-shrink-0` et ajustements de padding pour un alignement parfait
+- **Cohérence visuelle** : Tailles réduites mais proportions maintenues
+- **Responsive maintenu** : Adaptations via breakpoints `md:` et `lg:`
+
+---
+
+### Session 13 du 11/12/2025 - Réorganisation des boutons de navigation
+
+#### 1. Boutons côte à côte sous la date
+- **Structure réorganisée** :
+  - Date placée en haut (centrée sur mobile, alignée à gauche sur desktop)
+  - Boutons précédent et suivant placés côte à côte en bas de la date
+  - Layout en colonne : `flex flex-col` pour organiser date puis boutons
+- **Boutons de navigation** :
+  - Conteneur flex horizontal : `flex flex-row` avec `gap-2`
+  - Centrés sur mobile : `justify-center`
+  - Alignés à gauche sur desktop : `md:justify-start`
+  - Même taille et style que précédemment
+- **Date** :
+  - Largeur pleine : `w-full` pour occuper tout l'espace disponible
+  - Centrée sur mobile : `text-center`
+  - Alignée à gauche sur desktop : `md:text-left`
+
+#### 2. Principes appliqués
+- **Hiérarchie visuelle claire** : Date en haut, contrôles en bas
+- **Espacement cohérent** : Gaps uniformes (`gap-3 md:gap-3` pour le conteneur principal, `gap-2` pour les boutons)
+- **Responsive maintenu** : Adaptations via breakpoints `md:`
+- **UX améliorée** : Boutons regroupés pour une navigation plus intuitive
+
+---
+
+*Fichier mis à jour automatiquement - Session 13 du 11/12/2025*

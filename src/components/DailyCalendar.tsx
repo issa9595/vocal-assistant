@@ -169,100 +169,111 @@ export function DailyCalendar() {
         backdrop-blur-md 
         border-b md:border-b-0 md:border-r
         border-[#3D3D3D0D] 
-        px-4 md:px-6 lg:px-8
-        py-4 md:py-6
+        px-3 md:px-4
+        py-3 md:py-4
         shadow-soft
-        md:w-64 lg:w-80
+        md:w-48 lg:w-56
         md:flex-shrink-0
       ">
         {/* 
           Navigation responsive :
-          MOBILE : boutons navigation en ligne avec date au centre
-          DESKTOP (md+) : navigation verticale dans la sidebar
+          MOBILE : date en haut, boutons côte à côte en bas
+          DESKTOP (md+) : date en haut, boutons côte à côte en bas
         */}
         <div className="
-          flex flex-row md:flex-col
+          flex flex-col
           items-center md:items-start
-          justify-between md:justify-start
-          gap-4 md:gap-6
-          mb-3 md:mb-6
+          gap-3 md:gap-3
+          mb-2 md:mb-4
         ">
-          {/* Bouton jour précédent */}
-          <button
-            onClick={goToPreviousDay}
-            className="
-              w-10 h-10 md:w-12 md:h-12
-              rounded-full
-              flex items-center justify-center
-              bg-[var(--color-brand-white)] 
-              border border-[#3D3D3D1A]
-              hover:bg-[#CDE8FA4D]
-              text-[var(--color-brand-black)]
-              transition-colors
-              focus:outline-none focus:ring-2 focus:ring-brand-blue
-            "
-            aria-label="Jour précédent"
-          >
-            <svg
-              className="w-5 h-5 md:w-6 md:h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-          </button>
-
-          {/* Date actuelle */}
-          <div className="flex-1 text-center md:text-left px-4 md:px-0">
+          {/* Date actuelle - en haut */}
+          <div className="w-full text-center md:text-left">
             <h2 className="
-              text-xl md:text-2xl lg:text-3xl
+              text-base md:text-lg
               font-bold 
               text-[var(--color-brand-black)] 
               tracking-tight
+              leading-tight
             ">
               {formatDateHeader(dayStart)}
             </h2>
             {isToday && (
-              <p className="text-xs md:text-sm text-[#3D3D3D80] mt-1 font-medium">Aujourd'hui</p>
+              <p className="text-[10px] md:text-[10px] text-[#3D3D3D80] mt-0.5 font-medium">Aujourd'hui</p>
             )}
           </div>
 
-          {/* Bouton jour suivant */}
-          <button
-            onClick={goToNextDay}
-            className="
-              w-10 h-10 md:w-12 md:h-12
-              rounded-full
-              flex items-center justify-center
-              bg-[var(--color-brand-white)] 
-              border border-[#3D3D3D1A]
-              hover:bg-[#CDE8FA4D]
-              text-[var(--color-brand-black)]
-              transition-colors
-              focus:outline-none focus:ring-2 focus:ring-brand-blue
-            "
-            aria-label="Jour suivant"
-          >
-            <svg
-              className="w-5 h-5 md:w-6 md:h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          {/* Boutons de navigation - côte à côte en bas */}
+          <div className="
+            flex flex-row
+            items-center
+            justify-center md:justify-start
+            gap-2 md:gap-2
+            w-full
+          ">
+            {/* Bouton jour précédent */}
+            <button
+              onClick={goToPreviousDay}
+              className="
+                w-8 h-8 md:w-9 md:h-9
+                rounded-full
+                flex items-center justify-center
+                bg-[var(--color-brand-white)] 
+                border border-[#3D3D3D1A]
+                hover:bg-[#CDE8FA4D]
+                text-[var(--color-brand-black)]
+                transition-colors
+                focus:outline-none focus:ring-2 focus:ring-brand-blue
+                flex-shrink-0
+              "
+              aria-label="Jour précédent"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
+              <svg
+                className="w-4 h-4 md:w-4 md:h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+
+            {/* Bouton jour suivant */}
+            <button
+              onClick={goToNextDay}
+              className="
+                w-8 h-8 md:w-9 md:h-9
+                rounded-full
+                flex items-center justify-center
+                bg-[var(--color-brand-white)] 
+                border border-[#3D3D3D1A]
+                hover:bg-[#CDE8FA4D]
+                text-[var(--color-brand-black)]
+                transition-colors
+                focus:outline-none focus:ring-2 focus:ring-brand-blue
+                flex-shrink-0
+              "
+              aria-label="Jour suivant"
+            >
+              <svg
+                className="w-4 h-4 md:w-4 md:h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Bouton "Aujourd'hui" */}
@@ -270,12 +281,23 @@ export function DailyCalendar() {
           <button
             onClick={goToToday}
             className="
-              w-full py-3 px-4 rounded-medium
+              w-full 
+              py-2 
+              px-3 
+              rounded-medium
               bg-gradient-green-blue
-              text-[var(--color-brand-black)] text-sm font-bold
-              transition-all duration-200 hover:opacity-90 hover:scale-[1.02]
-              focus:outline-none focus:ring-2 focus:ring-brand-blue/50
+              text-[var(--color-brand-black)] 
+              text-xs 
+              md:text-xs
+              font-bold
+              transition-all duration-200 
+              hover:opacity-90 
+              hover:scale-[1.02]
+              focus:outline-none 
+              focus:ring-2 
+              focus:ring-brand-blue/50
               shadow-soft
+              mt-2 md:mt-2
             "
           >
             Aujourd'hui
