@@ -890,4 +890,58 @@ const isToday = today.getTime() === dayStart.getTime();
 
 ---
 
-*Fichier mis à jour automatiquement - Session 15 du 11/12/2025*
+### Session 16 du 11/12/2025 - Correction de l'erreur "The default export is not a React Component"
+
+#### 1. Problème identifié
+- **Erreur** : "The default export is not a React Component in '/page'"
+- **Cause** : Le fichier `src/app/page.tsx` était complètement vide
+  - Next.js ne trouvait pas de composant React par défaut à exporter
+  - L'application ne pouvait pas démarrer
+
+#### 2. Solution appliquée
+- **Recréation complète du fichier `page.tsx`** :
+  - Composant `Home` exporté par défaut
+  - Utilisation du store `useCalendarStore` pour gérer `viewMode`
+  - Header avec titre "Helpiya" et `ViewSelector`
+  - Affichage conditionnel des vues selon `viewMode` :
+    - `DailyCalendar` pour `viewMode === "day"`
+    - `WeekView` pour `viewMode === "week"`
+    - `MonthView` pour `viewMode === "month"`
+    - `YearView` pour `viewMode === "year"`
+  - `AiFabButton` pour ouvrir la modale IA
+  - `AiModal` pour l'assistant vocal
+- **Layout responsive** :
+  - Mobile : colonne unique, `max-w-md`, centré
+  - Desktop (md+) : layout avec calendrier pleine largeur
+  - Marges latérales adaptatives : `px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20`
+
+#### 3. Structure du composant
+```typescript
+export default function Home() {
+  const { viewMode } = useCalendarStore();
+  const [isAiModalOpen, setIsAiModalOpen] = useState(false);
+
+  return (
+    <div>
+      <header>
+        {/* Titre "Helpiya" + ViewSelector */}
+      </header>
+      <main>
+        {/* Affichage conditionnel des vues */}
+      </main>
+      <AiFabButton />
+      <AiModal />
+    </div>
+  );
+}
+```
+
+#### 4. Principes appliqués
+- **Composant React valide** : Export par défaut d'un composant fonctionnel
+- **Client-side rendering** : Directive `"use client"` pour les hooks React
+- **Responsive design** : Layout adaptatif avec breakpoints Tailwind
+- **Cohérence** : Structure alignée avec les autres composants du projet
+
+---
+
+*Fichier mis à jour automatiquement - Session 16 du 11/12/2025*
