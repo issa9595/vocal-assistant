@@ -944,4 +944,137 @@ export default function Home() {
 
 ---
 
-*Fichier mis à jour automatiquement - Session 16 du 11/12/2025*
+### Session 17 du 11/12/2025 - Ajout d'une page d'accueil / landing page
+
+#### 1. Restructuration du routage
+- **Déplacement de l'application** : L'application principale a été déplacée de `/` vers `/app`
+  - Nouveau fichier : `src/app/app/page.tsx` (ancien contenu de `page.tsx`)
+  - Composant renommé : `Home` → `AppPage`
+- **Redirection automatique** : La route racine `/` redirige maintenant automatiquement vers `/accueil`
+  - Fichier `src/app/page.tsx` : Server Component avec `redirect("/accueil")`
+  - Utilisation de `next/navigation` pour la redirection côté serveur
+
+#### 2. Création de la landing page (`/accueil`)
+- **Fichier créé** : `src/app/accueil/page.tsx`
+- **Design minimaliste et moderne** :
+  - Fond blanc (`bg-[var(--color-brand-white)]`)
+  - Texte noir (`text-[var(--color-brand-black)]`)
+  - Dégradé vert-bleu pour les éléments interactifs
+  - Typographie cohérente avec le reste de l'application
+- **Structure** :
+  - Header avec logo "Helpiya"
+  - Section hero avec titre principal et description
+  - Bouton CTA "Accéder à l'app" pointant vers `/app`
+  - Section features avec 3 cartes (Reconnaissance vocale, Calendrier intelligent, IA avancée)
+  - Footer minimaliste
+- **Responsive** :
+  - Mobile-first : Layout en colonne unique
+  - Desktop (md+) : Grille 3 colonnes pour les features
+  - Tailles de texte adaptatives : `text-4xl md:text-5xl lg:text-6xl xl:text-7xl`
+  - Espacements généreux : `space-y-8 md:space-y-12`
+- **Interactivité** :
+  - Bouton CTA avec hover effect (`hover:scale-105`, `hover:shadow-medium`)
+  - Cartes features avec hover effect
+  - Transitions fluides : `transition-all duration-200`
+
+#### 3. Principes appliqués
+- **SOLID** : Séparation des responsabilités (landing page vs application)
+- **Clean Code** : Code lisible avec commentaires explicatifs
+- **Clean Architecture** : Structure de routes claire et logique
+- **Design cohérent** : Utilisation de la même palette de couleurs et tokens de design
+- **Accessibilité** : Structure sémantique (header, main, footer)
+
+#### 4. Flux de navigation
+1. **Accès à la racine (`/`)** : Redirection automatique vers `/accueil`
+2. **Landing page (`/accueil`)** : Présentation de l'application avec bouton CTA
+3. **Application (`/app`)** : Application complète avec calendrier et assistant vocal
+
+---
+
+### Session 18 du 11/12/2025 - Refonte complète de la landing page avec contenu pédagogique
+
+#### 1. Réécriture complète de la landing page
+- **Fichier modifié** : `src/app/accueil/page.tsx`
+- **Nom de l'application** : Changement de "Helpiya" vers "My Voice Planner"
+- **Structure complète** : 7 sections pédagogiques avec contenu en français
+
+#### 2. Sections créées
+
+**Header fixe** :
+- Logo "My Voice Planner" à gauche
+- Bouton "Accéder à l'app" à droite (pointe vers `/`)
+- Sticky avec ombre légère en desktop
+- Responsive : colonne sur mobile, ligne sur desktop
+
+**Hero principal** :
+- Titre impactant : "Organise ta journée, juste avec ta voix."
+- Sous-titre expliquant le fonctionnement (parler → IA comprend → calendrier se remplit → étapes cachées)
+- 2 CTA : bouton principal "Accéder à l'app" + lien "Voir comment ça marche" (scroll vers `#comment-ca-marche`)
+- Hauteur minimum 70vh, centré verticalement
+
+**Section "Ce que fait My Voice Planner"** :
+- 3 cards en grid (1 col mobile, 3 cols desktop) :
+  1. "Parle, l'IA t'écoute" - Explication de la saisie vocale
+  2. "Le calendrier se remplit seul" - Création automatique d'événements
+  3. "Elle anticipe les étapes cachées" - Planification intelligente
+- Chaque card avec icône emoji, titre, texte 2-3 phrases
+
+**Section "Les bénéfices concrets"** :
+- 4 bénéfices en grid 2x2 (1 col mobile, 2 cols desktop) :
+  - Gagner du temps
+  - Moins de charge mentale
+  - Une vue claire de ta journée
+  - Toujours avec toi
+- Textes simples et accessibles
+
+**Section "Comment ça marche ?"** :
+- Ancre `id="comment-ca-marche"` pour le scroll
+- 3 étapes numérotées (verticales mobile, horizontales desktop) :
+  1. Tu parles à l'assistant
+  2. L'IA analyse et planifie
+  3. Le calendrier se met à jour
+- Encadré d'exemple concret montrant :
+  - Ce que l'utilisateur dit (exemple : dîner lasagnes)
+  - Ce que l'app crée (liste des événements planifiés)
+
+**Section "Pour qui ?"** :
+- 3 profils en grid (1 col mobile, 3 cols desktop) :
+  - Étudiants / Freelances
+  - Salariés débordés
+  - Personnes qui n'aiment pas les apps compliquées
+- 1-2 phrases par profil
+
+**Section "Appel à l'action final"** :
+- Fond avec dégradé vert-bleu
+- Titre : "Prêt à laisser ta voix planifier pour toi ?"
+- Texte d'accompagnement
+- Bouton "Accéder à l'app" pointant vers `/`
+
+#### 3. Design et style
+- **Cohérence visuelle** : Utilisation de la palette existante (blanc, noir, dégradé vert-bleu)
+- **Mobile-first** : Layout en colonne sur mobile, grid/flex sur desktop
+- **Tokens de design** : `rounded-soft`, `shadow-soft`, `border-[#3D3D3D0D]`
+- **Typographie** : Tailles adaptatives (`text-3xl md:text-4xl lg:text-5xl`)
+- **Espacements** : `px-4 md:px-8 lg:px-12`, `py-12 md:py-16 lg:py-20`
+- **Interactivité** : Hover effects légers (`hover:scale-105`, `hover:shadow-medium`)
+
+#### 4. Contenu en français
+- **Textes pédagogiques** : Phrases courtes, claires, sans jargon
+- **Exemples concrets** : Cas d'usage réel (dîner lasagnes avec toutes les étapes)
+- **Ton accessible** : Tutoiement, langage simple et direct
+
+#### 5. Navigation
+- **Bouton "Accéder à l'app"** : Pointe vers `/` (route racine qui redirige vers `/accueil` puis vers `/app`)
+- **Lien "Voir comment ça marche"** : Scroll smooth vers `#comment-ca-marche`
+- **Smooth scrolling** : Activé via CSS global (`scroll-behavior: smooth`)
+
+#### 6. Principes appliqués
+- **SOLID** : Sections bien séparées, responsabilités claires
+- **Clean Code** : Commentaires pour chaque section, code lisible
+- **Clean Architecture** : Structure logique et maintenable
+- **Accessibilité** : Structure sémantique (header, sections, footer)
+- **Responsive** : Mobile-first avec breakpoints Tailwind
+
+---
+
+*Fichier mis à jour automatiquement - Session 18 du 11/12/2025*
