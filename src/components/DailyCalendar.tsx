@@ -476,11 +476,9 @@ interface EventCardProps {
 
 function EventCard({ event, position, height }: EventCardProps) {
   // Dégradé vert → bleu pour tous les événements (identité visuelle unifiée)
-  // Hauteur minimale pour que l'événement soit visible
-  // La timeline fait 24 heures, donc 1% = environ 14.4 minutes
-  // On veut au moins 40px de hauteur, ce qui représente environ 2.8% de la timeline
-  const minHeightPercent = 2.8; // ~40px sur une timeline de 1440px (24h * 60px)
-  const finalHeight = Math.max(height, minHeightPercent);
+  // On utilise la hauteur réelle calculée, avec seulement une hauteur minimale en pixels
+  // pour garantir la lisibilité sans créer d'espaces visuels artificiels
+  const finalHeight = height;
 
   return (
     <div
@@ -489,37 +487,37 @@ function EventCard({ event, position, height }: EventCardProps) {
         bg-[linear-gradient(135deg,#CCE3C3_0%,#CDE8FA_100%)]
         border-none
         rounded-medium
-        p-3
+        p-2.5 md:p-3
         text-[var(--color-brand-black)]
         shadow-soft
         hover:shadow-medium hover:scale-[1.02]
         transition-all duration-200
         cursor-pointer
         overflow-hidden
+        flex flex-col
+        gap-1
       "
       style={{
         top: `${Math.max(0, Math.min(100 - finalHeight, position))}%`,
         height: `${finalHeight}%`,
-        minHeight: "40px", // Hauteur minimale en pixels pour lisibilité
+        minHeight: "30px", // Hauteur minimale en pixels uniquement (pas de % pour éviter les espaces)
       }}
       title={`${event.title} - ${formatTime(event.start)} - ${formatTime(event.end)}`}
     >
-      {/* Heure de début */}
-      <div className="text-[10px] font-semibold text-[#3D3D3DB3] mb-1.5 uppercase tracking-wide">
-        {formatTime(event.start)}
+      {/* Heures de début et fin sur la même ligne */}
+      <div className="flex items-center gap-1.5 text-[9px] md:text-[10px] font-semibold text-[#3D3D3DB3] uppercase tracking-wide leading-none">
+        <span>{formatTime(event.start)}</span>
+        {height > 5 && (
+          <span className="text-[#3D3D3D80] font-medium normal-case">
+            Jusqu'à {formatTime(event.end)}
+          </span>
+        )}
       </div>
       
       {/* Titre */}
-      <div className="text-sm font-bold text-[var(--color-brand-black)] line-clamp-2 leading-tight">
+      <div className="text-xs md:text-sm font-bold text-[var(--color-brand-black)] line-clamp-2 leading-tight flex-1">
         {event.title}
       </div>
-      
-      {/* Heure de fin (si l'événement est assez grand) */}
-      {height > 5 && (
-        <div className="text-[10px] text-[#3D3D3D0D]0 mt-1.5 font-medium">
-          Jusqu'à {formatTime(event.end)}
-        </div>
-      )}
     </div>
   );
 }

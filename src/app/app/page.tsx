@@ -11,7 +11,7 @@ import { AiFabButton } from "@/components/AiFabButton";
 import { AiModal } from "@/components/AiModal";
 
 /**
- * Page principale du dashboard Helpiya
+ * Page principale du dashboard Lumia
  * 
  * Layout responsive :
  * - Mobile : colonne unique, max-w-md, centré
@@ -53,7 +53,7 @@ export default function AppPage() {
               text-[var(--color-brand-black)]
               tracking-tight
             ">
-              Helpiya
+              Lumia
             </h1>
             <p className="
               text-xs md:text-sm

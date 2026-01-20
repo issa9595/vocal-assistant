@@ -40,26 +40,26 @@ const geistMono = Geist_Mono({
  * Utilisées par les moteurs de recherche et les réseaux sociaux
  */
 export const metadata: Metadata = {
-  title: "Helpiya - Assistant Personnel Vocal",
+  title: "Lumia - Assistant Personnel Vocal",
   description:
     "Application mobile-first pour gérer votre agenda avec un assistant vocal IA. Planifiez vos tâches et réunions simplement en parlant.",
   keywords: ["agenda", "vocal", "IA", "assistant", "planning", "tâches"],
   authors: [{ name: "Voice Assistant Team" }],
   
   // Configuration pour les appareils mobiles (PWA ready)
-  applicationName: "Helpiya",
+  applicationName: "Lumia",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Helpiya",
+    title: "Lumia",
   },
   
   // Open Graph pour le partage sur les réseaux sociaux
   openGraph: {
     type: "website",
-    title: "Helpiya - Assistant Personnel Vocal",
+    title: "Lumia - Assistant Personnel Vocal",
     description: "Gérez votre agenda avec votre voix",
-    siteName: "Helpiya",
+    siteName: "Lumia",
   },
 };
 

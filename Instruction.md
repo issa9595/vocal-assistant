@@ -1,13 +1,13 @@
 # Instruction.md - Journal des actions
 
-> Ce fichier trace les actions effectuées sur le projet "Helpiya".
+> Ce fichier trace les actions effectuées sur le projet "Lumia".
 > Dernière mise à jour : 10 décembre 2025
 
 ---
 
 ## 📋 Résumé du projet
 
-**Helpiya** est une application web mobile-first permettant de gérer un **calendrier** (jour/semaine/mois) via un assistant vocal IA connecté à **Gemini 2.5 Flash**.
+**Lumia** est une application web mobile-first permettant de gérer un **calendrier** (jour/semaine/mois) via un assistant vocal IA connecté à **Gemini 2.5 Flash**.
 
 ### Stack technique
 - **Framework** : Next.js 16 (App Router)
@@ -902,7 +902,7 @@ const isToday = today.getTime() === dayStart.getTime();
 - **Recréation complète du fichier `page.tsx`** :
   - Composant `Home` exporté par défaut
   - Utilisation du store `useCalendarStore` pour gérer `viewMode`
-  - Header avec titre "Helpiya" et `ViewSelector`
+  - Header avec titre "Lumia" et `ViewSelector`
   - Affichage conditionnel des vues selon `viewMode` :
     - `DailyCalendar` pour `viewMode === "day"`
     - `WeekView` pour `viewMode === "week"`
@@ -924,7 +924,7 @@ export default function Home() {
   return (
     <div>
       <header>
-        {/* Titre "Helpiya" + ViewSelector */}
+        {/* Titre "Lumia" + ViewSelector */}
       </header>
       <main>
         {/* Affichage conditionnel des vues */}
@@ -962,7 +962,7 @@ export default function Home() {
   - Dégradé vert-bleu pour les éléments interactifs
   - Typographie cohérente avec le reste de l'application
 - **Structure** :
-  - Header avec logo "Helpiya"
+  - Header avec logo "Lumia"
   - Section hero avec titre principal et description
   - Bouton CTA "Accéder à l'app" pointant vers `/app`
   - Section features avec 3 cartes (Reconnaissance vocale, Calendrier intelligent, IA avancée)
@@ -995,7 +995,7 @@ export default function Home() {
 
 #### 1. Réécriture complète de la landing page
 - **Fichier modifié** : `src/app/accueil/page.tsx`
-- **Nom de l'application** : Changement de "Helpiya" vers "My Voice Planner"
+- **Nom de l'application** : Changement de "Lumia" vers "My Voice Planner"
 - **Structure complète** : 7 sections pédagogiques avec contenu en français
 
 #### 2. Sections créées
@@ -1077,4 +1077,197 @@ export default function Home() {
 
 ---
 
-*Fichier mis à jour automatiquement - Session 18 du 11/12/2025*
+### Session 19 du 11/12/2025 - Alignement du chat avec le pattern du calendrier
+
+#### 1. Objectif
+Reproduire exactement la logique du calendrier pour le chat/conversations :
+- Store Zustand avec persist (localStorage)
+- Hydratation depuis Supabase via API route
+- Synchronisation automatique lors des modifications
+- Utilisation de `DEMO_USER_ID` pour l'instant (comme le calendrier)
+- Si pas de user → localStorage uniquement
+- Si user connecté → Supabase + localStorage (cache)
+
+#### 2. Store chat créé (`src/store/useChatStore.ts`)
+- **Structure alignée avec `useCalendarStore`** :
+  - `messages: Message[]` : Liste des messages
+  - `conversationId: string | null` : ID de la conversation courante
+  - `isHydrated: boolean` : Indique si les données ont été chargées depuis Supabase
+  - `addMessage()` : Ajoute un message et synchronise avec Supabase si `conversationId` existe
+  - `addMessages()` : Ajoute plusieurs messages (pour l'hydratation)
+  - `setMessages()` : Définit les messages (pour l'hydratation)
+  - `setConversationId()` : Définit l'ID de la conversation
+  - `clearConversation()` : Vide la conversation
+  - `hydrateFromSupabase()` : Charge les messages depuis `/api/conversations/current`
+- **Persistance localStorage** : Même pattern que le calendrier avec validation des dates
+- **Synchronisation automatique** : `addMessage()` appelle `/api/conversations/[id]/messages` si `conversationId` existe
+
+#### 3. Adaptation de `AiModal.tsx`
+- **Remplacement de `useState` par le store** :
+  - `messages` → `useChatStore().messages`
+  - `currentConversationId` → `useChatStore().conversationId`
+- **Hydratation au montage** :
+  - Appel de `hydrateFromSupabase()` quand la modale s'ouvre (comme pour le calendrier)
+  - Remplacement du `useEffect` de chargement manuel par l'appel au store
+- **Ajout de messages** :
+  - Utilisation de `addMessage()` au lieu de `setMessages()`
+  - Le store gère automatiquement la synchronisation avec Supabase
+- **Création de conversation** :
+  - Si `conversationId` n'existe pas, création via `/api/conversations`
+  - Mise à jour du store avec `setConversationId()`
+  - Les messages suivants seront automatiquement synchronisés
+
+#### 4. Pattern aligné avec le calendrier
+- **Même structure de store** : Zustand + persist
+- **Même logique d'hydratation** : `hydrateFromSupabase()` appelle l'API route
+- **Même logique de synchronisation** : Appel API automatique dans les méthodes d'ajout
+- **Même gestion user/no-user** : Utilisation de `DEMO_USER_ID` (comme le calendrier)
+- **Même fallback** : Si Supabase n'est pas configuré, localStorage uniquement
+
+#### 5. API routes utilisées
+- **GET `/api/conversations/current`** : Hydratation (comme GET `/api/events`)
+  - Retourne la dernière conversation et ses messages
+  - Utilisé par `hydrateFromSupabase()`
+- **POST `/api/conversations/[id]/messages`** : Synchronisation (comme POST `/api/events`)
+  - Ajoute un message à une conversation
+  - Appelé automatiquement par `addMessage()` si `conversationId` existe
+
+#### 6. Principes appliqués
+- **Pas de duplication de logique** : Le store gère tout (comme pour le calendrier)
+- **Synchronisation automatique** : Pas besoin d'appeler manuellement l'API
+- **Cohérence** : Même pattern pour calendrier et chat
+- **Fallback gracieux** : Si Supabase n'est pas configuré, fonctionnement local uniquement
+
+---
+
+### Session 20 du 11/12/2025 - Refactorisation et redesign de la landing page
+
+#### 1. Refactorisation en composants séparés
+- **Structure créée** : `src/components/landing/` avec 8 composants modulaires
+  - `LandingHeader.tsx` : Header fixe avec logo et CTA
+  - `LandingHero.tsx` : Section hero principale avec titre et CTA
+  - `LandingFeatures.tsx` : Section "Ce que fait l'app" (3 features)
+  - `LandingBenefits.tsx` : Section "Pourquoi l'utiliser ?" (4 bénéfices)
+  - `LandingHowItWorks.tsx` : Section "Comment ça marche ?" (3 étapes + exemple)
+  - `LandingTargetAudience.tsx` : Section "Pour qui ?" (3 profils)
+  - `LandingCTA.tsx` : Section CTA finale avec dégradé
+  - `LandingFooter.tsx` : Footer minimaliste
+  - `index.ts` : Barrel export pour faciliter les imports
+- **Page principale refactorisée** : `src/app/accueil/page.tsx` utilise maintenant les composants modulaires
+- **Avantages** : Code plus maintenable, réutilisable, et facile à tester
+
+#### 2. Redesign moderne et épuré
+- **Typographie soignée** :
+  - Tailles augmentées : `text-4xl md:text-5xl lg:text-6xl xl:text-7xl` pour le hero
+  - Hiérarchie claire : `font-bold` pour les titres, `font-light` pour les sous-titres
+  - Espacements généreux : `space-y-8 md:space-y-12` entre les éléments
+- **Grands espacements** :
+  - Padding vertical : `py-20 md:py-32` pour les sections
+  - Padding horizontal : `px-6 md:px-12 lg:px-16` pour les marges latérales
+  - Gaps entre éléments : `gap-8 md:gap-12 lg:gap-16` pour les grids
+- **Design minimaliste** :
+  - Bordures discrètes : `border-[#3D3D3D0D]` (opacité 5%)
+  - Ombres douces : `shadow-soft` avec `hover:shadow-medium`
+  - Transitions fluides : `transition-all duration-300`
+- **Hiérarchie visuelle** :
+  - Hero avec hauteur minimale : `min-h-[85vh]`
+  - Cards avec hover effects subtils : `hover:scale-110` pour les icônes
+  - Dégradés utilisés avec parcimonie (hero, CTA, logo)
+
+#### 3. Corrections des liens
+- **Tous les liens CTA** : Pointent maintenant vers `/` au lieu de `/app`
+  - `LandingHeader` : Bouton "Accéder à l'app" → `/`
+  - `LandingHero` : Bouton principal et lien secondaire → `/`
+  - `LandingCTA` : Bouton "Accéder à l'app" → `/`
+- **Cohérence** : Tous les boutons d'accès à l'application pointent vers la route racine
+
+#### 4. Principes appliqués
+- **SOLID** : Chaque composant a une responsabilité unique
+- **Clean Code** : Code lisible avec commentaires explicatifs
+- **Clean Architecture** : Séparation claire entre composants UI et page principale
+- **Design System** : Utilisation cohérente de la palette de couleurs et tokens de design
+- **Responsive** : Mobile-first avec breakpoints Tailwind (`md:`, `lg:`, `xl:`)
+- **Accessibilité** : Structure sémantique (header, sections, footer)
+
+#### 5. Améliorations UX
+- **Backdrop blur** : Header avec `backdrop-blur-sm` pour un effet moderne
+- **Hover states** : Transitions douces sur tous les éléments interactifs
+- **Typographie responsive** : Tailles adaptatives selon la taille d'écran
+- **Espacements généreux** : Design aéré et premium
+
+---
+
+### Session 21 du 11/12/2025 - Refonte complète de la landing page avec nouveau pitch
+
+#### 1. Refactorisation complète en sections modulaires
+- **Nouvelle structure** : `src/app/accueil/_sections/` avec 11 composants
+  - `Header.tsx` : Header sticky avec logo et CTA
+  - `Hero.tsx` : Hero avec H1, sous-titre, CTA + preview card (desktop)
+  - `ProblemMentalLoad.tsx` : Section problème charge mentale avec chiffres et exemples
+  - `WhatLumiaDoes.tsx` : Section "Ce que fait Lumia" (3 features)
+  - `AgentNotChat.tsx` : Section "Agent, pas un chat"
+  - `Benefits.tsx` : Section bénéfices concrets
+  - `HowItWorks.tsx` : Section "Comment ça marche ?" avec ancre `#comment-ca-marche`
+  - `ForWho.tsx` : Section "Pour qui ?" (3 profils)
+  - `DataAndImpact.tsx` : Section données & impact (IA responsable)
+  - `FinalCTA.tsx` : CTA final avec dégradé vert/bleu
+  - `Footer.tsx` : Footer minimaliste
+- **Page principale simplifiée** : `src/app/accueil/page.tsx` compose simplement les sections dans l'ordre
+- **Anciens composants supprimés** : `src/components/landing/` supprimé (remplacé par `_sections/`)
+
+#### 2. Design SaaS moderne appliqué
+- **Layout aéré** :
+  - Conteneur commun : `max-w-6xl mx-auto px-4 md:px-8 lg:px-12`
+  - Padding vertical cohérent : `py-16 md:py-24` (ou `py-24 lg:py-32` pour hero/CTA)
+  - Espacements généreux entre sections
+- **Cards modernes** :
+  - `rounded-2xl` (arrondis prononcés)
+  - `border border-[#3D3D3D0D]` (bordures fines)
+  - `shadow-soft` avec `hover:shadow-medium`
+  - Fond blanc ou pastel très léger
+- **Typographie soignée** :
+  - Titres : `text-3xl md:text-4xl lg:text-5xl` (ou plus grands pour hero)
+  - Sous-titres : `text-lg md:text-xl lg:text-2xl` avec `font-light`
+  - Texte : `text-base md:text-lg` avec `text-[#3D3D3D80]`
+- **Boutons** :
+  - `rounded-full` (complètement arrondis)
+  - Padding réduit : `px-6 md:px-8 lg:px-10 py-2.5 md:py-3 lg:py-3.5`
+  - Tailles de texte : `text-sm md:text-base lg:text-lg`
+
+#### 3. Contenu intégré (textes exacts)
+- **Hero** : "Arrêtez de penser à tout. Lumia organise votre vie pour vous."
+- **Problème** : Charge mentale avec chiffres (88%, 68%/38%) et exemples concrets
+- **Features** : 3 cards avec descriptions détaillées
+- **Agent** : Distinction claire entre chat et agent proactif
+- **Bénéfices** : Liste de 5 bénéfices concrets
+- **Comment ça marche** : 3 étapes numérotées + exemple encadré
+- **Pour qui** : 3 profils cibles avec conclusion
+- **Données** : Section sur l'IA responsable
+- **CTA final** : Slogan "Arrêtez de penser votre vie. Commencez à la vivre."
+
+#### 4. Responsive optimisé
+- **Mobile-first** : Layout vertical simple, CTA accessible
+- **Desktop** :
+  - Hero en 2 colonnes (`lg:grid-cols-2`) avec preview card à droite
+  - Grids 3 colonnes pour features (`md:grid-cols-3`)
+  - Grids 2 colonnes pour chiffres et listes (`md:grid-cols-2`)
+- **Breakpoints cohérents** : `md:` (768px), `lg:` (1024px), `xl:` (1280px)
+
+#### 5. Principes appliqués
+- **SOLID** : Chaque section est un composant indépendant avec responsabilité unique
+- **Clean Code** : Commentaires explicatifs, code lisible
+- **Clean Architecture** : Séparation claire entre sections et page principale
+- **Design System** : Cohérence avec palette brand (blanc, noir, pastels, gradients)
+- **Accessibilité** : Structure sémantique (header, sections, footer)
+- **Maintenabilité** : Sections modulaires faciles à modifier indépendamment
+
+#### 6. Améliorations UX
+- **Preview card** : Hero avec exemple visuel de planning (desktop uniquement)
+- **Chiffres visuels** : Cards avec statistiques mises en avant
+- **Exemples concrets** : Encadrés avec "Phrase" → "Résultat"
+- **Ancre de navigation** : `#comment-ca-marche` pour scroll smooth
+- **CTA multiples** : Boutons "Accéder à l'app" dans header, hero et CTA final
+
+---
+
+*Fichier mis à jour automatiquement - Session 21 du 11/12/2025*

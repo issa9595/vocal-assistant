@@ -17,6 +17,7 @@
 import { useState, useCallback, useEffect, useRef } from "react";
 import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
 import { useCalendarStore } from "@/store/useCalendarStore";
+import { useChatStore } from "@/store/useChatStore";
 import type { 
   Message, 
   SpeechRecognitionStatus, 
@@ -112,12 +113,6 @@ async function callAssistantAPI(payload: GeminiRequestPayload): Promise<Assistan
 export function AiModal({ isOpen, onClose }: AiModalProps) {
   // ========== ÉTATS ==========
   
-  // Historique des messages de la conversation
-  const [messages, setMessages] = useState<Message[]>([]);
-  
-  // ID de la conversation actuelle
-  const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
-  
   // État de chargement pendant l'envoi à l'assistant
   const [isLoading, setIsLoading] = useState(false);
   
@@ -138,6 +133,17 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
     viewMode,
     referenceDate,
   } = useCalendarStore();
+
+  // Store chat (aligné avec le pattern du calendrier)
+  const {
+    messages,
+    conversationId: currentConversationId,
+    isHydrated,
+    addMessage,
+    setMessages,
+    setConversationId,
+    hydrateFromSupabase,
+  } = useChatStore();
 
   /**
    * Exécute une action retournée par l'assistant
@@ -347,39 +353,20 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
         if (response.ok) {
           const data = await response.json();
           conversationId = data.conversation.id;
-          setCurrentConversationId(conversationId);
+          setConversationId(conversationId);
         }
       } catch (error) {
         console.error("Erreur lors de la création de la conversation:", error);
       }
     }
 
-    // Ajout du message utilisateur
-    const userMessage: Message = {
-      id: generateMessageId(),
+    // Ajout du message utilisateur via le store (qui synchronise automatiquement avec Supabase)
+    // Le store vérifie conversationId et synchronise si présent
+    addMessage({
       role: "user",
       content: transcript,
-      createdAt: new Date(),
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
+    });
     setIsLoading(true);
-    
-    // Sauvegarder le message utilisateur dans Supabase
-    if (conversationId) {
-      try {
-        await fetch(`/api/conversations/${conversationId}/messages`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            role: "user",
-            content: transcript,
-          }),
-        });
-      } catch (error) {
-        console.error("Erreur lors de la sauvegarde du message:", error);
-      }
-    }
 
     try {
       // Fonction helper pour valider une date
@@ -389,9 +376,11 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
 
       // Préparation du payload pour l'API
       // Note: `now` sera calculé côté serveur si non fourni, mais on peut aussi l'envoyer côté client
+      // Utiliser les messages du store (qui sont déjà à jour)
+      const currentMessages = messages;
       const payload: GeminiRequestPayload = {
         userMessage: transcript,
-        conversationHistory: messages.map((m) => ({
+        conversationHistory: currentMessages.map((m) => ({
           role: m.role,
           content: m.content,
         })),
@@ -422,31 +411,11 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
         await executeAction(response);
       }
 
-      // Ajout de la réponse de l'assistant
-      const assistantMessage: Message = {
-        id: generateMessageId(),
+      // Ajout de la réponse de l'assistant via le store (qui synchronise automatiquement avec Supabase)
+      addMessage({
         role: "assistant",
         content: response.message,
-        createdAt: new Date(),
-      };
-
-      setMessages((prev) => [...prev, assistantMessage]);
-      
-      // Sauvegarder le message assistant dans Supabase
-      if (conversationId) {
-        try {
-          await fetch(`/api/conversations/${conversationId}/messages`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              role: "assistant",
-              content: response.message,
-            }),
-          });
-        } catch (error) {
-          console.error("Erreur lors de la sauvegarde du message:", error);
-        }
-      }
+      });
 
     } catch (error) {
       // Ne log l'erreur que si ce n'est pas une erreur gérée (429, 503)
@@ -494,24 +463,21 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
         // Ignorer les erreurs de parsing
       }
       
-      // Message d'erreur
-      const errorMessage: Message = {
-        id: generateMessageId(),
+      // Message d'erreur via le store
+      addMessage({
         role: "assistant",
         content: errorContent,
-        createdAt: new Date(),
-      };
-
-      setMessages((prev) => [...prev, errorMessage]);
+      });
     } finally {
       setIsLoading(false);
     }
-  }, [messages, events, viewMode, referenceDate, executeAction, currentConversationId]);
+  }, [messages, events, viewMode, referenceDate, executeAction, currentConversationId, addMessage, setConversationId]);
 
   // ========== CHARGEMENT INITIAL DEPUIS SUPABASE ==========
   
   /**
    * Charge la conversation actuelle et ses messages depuis Supabase
+   * PATTERN ALIGNÉ : Même logique que pour le calendrier (hydrateFromSupabase)
    */
   useEffect(() => {
     if (!isOpen) return; // Ne charger que quand la modale est ouverte
@@ -519,25 +485,8 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
     const loadConversation = async () => {
       setIsLoadingInitial(true);
       try {
-        const response = await fetch("/api/conversations/current");
-        if (!response.ok) {
-          console.error("Erreur lors du chargement de la conversation");
-          setIsLoadingInitial(false);
-          return;
-        }
-        
-        const data = await response.json();
-        setCurrentConversationId(data.conversation.id);
-        
-        // Convertir les dates string en objets Date
-        const messagesWithDates: Message[] = (data.messages || []).map((msg: any) => ({
-          ...msg,
-          createdAt: msg.createdAt instanceof Date 
-            ? msg.createdAt 
-            : new Date(msg.createdAt || Date.now()),
-        }));
-        
-        setMessages(messagesWithDates);
+        // Utiliser la méthode d'hydratation du store (comme pour le calendrier)
+        await hydrateFromSupabase();
       } catch (error) {
         console.error("Erreur lors du chargement de la conversation:", error);
       } finally {
@@ -546,7 +495,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
     };
     
     loadConversation();
-  }, [isOpen]);
+  }, [isOpen, hydrateFromSupabase]);
 
   // ========== HOOK RECONNAISSANCE VOCALE ==========
   
