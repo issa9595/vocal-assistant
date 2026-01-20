@@ -476,8 +476,8 @@ interface EventCardProps {
 
 function EventCard({ event, position, height }: EventCardProps) {
   // Dégradé vert → bleu pour tous les événements (identité visuelle unifiée)
-  // On utilise la hauteur réelle calculée, avec seulement une hauteur minimale en pixels
-  // pour garantir la lisibilité sans créer d'espaces visuels artificiels
+  // On utilise la hauteur réelle calculée, avec une hauteur minimale en pixels
+  // suffisante pour afficher tout le contenu (heures + titre sur 2 lignes)
   const finalHeight = height;
 
   return (
@@ -487,7 +487,7 @@ function EventCard({ event, position, height }: EventCardProps) {
         bg-[linear-gradient(135deg,#CCE3C3_0%,#CDE8FA_100%)]
         border-none
         rounded-medium
-        p-2.5 md:p-3
+        p-3 md:p-3.5
         text-[var(--color-brand-black)]
         shadow-soft
         hover:shadow-medium hover:scale-[1.02]
@@ -500,7 +500,7 @@ function EventCard({ event, position, height }: EventCardProps) {
       style={{
         top: `${Math.max(0, Math.min(100 - finalHeight, position))}%`,
         height: `${finalHeight}%`,
-        minHeight: "30px", // Hauteur minimale en pixels uniquement (pas de % pour éviter les espaces)
+        minHeight: "70px", // Hauteur minimale pour afficher heures + titre complet + padding
       }}
       title={`${event.title} - ${formatTime(event.start)} - ${formatTime(event.end)}`}
     >
@@ -515,7 +515,7 @@ function EventCard({ event, position, height }: EventCardProps) {
       </div>
       
       {/* Titre */}
-      <div className="text-xs md:text-sm font-bold text-[var(--color-brand-black)] line-clamp-2 leading-tight flex-1">
+      <div className="text-xs md:text-sm font-bold text-[var(--color-brand-black)] leading-tight flex-1 break-words">
         {event.title}
       </div>
     </div>
