@@ -8,7 +8,7 @@ export default function ProblemMentalLoad() {
   return (
     <section className="
       py-16 md:py-24
-      bg-[var(--color-brand-white)]
+      bg-(--color-brand-white)
     ">
       <div className="
         max-w-6xl
@@ -20,7 +20,7 @@ export default function ProblemMentalLoad() {
           <h2 className="
             text-3xl md:text-4xl lg:text-5xl
             font-bold
-            text-[var(--color-brand-black)]
+            text-(--color-brand-black)
             text-center
             max-w-3xl
             mx-auto
@@ -37,7 +37,7 @@ export default function ProblemMentalLoad() {
           ">
             <p className="
               text-lg md:text-xl lg:text-2xl
-              text-[#3D3D3D80]
+              landing-muted
               leading-relaxed
               font-light
             ">
@@ -47,7 +47,7 @@ export default function ProblemMentalLoad() {
             </p>
             <p className="
               text-base md:text-lg
-              text-[#3D3D3D80]
+              landing-muted
               leading-relaxed
             ">
               Comme quand votre téléphone a trop d'applications ouvertes :
@@ -66,8 +66,8 @@ export default function ProblemMentalLoad() {
           ">
             <div className="
               p-6 md:p-8
-              bg-[var(--color-brand-white)]
-              border border-[#3D3D3D0D]
+              bg-(--color-brand-white)
+              border border-(--border-subtle)
               rounded-2xl
               shadow-soft
               text-center
@@ -75,22 +75,22 @@ export default function ProblemMentalLoad() {
               <div className="
                 text-2xl md:text-3xl lg:text-4xl
                 font-bold
-                text-[var(--color-brand-black)]
+                text-(--color-brand-black)
                 mb-2
               ">
                 88%
               </div>
               <p className="
                 text-sm md:text-base
-                text-[#3D3D3D80]
+                landing-subtle
               ">
                 des Français se disent affectés par la charge mentale
               </p>
             </div>
             <div className="
               p-6 md:p-8
-              bg-[var(--color-brand-white)]
-              border border-[#3D3D3D0D]
+              bg-(--color-brand-white)
+              border border-(--border-subtle)
               rounded-2xl
               shadow-soft
               text-center
@@ -98,14 +98,14 @@ export default function ProblemMentalLoad() {
               <div className="
                 text-2xl md:text-3xl lg:text-4xl
                 font-bold
-                text-[var(--color-brand-black)]
+                text-(--color-brand-black)
                 mb-2
               ">
                 68% / 38%
               </div>
               <p className="
                 text-sm md:text-base
-                text-[#3D3D3D80]
+                landing-subtle
               ">
                 des femmes et 38% des hommes ont du mal à s'organiser
               </p>
@@ -120,7 +120,7 @@ export default function ProblemMentalLoad() {
             <h3 className="
               text-lg md:text-xl
               font-semibold
-              text-[var(--color-brand-black)]
+              text-(--color-brand-black)
               mb-4 md:mb-6
               text-center
             ">
@@ -131,7 +131,7 @@ export default function ProblemMentalLoad() {
               gap-3 md:gap-4
               list-disc list-inside
               text-base md:text-lg
-              text-[#3D3D3D80]
+              landing-muted
             ">
               <li>Préparer la réunion de demain</li>
               <li>Relancer un client impayé</li>

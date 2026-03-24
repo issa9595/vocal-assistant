@@ -8,8 +8,8 @@ export default function Footer() {
     <footer className="
       w-full
       py-8 md:py-12
-      border-t border-[#3D3D3D0D]
-      bg-[var(--color-brand-white)]
+      border-t border-(--border-subtle)
+      bg-(--color-brand-white)
     ">
       <div className="
         max-w-6xl
@@ -17,19 +17,25 @@ export default function Footer() {
         px-4 md:px-8 lg:px-12
         text-center
         text-sm md:text-base
-        text-[#3D3D3D80]
+        landing-muted
       ">
         <p>
           © 2025{" "}
-          <span className="
-            bg-gradient-to-r from-[#F8C4C5] to-[#FFF4C7]
-            bg-clip-text
-            text-transparent
-            font-bold
-          ">
+          <span className="landing-gradient-text font-bold">
             Lumia
           </span>
           . Tous droits réservés.
+        </p>
+        <p className="mt-2 text-xs md:text-sm">
+          Created by{" "}
+          <a
+            href="https://mada-dev.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold landing-link"
+          >
+            MADA-DEV.COM
+          </a>
         </p>
       </div>
     </footer>

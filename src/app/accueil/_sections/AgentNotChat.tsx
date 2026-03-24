@@ -8,7 +8,7 @@ export default function AgentNotChat() {
   return (
     <section className="
       py-16 md:py-24
-      bg-[var(--color-brand-white)]
+      bg-(--color-brand-white)
     ">
       <div className="
         max-w-6xl
@@ -24,7 +24,7 @@ export default function AgentNotChat() {
           <h2 className="
             text-3xl md:text-4xl lg:text-5xl
             font-bold
-            text-[var(--color-brand-black)]
+            text-(--color-brand-black)
             text-center
           ">
             Lumia ne répond pas. Il agit.
@@ -34,7 +34,7 @@ export default function AgentNotChat() {
           <div className="space-y-6">
             <p className="
               text-lg md:text-xl lg:text-2xl
-              text-[#3D3D3D80]
+              landing-muted
               leading-relaxed
               font-light
               text-center
@@ -45,7 +45,7 @@ export default function AgentNotChat() {
             </p>
             <p className="
               text-base md:text-lg
-              text-[var(--color-brand-black)]
+              text-(--color-brand-black)
               leading-relaxed
               text-center
               font-semibold
@@ -59,8 +59,7 @@ export default function AgentNotChat() {
           {/* Liste */}
           <div className="
             p-6 md:p-8
-            bg-[var(--color-brand-white)]
-            border border-[#3D3D3D0D]
+            landing-card
             rounded-2xl
             shadow-soft
           ">
@@ -69,7 +68,7 @@ export default function AgentNotChat() {
               gap-3 md:gap-4
               list-disc list-inside
               text-base md:text-lg
-              text-[#3D3D3D80]
+              landing-muted
             ">
               <li>Gérer votre agenda</li>
               <li>Organiser vos priorités</li>

@@ -29,7 +29,7 @@ export default function HowItWorks() {
       id="comment-ca-marche"
       className="
         py-16 md:py-24
-        bg-[var(--color-brand-white)]
+        bg-(--color-brand-white)
       "
     >
       <div className="
@@ -42,7 +42,7 @@ export default function HowItWorks() {
           <h2 className="
             text-3xl md:text-4xl lg:text-5xl
             font-bold
-            text-[var(--color-brand-black)]
+            text-(--color-brand-black)
             text-center
           ">
             Comment ça marche ?
@@ -58,13 +58,13 @@ export default function HowItWorks() {
                 <div className="
                   w-16 h-16 md:w-20 md:h-20
                   mx-auto mb-6 md:mb-8
-                  bg-[var(--color-brand-white)]
-                  border border-[#3D3D3D0D]
+                  bg-(--color-brand-white)
+                  border border-(--border-subtle)
                   rounded-full
                   flex items-center justify-center
                   text-2xl md:text-3xl
                   font-bold
-                  text-[var(--color-brand-black)]
+                  text-(--color-brand-black)
                   shadow-soft
                 ">
                   {step.number}
@@ -72,14 +72,14 @@ export default function HowItWorks() {
                 <h3 className="
                   text-xl md:text-2xl
                   font-semibold
-                  text-[var(--color-brand-black)]
+                  text-(--color-brand-black)
                   mb-4 md:mb-6
                 ">
                   {step.title}
                 </h3>
                 <p className="
                   text-base md:text-lg
-                  text-[#3D3D3D80]
+                  landing-muted
                   leading-relaxed
                 ">
                   {step.description}
@@ -93,15 +93,14 @@ export default function HowItWorks() {
             max-w-3xl
             mx-auto
             p-6 md:p-8 lg:p-10
-            bg-[var(--color-brand-white)]
-            border border-[#3D3D3D0D]
+            landing-card
             rounded-2xl
             shadow-soft
           ">
             <h3 className="
               text-lg md:text-xl
               font-semibold
-              text-[var(--color-brand-black)]
+              text-(--color-brand-black)
               mb-6 md:mb-8
             ">
               Exemple
@@ -111,17 +110,17 @@ export default function HowItWorks() {
                 <p className="
                   text-sm md:text-base
                   font-medium
-                  text-[#3D3D3D80]
+                  landing-subtle
                   mb-2 md:mb-3
                 ">
                   Phrase :
                 </p>
                 <div className="
                   p-4 md:p-5
-                  bg-[var(--color-brand-blue)]
+                  bg-(--color-brand-blue)
                   rounded-soft
                   text-base md:text-lg
-                  text-[var(--color-brand-black)]
+                  text-(--color-brand-black)
                   italic
                 ">
                   J'ai un dîner ce soir à 19h…
@@ -131,18 +130,18 @@ export default function HowItWorks() {
                 <p className="
                   text-sm md:text-base
                   font-medium
-                  text-[#3D3D3D80]
+                  landing-subtle
                   mb-2 md:mb-3
                 ">
                   Résultat :
                 </p>
                 <div className="
                   p-4 md:p-5
-                  bg-[var(--color-brand-white)]
-                  border border-[#3D3D3D0D]
+                  bg-(--color-brand-white)
+                  border border-(--border-subtle)
                   rounded-soft
                   text-base md:text-lg
-                  text-[var(--color-brand-black)]
+                  text-(--color-brand-black)
                 ">
                   <ul className="space-y-2 list-disc list-inside">
                     <li>Courses 16:30</li>

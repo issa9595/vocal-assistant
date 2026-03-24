@@ -23,7 +23,7 @@ export default function WhatLumiaDoes() {
   return (
     <section className="
       py-16 md:py-24
-      bg-[var(--color-brand-white)]
+      bg-(--color-brand-white)
     ">
       <div className="
         max-w-6xl
@@ -35,7 +35,7 @@ export default function WhatLumiaDoes() {
           <h2 className="
             text-3xl md:text-4xl lg:text-5xl
             font-bold
-            text-[var(--color-brand-black)]
+            text-(--color-brand-black)
             text-center
             max-w-3xl
             mx-auto
@@ -53,8 +53,7 @@ export default function WhatLumiaDoes() {
                 key={index}
                 className="
                   p-6 md:p-8 lg:p-10
-                  bg-[var(--color-brand-white)]
-                  border border-[#3D3D3D0D]
+                  landing-card
                   rounded-2xl
                   shadow-soft
                   hover:shadow-medium
@@ -64,14 +63,14 @@ export default function WhatLumiaDoes() {
                 <h3 className="
                   text-xl md:text-2xl
                   font-semibold
-                  text-[var(--color-brand-black)]
+                  text-(--color-brand-black)
                   mb-4 md:mb-6
                 ">
                   {feature.title}
                 </h3>
                 <p className="
                   text-base md:text-lg
-                  text-[#3D3D3D80]
+                  landing-muted
                   leading-relaxed
                 ">
                   {feature.description}

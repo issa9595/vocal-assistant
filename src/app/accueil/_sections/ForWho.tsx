@@ -23,7 +23,7 @@ export default function ForWho() {
   return (
     <section className="
       py-16 md:py-24
-      bg-[var(--color-brand-white)]
+      bg-(--color-brand-white)
     ">
       <div className="
         max-w-6xl
@@ -35,7 +35,7 @@ export default function ForWho() {
           <h2 className="
             text-3xl md:text-4xl lg:text-5xl
             font-bold
-            text-[var(--color-brand-black)]
+            text-(--color-brand-black)
             text-center
           ">
             Pour qui est faite l'app ?
@@ -51,8 +51,7 @@ export default function ForWho() {
                 key={index}
                 className="
                   p-6 md:p-8 lg:p-10
-                  bg-[var(--color-brand-white)]
-                  border border-[#3D3D3D0D]
+                  landing-card
                   rounded-2xl
                   shadow-soft
                   hover:shadow-medium
@@ -62,14 +61,14 @@ export default function ForWho() {
                 <h3 className="
                   text-xl md:text-2xl
                   font-semibold
-                  text-[var(--color-brand-black)]
+                  text-(--color-brand-black)
                   mb-4 md:mb-6
                 ">
                   {profile.title}
                 </h3>
                 <p className="
                   text-base md:text-lg
-                  text-[#3D3D3D80]
+                  landing-muted
                   leading-relaxed
                 ">
                   {profile.description}
@@ -81,7 +80,7 @@ export default function ForWho() {
           {/* Conclusion */}
           <p className="
             text-lg md:text-xl lg:text-2xl
-            text-[var(--color-brand-black)]
+            text-(--color-brand-black)
             leading-relaxed
             font-light
             text-center

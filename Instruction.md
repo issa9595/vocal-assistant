@@ -1270,4 +1270,47 @@ Reproduire exactement la logique du calendrier pour le chat/conversations :
 
 ---
 
-*Fichier mis à jour automatiquement - Session 21 du 11/12/2025*
+ *Fichier mis à jour automatiquement - Session 21 du 11/12/2025*
+
+---
+
+### Session 22 du 12/03/2026 - Refactorisation du composant AiFabButton
+
+- **Refactor UI** : simplification de `AiFabButton.tsx` avec :
+  - Composant typé `FC<AiFabButtonProps>` et constante `BUTTON_BASE_CLASSES` pour centraliser les classes Tailwind.
+  - Suppression des commentaires et blocs JSX morts (badge de notification commenté).
+  - Conservation du comportement existant (position fixe, animations, accessibilité ARIA).
+- **Qualité code** : correction des avertissements Tailwind (utilisation de `text-(--color-brand-black)` et `bg-linear-to-tr`).
+
+---
+
+### Session 23 du 12/03/2026 - Demande de résumé du projet
+
+- **Action** : Fourniture d'un résumé global du projet pour l'IA, structuré en deux parties (fonctionnelle et technique), basé sur l'état actuel documenté dans ce fichier et dans le code.
+
+---
+
+### Session 24 du 24/03/2026 - Ajout d'un crédit dans le footer
+
+- **Footer** : ajout d'une ligne de crédit "Created by MADA-DEV.COM" dans `src/app/accueil/_sections/Footer.tsx`.
+- **Lien externe** : insertion d'un lien cliquable vers `https://mada-dev.com` avec ouverture dans un nouvel onglet (`target="_blank"` + `rel="noopener noreferrer"`).
+
+---
+
+### Session 25 du 24/03/2026 - Amélioration accessibilité visuelle de la landing page
+
+- **Palette et contrastes** : ajout de variables CSS d'accessibilité dans `src/app/globals.css` (`--text-secondary-accessible`, `--text-muted-accessible`, `--border-subtle`, `--surface-soft`, `--focus-ring`).
+- **Focus clavier** : renforcement du style `:focus-visible` (outline plus visible) pour améliorer la navigation clavier.
+- **Design system landing** : création de classes utilitaires globales (`landing-muted`, `landing-subtle`, `landing-card`, `landing-gradient-text`, `landing-link`) pour harmoniser lisibilité et cohérence.
+- **Refonte sections accueil** : application des nouvelles classes et contrastes sur l'ensemble des sections de `src/app/accueil/_sections/` (dont `Footer.tsx`, `Header.tsx`, `Hero.tsx`, `ProblemMentalLoad.tsx`, `WhatLumiaDoes.tsx`, `AgentNotChat.tsx`, `Benefits.tsx`, `HowItWorks.tsx`, `ForWho.tsx`, `DataAndImpact.tsx`, `FinalCTA.tsx`) sans modifier les textes.
+- **CTA et liens** : suppression des états hover à faible contraste (texte blanc sur fond pastel), remplacés par des variantes plus lisibles.
+
+---
+
+### Session 26 du 24/03/2026 - Correction des warnings Tailwind
+
+- **Qualité code** : correction des warnings de classes Tailwind dans les sections de `src/app/accueil/_sections/`.
+- **Conventions v4** : remplacement des syntaxes `bg-[var(...)]`, `text-[var(...)]`, `border-[var(...)]`, `hover:bg-[var(...)]` par les formes recommandées `bg-(--...)`, `text-(--...)`, `border-(--...)`, `hover:bg-(--...)`.
+- **Nettoyage CTA final** : correction de la classe de paragraphe dans `FinalCTA.tsx` pour éviter les doublons/incohérences (`landing-muted` proprement appliquée).
+- **Validation** : relance du lint sur tous les fichiers modifiés de la landing, résultat sans erreur/avertissement sur ce scope.
+

@@ -11,8 +11,8 @@ export default function Header() {
     <header className="
       sticky top-0 z-50
       w-full
-      bg-[var(--color-brand-white)]
-      border-b border-[#3D3D3D0D]
+      bg-(--color-brand-white)
+      border-b border-(--border-subtle)
       backdrop-blur-sm bg-opacity-95
     ">
       <div className="
@@ -30,11 +30,7 @@ export default function Header() {
           font-bold
           tracking-tight
         ">
-          <span className="
-            bg-gradient-to-r from-[#F8C4C5] to-[#FFF4C7]
-            bg-clip-text
-            text-transparent
-          ">
+          <span className="landing-gradient-text">
             Lumia
           </span>
         </h1>
@@ -45,16 +41,15 @@ export default function Header() {
           className="
             px-4 md:px-6
             py-2 md:py-2.5
-            bg-[var(--color-brand-white)]
-            border border-[#3D3D3D0D]
-            text-[var(--color-brand-black)]
+            bg-(--color-brand-white)
+            border border-(--border-subtle)
+            text-(--color-brand-black)
             font-medium
             text-sm md:text-base
             rounded-full
             shadow-soft
             hover:shadow-medium
-            hover:bg-gradient-to-r hover:from-[#F8C4C5] hover:to-[#FFF4C7]
-            hover:text-white
+            hover:bg-(--surface-soft)
             transition-all duration-300
           "
         >

@@ -28,7 +28,7 @@ export default function FinalCTA() {
           <h2 className="
             text-3xl md:text-4xl lg:text-5xl xl:text-6xl
             font-bold
-            text-[var(--color-brand-black)]
+            text-(--color-brand-black)
           ">
             Lumia n'est pas qu'un assistant. C'est votre futur allié du quotidien.
           </h2>
@@ -36,10 +36,9 @@ export default function FinalCTA() {
           {/* Texte */}
           <p className="
             text-lg md:text-xl lg:text-2xl
-            text-[var(--color-brand-black)]
+            landing-muted
             leading-relaxed
             font-light
-            opacity-90
           ">
             Le repas est organisé. La réunion est prête. La facture est relancée. Vous respirez.
           </p>
@@ -47,15 +46,11 @@ export default function FinalCTA() {
           {/* Slogan */}
           <p className="
             text-xl md:text-2xl lg:text-3xl
-            text-[var(--color-brand-black)]
+            text-(--color-brand-black)
             font-semibold
           ">
             Arrêtez de penser votre vie.{" "}
-            <span className="
-              bg-gradient-to-r from-[#F8C4C5] to-[#FFF4C7]
-              bg-clip-text
-              text-transparent
-            ">
+            <span className="landing-gradient-text">
               Commencez à la vivre.
             </span>
           </p>
@@ -68,15 +63,14 @@ export default function FinalCTA() {
                 inline-block
                 px-6 md:px-8 lg:px-10
                 py-2.5 md:py-3 lg:py-3.5
-                bg-[var(--color-brand-white)]
-                text-[var(--color-brand-black)]
+                bg-(--color-brand-white)
+                text-(--color-brand-black)
                 font-semibold
                 text-sm md:text-base lg:text-lg
                 rounded-full
                 shadow-soft
                 hover:shadow-medium
-                hover:bg-gradient-to-r hover:from-[#F8C4C5] hover:to-[#FFF4C7]
-                hover:text-white
+                hover:bg-(--surface-soft)
                 transition-all duration-300
                 transform hover:scale-[1.02]
                 active:scale-[0.98]

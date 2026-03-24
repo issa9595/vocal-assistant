@@ -16,7 +16,7 @@ export default function Benefits() {
   return (
     <section className="
       py-16 md:py-24
-      bg-[var(--color-brand-white)]
+      bg-(--color-brand-white)
     ">
       <div className="
         max-w-6xl
@@ -32,7 +32,7 @@ export default function Benefits() {
           <h2 className="
             text-3xl md:text-4xl lg:text-5xl
             font-bold
-            text-[var(--color-brand-black)]
+            text-(--color-brand-black)
             text-center
           ">
             Ce que ça change pour vous
@@ -41,8 +41,7 @@ export default function Benefits() {
           {/* Bullets */}
           <div className="
             p-6 md:p-8 lg:p-10
-            bg-[var(--color-brand-white)]
-            border border-[#3D3D3D0D]
+            landing-card
             rounded-2xl
             shadow-soft
           ">
@@ -50,7 +49,7 @@ export default function Benefits() {
               space-y-4 md:space-y-5
               list-disc list-inside
               text-base md:text-lg lg:text-xl
-              text-[#3D3D3D80]
+              landing-muted
             ">
               {benefits.map((benefit, index) => (
                 <li key={index}>{benefit}</li>
@@ -61,7 +60,7 @@ export default function Benefits() {
           {/* Phrase de fin */}
           <p className="
             text-lg md:text-xl lg:text-2xl
-            text-[var(--color-brand-black)]
+            text-(--color-brand-black)
             leading-relaxed
             font-light
             text-center

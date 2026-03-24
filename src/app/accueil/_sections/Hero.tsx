@@ -13,7 +13,7 @@ export default function Hero() {
       flex items-center justify-center
       px-4 md:px-8 lg:px-12
       py-20 md:py-32
-      bg-[var(--color-brand-white)]
+      bg-(--color-brand-white)
     ">
       <div className="
         max-w-5xl
@@ -25,17 +25,13 @@ export default function Hero() {
         <h1 className="
           text-4xl md:text-5xl lg:text-6xl xl:text-7xl
           font-bold
-          text-[var(--color-brand-black)]
+          text-(--color-brand-black)
           tracking-tight
           leading-[1.1]
         ">
           Organise ta journée,
           <br />
-          <span className="
-            bg-gradient-to-r from-[#F8C4C5] to-[#FFF4C7]
-            bg-clip-text
-            text-transparent
-          ">
+          <span className="landing-gradient-text">
             juste avec ta voix.
           </span>
         </h1>
@@ -43,7 +39,7 @@ export default function Hero() {
         {/* Sous-titre */}
         <p className="
           text-lg md:text-xl lg:text-2xl
-          text-[#3D3D3D80]
+          landing-muted
           max-w-3xl
           mx-auto
           leading-relaxed
@@ -67,12 +63,13 @@ export default function Hero() {
               px-6 md:px-8 lg:px-10
               py-2.5 md:py-3 lg:py-3.5
               bg-[linear-gradient(135deg,#CCE3C3_0%,#CDE8FA_100%)]
-              text-[var(--color-brand-black)]
+              text-(--color-brand-black)
               font-semibold
               text-sm md:text-base lg:text-lg
               rounded-full
               shadow-soft
               hover:shadow-medium
+              hover:brightness-95
               transition-all duration-300
               transform hover:scale-[1.02]
               active:scale-[0.98]
@@ -84,13 +81,10 @@ export default function Hero() {
           <a
             href="#comment-ca-marche"
             className="
-              text-[var(--color-brand-black)]
+              text-(--color-brand-black)
               font-medium
               text-sm md:text-base lg:text-lg
-              underline
-              underline-offset-4
-              decoration-2
-              hover:text-[#3D3D3D80]
+              landing-link
               transition-colors duration-300
             "
           >
