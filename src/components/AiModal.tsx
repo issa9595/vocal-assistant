@@ -19,6 +19,7 @@ import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
 import { useCalendarStore } from "@/store/useCalendarStore";
 import { useChatStore } from "@/store/useChatStore";
 import { callAssistantAPI } from "@/services/assistantApi";
+import { MessageBubble } from "@/components/chat/MessageBubble";
 import type {
   Message,
   SpeechRecognitionStatus,
@@ -41,24 +42,6 @@ interface AiModalProps {
  */
 const generateMessageId = (): string => {
   return `msg_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
-};
-
-/**
- * Formate un timestamp en heure lisible (HH:MM)
- */
-const formatTimestamp = (date: Date | string): string => {
-  // S'assurer que date est un objet Date
-  const dateObj = typeof date === "string" ? new Date(date) : date;
-  
-  // Vérifier que la date est valide
-  if (!(dateObj instanceof Date) || isNaN(dateObj.getTime())) {
-    return "";
-  }
-  
-  return dateObj.toLocaleTimeString("fr-FR", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 };
 
 
@@ -703,56 +686,6 @@ function SuggestionChip({ text }: SuggestionChipProps) {
     ">
       &quot;{text}&quot;
     </span>
-  );
-}
-
-/**
- * Props du composant MessageBubble
- */
-interface MessageBubbleProps {
-  message: Message;
-}
-
-/**
- * Composant MessageBubble
- * 
- * Affiche un message dans une bulle de chat.
- * - Messages utilisateur : alignés à droite, fond violet
- * - Messages assistant : alignés à gauche, fond gris
- */
-function MessageBubble({ message }: MessageBubbleProps) {
-  const isUser = message.role === "user";
-
-  return (
-    <div
-      className={`
-        flex items-end gap-2
-        ${isUser ? "justify-end" : "justify-start"}
-      `}
-    >
-      <div
-        className={`
-          max-w-[85%] px-4 py-3 rounded-large
-          ${isUser
-            ? "bg-[var(--color-brand-pink)] text-[var(--color-brand-black)] rounded-br-md"
-            : "bg-[#9dc0bc30] text-[var(--color-brand-black)] rounded-bl-md"
-          }
-        `}
-      >
-        {/* Contenu du message */}
-        <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
-
-        {/* Timestamp */}
-        <span
-          className={`
-            text-xs mt-1 block
-            ${isUser ? "text-[#3D3D3D99]" : "text-[#3D3D3D0D]0"}
-          `}
-        >
-          {formatTimestamp(message.createdAt)}
-        </span>
-      </div>
-    </div>
   );
 }
 
