@@ -13,6 +13,16 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { CalendarEvent } from "@/types/message";
+import {
+  addHours,
+  startOfDay,
+  endOfDay,
+  startOfWeek,
+  endOfWeek,
+  startOfMonth,
+  endOfMonth,
+  isWithin,
+} from "@/lib/dateHelpers";
 
 type CalendarViewMode = "day" | "week" | "month" | "year";
 
@@ -61,53 +71,6 @@ interface CalendarStore {
 
 const generateEventId = () => `evt_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 const generateGroupId = () => `group_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
-
-const addHours = (date: Date, hours: number) => {
-  const d = new Date(date);
-  d.setHours(d.getHours() + hours);
-  return d;
-};
-
-const startOfDay = (date: Date) => {
-  const d = new Date(date);
-  d.setHours(0, 0, 0, 0);
-  return d;
-};
-
-const endOfDay = (date: Date) => {
-  const d = new Date(date);
-  d.setHours(23, 59, 59, 999);
-  return d;
-};
-
-const startOfWeek = (date: Date) => {
-  const d = startOfDay(date);
-  const day = d.getDay(); // 0 dimanche
-  const diff = (day === 0 ? -6 : 1) - day; // Lundi comme début
-  d.setDate(d.getDate() + diff);
-  return d;
-};
-
-const endOfWeek = (date: Date) => {
-  const d = startOfWeek(date);
-  d.setDate(d.getDate() + 6);
-  d.setHours(23, 59, 59, 999);
-  return d;
-};
-
-const startOfMonth = (date: Date) => {
-  const d = new Date(date.getFullYear(), date.getMonth(), 1);
-  d.setHours(0, 0, 0, 0);
-  return d;
-};
-
-const endOfMonth = (date: Date) => {
-  const d = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-  d.setHours(23, 59, 59, 999);
-  return d;
-};
-
-const isWithin = (date: Date, start: Date, end: Date) => date >= start && date <= end;
 
 const getDefaultEvents = (): CalendarEvent[] => {
   const now = new Date();
