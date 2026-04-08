@@ -20,6 +20,8 @@ import { useCalendarStore } from "@/store/useCalendarStore";
 import { useChatStore } from "@/store/useChatStore";
 import { callAssistantAPI } from "@/services/assistantApi";
 import { MessageBubble } from "@/components/chat/MessageBubble";
+import { StatusIndicator } from "@/components/chat/StatusIndicator";
+import { SuggestionChip } from "@/components/chat/SuggestionChip";
 import type {
   Message,
   SpeechRecognitionStatus,
@@ -665,70 +667,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
   );
 }
 
-/**
- * Props du composant SuggestionChip
- */
-interface SuggestionChipProps {
-  text: string;
-}
 
-/**
- * Composant SuggestionChip
- * Affiche une suggestion cliquable pour aider l'utilisateur
- */
-function SuggestionChip({ text }: SuggestionChipProps) {
-  return (
-    <span className="
-      px-3 py-1.5 rounded-full
-      bg-[#f4b4c830] text-[#3D3D3D99]
-      text-xs
-      border border-zinc-700/50
-    ">
-      &quot;{text}&quot;
-    </span>
-  );
-}
-
-/**
- * Props du composant StatusIndicator
- */
-interface StatusIndicatorProps {
-  status: SpeechRecognitionStatus;
-  isSupported: boolean;
-}
-
-/**
- * Composant StatusIndicator
- * 
- * Affiche l'état actuel de la reconnaissance vocale
- * avec un texte descriptif et une animation si nécessaire.
- */
-function StatusIndicator({ status, isSupported }: StatusIndicatorProps) {
-  if (!isSupported) {
-    return (
-      <p className="text-sm text-amber-500 text-center">
-        ⚠️ Reconnaissance vocale non disponible
-      </p>
-    );
-  }
-
-  const statusTexts: Record<SpeechRecognitionStatus, string> = {
-    idle: "En attente...",
-    listening: "🎙️ Écoute en cours...",
-    processing: "⏳ Traitement...",
-    error: "❌ Erreur",
-  };
-
-  return (
-    <p className={`
-      text-sm text-center
-      ${status === "listening" ? "text-emerald-400" : "text-zinc-500"}
-      ${status === "listening" ? "animate-pulse" : ""}
-    `}>
-      {statusTexts[status]}
-    </p>
-  );
-}
 
 /**
  * Props du composant MicrophoneButton
