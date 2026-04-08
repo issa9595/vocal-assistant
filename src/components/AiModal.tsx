@@ -18,11 +18,12 @@ import { useState, useCallback, useEffect, useRef } from "react";
 import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
 import { useCalendarStore } from "@/store/useCalendarStore";
 import { useChatStore } from "@/store/useChatStore";
-import type { 
-  Message, 
-  SpeechRecognitionStatus, 
+import { callAssistantAPI } from "@/services/assistantApi";
+import type {
+  Message,
+  SpeechRecognitionStatus,
   AssistantResponse,
-  GeminiRequestPayload, 
+  GeminiRequestPayload,
 } from "@/types/message";
 
 /**
@@ -60,48 +61,6 @@ const formatTimestamp = (date: Date | string): string => {
   });
 };
 
-/**
- * Appelle l'API assistant avec Gemini
- * 
- * @param payload - Données à envoyer (message, historique, tâches actuelles)
- * @returns Réponse de l'assistant avec message et action éventuelle
- */
-async function callAssistantAPI(payload: GeminiRequestPayload): Promise<AssistantResponse> {
-  const response = await fetch("/api/assistant", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
-
-  // Récupérer la réponse même si le statut n'est pas OK
-  const data = await response.json();
-
-  if (!response.ok) {
-    // Pour les erreurs gérées (429, 503), retourner directement la réponse
-    // au lieu de lancer une erreur, pour éviter les logs console inutiles
-    if (response.status === 429 || response.status === 503) {
-      return {
-        message: data.message || "Une erreur s'est produite",
-        action: { type: "none" },
-      };
-    }
-    
-    // Pour les autres erreurs, créer une erreur avec le statut et le message
-    const error = new Error(data.message || `Erreur API: ${response.status}`) as Error & { 
-      status?: number; 
-      error?: string;
-    };
-    error.status = response.status;
-    if (data.error) {
-      error.error = data.error;
-    }
-    throw error;
-  }
-
-  return data;
-}
 
 /**
  * Composant AiModal
@@ -553,7 +512,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
     <div
       className="
         fixed inset-0 z-50
-        bg-[#FAFAFAF2] backdrop-blur-sm
+        bg-[#fdf8f8f2] backdrop-blur-sm
         flex flex-col
       "
       role="dialog"
@@ -624,12 +583,12 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
           ">
             <div className="
               w-20 h-20 rounded-full
-              bg-gradient-to-br from-violet-600/30 to-indigo-600/30
+              bg-[linear-gradient(135deg,#f4b4c830_0%,#fcecd330_100%)]
               flex items-center justify-center
               mb-4
             ">
               <svg
-                className="w-10 h-10 text-[var(--color-brand-blue)]"
+                className="w-10 h-10 text-[var(--color-brand-pink)]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -673,9 +632,9 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
                 bg-[var(--color-brand-white)] border border-[#3D3D3D1A] text-[var(--color-brand-black)]
               ">
                 <div className="flex gap-1">
-                  <span className="w-2 h-2 bg-[var(--color-brand-blue)] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                  <span className="w-2 h-2 bg-[var(--color-brand-blue)] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                  <span className="w-2 h-2 bg-[var(--color-brand-blue)] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                  <span className="w-2 h-2 bg-[var(--color-brand-pink)] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="w-2 h-2 bg-[var(--color-brand-pink)] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="w-2 h-2 bg-[var(--color-brand-pink)] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
                 </div>
               </div>
             </div>
@@ -738,7 +697,7 @@ function SuggestionChip({ text }: SuggestionChipProps) {
   return (
     <span className="
       px-3 py-1.5 rounded-full
-      bg-[#CDE8FA4D] text-[#3D3D3D99]
+      bg-[#f4b4c830] text-[#3D3D3D99]
       text-xs
       border border-zinc-700/50
     ">
@@ -775,8 +734,8 @@ function MessageBubble({ message }: MessageBubbleProps) {
         className={`
           max-w-[85%] px-4 py-3 rounded-large
           ${isUser
-            ? "bg-[var(--color-brand-blue)] text-[var(--color-brand-black)] rounded-br-md"
-            : "bg-[#CCE3C34D] text-[var(--color-brand-black)] rounded-bl-md"
+            ? "bg-[var(--color-brand-pink)] text-[var(--color-brand-black)] rounded-br-md"
+            : "bg-[#9dc0bc30] text-[var(--color-brand-black)] rounded-bl-md"
           }
         `}
       >
@@ -867,8 +826,8 @@ function MicrophoneButton({ status, isSupported, onClick }: MicrophoneButtonProp
         transition-all duration-300
         focus:outline-none focus:ring-4
         ${isListening
-          ? "bg-[var(--color-brand-pink)] hover:bg-[#F8C4C5CC] focus:ring-brand-pink/50 scale-110"
-          : "bg-gradient-pink-yellow hover:opacity-90 focus:ring-brand-pink/50"
+          ? "bg-[var(--color-brand-pink)] hover:bg-[#f4b4c8cc] focus:ring-[#f4b4c8]/50 scale-110"
+          : "bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)] hover:opacity-90 focus:ring-[#f4b4c8]/50"
         }
         ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}
         ${isListening ? "animate-pulse" : ""}
@@ -883,14 +842,14 @@ function MicrophoneButton({ status, isSupported, onClick }: MicrophoneButtonProp
           <span
             className="
               absolute w-20 h-20 rounded-full
-              bg-[#F8C4C54D] animate-ping
+              bg-[#f4b4c84d] animate-ping
             "
             aria-hidden="true"
           />
           <span
             className="
               absolute w-24 h-24 rounded-full
-              border-2 border-[#F8C4C50D]0 animate-ping
+              border-2 border-[#f4b4c840] animate-ping
             "
             style={{ animationDelay: "150ms" }}
             aria-hidden="true"
