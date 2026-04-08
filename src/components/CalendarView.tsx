@@ -146,8 +146,8 @@ export function CalendarView() {
             onClick={() => setViewMode(mode)}
             className={`px-3 py-2 rounded-lg text-sm font-medium transition ${
               viewMode === mode
-                ? "bg-violet-600 text-white shadow-lg shadow-violet-500/20"
-                : "bg-zinc-800/60 text-zinc-300 hover:bg-zinc-800"
+                ? "bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)] text-[#3d3d3d] shadow-lg shadow-[#f4b4c840]"
+                : "bg-[#3d3d3d10] text-[#3d3d3d80] hover:bg-[#f4b4c820]"
             }`}
             aria-pressed={viewMode === mode}
           >

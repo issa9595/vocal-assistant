@@ -117,7 +117,7 @@ export default function HowItWorks() {
                 </p>
                 <div className="
                   p-4 md:p-5
-                  bg-(--color-brand-blue)
+                  bg-(--color-brand-peach)
                   rounded-soft
                   text-base md:text-lg
                   text-(--color-brand-black)

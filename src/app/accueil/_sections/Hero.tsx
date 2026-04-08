@@ -62,7 +62,7 @@ export default function Hero() {
             className="
               px-6 md:px-8 lg:px-10
               py-2.5 md:py-3 lg:py-3.5
-              bg-[linear-gradient(135deg,#CCE3C3_0%,#CDE8FA_100%)]
+              bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
               text-(--color-brand-black)
               font-semibold
               text-sm md:text-base lg:text-lg

@@ -14,7 +14,7 @@
 
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import { useSpeechRecognition } from "@/hooks/useSpeechRecognition";
 import { useCalendarStore } from "@/store/useCalendarStore";
 import { useChatStore } from "@/store/useChatStore";
@@ -66,6 +66,12 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
 
   // Référence pour le scroll automatique
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Référence sur la modale pour le focus trap
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  // Référence sur l'élément focalisé avant l'ouverture (pour la restauration)
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   // ========== STORE ZUSTAND ==========
   const {
@@ -463,12 +469,45 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
   }, [messages, isLoading]);
 
   /**
-   * Gestion de la touche Escape pour fermer la modale
+   * Focus trap + Escape pour fermer la modale
+   * Sauvegarde le focus précédent et le restaure à la fermeture
    */
   useEffect(() => {
+    if (!isOpen) {
+      previousFocusRef.current?.focus();
+      return;
+    }
+
+    previousFocusRef.current = document.activeElement as HTMLElement;
+
+    // Focus sur le premier élément interactif de la modale
+    const focusable = modalRef.current?.querySelector<HTMLElement>(
+      'button:not([disabled]), [href], input, [tabindex]:not([tabindex="-1"])'
+    );
+    focusable?.focus();
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
+      if (e.key === "Escape") {
         onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const modal = modalRef.current;
+      if (!modal) return;
+      const elements = Array.from(
+        modal.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input, [tabindex]:not([tabindex="-1"])'
+        )
+      );
+      if (elements.length === 0) return;
+      const first = elements[0];
+      const last = elements[elements.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
     };
 
@@ -496,6 +535,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
 
   return (
     <div
+      ref={modalRef}
       className="
         fixed inset-0 z-50
         bg-[#fdf8f8f2] backdrop-blur-sm
@@ -504,6 +544,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
+      aria-describedby="modal-description"
     >
       {/* ========== HEADER DE LA MODALE ========== */}
       <header className="
@@ -516,7 +557,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
           <h2 id="modal-title" className="text-lg font-semibold text-[var(--color-brand-black)]">
             Assistant vocal
           </h2>
-          <p className="text-xs text-[#3D3D3D99] mt-0.5">
+          <p id="modal-description" className="text-xs text-[#3D3D3D99] mt-0.5">
             Propulsé par Gemini • Parlez pour interagir
           </p>
         </div>
@@ -552,11 +593,11 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
       </header>
 
       {/* ========== ZONE DE CONVERSATION ========== */}
-      <main className="flex-1 overflow-y-auto p-4">
+      <main className="flex-1 overflow-y-auto p-4" aria-label="Conversation" aria-busy={isLoadingInitial || isLoading}>
         {/* Indicateur de chargement initial */}
         {isLoadingInitial && (
-          <div className="flex flex-col items-center justify-center h-full">
-            <div className="w-8 h-8 border-2 border-violet-500 border-t-transparent rounded-full animate-spin mb-2" />
+          <div className="flex flex-col items-center justify-center h-full" role="status" aria-label="Chargement de l'historique">
+            <div className="w-8 h-8 border-2 border-violet-500 border-t-transparent rounded-full animate-spin mb-2" aria-hidden="true" />
             <p className="text-sm text-[#3D3D3D99]">Chargement de l'historique...</p>
           </div>
         )}
@@ -596,7 +637,8 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
             </p>
             
             {/* Suggestions d'actions */}
-            <div className="flex flex-wrap gap-2 justify-center mt-2">
+            <p className="sr-only" id="suggestions-label">Exemples de commandes vocales</p>
+            <div className="flex flex-wrap gap-2 justify-center mt-2" aria-labelledby="suggestions-label">
               <SuggestionChip text="Ajoute une réunion à 14h" />
               <SuggestionChip text="Qu'est-ce que j'ai aujourd'hui ?" />
               <SuggestionChip text="Marque la réunion comme terminée" />
@@ -605,19 +647,19 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
         )}
 
         {/* Liste des messages */}
-        <div className="flex flex-col gap-3">
+        <div role="log" aria-live="polite" aria-label="Messages de la conversation" className="flex flex-col gap-3">
           {messages.map((message) => (
             <MessageBubble key={message.id} message={message} />
           ))}
 
-          {/* Indicateur de chargement */}
+          {/* Indicateur de chargement de la réponse */}
           {isLoading && (
-            <div className="flex items-start gap-2 max-w-[85%]">
+            <div className="flex items-start gap-2 max-w-[85%]" role="status" aria-label="L'assistant réfléchit…">
               <div className="
                 px-4 py-3 rounded-2xl rounded-bl-md
                 bg-[var(--color-brand-white)] border border-[#3D3D3D1A] text-[var(--color-brand-black)]
               ">
-                <div className="flex gap-1">
+                <div className="flex gap-1" aria-hidden="true">
                   <span className="w-2 h-2 bg-[var(--color-brand-pink)] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
                   <span className="w-2 h-2 bg-[var(--color-brand-pink)] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
                   <span className="w-2 h-2 bg-[var(--color-brand-pink)] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
@@ -627,7 +669,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
           )}
 
           {/* Élément invisible pour le scroll automatique */}
-          <div ref={messagesEndRef} />
+          <div ref={messagesEndRef} aria-hidden="true" />
         </div>
       </main>
 
@@ -639,7 +681,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
       ">
         {/* Affichage de l'erreur si présente */}
         {errorMessage && (
-          <p className="text-sm text-red-400 text-center mb-3">
+          <p role="alert" className="text-sm text-red-400 text-center mb-3">
             {errorMessage}
           </p>
         )}

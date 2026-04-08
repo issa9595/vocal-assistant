@@ -143,7 +143,7 @@ export function YearView() {
               border border-[#3D3D3D1A]
               text-[var(--color-brand-black)] 
               text-sm md:text-base
-              focus:outline-none focus:ring-2 focus:ring-brand-blue
+              focus:outline-none focus:ring-2 focus:ring-[#96b6dd]
               cursor-pointer
               shadow-soft
             "
@@ -242,7 +242,7 @@ export function YearView() {
                                 {formatDayHeader(date)}
                               </h3>
                               {isToday && (
-                                <span className="text-xs text-[#3D3D3DCC] bg-[#CCE3C34D] px-2 py-0.5 rounded-soft">
+                                <span className="text-xs text-[#3D3D3DCC] bg-[#9dc0bc30] px-2 py-0.5 rounded-soft">
                                   Aujourd'hui
                                 </span>
                               )}
@@ -260,7 +260,7 @@ export function YearView() {
                                     flex items-start gap-3
                                     p-3 md:p-4
                                     rounded-medium
-                                    bg-[linear-gradient(135deg,#CCE3C3_0%,#CDE8FA_100%)]
+                                    bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
                                     border-none
                                     shadow-soft
                                     hover:shadow-medium

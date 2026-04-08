@@ -11,7 +11,7 @@ export default function FinalCTA() {
   return (
     <section className="
       py-16 md:py-24 lg:py-32
-      bg-[linear-gradient(135deg,#CCE3C3_0%,#CDE8FA_100%)]
+      bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
     ">
       <div className="
         max-w-6xl

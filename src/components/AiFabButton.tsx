@@ -12,7 +12,7 @@ interface AiFabButtonProps {
 }
 
 const BUTTON_BASE_CLASSES =
-  "fixed bottom-6 right-6 z-40 w-16 h-16 rounded-full bg-gradient-pink-yellow shadow-medium flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 hover:shadow-lg active:scale-95 focus:outline-none focus:ring-4 focus:ring-brand-pink/50 group";
+  "fixed bottom-6 right-6 z-40 w-16 h-16 rounded-full bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)] shadow-medium flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 hover:shadow-lg active:scale-95 focus:outline-none focus:ring-4 focus:ring-[#f4b4c8]/50 group";
 
 const AiFabButtonComponent: FC<AiFabButtonProps> = ({ onClick, isModalOpen = false }) => {
   return (
@@ -26,7 +26,7 @@ const AiFabButtonComponent: FC<AiFabButtonProps> = ({ onClick, isModalOpen = fal
       <span
         className="
           absolute inset-0 rounded-full
-          bg-[#F8C4C533]
+          bg-[#f4b4c833]
           animate-pulse
         "
         aria-hidden="true"

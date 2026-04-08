@@ -12,33 +12,40 @@ export function DayEventsSummary({ events }: DayEventsSummaryProps) {
   if (events.length === 0) return null;
 
   return (
-    <aside className="
-      hidden md:flex
-      md:flex-col
-      md:w-64 lg:w-80
-      md:border-l
-      md:border-[#3D3D3D0D]
-      md:px-4 lg:px-6
-      md:py-4
-      md:overflow-y-auto
-      md:bg-[#fdf8f8f5]
-    ">
-      <h3 className="
-        text-sm lg:text-base
-        font-semibold
-        text-[var(--color-brand-black)]
-        mb-4
-        sticky top-0
-        bg-[#fdf8f8f5]
-        pb-2
-        border-b border-[#3D3D3D0D]
-      ">
+    <aside
+      aria-label={`Résumé : ${events.length} événement${events.length > 1 ? "s" : ""}`}
+      className="
+        hidden md:flex
+        md:flex-col
+        md:w-64 lg:w-80
+        md:border-l
+        md:border-[#3D3D3D0D]
+        md:px-4 lg:px-6
+        md:py-4
+        md:overflow-y-auto
+        md:bg-[#fdf8f8f5]
+      "
+    >
+      <h3
+        aria-hidden="true"
+        className="
+          text-sm lg:text-base
+          font-semibold
+          text-[var(--color-brand-black)]
+          mb-4
+          sticky top-0
+          bg-[#fdf8f8f5]
+          pb-2
+          border-b border-[#3D3D3D0D]
+        "
+      >
         {events.length} événement{events.length > 1 ? "s" : ""}
       </h3>
-      <div className="flex flex-col gap-3">
+      <ul role="list" className="flex flex-col gap-3">
         {events.map((event) => (
-          <div
+          <li
             key={event.id}
+            aria-label={`${event.title}, de ${formatTime(event.start)} à ${formatTime(event.end)}`}
             className="
               p-3 lg:p-4
               rounded-medium
@@ -49,7 +56,7 @@ export function DayEventsSummary({ events }: DayEventsSummaryProps) {
               transition-all duration-200
             "
           >
-            <div className="
+            <div aria-hidden="true" className="
               text-xs lg:text-sm
               font-semibold
               text-[#3D3D3DB3]
@@ -75,9 +82,9 @@ export function DayEventsSummary({ events }: DayEventsSummaryProps) {
                 {event.description}
               </div>
             )}
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </aside>
   );
 }

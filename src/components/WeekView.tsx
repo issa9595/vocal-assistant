@@ -135,10 +135,20 @@ export function WeekView() {
     return today >= weekStart && today <= weekEnd;
   }, [weekStart]);
 
+  // Minuit d'aujourd'hui — calculé une fois en dehors du .map()
+  const todayMidnight = useMemo(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }, []);
+
   return (
     <div className="flex flex-col h-full bg-[var(--color-brand-white)] text-[var(--color-brand-black)]">
       {/* ========== HEADER DE NAVIGATION ========== */}
-      <header className="sticky top-0 z-10 bg-[#FAFAFAF2] backdrop-blur-md border-b border-[#3D3D3D0D] px-4 py-4 shadow-soft">
+      <header
+        aria-label="Navigation de la semaine"
+        className="sticky top-0 z-10 bg-[#fdf8f8f2] backdrop-blur-md border-b border-[#3D3D3D0D] px-4 py-4 shadow-soft"
+      >
         <div className="flex items-center justify-between mb-3">
           {/* Bouton semaine précédente */}
           <button
@@ -147,27 +157,17 @@ export function WeekView() {
               w-10 h-10 rounded-full
               flex items-center justify-center
               bg-[var(--color-brand-white)] border border-[#3D3D3D0D]
-              hover:bg-[#CDE8FA33] hover:border-[#CDE8FA4D]
+              hover:bg-[#f4b4c820] hover:border-[#f4b4c840]
               hover:scale-105
               text-[var(--color-brand-black)]
               transition-all duration-200
               shadow-soft
-              focus:outline-none focus:ring-2 focus:ring-brand-blue/50
+              focus:outline-none focus:ring-2 focus:ring-[#96b6dd]/50
             "
             aria-label="Semaine précédente"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
+            <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
 
@@ -175,17 +175,17 @@ export function WeekView() {
           <div className="flex-1 text-center md:text-left px-4 md:px-0">
             <h2 className="
               text-lg md:text-xl lg:text-2xl
-              font-bold 
-              text-[var(--color-brand-black)] 
+              font-bold
+              text-[var(--color-brand-black)]
               tracking-tight
             ">
               Semaine du {formatDayFull(weekStart)} au {formatDayFull(weekDays[6])}
             </h2>
             {isCurrentWeek && (
-              <p className="
+              <p aria-live="polite" className="
                 text-[10px] md:text-xs
-                text-[#3D3D3D80] 
-                mt-1 
+                text-[#3D3D3D80]
+                mt-1
                 font-medium
               ">
                 Cette semaine
@@ -200,27 +200,17 @@ export function WeekView() {
               w-10 h-10 rounded-full
               flex items-center justify-center
               bg-[var(--color-brand-white)] border border-[#3D3D3D0D]
-              hover:bg-[#CDE8FA33] hover:border-[#CDE8FA4D]
+              hover:bg-[#f4b4c820] hover:border-[#f4b4c840]
               hover:scale-105
               text-[var(--color-brand-black)]
               transition-all duration-200
               shadow-soft
-              focus:outline-none focus:ring-2 focus:ring-brand-blue/50
+              focus:outline-none focus:ring-2 focus:ring-[#96b6dd]/50
             "
             aria-label="Semaine suivante"
           >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
+            <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
         </div>
@@ -231,10 +221,10 @@ export function WeekView() {
             onClick={goToToday}
             className="
               w-full py-3 px-4 rounded-medium
-              bg-gradient-green-blue
+              bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
               text-[var(--color-brand-black)] text-sm font-bold
               transition-all duration-200 hover:opacity-90 hover:scale-[1.02]
-              focus:outline-none focus:ring-2 focus:ring-brand-blue/50
+              focus:outline-none focus:ring-2 focus:ring-[#96b6dd]/50
               shadow-soft
             "
           >
@@ -244,44 +234,41 @@ export function WeekView() {
       </header>
 
       {/* ========== LISTE DES JOURS ========== */}
-      <main className="
-        flex-1 
-        overflow-y-auto md:overflow-visible
-        px-4 
-        md:px-0
-        py-4 
-        md:py-6
-        w-full
-      ">
-        {/* 
-          Layout responsive :
-          MOBILE : liste verticale (flex-col) - jours empilés
-          DESKTOP (md+) : grille 7 colonnes avec espacements généreux
-        */}
+      <main
+        aria-label="Vue hebdomadaire"
+        className="
+          flex-1
+          overflow-y-auto md:overflow-visible
+          px-4
+          md:px-0
+          py-4
+          md:py-6
+          w-full
+        "
+      >
         <div className="
           w-full
-          flex flex-col 
+          flex flex-col
           md:grid md:grid-cols-7
-          gap-4 
-          md:gap-4 
+          gap-4
+          md:gap-4
           lg:gap-5
         ">
           {weekDays.map((day, index) => {
             const dayEvents = eventsByDay[index] || [];
-            const isToday = useMemo(() => {
-              const today = new Date();
-              today.setHours(0, 0, 0, 0);
-              const dayStart = new Date(day);
-              dayStart.setHours(0, 0, 0, 0);
-              return today.getTime() === dayStart.getTime();
-            }, [day]);
+            // Computed without useMemo — hooks cannot be called inside .map()
+            const dayMidnight = new Date(day);
+            dayMidnight.setHours(0, 0, 0, 0);
+            const isToday = todayMidnight.getTime() === dayMidnight.getTime();
+            const dayLabel = day.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long" });
 
             return (
-              <div 
-                key={index} 
+              <section
+                key={index}
+                aria-label={`${dayLabel}${isToday ? " — Aujourd'hui" : ""}, ${dayEvents.length} événement${dayEvents.length > 1 ? "s" : ""}`}
                 className="
                   flex flex-col
-                  p-3 
+                  p-3
                   md:p-3
                   rounded-medium
                   bg-[var(--color-brand-white)]
@@ -294,18 +281,20 @@ export function WeekView() {
                 "
               >
                 {/* En-tête du jour */}
-                <div className="
-                  flex flex-col
-                  gap-1
-                  mb-2 md:mb-3
-                  pb-2 md:pb-3
-                  border-b border-[#3D3D3D0D]
-                ">
-                  {/* Ligne jour + date + badge "Aujourd'hui" */}
+                <div
+                  aria-hidden="true"
+                  className="
+                    flex flex-col
+                    gap-1
+                    mb-2 md:mb-3
+                    pb-2 md:pb-3
+                    border-b border-[#3D3D3D0D]
+                  "
+                >
                   <div className="flex items-center gap-2 flex-wrap">
                     <h3
                       className={`
-                        text-base 
+                        text-base
                         md:text-sm
                         font-bold
                         ${isToday ? "text-[var(--color-brand-black)]" : "text-[#3D3D3DE6]"}
@@ -313,23 +302,19 @@ export function WeekView() {
                       `}
                     >
                       {day.toLocaleDateString("fr-FR", { weekday: "long" })}
-                      <span className="
-                        text-lg 
-                        md:text-base
-                        text-[var(--color-brand-black)]
-                      ">
+                      <span className="text-lg md:text-base text-[var(--color-brand-black)]">
                         {day.getDate()}
                       </span>
                     </h3>
                     {isToday && (
                       <span className="
                         text-[9px] md:text-[10px]
-                        text-[#3D3D3DCC] 
-                        bg-[#CCE3C366] 
-                        px-2 py-0.5 
-                        rounded-full 
-                        font-bold 
-                        uppercase 
+                        text-[#3D3D3DCC]
+                        bg-[#9dc0bc40]
+                        px-2 py-0.5
+                        rounded-full
+                        font-bold
+                        uppercase
                         tracking-wide
                         self-center
                       ">
@@ -337,31 +322,25 @@ export function WeekView() {
                       </span>
                     )}
                   </div>
-
-                  {/* Nombre d'événements */}
-                  <span className="
-                    text-[10px] 
-                    md:text-[10px]
-                    text-[#3D3D3D80]
-                    font-medium
-                  ">
+                  <span className="text-[10px] md:text-[10px] text-[#3D3D3D80] font-medium">
                     {dayEvents.length} événement{dayEvents.length > 1 ? "s" : ""}
                   </span>
                 </div>
 
                 {/* Liste des événements */}
                 {dayEvents.length > 0 ? (
-                  <div className="flex flex-col gap-2">
+                  <ul role="list" className="flex flex-col gap-2">
                     {dayEvents.map((event) => (
-                      <div
+                      <li
                         key={event.id}
+                        aria-label={`${event.title} à ${formatTime(event.start)}${event.location ? `, ${event.location}` : ""}`}
                         className="
-                          flex items-start gap-2 
+                          flex items-start gap-2
                           md:gap-2
-                          p-2.5 
+                          p-2.5
                           md:p-2.5
                           rounded-medium
-                          bg-[linear-gradient(135deg,#CCE3C3_0%,#CDE8FA_100%)]
+                          bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
                           border-none
                           hover:shadow-medium
                           transition-all duration-200
@@ -369,14 +348,12 @@ export function WeekView() {
                         "
                       >
                         {/* Heure */}
-                        <div className="flex-shrink-0">
+                        <div aria-hidden="true" className="flex-shrink-0">
                           <div className="
-                            w-10 
-                            md:w-10
-                            text-[10px] 
-                            md:text-[10px]
-                            text-[#3D3D3DB3] 
-                            font-semibold 
+                            w-10 md:w-10
+                            text-[10px] md:text-[10px]
+                            text-[#3D3D3DB3]
+                            font-semibold
                             pt-0.5
                           ">
                             {formatTime(event.start)}
@@ -384,13 +361,12 @@ export function WeekView() {
                         </div>
 
                         {/* Contenu */}
-                        <div className="flex-1 min-w-0">
+                        <div aria-hidden="true" className="flex-1 min-w-0">
                           <div className="
-                            text-xs 
-                            md:text-xs
-                            font-bold 
-                            text-[var(--color-brand-black)] 
-                            group-hover:text-[#3D3D3DE6] 
+                            text-xs md:text-xs
+                            font-bold
+                            text-[var(--color-brand-black)]
+                            group-hover:text-[#3D3D3DE6]
                             transition-colors
                             line-clamp-2
                             leading-tight
@@ -399,10 +375,9 @@ export function WeekView() {
                           </div>
                           {event.description && (
                             <div className="
-                              text-[10px] 
-                              md:text-[10px]
-                              text-[#3D3D3D99] 
-                              mt-1 
+                              text-[10px] md:text-[10px]
+                              text-[#3D3D3D99]
+                              mt-1
                               line-clamp-2
                               leading-relaxed
                             ">
@@ -411,50 +386,34 @@ export function WeekView() {
                           )}
                           {event.location && (
                             <div className="
-                              text-[10px] 
-                              md:text-[10px]
-                              text-[#3D3D3D80] 
-                              mt-1 
+                              text-[10px] md:text-[10px]
+                              text-[#3D3D3D80]
+                              mt-1
                               flex items-center gap-1
                             ">
-                              <svg
-                                className="w-3 h-3"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                                />
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                                />
+                              <svg aria-hidden="true" className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                               </svg>
                               {event.location}
                             </div>
                           )}
                         </div>
-                      </div>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 ) : (
-                  <div className="
+                  <p className="
                     text-xs md:text-sm
-                    text-[#3D3D3D66] 
-                    italic 
+                    text-[#3D3D3D66]
+                    italic
                     py-2 md:py-3
                     text-center
                   ">
                     Aucun événement
-                  </div>
+                  </p>
                 )}
-              </div>
+              </section>
             );
           })}
         </div>

@@ -1,12 +1,6 @@
 /**
  * @file globals.css
- * @description Styles globaux de l'application.
- * 
- * Ce fichier contient:
- * - L'import de Tailwind CSS
- * - Les variables CSS personnalisées
- * - Les styles de base pour le thème sombre
- * - Les animations personnalisées
+ * @description Styles globaux de l'application — charte Lumia.
  */
 
 /* Import Tailwind CSS (v4) */
@@ -14,223 +8,154 @@
 
 /* ========== VARIABLES CSS ========== */
 :root {
-  /* Couleurs de base - Thème clair minimaliste */
-  --background: #FAFAFA; /* brand-white */
-  --foreground: #3D3D3D; /* brand-black */
-  
-  /* Couleurs d'accent - Palette minimaliste */
-  --accent-primary: #CDE8FA; /* brand-blue */
-  --accent-secondary: #CCE3C3; /* brand-green */
-  --accent-tertiary: #F8C4C5; /* brand-pink */
-  --accent-quaternary: #FFF4C7; /* brand-yellow */
-  
-  /* Couleurs de surface */
-  --surface-elevated: #FAFAFA; /* brand-white */
-  --surface-hover: #CDE8FA; /* brand-blue avec opacité */
-  
-  /* Couleurs de texte */
-  --text-primary: #3D3D3D; /* brand-black */
-  --text-secondary: rgba(61, 61, 61, 0.6); /* brand-black/60 */
-  --text-muted: rgba(61, 61, 61, 0.5); /* brand-black/50 */
+  /* Couleurs de base */
+  --background: #fdf8f8;
+  --foreground: #3d3d3d;
+
+  /* Palette officielle Lumia */
+  --color-brand-white:    #fdf8f8;
+  --color-brand-black:    #3d3d3d;
+  --color-brand-pink:     #f4b4c8;
+  --color-brand-salmon:   #f6b9ae;
+  --color-brand-peach:    #fcecd3;
+  --color-brand-lavender: #c5a6cf;
+  --color-brand-blue:     #96b6dd;
+  --color-brand-teal:     #9dc0bc;
+
+  /* Accents sémantiques */
+  --accent-primary:   #f4b4c8;
+  --accent-secondary: #96b6dd;
+  --accent-tertiary:  #fcecd3;
+  --accent-quaternary: #c5a6cf;
+
+  /* Surfaces */
+  --surface-elevated: #fdf8f8;
+  --surface-hover:    #f4b4c820;
+  --surface-soft:     #faf5f5;
+
+  /* Texte */
+  --text-primary:              #3d3d3d;
+  --text-secondary:            rgba(61, 61, 61, 0.6);
+  --text-muted:                rgba(61, 61, 61, 0.5);
   --text-secondary-accessible: #515151;
-  --text-muted-accessible: #636363;
-  --border-subtle: rgba(61, 61, 61, 0.16);
-  --surface-soft: #f5f8fb;
-  --focus-ring: #5b8db0;
-  
-  /* Variables pour la palette brand */
-  --color-brand-white: #FAFAFA;
-  --color-brand-black: #3D3D3D;
-  --color-brand-blue: #CDE8FA;
-  --color-brand-green: #CCE3C3;
-  --color-brand-pink: #F8C4C5;
-  --color-brand-yellow: #FFF4C7;
+  --text-muted-accessible:     #636363;
+
+  /* Bordures & focus */
+  --border-subtle: rgba(61, 61, 61, 0.12);
+  --focus-ring:    #c5a6cf;
+
+  /* Dégradé principal brand */
+  --gradient-brand: linear-gradient(135deg, #f4b4c8 0%, #fcecd3 100%);
 }
 
 /* Configuration du thème Tailwind v4 */
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  /* Police Typekit prioritaire, fallback Geist puis système */
+
   --font-sans: "proxima-nova", "Helvetica Neue", Arial, var(--font-geist-sans), system-ui, sans-serif;
   --font-mono: var(--font-geist-mono);
-  
-  /* Palette brand - couleurs personnalisées pour Tailwind v4 */
-  /* Utiliser directement les noms sans préfixe brand- pour simplifier */
-  --color-white: #FAFAFA;
-  --color-black: #3D3D3D;
-  --color-blue: #CDE8FA;
-  --color-green: #CCE3C3;
-  --color-pink: #F8C4C5;
-  --color-yellow: #FFF4C7;
-  
-  /* Garder aussi les variables avec brand- pour compatibilité */
-  --color-brand-white: #FAFAFA;
-  --color-brand-black: #3D3D3D;
-  --color-brand-blue: #CDE8FA;
-  --color-brand-green: #CCE3C3;
-  --color-brand-pink: #F8C4C5;
-  --color-brand-yellow: #FFF4C7;
-  
-  /* Dégradé principal pour les événements du calendrier */
-  --gradient-brand-green-blue: linear-gradient(135deg, #CCE3C3 0%, #CDE8FA 100%);
-  }
+
+  /* Palette Tailwind */
+  --color-white:    #fdf8f8;
+  --color-black:    #3d3d3d;
+  --color-pink:     #f4b4c8;
+  --color-salmon:   #f6b9ae;
+  --color-peach:    #fcecd3;
+  --color-lavender: #c5a6cf;
+  --color-blue:     #96b6dd;
+  --color-teal:     #9dc0bc;
+
+  /* Aliases brand- pour compatibilité */
+  --color-brand-white:    #fdf8f8;
+  --color-brand-black:    #3d3d3d;
+  --color-brand-pink:     #f4b4c8;
+  --color-brand-salmon:   #f6b9ae;
+  --color-brand-peach:    #fcecd3;
+  --color-brand-lavender: #c5a6cf;
+  --color-brand-blue:     #96b6dd;
+  --color-brand-teal:     #9dc0bc;
+
+  /* Dégradé principal */
+  --gradient-brand: linear-gradient(135deg, #f4b4c8 0%, #fcecd3 100%);
+}
 
 /* ========== STYLES DE BASE ========== */
 html {
-  /* Empêche le zoom involontaire sur mobile lors du focus sur les inputs */
   touch-action: manipulation;
-  
-  /* Smooth scrolling */
   scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  /* Utiliser la police Typekit définie dans @theme */
   font-family: var(--font-sans);
-  
-  /* Amélioration du rendu des polices */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
-  /* Empêche la sélection de texte involontaire sur mobile */
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ========== SCROLLBAR PERSONNALISÉE ========== */
-/* Pour les navigateurs WebKit (Chrome, Safari, Edge) */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
+/* ========== SCROLLBAR ========== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(61, 61, 61, 0.3); /* brand-black/30 */
+  background: rgba(61, 61, 61, 0.2);
   border-radius: 3px;
 }
+::-webkit-scrollbar-thumb:hover { background: rgba(61, 61, 61, 0.35); }
+* { scrollbar-width: thin; scrollbar-color: rgba(61, 61, 61, 0.2) transparent; }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(61, 61, 61, 0.5); /* brand-black/50 */
-}
-
-/* Pour Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(61, 61, 61, 0.3) transparent;
-}
-
-/* ========== ANIMATIONS PERSONNALISÉES ========== */
-
-/* Animation de pulse pour le bouton micro */
+/* ========== ANIMATIONS ========== */
 @keyframes pulse-ring {
-  0% {
-    transform: scale(0.8);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(0.8);
-    opacity: 0.8;
-  }
+  0%   { transform: scale(0.8); opacity: 0.8; }
+  50%  { transform: scale(1.2); opacity: 0.4; }
+  100% { transform: scale(0.8); opacity: 0.8; }
 }
+.animate-pulse-ring { animation: pulse-ring 1.5s ease-in-out infinite; }
 
-.animate-pulse-ring {
-  animation: pulse-ring 1.5s ease-in-out infinite;
-}
-
-/* Animation de rebond pour les indicateurs de chargement */
 @keyframes bounce-dot {
-  0%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-6px);
-  }
+  0%, 80%, 100% { transform: translateY(0); }
+  40%           { transform: translateY(-6px); }
 }
 
-/* Animation fade-in pour les messages */
 @keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+.animate-fade-in-up { animation: fade-in-up 0.3s ease-out forwards; }
 
-.animate-fade-in-up {
-  animation: fade-in-up 0.3s ease-out forwards;
-}
-
-/* Animation de slide pour la modale */
 @keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+.animate-slide-up { animation: slide-up 0.3s ease-out forwards; }
 
-.animate-slide-up {
-  animation: slide-up 0.3s ease-out forwards;
+@keyframes lumia-sweep-fade {
+  0%   { opacity: 1; }
+  75%  { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 /* ========== UTILITAIRES ========== */
-
-/* Classe pour cacher visuellement mais garder accessible */
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
 }
 
-/* Safe area pour les appareils avec encoche (iPhone X+) */
 .safe-area-inset {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* ========== FOCUS VISIBLE ========== */
-/* Style de focus personnalisé pour l'accessibilité */
-:focus-visible {
-  outline: 3px solid var(--focus-ring);
-  outline-offset: 2px;
-}
+/* ========== FOCUS ========== */
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+:focus:not(:focus-visible) { outline: none; }
 
-/* Supprime le outline par défaut pour la souris */
-:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/* ========== LANDING: ACCESSIBILITE VISUELLE ========== */
-.landing-muted {
-  color: var(--text-secondary-accessible);
-}
-
-.landing-subtle {
-  color: var(--text-muted-accessible);
-}
+/* ========== LANDING ========== */
+.landing-muted   { color: var(--text-secondary-accessible); }
+.landing-subtle  { color: var(--text-muted-accessible); }
 
 .landing-card {
   background: var(--surface-elevated);
@@ -238,8 +163,9 @@ body {
   border-radius: 1rem;
 }
 
+/* Dégradé texte = palette brand rose → pêche */
 .landing-gradient-text {
-  background: linear-gradient(90deg, #cf7275 0%, #b2872a 100%);
+  background: linear-gradient(90deg, #f4b4c8 0%, #f6b9ae 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -249,10 +175,9 @@ body {
   color: var(--color-brand-black);
   text-decoration: underline;
   text-underline-offset: 4px;
-  text-decoration-color: #7a7a7a;
+  text-decoration-color: #aaa;
 }
-
 .landing-link:hover {
   color: #222;
-  text-decoration-color: #444;
+  text-decoration-color: #666;
 }

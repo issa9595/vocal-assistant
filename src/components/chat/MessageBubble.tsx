@@ -1,3 +1,4 @@
+// src/components/chat/MessageBubble.tsx
 "use client";
 
 import type { Message } from "@/types/message";
@@ -14,15 +15,19 @@ interface MessageBubbleProps {
 
 export function MessageBubble({ message }: MessageBubbleProps) {
   const isUser = message.role === "user";
+  const timestamp = formatTimestamp(message.createdAt);
+  const source = isUser ? "Vous" : "Assistant";
 
   return (
-    <div
+    <article
+      aria-label={`${source}${timestamp ? ` à ${timestamp}` : ""} : ${message.content}`}
       className={`
         flex items-end gap-2
         ${isUser ? "justify-end" : "justify-start"}
       `}
     >
       <div
+        aria-hidden="true"
         className={`
           max-w-[85%] px-4 py-3 rounded-large
           ${isUser
@@ -32,15 +37,17 @@ export function MessageBubble({ message }: MessageBubbleProps) {
         `}
       >
         <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
-        <span
-          className={`
-            text-xs mt-1 block
-            ${isUser ? "text-[#3D3D3D99]" : "text-[#3D3D3D66]"}
-          `}
-        >
-          {formatTimestamp(message.createdAt)}
-        </span>
+        {timestamp && (
+          <span
+            className={`
+              text-xs mt-1 block
+              ${isUser ? "text-[#3D3D3D99]" : "text-[#3D3D3D66]"}
+            `}
+          >
+            {timestamp}
+          </span>
+        )}
       </div>
-    </div>
+    </article>
   );
 }

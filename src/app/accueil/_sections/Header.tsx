@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import LumiaLogo from "@/components/LumiaLogo";
 
 /**
  * Header de la landing page
@@ -25,14 +26,8 @@ export default function Header() {
         justify-between
       ">
         {/* Logo */}
-        <h1 className="
-          text-2xl md:text-3xl
-          font-bold
-          tracking-tight
-        ">
-          <span className="landing-gradient-text">
-            Lumia
-          </span>
+        <h1>
+          <LumiaLogo height={28} />
         </h1>
 
         {/* CTA */}

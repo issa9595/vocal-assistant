@@ -9,6 +9,7 @@ import { YearView } from "@/components/YearView";
 import { ViewSelector } from "@/components/ViewSelector";
 import { AiFabButton } from "@/components/AiFabButton";
 import { AiModal } from "@/components/AiModal";
+import LumiaLogo from "@/components/LumiaLogo";
 
 /**
  * Page principale du dashboard Lumia
@@ -30,7 +31,7 @@ export default function AppPage() {
       {/* ========== HEADER PRINCIPAL ========== */}
       <header className="
         sticky top-0 z-20
-        bg-[#FAFAFAF2]
+        bg-[#fdf8f8f2]
         backdrop-blur-md
         border-b border-[#3D3D3D0D]
         px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20
@@ -47,13 +48,8 @@ export default function AppPage() {
         ">
           {/* Titre */}
           <div>
-            <h1 className="
-              text-2xl md:text-3xl lg:text-4xl
-              font-bold
-              text-[var(--color-brand-black)]
-              tracking-tight
-            ">
-              Lumia
+            <h1>
+              <LumiaLogo height={32} />
             </h1>
             <p className="
               text-xs md:text-sm

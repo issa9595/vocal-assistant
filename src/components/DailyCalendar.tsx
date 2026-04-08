@@ -155,18 +155,21 @@ export function DailyCalendar() {
       md:min-h-[70vh]
     ">
       {/* ========== HEADER DE NAVIGATION ========== */}
-      <header className="
-        sticky top-0 z-10 
-        bg-[#fdf8f8f2] 
-        backdrop-blur-md 
-        border-b md:border-b-0 md:border-r
-        border-[#3D3D3D0D] 
-        px-3 md:px-4
-        py-3 md:py-4
-        shadow-soft
-        md:w-48 lg:w-56
-        md:flex-shrink-0
-      ">
+      <header
+        aria-label="Navigation du jour"
+        className="
+          sticky top-0 z-10
+          bg-[#fdf8f8f2]
+          backdrop-blur-md
+          border-b md:border-b-0 md:border-r
+          border-[#3D3D3D0D]
+          px-3 md:px-4
+          py-3 md:py-4
+          shadow-soft
+          md:w-48 lg:w-56
+          md:flex-shrink-0
+        "
+      >
         {/* 
           Navigation responsive :
           MOBILE : date en haut, boutons côte à côte en bas
@@ -219,18 +222,8 @@ export function DailyCalendar() {
               "
               aria-label="Jour précédent"
             >
-              <svg
-                className="w-4 h-4 md:w-4 md:h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
+              <svg aria-hidden="true" className="w-4 h-4 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
 
@@ -241,7 +234,7 @@ export function DailyCalendar() {
                 w-8 h-8 md:w-9 md:h-9
                 rounded-full
                 flex items-center justify-center
-                bg-[var(--color-brand-white)] 
+                bg-[var(--color-brand-white)]
                 border border-[#3D3D3D1A]
                 hover:bg-[#f4b4c840]
                 text-[var(--color-brand-black)]
@@ -251,18 +244,8 @@ export function DailyCalendar() {
               "
               aria-label="Jour suivant"
             >
-              <svg
-                className="w-4 h-4 md:w-4 md:h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
+              <svg aria-hidden="true" className="w-4 h-4 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
           </div>
@@ -298,11 +281,14 @@ export function DailyCalendar() {
       </header>
 
       {/* ========== TIMELINE DES ÉVÉNEMENTS ========== */}
-      <main className="
-        flex-1 
-        overflow-y-auto
-        md:flex md:flex-col
-      ">
+      <main
+        aria-label="Planning journalier"
+        className="
+          flex-1
+          overflow-y-auto
+          md:flex md:flex-col
+        "
+      >
         {/* 
           Layout responsive :
           MOBILE : timeline seule, pleine largeur
@@ -326,6 +312,7 @@ export function DailyCalendar() {
               {HOURS.map((hour) => (
                 <div
                   key={hour}
+                  aria-label={formatHour(hour)}
                   className="
                     flex items-start
                     border-b border-[#3D3D3D1A]
@@ -337,23 +324,19 @@ export function DailyCalendar() {
                     minHeight: "60px",
                   }}
                 >
-                  {/* Label de l'heure - plus large sur desktop */}
-                  <div className="
+                  {/* Label de l'heure */}
+                  <div aria-hidden="true" className="
                     w-16 md:w-20 lg:w-24
-                    flex-shrink-0 
+                    flex-shrink-0
                     pt-2
                   ">
-                    <span className="
-                      text-xs md:text-sm
-                      text-[#3D3D3D80] 
-                      font-medium
-                    ">
+                    <span className="text-xs md:text-sm text-[#3D3D3D80] font-medium">
                       {formatHour(hour)}
                     </span>
                   </div>
 
                   {/* Zone des événements (vide, les événements sont positionnés absolument) */}
-                  <div className="flex-1 relative pt-2 min-h-[60px]" />
+                  <div className="flex-1 relative pt-2 min-h-[60px]" aria-hidden="true" />
                 </div>
               ))}
 

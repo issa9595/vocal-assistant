@@ -72,7 +72,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#FAFAFA", // brand-white
+  themeColor: "#fdf8f8", // brand-white
 };
 
 /**

@@ -12,7 +12,8 @@ export interface EventCardProps {
 
 export function EventCard({ event, position, height }: EventCardProps) {
   return (
-    <div
+    <article
+      aria-label={`${event.title}, de ${formatTime(event.start)} à ${formatTime(event.end)}${event.description ? `, ${event.description}` : ""}`}
       className="
         absolute left-0 right-0
         bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
@@ -21,9 +22,8 @@ export function EventCard({ event, position, height }: EventCardProps) {
         p-3 md:p-3.5
         text-[var(--color-brand-black)]
         shadow-soft
-        hover:shadow-medium hover:scale-[1.02]
+        hover:shadow-medium
         transition-all duration-200
-        cursor-pointer
         overflow-hidden
         flex flex-col
         gap-1
@@ -33,7 +33,6 @@ export function EventCard({ event, position, height }: EventCardProps) {
         height: `${height}%`,
         minHeight: "70px",
       }}
-      title={`${event.title} - ${formatTime(event.start)} - ${formatTime(event.end)}`}
     >
       <div className="flex items-center gap-1.5 text-[9px] md:text-[10px] font-semibold text-[#3D3D3DB3] uppercase tracking-wide leading-none">
         <span>{formatTime(event.start)}</span>
@@ -47,6 +46,6 @@ export function EventCard({ event, position, height }: EventCardProps) {
       <div className="text-xs md:text-sm font-bold text-[var(--color-brand-black)] leading-tight flex-1 break-words">
         {event.title}
       </div>
-    </div>
+    </article>
   );
 }

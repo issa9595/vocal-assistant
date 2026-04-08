@@ -54,7 +54,7 @@ export function ViewSelector() {
           text-[var(--color-brand-black)] 
           text-sm md:text-base
           font-semibold
-          focus:outline-none focus:ring-2 focus:ring-brand-blue/50
+          focus:outline-none focus:ring-2 focus:ring-[#96b6dd]/50
           cursor-pointer
           shadow-soft hover:shadow-medium
           transition-all duration-200
