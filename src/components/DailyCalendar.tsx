@@ -11,6 +11,7 @@
 
 import { useMemo } from "react";
 import { useCalendarStore } from "@/store/useCalendarStore";
+import { EventCard } from "@/components/calendar/EventCard";
 import type { CalendarEvent } from "@/types/message";
 
 /**
@@ -165,7 +166,7 @@ export function DailyCalendar() {
       {/* ========== HEADER DE NAVIGATION ========== */}
       <header className="
         sticky top-0 z-10 
-        bg-[#FAFAFAF2] 
+        bg-[#fdf8f8f2] 
         backdrop-blur-md 
         border-b md:border-b-0 md:border-r
         border-[#3D3D3D0D] 
@@ -219,10 +220,10 @@ export function DailyCalendar() {
                 flex items-center justify-center
                 bg-[var(--color-brand-white)] 
                 border border-[#3D3D3D1A]
-                hover:bg-[#CDE8FA4D]
+                hover:bg-[#f4b4c840]
                 text-[var(--color-brand-black)]
                 transition-colors
-                focus:outline-none focus:ring-2 focus:ring-brand-blue
+                focus:outline-none focus:ring-2 focus:ring-[#96b6dd]
                 flex-shrink-0
               "
               aria-label="Jour précédent"
@@ -251,10 +252,10 @@ export function DailyCalendar() {
                 flex items-center justify-center
                 bg-[var(--color-brand-white)] 
                 border border-[#3D3D3D1A]
-                hover:bg-[#CDE8FA4D]
+                hover:bg-[#f4b4c840]
                 text-[var(--color-brand-black)]
                 transition-colors
-                focus:outline-none focus:ring-2 focus:ring-brand-blue
+                focus:outline-none focus:ring-2 focus:ring-[#96b6dd]
                 flex-shrink-0
               "
               aria-label="Jour suivant"
@@ -285,7 +286,7 @@ export function DailyCalendar() {
               py-2 
               px-3 
               rounded-medium
-              bg-gradient-green-blue
+              bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
               text-[var(--color-brand-black)] 
               text-xs 
               md:text-xs
@@ -295,7 +296,7 @@ export function DailyCalendar() {
               hover:scale-[1.02]
               focus:outline-none 
               focus:ring-2 
-              focus:ring-brand-blue/50
+              focus:ring-[#96b6dd]/50
               shadow-soft
               mt-2 md:mt-2
             "
@@ -399,7 +400,7 @@ export function DailyCalendar() {
               md:px-4 lg:px-6
               md:py-4
               md:overflow-y-auto
-              md:bg-[#FAFAFAF5]
+              md:bg-[#fdf8f8f5]
             ">
               <h3 className="
                 text-sm lg:text-base
@@ -407,7 +408,7 @@ export function DailyCalendar() {
                 text-[var(--color-brand-black)]
                 mb-4
                 sticky top-0
-                bg-[#FAFAFAF5]
+                bg-[#fdf8f8f5]
                 pb-2
                 border-b border-[#3D3D3D0D]
               ">
@@ -420,7 +421,7 @@ export function DailyCalendar() {
                     className="
                       p-3 lg:p-4
                       rounded-medium
-                      bg-[linear-gradient(135deg,#CCE3C3_0%,#CDE8FA_100%)]
+                      bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
                       border-none
                       shadow-soft
                       hover:shadow-medium
@@ -464,61 +465,4 @@ export function DailyCalendar() {
   );
 }
 
-/**
- * Composant EventCard
- * Affiche un événement dans la timeline
- */
-interface EventCardProps {
-  event: CalendarEvent;
-  position: number;
-  height: number;
-}
-
-function EventCard({ event, position, height }: EventCardProps) {
-  // Dégradé vert → bleu pour tous les événements (identité visuelle unifiée)
-  // On utilise la hauteur réelle calculée, avec une hauteur minimale en pixels
-  // suffisante pour afficher tout le contenu (heures + titre sur 2 lignes)
-  const finalHeight = height;
-
-  return (
-    <div
-      className="
-        absolute left-0 right-0
-        bg-[linear-gradient(135deg,#CCE3C3_0%,#CDE8FA_100%)]
-        border-none
-        rounded-medium
-        p-3 md:p-3.5
-        text-[var(--color-brand-black)]
-        shadow-soft
-        hover:shadow-medium hover:scale-[1.02]
-        transition-all duration-200
-        cursor-pointer
-        overflow-hidden
-        flex flex-col
-        gap-1
-      "
-      style={{
-        top: `${Math.max(0, Math.min(100 - finalHeight, position))}%`,
-        height: `${finalHeight}%`,
-        minHeight: "70px", // Hauteur minimale pour afficher heures + titre complet + padding
-      }}
-      title={`${event.title} - ${formatTime(event.start)} - ${formatTime(event.end)}`}
-    >
-      {/* Heures de début et fin sur la même ligne */}
-      <div className="flex items-center gap-1.5 text-[9px] md:text-[10px] font-semibold text-[#3D3D3DB3] uppercase tracking-wide leading-none">
-        <span>{formatTime(event.start)}</span>
-        {height > 5 && (
-          <span className="text-[#3D3D3D80] font-medium normal-case">
-            Jusqu'à {formatTime(event.end)}
-          </span>
-        )}
-      </div>
-      
-      {/* Titre */}
-      <div className="text-xs md:text-sm font-bold text-[var(--color-brand-black)] leading-tight flex-1 break-words">
-        {event.title}
-      </div>
-    </div>
-  );
-}
 
