@@ -23,17 +23,15 @@ import {
   endOfMonth,
   isWithin,
 } from "@/lib/dateHelpers";
+import {
+  findFreeSlots as findFreeSlotsUtil,
+  canFitEvent as canFitEventUtil,
+  type FreeSlot,
+} from "@/lib/schedulingUtils";
 
 type CalendarViewMode = "day" | "week" | "month" | "year";
 
-/**
- * Représente un créneau libre dans le calendrier
- */
-export interface FreeSlot {
-  start: Date;
-  end: Date;
-  duration: number; // Durée en millisecondes
-}
+export type { FreeSlot } from "@/lib/schedulingUtils";
 
 interface CalendarStore {
   events: CalendarEvent[];
@@ -325,47 +323,7 @@ export const useCalendarStore = create<CalendarStore>()(
        * @returns Liste des créneaux libres triés par date de début
        */
       findFreeSlots: (startDate, endDate, minDuration = 0) => {
-        const events = get().events
-          .filter((evt) => {
-            // Garder uniquement les événements qui chevauchent la période
-            return evt.start < endDate && evt.end > startDate;
-          })
-          .sort((a, b) => a.start.getTime() - b.start.getTime());
-
-        const freeSlots: FreeSlot[] = [];
-        let currentStart = new Date(startDate);
-
-        for (const event of events) {
-          // Si l'événement commence après le début du créneau actuel
-          if (event.start > currentStart) {
-            const duration = event.start.getTime() - currentStart.getTime();
-            if (duration >= minDuration) {
-              freeSlots.push({
-                start: new Date(currentStart),
-                end: new Date(event.start),
-                duration,
-              });
-            }
-          }
-          // Mettre à jour le début du prochain créneau potentiel
-          if (event.end > currentStart) {
-            currentStart = new Date(event.end);
-          }
-        }
-
-        // Vérifier s'il reste un créneau après le dernier événement
-        if (currentStart < endDate) {
-          const duration = endDate.getTime() - currentStart.getTime();
-          if (duration >= minDuration) {
-            freeSlots.push({
-              start: new Date(currentStart),
-              end: new Date(endDate),
-              duration,
-            });
-          }
-        }
-
-        return freeSlots;
+        return findFreeSlotsUtil(get().events, startDate, endDate, minDuration);
       },
 
       /**
@@ -373,12 +331,7 @@ export const useCalendarStore = create<CalendarStore>()(
        * sans chevaucher d'autres événements
        */
       canFitEvent: (start, end) => {
-        const events = get().events;
-        return !events.some(
-          (evt) =>
-            (evt.start < end && evt.end > start) ||
-            (start < evt.end && end > evt.start)
-        );
+        return canFitEventUtil(get().events, start, end);
       },
 
       setViewMode: (mode) => set({ viewMode: mode }),
