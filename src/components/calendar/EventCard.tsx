@@ -2,9 +2,7 @@
 "use client";
 
 import type { CalendarEvent } from "@/types/message";
-
-const formatTime = (date: Date): string =>
-  date.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+import { formatTime } from "@/lib/dateHelpers";
 
 export interface EventCardProps {
   event: CalendarEvent;
