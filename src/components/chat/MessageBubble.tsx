@@ -29,10 +29,10 @@ export function MessageBubble({ message }: MessageBubbleProps) {
       <div
         aria-hidden="true"
         className={`
-          max-w-[85%] px-4 py-3 rounded-large
+          max-w-[85%] px-4 py-3 rounded-large glass-highlight
           ${isUser
-            ? "bg-[var(--color-brand-pink)] text-[var(--color-brand-black)] rounded-br-md"
-            : "bg-[#9dc0bc30] text-[var(--color-brand-black)] rounded-bl-md"
+            ? "glass-pink rounded-br-md text-[var(--color-brand-black)]"
+            : "glass-teal rounded-bl-md text-[var(--color-brand-black)]"
           }
         `}
       >

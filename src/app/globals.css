@@ -136,6 +136,138 @@ body {
   100% { opacity: 0; }
 }
 
+/* ========== LIQUID GLASS SYSTEM ========== */
+
+/*
+ * Variables glass — surfaces translucides avec reflets et grain
+ */
+:root {
+  --glass-bg:           rgba(253, 248, 248, 0.45);
+  --glass-bg-strong:    rgba(253, 248, 248, 0.70);
+  --glass-border:       rgba(255, 255, 255, 0.55);
+  --glass-border-top:   rgba(255, 255, 255, 0.80);
+  --glass-shadow:
+    0 8px 32px rgba(150, 182, 221, 0.14),
+    0 2px 8px  rgba(197, 166, 207, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  --glass-shadow-strong:
+    0 16px 48px rgba(150, 182, 221, 0.20),
+    0 4px  16px rgba(197, 166, 207, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.80);
+  --glass-blur:         blur(20px) saturate(160%);
+  --glass-blur-strong:  blur(28px) saturate(180%);
+
+  /* Aurora */
+  --aurora-pink:    rgba(244, 180, 200, 0.45);
+  --aurora-lavender:rgba(197, 166, 207, 0.38);
+  --aurora-blue:    rgba(150, 182, 221, 0.32);
+  --aurora-teal:    rgba(157, 192, 188, 0.30);
+  --aurora-salmon:  rgba(246, 185, 174, 0.28);
+}
+
+/* Fond aurore boréale — base de la page app */
+.aurora-bg {
+  background:
+    radial-gradient(ellipse 70% 45% at 10% 10%, var(--aurora-pink)    0%, transparent 60%),
+    radial-gradient(ellipse 55% 50% at 90%  5%, var(--aurora-lavender) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 55% at 50% 95%, var(--aurora-blue)     0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at  2% 85%, var(--aurora-teal)     0%, transparent 50%),
+    radial-gradient(ellipse 45% 35% at 98% 65%, var(--aurora-salmon)   0%, transparent 50%),
+    #fdf8f8;
+}
+
+/* Animation douce de l'aurore */
+@keyframes aurora-drift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Surface glass légère — cartes et widgets */
+.glass {
+  background:             var(--glass-bg);
+  backdrop-filter:        var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border: 1px solid var(--glass-border);
+  border-top-color:       var(--glass-border-top);
+  box-shadow:             var(--glass-shadow);
+}
+
+/* Surface glass forte — panneaux et headers */
+.glass-panel {
+  background:             var(--glass-bg-strong);
+  backdrop-filter:        var(--glass-blur-strong);
+  -webkit-backdrop-filter:var(--glass-blur-strong);
+  border: 1px solid var(--glass-border);
+  border-top-color:       var(--glass-border-top);
+  box-shadow:             var(--glass-shadow-strong);
+}
+
+/* Glass teinté rose — cartes événements */
+.glass-pink {
+  background:
+    linear-gradient(135deg, rgba(244,180,200,0.22) 0%, rgba(252,236,211,0.22) 100%),
+    rgba(253,248,248,0.35);
+  backdrop-filter:        var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border: 1px solid rgba(244, 180, 200, 0.40);
+  border-top-color:       rgba(255, 255, 255, 0.70);
+  box-shadow:
+    0 4px 20px rgba(244, 180, 200, 0.22),
+    0 1px 6px  rgba(197, 166, 207, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.60);
+}
+
+/* Glass foncé — pour bulles de chat IA */
+.glass-teal {
+  background:             rgba(157, 192, 188, 0.18);
+  backdrop-filter:        var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border: 1px solid rgba(157, 192, 188, 0.35);
+  border-top-color:       rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 4px 16px rgba(157, 192, 188, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+/* Grain texture sur les surfaces glass */
+.glass-grain {
+  position: relative;
+  isolation: isolate;
+}
+.glass-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.80' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* Reflet de spécularité supérieur */
+.glass-highlight {
+  position: relative;
+  overflow: hidden;
+}
+.glass-highlight::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.00) 100%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
+}
+
 /* ========== UTILITAIRES ========== */
 .sr-only {
   position: absolute; width: 1px; height: 1px;

@@ -147,7 +147,7 @@ export function WeekView() {
       {/* ========== HEADER DE NAVIGATION ========== */}
       <header
         aria-label="Navigation de la semaine"
-        className="sticky top-0 z-10 bg-[#fdf8f8f2] backdrop-blur-md border-b border-[#3D3D3D0D] px-4 py-4 shadow-soft"
+        className="sticky top-0 z-10 glass-panel glass-grain border-b border-[rgba(255,255,255,0.3)] px-4 py-4"
       >
         <div className="flex items-center justify-between mb-3">
           {/* Bouton semaine précédente */}
@@ -271,10 +271,8 @@ export function WeekView() {
                   p-3
                   md:p-3
                   rounded-medium
-                  bg-[var(--color-brand-white)]
-                  border border-[#3D3D3D0D]
-                  shadow-soft
-                  hover:shadow-medium
+                  glass glass-grain glass-highlight
+                  hover:scale-[1.005]
                   transition-all duration-200
                   md:h-fit
                   md:min-w-0
@@ -340,9 +338,8 @@ export function WeekView() {
                           p-2.5
                           md:p-2.5
                           rounded-medium
-                          bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
-                          border-none
-                          hover:shadow-medium
+                          glass-pink glass-highlight
+                          hover:scale-[1.01]
                           transition-all duration-200
                           group
                         "

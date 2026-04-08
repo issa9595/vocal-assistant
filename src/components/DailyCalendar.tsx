@@ -149,8 +149,9 @@ export function DailyCalendar() {
   return (
     <div className="
       flex flex-col md:flex-row
-      h-full 
-      bg-[var(--color-brand-white)] 
+      h-full
+      rounded-xl overflow-hidden
+      glass glass-grain
       text-[var(--color-brand-black)]
       md:min-h-[70vh]
     ">
@@ -159,13 +160,11 @@ export function DailyCalendar() {
         aria-label="Navigation du jour"
         className="
           sticky top-0 z-10
-          bg-[#fdf8f8f2]
-          backdrop-blur-md
+          glass-panel glass-grain glass-highlight
           border-b md:border-b-0 md:border-r
-          border-[#3D3D3D0D]
+          border-[rgba(255,255,255,0.3)]
           px-3 md:px-4
           py-3 md:py-4
-          shadow-soft
           md:w-48 lg:w-56
           md:flex-shrink-0
         "

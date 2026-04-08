@@ -16,13 +16,11 @@ export function EventCard({ event, position, height }: EventCardProps) {
       aria-label={`${event.title}, de ${formatTime(event.start)} à ${formatTime(event.end)}${event.description ? `, ${event.description}` : ""}`}
       className="
         absolute left-0 right-0
-        bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
-        border-none
+        glass-pink glass-grain glass-highlight
         rounded-medium
         p-3 md:p-3.5
         text-[var(--color-brand-black)]
-        shadow-soft
-        hover:shadow-medium
+        hover:scale-[1.01]
         transition-all duration-200
         overflow-hidden
         flex flex-col

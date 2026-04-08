@@ -538,7 +538,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
       ref={modalRef}
       className="
         fixed inset-0 z-50
-        bg-[#fdf8f8f2] backdrop-blur-sm
+        aurora-bg
         flex flex-col
       "
       role="dialog"
@@ -550,8 +550,8 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
       <header className="
         flex items-center justify-between
         px-4 py-4
-        border-b border-[#3D3D3D1A]
-        bg-[var(--color-brand-white)]
+        border-b border-[rgba(255,255,255,0.3)]
+        glass-panel glass-grain glass-highlight
       ">
         <div>
           <h2 id="modal-title" className="text-lg font-semibold text-[var(--color-brand-black)]">
@@ -657,7 +657,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
             <div className="flex items-start gap-2 max-w-[85%]" role="status" aria-label="L'assistant réfléchit…">
               <div className="
                 px-4 py-3 rounded-2xl rounded-bl-md
-                bg-[var(--color-brand-white)] border border-[#3D3D3D1A] text-[var(--color-brand-black)]
+                glass glass-highlight text-[var(--color-brand-black)]
               ">
                 <div className="flex gap-1" aria-hidden="true">
                   <span className="w-2 h-2 bg-[var(--color-brand-pink)] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
@@ -676,8 +676,8 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
       {/* ========== BARRE DE CONTRÔLE VOCALE ========== */}
       <footer className="
         px-4 py-6
-        border-t border-[#3D3D3D1A]
-        bg-[var(--color-brand-white)]
+        border-t border-[rgba(255,255,255,0.3)]
+        glass-panel glass-grain
       ">
         {/* Affichage de l'erreur si présente */}
         {errorMessage && (

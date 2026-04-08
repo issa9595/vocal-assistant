@@ -18,12 +18,11 @@ export function DayEventsSummary({ events }: DayEventsSummaryProps) {
         hidden md:flex
         md:flex-col
         md:w-64 lg:w-80
-        md:border-l
-        md:border-[#3D3D3D0D]
+        md:border-l md:border-[rgba(255,255,255,0.3)]
         md:px-4 lg:px-6
         md:py-4
         md:overflow-y-auto
-        md:bg-[#fdf8f8f5]
+        glass-panel glass-grain
       "
     >
       <h3
@@ -49,10 +48,8 @@ export function DayEventsSummary({ events }: DayEventsSummaryProps) {
             className="
               p-3 lg:p-4
               rounded-medium
-              bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
-              border-none
-              shadow-soft
-              hover:shadow-medium
+              glass-pink glass-highlight
+              hover:scale-[1.01]
               transition-all duration-200
             "
           >

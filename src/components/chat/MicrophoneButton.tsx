@@ -17,13 +17,14 @@ export function MicrophoneButton({ status, isSupported, onClick }: MicrophoneBut
       onClick={onClick}
       disabled={isDisabled}
       className={`
-        w-20 h-20 rounded-full
+        relative w-20 h-20 rounded-full
         flex items-center justify-center
         transition-all duration-300
         focus:outline-none focus:ring-4
+        glass-highlight overflow-hidden
         ${isListening
-          ? "bg-[var(--color-brand-pink)] hover:bg-[#f4b4c8cc] focus:ring-[#f4b4c8]/50 scale-110"
-          : "bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)] hover:opacity-90 focus:ring-[#f4b4c8]/50"
+          ? "glass-pink focus:ring-[#f4b4c8]/50 scale-110"
+          : "glass-pink hover:scale-105 focus:ring-[#f4b4c8]/50"
         }
         ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}
         ${isListening ? "animate-pulse" : ""}

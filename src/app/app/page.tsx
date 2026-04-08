@@ -25,18 +25,16 @@ export default function AppPage() {
   return (
     <div className="
       min-h-screen
-      bg-[var(--color-brand-white)]
+      aurora-bg
       text-[var(--color-brand-black)]
     ">
       {/* ========== HEADER PRINCIPAL ========== */}
       <header className="
         sticky top-0 z-20
-        bg-[#fdf8f8f2]
-        backdrop-blur-md
-        border-b border-[#3D3D3D0D]
+        glass-panel glass-grain glass-highlight
+        border-b border-[rgba(255,255,255,0.3)]
         px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-20
         py-4 md:py-6 lg:py-8
-        shadow-soft
       ">
         <div className="
           flex flex-col md:flex-row
