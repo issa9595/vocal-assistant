@@ -154,14 +154,11 @@ export function WeekView() {
           <button
             onClick={goToPreviousWeek}
             className="
-              w-10 h-10 rounded-full
+              w-10 h-10 rounded-full glass
               flex items-center justify-center
-              bg-[var(--color-brand-white)] border border-[#3D3D3D0D]
-              hover:bg-[#f4b4c820] hover:border-[#f4b4c840]
-              hover:scale-105
+              hover:scale-110 hover:shadow-md
               text-[var(--color-brand-black)]
               transition-all duration-200
-              shadow-soft
               focus:outline-none focus:ring-2 focus:ring-[#96b6dd]/50
             "
             aria-label="Semaine précédente"
@@ -197,14 +194,11 @@ export function WeekView() {
           <button
             onClick={goToNextWeek}
             className="
-              w-10 h-10 rounded-full
+              w-10 h-10 rounded-full glass
               flex items-center justify-center
-              bg-[var(--color-brand-white)] border border-[#3D3D3D0D]
-              hover:bg-[#f4b4c820] hover:border-[#f4b4c840]
-              hover:scale-105
+              hover:scale-110 hover:shadow-md
               text-[var(--color-brand-black)]
               transition-all duration-200
-              shadow-soft
               focus:outline-none focus:ring-2 focus:ring-[#96b6dd]/50
             "
             aria-label="Semaine suivante"

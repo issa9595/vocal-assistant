@@ -209,19 +209,17 @@ export function DailyCalendar() {
               onClick={goToPreviousDay}
               className="
                 w-8 h-8 md:w-9 md:h-9
-                rounded-full
+                rounded-full glass
                 flex items-center justify-center
-                bg-[var(--color-brand-white)] 
-                border border-[#3D3D3D1A]
-                hover:bg-[#f4b4c840]
+                hover:scale-110 hover:shadow-md
                 text-[var(--color-brand-black)]
-                transition-colors
+                transition-all duration-200
                 focus:outline-none focus:ring-2 focus:ring-[#96b6dd]
                 flex-shrink-0
               "
               aria-label="Jour précédent"
             >
-              <svg aria-hidden="true" className="w-4 h-4 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
@@ -231,19 +229,17 @@ export function DailyCalendar() {
               onClick={goToNextDay}
               className="
                 w-8 h-8 md:w-9 md:h-9
-                rounded-full
+                rounded-full glass
                 flex items-center justify-center
-                bg-[var(--color-brand-white)]
-                border border-[#3D3D3D1A]
-                hover:bg-[#f4b4c840]
+                hover:scale-110 hover:shadow-md
                 text-[var(--color-brand-black)]
-                transition-colors
+                transition-all duration-200
                 focus:outline-none focus:ring-2 focus:ring-[#96b6dd]
                 flex-shrink-0
               "
               aria-label="Jour suivant"
             >
-              <svg aria-hidden="true" className="w-4 h-4 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
