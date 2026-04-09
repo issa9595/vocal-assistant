@@ -301,14 +301,15 @@ export function WeekView() {
                     {isToday && (
                       <span className="
                         text-[9px] md:text-[10px]
-                        text-[#3D3D3DCC]
-                        bg-[#9dc0bc40]
+                        text-[var(--color-brand-black)]
+                        glass-pink
                         px-2 py-0.5
                         rounded-full
                         font-bold
                         uppercase
-                        tracking-wide
+                        tracking-widest
                         self-center
+                        shadow-sm
                       ">
                         Aujourd'hui
                       </span>
