@@ -23,7 +23,7 @@ const formatDayHeader = (date: Date): string => {
 };
 
 /**
- * Formate une date pour l'affichage court du range de semaine (ex: "6 – 12 avr. 2026")
+ * Formate une date pour l'affichage court du range de semaine (ex: "6 - 12 avr. 2026")
  */
 const formatWeekRange = (start: Date, end: Date): string => {
   const startDay = start.getDate();
@@ -32,9 +32,9 @@ const formatWeekRange = (start: Date, end: Date): string => {
   const endMonth = end.toLocaleDateString("fr-FR", { month: "short" });
   const year = end.getFullYear();
   if (start.getMonth() === end.getMonth()) {
-    return `${startDay} – ${endDay} ${endMonth} ${year}`;
+    return `${startDay} - ${endDay} ${endMonth} ${year}`;
   }
-  return `${startDay} ${startMonth} – ${endDay} ${endMonth} ${year}`;
+  return `${startDay} ${startMonth} - ${endDay} ${endMonth} ${year}`;
 };
 
 /**
