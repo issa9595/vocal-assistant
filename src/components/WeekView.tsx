@@ -268,7 +268,7 @@ export function WeekView() {
                   hover:scale-[1.005]
                   transition-all duration-200
                   md:h-fit md:min-w-0
-                  ${isToday ? "mt-5" : ""}
+                  mt-5
                 `}
               >
                 {/* Badge Aujourd'hui à cheval sur la bordure supérieure */}
