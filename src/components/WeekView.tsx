@@ -299,18 +299,10 @@ export function WeekView() {
                       </span>
                     </h3>
                     {isToday && (
-                      <span className="
-                        text-[9px] md:text-[10px]
-                        text-[var(--color-brand-black)]
-                        glass-pink
-                        px-2 py-0.5
-                        rounded-full
-                        font-bold
-                        uppercase
-                        tracking-widest
-                        self-center
-                        shadow-sm
-                      ">
+                      <span
+                        style={{ borderTopColor: "rgba(244, 180, 200, 0.40)" }}
+                        className="text-[9px] md:text-[10px] text-[var(--color-brand-black)] glass-pink px-2 py-0.5 rounded-full font-bold uppercase tracking-widest self-center"
+                      >
                         Aujourd'hui
                       </span>
                     )}
