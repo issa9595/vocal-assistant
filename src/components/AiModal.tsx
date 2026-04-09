@@ -23,6 +23,7 @@ import { MessageBubble } from "@/components/chat/MessageBubble";
 import { StatusIndicator } from "@/components/chat/StatusIndicator";
 import { SuggestionChip } from "@/components/chat/SuggestionChip";
 import { MicrophoneButton } from "@/components/chat/MicrophoneButton";
+import LumiaMarkLogo from "@/components/LumiaMarkLogo";
 import type {
   Message,
   SpeechRecognitionStatus,
@@ -553,14 +554,10 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
         border-b border-[rgba(255,255,255,0.3)]
         glass-panel glass-grain glass-highlight
       ">
-        <div>
-          <h2 id="modal-title" className="text-lg font-semibold text-[var(--color-brand-black)]">
-            Assistant vocal
-          </h2>
-          <p id="modal-description" className="text-xs text-[#3D3D3D99] mt-0.5">
-            Propulsé par Gemini • Parlez pour interagir
-          </p>
+        <div aria-label="Lumia" id="modal-title">
+          <LumiaMarkLogo height={36} />
         </div>
+        <span id="modal-description" className="sr-only">Assistant vocal Lumia</span>
 
         {/* Bouton de fermeture */}
         <button
