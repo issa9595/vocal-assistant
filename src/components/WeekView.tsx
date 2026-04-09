@@ -143,7 +143,7 @@ export function WeekView() {
   }, []);
 
   return (
-    <div className="flex flex-col h-full bg-[var(--color-brand-white)] text-[var(--color-brand-black)]">
+    <div className="flex flex-col h-full rounded-xl overflow-hidden glass glass-grain text-[var(--color-brand-black)]">
       {/* ========== HEADER DE NAVIGATION ========== */}
       <header
         aria-label="Navigation de la semaine"
@@ -264,7 +264,7 @@ export function WeekView() {
                   flex flex-col
                   p-3
                   md:p-3
-                  rounded-medium
+                  rounded-xl
                   glass glass-grain glass-highlight
                   hover:scale-[1.005]
                   transition-all duration-200
