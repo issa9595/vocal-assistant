@@ -33,7 +33,7 @@ export function ViewSelector() {
       </label>
 
       {/* Wrapper glass — backdrop-filter ne s'applique pas sur <select> natif */}
-      <div className="relative flex-1 md:flex-none md:min-w-[160px] glass rounded-medium hover:scale-[1.02] transition-all duration-200">
+      <div className="relative flex-1 md:flex-none md:min-w-[160px] glass rounded-xl hover:scale-[1.02] transition-all duration-200">
         <select
           id="view-select"
           value={viewMode}
@@ -43,7 +43,7 @@ export function ViewSelector() {
             w-full
             px-3 md:px-4 pr-8
             py-2 md:py-2.5
-            rounded-medium
+            rounded-xl
             bg-transparent
             text-[var(--color-brand-black)]
             text-sm md:text-base
