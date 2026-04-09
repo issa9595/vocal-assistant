@@ -248,30 +248,28 @@ export function DailyCalendar() {
 
         {/* Bouton "Aujourd'hui" */}
         {!isToday && (
-          <button
-            onClick={goToToday}
-            className="
-              w-full 
-              py-2 
-              px-3 
-              rounded-medium
-              bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
-              text-[var(--color-brand-black)] 
-              text-xs 
-              md:text-xs
-              font-bold
-              transition-all duration-200 
-              hover:opacity-90 
-              hover:scale-[1.02]
-              focus:outline-none 
-              focus:ring-2 
-              focus:ring-[#96b6dd]/50
-              shadow-soft
-              mt-2 md:mt-2
-            "
-          >
-            Aujourd'hui
-          </button>
+          <div className="flex justify-center mt-2">
+            <button
+              onClick={goToToday}
+              style={{ borderTopColor: "rgba(244, 180, 200, 0.40)" }}
+              className="
+                inline-flex items-center gap-1.5
+                text-[10px] font-semibold
+                text-[var(--color-brand-black)]
+                glass-pink
+                px-3 py-1.5 rounded-full
+                hover:scale-105
+                transition-all duration-200
+                focus:outline-none focus:ring-2 focus:ring-[#f4b4c8]/50
+              "
+              aria-label="Revenir à aujourd'hui"
+            >
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              </svg>
+              Aujourd'hui
+            </button>
+          </div>
         )}
       </header>
 
