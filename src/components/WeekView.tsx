@@ -260,45 +260,40 @@ export function WeekView() {
               <section
                 key={index}
                 aria-label={`${dayLabel}${isToday ? " — Aujourd'hui" : ""}, ${dayEvents.length} événement${dayEvents.length > 1 ? "s" : ""}`}
-                className="
-                  flex flex-col
-                  p-3
-                  md:p-3
+                className={`
+                  relative flex flex-col
+                  p-3 md:p-3
                   rounded-xl
                   glass glass-grain glass-highlight
                   hover:scale-[1.005]
                   transition-all duration-200
-                  md:h-fit
-                  md:min-w-0
-                "
+                  md:h-fit md:min-w-0
+                  ${isToday ? "mt-4 overflow-visible" : ""}
+                `}
               >
+                {/* Badge Aujourd'hui centré sur la bordure supérieure */}
+                {isToday && (
+                  <span
+                    style={{ borderTopColor: "rgba(244, 180, 200, 0.40)" }}
+                    className="absolute -top-4 left-1/2 -translate-x-1/2 text-[9px] text-[var(--color-brand-black)] glass-pink px-2 py-0.5 rounded-full font-bold uppercase tracking-widest whitespace-nowrap shadow-sm z-10"
+                    aria-hidden="true"
+                  >
+                    Aujourd'hui
+                  </span>
+                )}
+
                 {/* En-tête du jour */}
                 <div
                   aria-hidden="true"
-                  className="
-                    flex flex-col
-                    gap-1
-                    mb-2 md:mb-3
-                    pb-2 md:pb-3
-                    border-b border-[#3D3D3D0D]
-                  "
+                  className="flex flex-col gap-1 mb-2 md:mb-3 pb-2 md:pb-3 border-b border-[#3D3D3D0D]"
                 >
-                  {/* Titre du jour + badge aujourd'hui inline */}
-                  <div className="flex items-center gap-1.5">
-                    <h3 className={`text-base md:text-sm font-bold ${isToday ? "text-[var(--color-brand-black)]" : "text-[#3D3D3DE6]"} flex items-baseline gap-1`}>
-                      {day.toLocaleDateString("fr-FR", { weekday: "long" })}
-                      <span className="text-lg md:text-base text-[var(--color-brand-black)]">
-                        {day.getDate()}
-                      </span>
-                    </h3>
-                    {isToday && (
-                      <span
-                        style={{ borderTopColor: "rgba(244, 180, 200, 0.40)" }}
-                        className="shrink-0 w-2 h-2 rounded-full glass-pink"
-                        title="Aujourd'hui"
-                      />
-                    )}
-                  </div>
+                  {/* Titre du jour */}
+                  <h3 className={`text-base md:text-sm font-bold ${isToday ? "text-[var(--color-brand-black)]" : "text-[#3D3D3DE6]"} flex items-baseline gap-1`}>
+                    {day.toLocaleDateString("fr-FR", { weekday: "long" })}
+                    <span className="text-lg md:text-base text-[var(--color-brand-black)]">
+                      {day.getDate()}
+                    </span>
+                  </h3>
 
                   {/* Compteur */}
                   <span className="text-[10px] text-[#3D3D3D80] font-medium">
