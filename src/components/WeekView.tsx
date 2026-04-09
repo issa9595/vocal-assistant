@@ -23,6 +23,21 @@ const formatDayHeader = (date: Date): string => {
 };
 
 /**
+ * Formate une date pour l'affichage court du range de semaine (ex: "6 – 12 avr. 2026")
+ */
+const formatWeekRange = (start: Date, end: Date): string => {
+  const startDay = start.getDate();
+  const endDay = end.getDate();
+  const startMonth = start.toLocaleDateString("fr-FR", { month: "short" });
+  const endMonth = end.toLocaleDateString("fr-FR", { month: "short" });
+  const year = end.getFullYear();
+  if (start.getMonth() === end.getMonth()) {
+    return `${startDay} – ${endDay} ${endMonth} ${year}`;
+  }
+  return `${startDay} ${startMonth} – ${endDay} ${endMonth} ${year}`;
+};
+
+/**
  * Formate une date pour l'affichage complet (ex: "Lundi 11 décembre")
  */
 const formatDayFull = (date: Date): string => {
@@ -170,8 +185,8 @@ export function WeekView() {
 
           {/* Période de la semaine + pill "Cette semaine" */}
           <div className="flex-1 text-center md:text-left px-4 md:px-0">
-            <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[var(--color-brand-black)] tracking-tight">
-              Semaine du {formatDayFull(weekStart)} au {formatDayFull(weekDays[6])}
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-[var(--color-brand-black)] tracking-tight">
+              {formatWeekRange(weekStart, weekDays[6])}
             </h2>
             <div className="flex items-center justify-center md:justify-start gap-2 mt-1">
               {isCurrentWeek ? (
