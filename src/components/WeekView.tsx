@@ -264,21 +264,32 @@ export function WeekView() {
                   relative flex flex-col
                   p-3 md:p-3
                   rounded-xl
-                  glass glass-grain glass-highlight
+                  glass glass-grain
                   hover:scale-[1.005]
                   transition-all duration-200
                   md:h-fit md:min-w-0
-                  ${isToday ? "mt-4 overflow-visible" : ""}
+                  ${isToday ? "mt-5" : ""}
                 `}
               >
-                {/* Badge Aujourd'hui centré sur la bordure supérieure */}
+                {/* Badge Aujourd'hui à cheval sur la bordure supérieure */}
                 {isToday && (
                   <span
-                    style={{ borderTopColor: "rgba(244, 180, 200, 0.40)" }}
-                    className="absolute -top-4 left-1/2 -translate-x-1/2 text-[9px] text-[var(--color-brand-black)] glass-pink px-2 py-0.5 rounded-full font-bold uppercase tracking-widest whitespace-nowrap shadow-sm z-10"
+                    className="absolute -top-[14px] left-1/2 -translate-x-1/2 z-20 whitespace-nowrap"
                     aria-hidden="true"
                   >
-                    Aujourd'hui
+                    <span className="
+                      inline-block
+                      text-[10px] font-bold uppercase tracking-widest
+                      text-[var(--color-brand-black)]
+                      bg-[linear-gradient(135deg,rgba(244,180,200,0.85)_0%,rgba(252,236,211,0.85)_100%)]
+                      backdrop-blur-md
+                      border border-[rgba(244,180,200,0.5)]
+                      px-3 py-1
+                      rounded-full
+                      shadow-sm
+                    ">
+                      Aujourd'hui
+                    </span>
                   </span>
                 )}
 
