@@ -283,16 +283,9 @@ export function WeekView() {
                     border-b border-[#3D3D3D0D]
                   "
                 >
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <h3
-                      className={`
-                        text-base
-                        md:text-sm
-                        font-bold
-                        ${isToday ? "text-[var(--color-brand-black)]" : "text-[#3D3D3DE6]"}
-                        flex items-baseline gap-1
-                      `}
-                    >
+                  {/* Titre du jour + badge aujourd'hui inline */}
+                  <div className="flex items-center gap-1.5">
+                    <h3 className={`text-base md:text-sm font-bold ${isToday ? "text-[var(--color-brand-black)]" : "text-[#3D3D3DE6]"} flex items-baseline gap-1`}>
                       {day.toLocaleDateString("fr-FR", { weekday: "long" })}
                       <span className="text-lg md:text-base text-[var(--color-brand-black)]">
                         {day.getDate()}
@@ -301,13 +294,14 @@ export function WeekView() {
                     {isToday && (
                       <span
                         style={{ borderTopColor: "rgba(244, 180, 200, 0.40)" }}
-                        className="text-[9px] md:text-[10px] text-[var(--color-brand-black)] glass-pink px-2 py-0.5 rounded-full font-bold uppercase tracking-widest self-center"
-                      >
-                        Aujourd'hui
-                      </span>
+                        className="shrink-0 w-2 h-2 rounded-full glass-pink"
+                        title="Aujourd'hui"
+                      />
                     )}
                   </div>
-                  <span className="text-[10px] md:text-[10px] text-[#3D3D3D80] font-medium">
+
+                  {/* Compteur */}
+                  <span className="text-[10px] text-[#3D3D3D80] font-medium">
                     {dayEvents.length} événement{dayEvents.length > 1 ? "s" : ""}
                   </span>
                 </div>
