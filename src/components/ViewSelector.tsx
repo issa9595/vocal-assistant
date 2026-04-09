@@ -38,6 +38,7 @@ export function ViewSelector() {
           id="view-select"
           value={viewMode}
           onChange={(e) => setViewMode(e.target.value as "day" | "week" | "month" | "year")}
+          style={{ outline: "none" }}
           className="
             w-full
             px-3 md:px-4 pr-8
@@ -47,7 +48,6 @@ export function ViewSelector() {
             text-[var(--color-brand-black)]
             text-sm md:text-base
             font-semibold
-            focus:outline-none focus:ring-2 focus:ring-[#96b6dd]/50
             cursor-pointer
             appearance-none
           "
