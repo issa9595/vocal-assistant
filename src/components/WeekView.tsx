@@ -168,26 +168,39 @@ export function WeekView() {
             </svg>
           </button>
 
-          {/* Période de la semaine */}
+          {/* Période de la semaine + pill "Cette semaine" */}
           <div className="flex-1 text-center md:text-left px-4 md:px-0">
-            <h2 className="
-              text-lg md:text-xl lg:text-2xl
-              font-bold
-              text-[var(--color-brand-black)]
-              tracking-tight
-            ">
+            <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-[var(--color-brand-black)] tracking-tight">
               Semaine du {formatDayFull(weekStart)} au {formatDayFull(weekDays[6])}
             </h2>
-            {isCurrentWeek && (
-              <p aria-live="polite" className="
-                text-[10px] md:text-xs
-                text-[#3D3D3D80]
-                mt-1
-                font-medium
-              ">
-                Cette semaine
-              </p>
-            )}
+            <div className="flex items-center justify-center md:justify-start gap-2 mt-1">
+              {isCurrentWeek ? (
+                <p aria-live="polite" className="text-[10px] md:text-xs text-[#3D3D3D80] font-medium">
+                  Cette semaine
+                </p>
+              ) : (
+                <button
+                  onClick={goToToday}
+                  style={{ borderTopColor: "rgba(244, 180, 200, 0.40)" }}
+                  className="
+                    inline-flex items-center gap-1
+                    text-[10px] md:text-xs font-semibold
+                    text-[var(--color-brand-black)]
+                    glass-pink
+                    px-2.5 py-1 rounded-full
+                    hover:scale-105
+                    transition-all duration-200
+                    focus:outline-none focus:ring-2 focus:ring-[#f4b4c8]/50
+                  "
+                  aria-label="Revenir à la semaine actuelle"
+                >
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                  </svg>
+                  Cette semaine
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Bouton semaine suivante */}
@@ -208,23 +221,6 @@ export function WeekView() {
             </svg>
           </button>
         </div>
-
-        {/* Bouton "Cette semaine" */}
-        {!isCurrentWeek && (
-          <button
-            onClick={goToToday}
-            className="
-              w-full py-3 px-4 rounded-medium
-              bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
-              text-[var(--color-brand-black)] text-sm font-bold
-              transition-all duration-200 hover:opacity-90 hover:scale-[1.02]
-              focus:outline-none focus:ring-2 focus:ring-[#96b6dd]/50
-              shadow-soft
-            "
-          >
-            Cette semaine
-          </button>
-        )}
       </header>
 
       {/* ========== LISTE DES JOURS ========== */}
