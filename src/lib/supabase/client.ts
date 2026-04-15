@@ -1,37 +1,35 @@
 /**
  * @file client.ts
- * @description Client Supabase pour le côté client (browser)
- * 
- * Ce client est utilisé dans les composants React côté client.
- * Utilise NEXT_PUBLIC_SUPABASE_URL et NEXT_PUBLIC_SUPABASE_ANON_KEY.
+ * @description Client Supabase pour les composants client (browser)
+ * Utilise createBrowserClient de @supabase/ssr pour gérer la session via cookies.
  */
 
-import { createClient } from "@supabase/supabase-js";
+import { createBrowserClient } from "@supabase/ssr";
 import type { Database } from "./types";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
 /**
- * Client Supabase pour le côté client
- * Utilise la clé anonyme (anon key) pour les opérations côté client
- * 
- * Note: Les variables d'environnement doivent être configurées dans .env.local
+ * Crée un client Supabase pour les composants "use client".
+ * Appelé à chaque rendu pour récupérer la session courante.
  */
-export const supabase = createClient<Database>(
-  supabaseUrl || "https://placeholder.supabase.co",
-  supabaseAnonKey || "placeholder-key",
-  {
-    auth: {
-      persistSession: false, // On n'utilise pas l'auth pour l'instant
-    },
-  }
-);
-
-/**
- * Vérifie si Supabase est configuré
- */
-export function isSupabaseConfigured(): boolean {
-  return !!supabaseUrl && !!supabaseAnonKey;
+export function createClient() {
+  return createBrowserClient<Database>(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
 }
 
+/**
+ * Instance partagée pour une utilisation simple côté client.
+ * Pour les composants qui ont besoin d'un accès direct sans recréer le client.
+ */
+export const supabase = createClient();
+
+/**
+ * Vérifie si les variables d'environnement Supabase sont configurées.
+ */
+export function isSupabaseConfigured(): boolean {
+  return (
+    !!process.env.NEXT_PUBLIC_SUPABASE_URL &&
+    !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
+}
