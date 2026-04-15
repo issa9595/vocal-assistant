@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useCalendarStore } from "@/store/useCalendarStore";
+import { createClient } from "@/lib/supabase/client";
 import { DailyCalendar } from "@/components/DailyCalendar";
 import { WeekView } from "@/components/WeekView";
 import { MonthView } from "@/components/MonthView";
@@ -21,6 +23,13 @@ import LumiaLogo from "@/components/LumiaLogo";
 export default function AppPage() {
   const { viewMode } = useCalendarStore();
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
+  const router = useRouter();
+
+  async function handleSignOut() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/accueil");
+  }
 
   return (
     <div className="
@@ -58,8 +67,24 @@ export default function AppPage() {
             </p>
           </div>
 
-          {/* Sélecteur de vue */}
-          <ViewSelector />
+          {/* Sélecteur de vue + déconnexion */}
+          <div className="flex items-center gap-4">
+            <ViewSelector />
+            <button
+              onClick={handleSignOut}
+              className="
+                px-4 py-2
+                text-sm font-medium
+                text-[#3D3D3D80]
+                hover:text-[var(--color-brand-black)]
+                border border-[rgba(255,255,255,0.3)]
+                rounded-full
+                transition-colors
+              "
+            >
+              Se déconnecter
+            </button>
+          </div>
         </div>
       </header>
 
