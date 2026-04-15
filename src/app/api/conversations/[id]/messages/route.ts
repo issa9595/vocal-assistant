@@ -1,14 +1,14 @@
 /**
  * @file route.ts
  * @description API Route pour gérer les messages d'une conversation
- * 
+ *
  * Endpoints:
  * - GET /api/conversations/[id]/messages : Récupère les messages
  * - POST /api/conversations/[id]/messages : Ajoute un message
  */
 
 import { NextResponse } from "next/server";
-import { supabase, isSupabaseConfigured } from "@/lib/supabase/server";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
 
 /**
  * GET /api/conversations/[id]/messages
@@ -24,6 +24,12 @@ export async function GET(
         { error: "Supabase n'est pas configuré. Veuillez configurer NEXT_PUBLIC_SUPABASE_URL et NEXT_PUBLIC_SUPABASE_ANON_KEY dans .env.local" },
         { status: 503 }
       );
+    }
+
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
     }
 
     const { id } = await params;
@@ -66,6 +72,12 @@ export async function POST(
         { error: "Supabase n'est pas configuré. Veuillez configurer NEXT_PUBLIC_SUPABASE_URL et NEXT_PUBLIC_SUPABASE_ANON_KEY dans .env.local" },
         { status: 503 }
       );
+    }
+
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
     }
 
     const { id } = await params;
@@ -113,4 +125,3 @@ export async function POST(
     );
   }
 }
-

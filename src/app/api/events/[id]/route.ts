@@ -1,14 +1,14 @@
 /**
  * @file route.ts
  * @description API Route pour gérer un événement spécifique
- * 
+ *
  * Endpoints:
  * - PUT /api/events/[id] : Met à jour un événement
  * - DELETE /api/events/[id] : Supprime un événement
  */
 
 import { NextResponse } from "next/server";
-import { supabase, isSupabaseConfigured } from "@/lib/supabase/server";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import type { CalendarEvent } from "@/types/message";
 
 const DEMO_USER_ID = "demo-user";
@@ -29,11 +29,25 @@ export async function PUT(
       );
     }
 
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+    }
+
     const { id } = await params;
     const body = await request.json();
     const updates: Partial<CalendarEvent> = body;
 
-    const updateData: Record<string, unknown> = {};
+    const updateData: Partial<{
+      title: string;
+      start_time: string;
+      end_time: string;
+      description: string | null;
+      location: string | null;
+      source: "voice" | "manual" | "ai" | null;
+      meta: { groupId?: string } | null;
+    }> = {};
 
     if (updates.title !== undefined) updateData.title = updates.title;
     if (updates.start !== undefined) {
@@ -48,7 +62,7 @@ export async function PUT(
     }
     if (updates.description !== undefined) updateData.description = updates.description || null;
     if (updates.location !== undefined) updateData.location = updates.location || null;
-    if (updates.source !== undefined) updateData.source = updates.source || null;
+    if (updates.source !== undefined) updateData.source = (updates.source as "voice" | "manual" | "ai" | null) || null;
     if (updates.meta !== undefined) {
       updateData.meta = updates.meta ? { groupId: updates.meta.groupId } : null;
     }
@@ -76,7 +90,6 @@ export async function PUT(
       );
     }
 
-    // Convertir en CalendarEvent
     const event: CalendarEvent = {
       id: data.id,
       title: data.title,
@@ -115,6 +128,12 @@ export async function DELETE(
       );
     }
 
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+    }
+
     const { id } = await params;
 
     const { error } = await supabase
@@ -140,4 +159,3 @@ export async function DELETE(
     );
   }
 }
-

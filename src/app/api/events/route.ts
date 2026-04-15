@@ -1,16 +1,14 @@
 /**
  * @file route.ts
  * @description API Route pour gérer les événements du calendrier
- * 
+ *
  * Endpoints:
  * - GET /api/events : Liste les événements (avec filtres optionnels)
  * - POST /api/events : Crée un ou plusieurs événements
- * - PUT /api/events/[id] : Met à jour un événement
- * - DELETE /api/events/[id] : Supprime un événement
  */
 
 import { NextResponse } from "next/server";
-import { supabase, isSupabaseConfigured } from "@/lib/supabase/server";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import type { CalendarEvent } from "@/types/message";
 
 const DEMO_USER_ID = "demo-user";
@@ -28,6 +26,12 @@ export async function GET(request: Request) {
       );
     }
 
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+    }
+
     const { searchParams } = new URL(request.url);
     const startParam = searchParams.get("start");
     const endParam = searchParams.get("end");
@@ -38,7 +42,6 @@ export async function GET(request: Request) {
       .eq("user_id", DEMO_USER_ID)
       .order("start_time", { ascending: true });
 
-    // Filtres optionnels par période
     if (startParam) {
       query = query.gte("start_time", startParam);
     }
@@ -56,7 +59,6 @@ export async function GET(request: Request) {
       );
     }
 
-    // Convertir les données Supabase en CalendarEvent
     const events: CalendarEvent[] = (data || []).map((row) => ({
       id: row.id,
       title: row.title,
@@ -92,10 +94,15 @@ export async function POST(request: Request) {
       );
     }
 
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+    }
+
     const body = await request.json();
     const { events } = body;
 
-    // Support pour un seul événement ou plusieurs
     const eventsToInsert = Array.isArray(events) ? events : [events];
 
     const insertData = eventsToInsert.map((event: Omit<CalendarEvent, "id" | "createdAt">) => ({
@@ -123,7 +130,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Convertir les données Supabase en CalendarEvent
     const createdEvents: CalendarEvent[] = (data || []).map((row) => ({
       id: row.id,
       title: row.title,
@@ -136,10 +142,7 @@ export async function POST(request: Request) {
       meta: row.meta ? (row.meta as { groupId?: string }) : undefined,
     }));
 
-    // Toujours retourner un tableau d'événements pour simplifier le traitement côté client
-    return NextResponse.json({
-      events: createdEvents,
-    });
+    return NextResponse.json({ events: createdEvents });
   } catch (error) {
     console.error("Erreur API events:", error);
     return NextResponse.json(
@@ -148,4 +151,3 @@ export async function POST(request: Request) {
     );
   }
 }
-

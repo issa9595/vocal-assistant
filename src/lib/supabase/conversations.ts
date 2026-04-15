@@ -1,12 +1,12 @@
 /**
  * @file conversations.ts
  * @description Fonctions serveur pour gérer les conversations et messages
- * 
+ *
  * Ces fonctions utilisent le client Supabase serveur et sont appelées
  * depuis les Server Components ou Server Actions.
  */
 
-import { supabase, isSupabaseConfigured } from "./server";
+import { createClient, isSupabaseConfigured } from "./server";
 import type { Conversation, Message, ConversationInsert, MessageInsert } from "@/types/supabase";
 
 const DEMO_USER_ID = "demo-user";
@@ -20,6 +20,7 @@ export async function getConversations(): Promise<Conversation[]> {
     return [];
   }
 
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("conversations")
     .select("*")
@@ -42,6 +43,7 @@ export async function getConversationById(id: string): Promise<Conversation | nu
     return null;
   }
 
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("conversations")
     .select("*")
@@ -67,6 +69,7 @@ export async function createConversation(
     throw new Error("Supabase n'est pas configuré");
   }
 
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("conversations")
     .insert({
@@ -94,6 +97,7 @@ export async function getMessagesByConversationId(
     return [];
   }
 
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("messages")
     .select("*")
@@ -116,6 +120,7 @@ export async function createMessage(insert: MessageInsert): Promise<Message> {
     throw new Error("Supabase n'est pas configuré");
   }
 
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("messages")
     .insert({
@@ -140,15 +145,13 @@ export async function createMessage(insert: MessageInsert): Promise<Message> {
  */
 export async function getOrCreateLatestConversation(): Promise<Conversation> {
   const conversations = await getConversations();
-  
+
   if (conversations.length > 0) {
     return conversations[0];
   }
 
-  // Créer une nouvelle conversation
   return await createConversation({
     user_id: DEMO_USER_ID,
     title: null,
   });
 }
-

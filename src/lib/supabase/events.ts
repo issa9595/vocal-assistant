@@ -1,12 +1,12 @@
 /**
  * @file events.ts
  * @description Fonctions serveur pour gérer les événements du calendrier
- * 
+ *
  * Ces fonctions utilisent le client Supabase serveur et sont appelées
  * depuis les Server Components ou Server Actions.
  */
 
-import { supabase, isSupabaseConfigured } from "./server";
+import { createClient, isSupabaseConfigured } from "./server";
 import type { CalendarEventDB, CalendarEventInsert } from "@/types/supabase";
 import type { CalendarEvent } from "@/types/message";
 
@@ -25,13 +25,14 @@ export async function getCalendarEvents(
     return [];
   }
 
+  const supabase = await createClient();
+
   let query = supabase
     .from("calendar_events")
     .select("*")
     .eq("user_id", DEMO_USER_ID)
     .order("start_time", { ascending: true });
 
-  // Filtres optionnels par période
   if (startDate) {
     query = query.gte("start_time", startDate.toISOString());
   }
@@ -46,7 +47,6 @@ export async function getCalendarEvents(
     return [];
   }
 
-  // Convertir les données Supabase en CalendarEvent
   return (data || []).map((row) => ({
     id: row.id,
     title: row.title,
@@ -70,6 +70,7 @@ export async function getCalendarEventById(
     return null;
   }
 
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("calendar_events")
     .select("*")
@@ -86,7 +87,6 @@ export async function getCalendarEventById(
     return null;
   }
 
-  // Convertir en CalendarEvent
   return {
     id: data.id,
     title: data.title,
@@ -110,6 +110,8 @@ export async function createCalendarEvents(
     throw new Error("Supabase n'est pas configuré");
   }
 
+  const supabase = await createClient();
+
   const insertData: CalendarEventInsert[] = events.map((event) => ({
     id: `evt_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
     user_id: DEMO_USER_ID,
@@ -132,7 +134,6 @@ export async function createCalendarEvents(
     throw new Error("Erreur lors de la création des événements");
   }
 
-  // Convertir en CalendarEvent
   return (data || []).map((row) => ({
     id: row.id,
     title: row.title,
@@ -157,6 +158,7 @@ export async function updateCalendarEvent(
     throw new Error("Supabase n'est pas configuré");
   }
 
+  const supabase = await createClient();
   const updateData: Partial<CalendarEventDB> = {};
 
   if (updates.title !== undefined) updateData.title = updates.title;
@@ -194,7 +196,6 @@ export async function updateCalendarEvent(
     return null;
   }
 
-  // Convertir en CalendarEvent
   return {
     id: data.id,
     title: data.title,
@@ -216,6 +217,7 @@ export async function deleteCalendarEvent(id: string): Promise<boolean> {
     throw new Error("Supabase n'est pas configuré");
   }
 
+  const supabase = await createClient();
   const { error } = await supabase
     .from("calendar_events")
     .delete()
@@ -229,4 +231,3 @@ export async function deleteCalendarEvent(id: string): Promise<boolean> {
 
   return true;
 }
-
