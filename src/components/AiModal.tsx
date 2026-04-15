@@ -612,7 +612,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
               mb-4
             ">
               <svg
-                className="w-10 h-10 text-[var(--color-brand-pink)]"
+                className="w-10 h-10 text-(--color-brand-pink)"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -626,7 +626,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
                 />
               </svg>
             </div>
-            <h3 className="text-lg font-medium text-[var(--color-brand-black)] mb-2">
+            <h3 className="text-lg font-medium text-(--color-brand-black) mb-2">
               Bonjour ! Je suis votre assistant.
             </h3>
             <p className="text-sm text-[#3D3D3D99] max-w-xs mb-4">
@@ -654,12 +654,12 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
             <div className="flex items-start gap-2 max-w-[85%]" role="status" aria-label="L'assistant réfléchit…">
               <div className="
                 px-4 py-3 rounded-2xl rounded-bl-md
-                glass glass-highlight text-[var(--color-brand-black)]
+                glass glass-highlight text-(--color-brand-black)
               ">
                 <div className="flex gap-1" aria-hidden="true">
-                  <span className="w-2 h-2 bg-[var(--color-brand-pink)] rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                  <span className="w-2 h-2 bg-[var(--color-brand-pink)] rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                  <span className="w-2 h-2 bg-[var(--color-brand-pink)] rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                  <span className="w-2 h-2 bg-(--color-brand-pink) rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                  <span className="w-2 h-2 bg-(--color-brand-pink) rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                  <span className="w-2 h-2 bg-(--color-brand-pink) rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
                 </div>
               </div>
             </div>

@@ -1310,7 +1310,16 @@ Reproduire exactement la logique du calendrier pour le chat/conversations :
 ### Session 26 du 24/03/2026 - Correction des warnings Tailwind
 
 - **Qualité code** : correction des warnings de classes Tailwind dans les sections de `src/app/accueil/_sections/`.
-- **Conventions v4** : remplacement des syntaxes `bg-[var(...)]`, `text-[var(...)]`, `border-[var(...)]`, `hover:bg-[var(...)]` par les formes recommandées `bg-(--...)`, `text-(--...)`, `border-(--...)`, `hover:bg-(--...)`.
+- **Conventions v4** : remplacement des syntaxes `bg-(var)`, `text-(var)`, `border-(var)`, `hover:bg-(var)` (ancienne syntaxe arbitraire) par les formes recommandées `bg-(--nom)`, `text-(--nom)`, `border-(--nom)`, `hover:bg-(--nom)`.
 - **Nettoyage CTA final** : correction de la classe de paragraphe dans `FinalCTA.tsx` pour éviter les doublons/incohérences (`landing-muted` proprement appliquée).
 - **Validation** : relance du lint sur tous les fichiers modifiés de la landing, résultat sans erreur/avertissement sur ce scope.
+
+---
+
+### Session 27 du 09/04/2026 - Diagnostic échec `npm run dev`
+
+- **Analyse terminal** : identification de la cause racine de l'échec de démarrage Next.js via la capture partagée.
+- **Cause principale** : verrou de dev détecté (`.next/dev/lock`) indiquant qu'une autre instance de `next dev` est déjà en cours.
+- **Contexte secondaire** : warning non bloquant sur lockfiles multiples (`/Users/madayev/Dev/yarn.lock` et `package-lock.json`) qui peut perturber la détection de la racine workspace.
+- **Action fournie** : explication des commandes pour arrêter l'ancien process et relancer proprement le serveur.
 

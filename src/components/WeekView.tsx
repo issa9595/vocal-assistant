@@ -158,7 +158,7 @@ export function WeekView() {
   }, []);
 
   return (
-    <div className="flex flex-col h-full rounded-xl overflow-hidden glass glass-grain text-[var(--color-brand-black)]">
+    <div className="flex flex-col h-full rounded-xl overflow-hidden glass glass-grain text-(--color-brand-black)">
       {/* ========== HEADER DE NAVIGATION ========== */}
       <header
         aria-label="Navigation de la semaine"
@@ -172,7 +172,7 @@ export function WeekView() {
               w-10 h-10 rounded-full glass
               flex items-center justify-center
               hover:scale-110 hover:shadow-md
-              text-[var(--color-brand-black)]
+              text-(--color-brand-black)
               transition-all duration-200
               focus:outline-none focus:ring-2 focus:ring-[#96b6dd]/50
             "
@@ -185,7 +185,7 @@ export function WeekView() {
 
           {/* Période de la semaine + pill "Cette semaine" */}
           <div className="flex-1 text-center md:text-left px-4 md:px-0">
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-[var(--color-brand-black)] tracking-tight">
+            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-(--color-brand-black) tracking-tight">
               {formatWeekRange(weekStart, weekDays[6])}
             </h2>
             <div className="flex items-center justify-center md:justify-start gap-2 mt-1">
@@ -200,7 +200,7 @@ export function WeekView() {
                   className="
                     inline-flex items-center gap-1
                     text-[10px] md:text-xs font-semibold
-                    text-[var(--color-brand-black)]
+                    text-(--color-brand-black)
                     glass-pink
                     px-2.5 py-1 rounded-full
                     hover:scale-105
@@ -225,7 +225,7 @@ export function WeekView() {
               w-10 h-10 rounded-full glass
               flex items-center justify-center
               hover:scale-110 hover:shadow-md
-              text-[var(--color-brand-black)]
+              text-(--color-brand-black)
               transition-all duration-200
               focus:outline-none focus:ring-2 focus:ring-[#96b6dd]/50
             "
@@ -291,7 +291,7 @@ export function WeekView() {
                     <span className="
                       inline-block
                       text-[10px] font-bold uppercase tracking-widest
-                      text-[var(--color-brand-black)]
+                      text-(--color-brand-black)
                       bg-[linear-gradient(135deg,rgba(244,180,200,0.85)_0%,rgba(252,236,211,0.85)_100%)]
                       backdrop-blur-md
                       border border-[rgba(244,180,200,0.5)]
@@ -310,9 +310,9 @@ export function WeekView() {
                   className="flex flex-col gap-1 mb-2 md:mb-3 pb-2 md:pb-3 border-b border-[#3D3D3D0D]"
                 >
                   {/* Titre du jour */}
-                  <h3 className={`text-base md:text-sm font-bold ${isToday ? "text-[var(--color-brand-black)]" : "text-[#3D3D3DE6]"} flex items-baseline gap-1`}>
+                  <h3 className={`text-base md:text-sm font-bold ${isToday ? "text-(--color-brand-black)" : "text-[#3D3D3DE6]"} flex items-baseline gap-1`}>
                     {day.toLocaleDateString("fr-FR", { weekday: "long" })}
-                    <span className="text-lg md:text-base text-[var(--color-brand-black)]">
+                    <span className="text-lg md:text-base text-(--color-brand-black)">
                       {day.getDate()}
                     </span>
                   </h3>
@@ -343,7 +343,7 @@ export function WeekView() {
                         "
                       >
                         {/* Heure */}
-                        <div aria-hidden="true" className="flex-shrink-0">
+                        <div aria-hidden="true" className="shrink-0">
                           <div className="
                             w-10 md:w-10
                             text-[10px] md:text-[10px]
@@ -360,7 +360,7 @@ export function WeekView() {
                           <div className="
                             text-xs md:text-xs
                             font-bold
-                            text-[var(--color-brand-black)]
+                            text-(--color-brand-black)
                             group-hover:text-[#3D3D3DE6]
                             transition-colors
                             line-clamp-2
