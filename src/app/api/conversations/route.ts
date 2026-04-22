@@ -10,8 +10,6 @@
 import { NextResponse } from "next/server";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
 
-const DEMO_USER_ID = "demo-user";
-
 /**
  * GET /api/conversations
  * Liste les conversations de l'utilisateur
@@ -34,7 +32,7 @@ export async function GET() {
     const { data, error } = await supabase
       .from("conversations")
       .select("*")
-      .eq("user_id", DEMO_USER_ID)
+      .eq("user_id", user.id)
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -80,7 +78,7 @@ export async function POST(request: Request) {
     const { data, error } = await supabase
       .from("conversations")
       .insert({
-        user_id: DEMO_USER_ID,
+        user_id: user.id,
         title: title || null,
       })
       .select()

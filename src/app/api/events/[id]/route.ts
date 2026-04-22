@@ -11,8 +11,6 @@ import { NextResponse } from "next/server";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import type { CalendarEvent } from "@/types/message";
 
-const DEMO_USER_ID = "demo-user";
-
 /**
  * PUT /api/events/[id]
  * Met à jour un événement
@@ -71,7 +69,7 @@ export async function PUT(
       .from("calendar_events")
       .update(updateData)
       .eq("id", id)
-      .eq("user_id", DEMO_USER_ID)
+      .eq("user_id", user.id)
       .select()
       .single();
 
@@ -140,7 +138,7 @@ export async function DELETE(
       .from("calendar_events")
       .delete()
       .eq("id", id)
-      .eq("user_id", DEMO_USER_ID);
+      .eq("user_id", user.id);
 
     if (error) {
       console.error("Erreur Supabase:", error);

@@ -11,8 +11,6 @@ import { NextResponse } from "next/server";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
 import type { CalendarEvent } from "@/types/message";
 
-const DEMO_USER_ID = "demo-user";
-
 /**
  * GET /api/events
  * Liste les événements avec filtres optionnels (start, end)
@@ -39,7 +37,7 @@ export async function GET(request: Request) {
     let query = supabase
       .from("calendar_events")
       .select("*")
-      .eq("user_id", DEMO_USER_ID)
+      .eq("user_id", user.id)
       .order("start_time", { ascending: true });
 
     if (startParam) {
@@ -107,7 +105,7 @@ export async function POST(request: Request) {
 
     const insertData = eventsToInsert.map((event: Omit<CalendarEvent, "id" | "createdAt">) => ({
       id: `evt_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
-      user_id: DEMO_USER_ID,
+      user_id: user.id,
       title: event.title,
       start_time: event.start instanceof Date ? event.start.toISOString() : event.start,
       end_time: event.end instanceof Date ? event.end.toISOString() : event.end,

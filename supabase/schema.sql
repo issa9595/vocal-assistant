@@ -84,15 +84,37 @@ create index if not exists idx_calendar_events_meta_group_id on public.calendar_
 -- ============================================
 -- POLITIQUES RLS (Row Level Security)
 -- ============================================
--- Pour l'instant, on désactive RLS car on utilise un user_id fixe
--- Quand l'auth sera implémentée, on pourra activer RLS avec :
--- ALTER TABLE ... ENABLE ROW LEVEL SECURITY;
--- ============================================
 
--- Désactiver RLS pour l'instant (système mono-utilisateur)
-alter table public.conversations disable row level security;
-alter table public.messages disable row level security;
-alter table public.calendar_events disable row level security;
+alter table public.conversations enable row level security;
+alter table public.messages enable row level security;
+alter table public.calendar_events enable row level security;
+
+create policy "conversations_own_rows" on public.conversations
+  for all
+  using (user_id = auth.uid()::text)
+  with check (user_id = auth.uid()::text);
+
+create policy "messages_via_conversations" on public.messages
+  for all
+  using (
+    exists (
+      select 1 from public.conversations
+      where conversations.id = messages.conversation_id
+        and conversations.user_id = auth.uid()::text
+    )
+  )
+  with check (
+    exists (
+      select 1 from public.conversations
+      where conversations.id = messages.conversation_id
+        and conversations.user_id = auth.uid()::text
+    )
+  );
+
+create policy "calendar_events_own_rows" on public.calendar_events
+  for all
+  using (user_id = auth.uid()::text)
+  with check (user_id = auth.uid()::text);
 
 -- ============================================
 -- FONCTIONS UTILITAIRES (optionnel)

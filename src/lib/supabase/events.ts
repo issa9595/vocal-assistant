@@ -1,21 +1,14 @@
-/**
- * @file events.ts
- * @description Fonctions serveur pour gérer les événements du calendrier
- *
- * Ces fonctions utilisent le client Supabase serveur et sont appelées
- * depuis les Server Components ou Server Actions.
- */
-
 import { createClient, isSupabaseConfigured } from "./server";
 import type { CalendarEventDB, CalendarEventInsert } from "@/types/supabase";
 import type { CalendarEvent } from "@/types/message";
 
-const DEMO_USER_ID = "demo-user";
+async function getAuthUserId(): Promise<string> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error("Non autorisé");
+  return user.id;
+}
 
-/**
- * Récupère tous les événements de l'utilisateur
- * Optionnellement filtrés par période (startDate, endDate)
- */
 export async function getCalendarEvents(
   startDate?: Date,
   endDate?: Date
@@ -25,12 +18,13 @@ export async function getCalendarEvents(
     return [];
   }
 
+  const userId = await getAuthUserId();
   const supabase = await createClient();
 
   let query = supabase
     .from("calendar_events")
     .select("*")
-    .eq("user_id", DEMO_USER_ID)
+    .eq("user_id", userId)
     .order("start_time", { ascending: true });
 
   if (startDate) {
@@ -60,9 +54,6 @@ export async function getCalendarEvents(
   }));
 }
 
-/**
- * Récupère un événement par son ID
- */
 export async function getCalendarEventById(
   id: string
 ): Promise<CalendarEvent | null> {
@@ -70,12 +61,13 @@ export async function getCalendarEventById(
     return null;
   }
 
+  const userId = await getAuthUserId();
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("calendar_events")
     .select("*")
     .eq("id", id)
-    .eq("user_id", DEMO_USER_ID)
+    .eq("user_id", userId)
     .single();
 
   if (error) {
@@ -100,9 +92,6 @@ export async function getCalendarEventById(
   };
 }
 
-/**
- * Crée un ou plusieurs événements
- */
 export async function createCalendarEvents(
   events: Array<Omit<CalendarEvent, "id" | "createdAt">>
 ): Promise<CalendarEvent[]> {
@@ -110,11 +99,12 @@ export async function createCalendarEvents(
     throw new Error("Supabase n'est pas configuré");
   }
 
+  const userId = await getAuthUserId();
   const supabase = await createClient();
 
   const insertData: CalendarEventInsert[] = events.map((event) => ({
     id: `evt_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
-    user_id: DEMO_USER_ID,
+    user_id: userId,
     title: event.title,
     start_time: event.start instanceof Date ? event.start.toISOString() : event.start,
     end_time: event.end instanceof Date ? event.end.toISOString() : event.end,
@@ -147,9 +137,6 @@ export async function createCalendarEvents(
   }));
 }
 
-/**
- * Met à jour un événement
- */
 export async function updateCalendarEvent(
   id: string,
   updates: Partial<Omit<CalendarEvent, "id" | "createdAt">>
@@ -158,6 +145,7 @@ export async function updateCalendarEvent(
     throw new Error("Supabase n'est pas configuré");
   }
 
+  const userId = await getAuthUserId();
   const supabase = await createClient();
   const updateData: Partial<CalendarEventDB> = {};
 
@@ -183,7 +171,7 @@ export async function updateCalendarEvent(
     .from("calendar_events")
     .update(updateData)
     .eq("id", id)
-    .eq("user_id", DEMO_USER_ID)
+    .eq("user_id", userId)
     .select()
     .single();
 
@@ -209,20 +197,18 @@ export async function updateCalendarEvent(
   };
 }
 
-/**
- * Supprime un événement
- */
 export async function deleteCalendarEvent(id: string): Promise<boolean> {
   if (!isSupabaseConfigured()) {
     throw new Error("Supabase n'est pas configuré");
   }
 
+  const userId = await getAuthUserId();
   const supabase = await createClient();
   const { error } = await supabase
     .from("calendar_events")
     .delete()
     .eq("id", id)
-    .eq("user_id", DEMO_USER_ID);
+    .eq("user_id", userId);
 
   if (error) {
     console.error("Erreur lors de la suppression de l'événement:", error);

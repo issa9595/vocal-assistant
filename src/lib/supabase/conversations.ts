@@ -1,30 +1,25 @@
-/**
- * @file conversations.ts
- * @description Fonctions serveur pour gérer les conversations et messages
- *
- * Ces fonctions utilisent le client Supabase serveur et sont appelées
- * depuis les Server Components ou Server Actions.
- */
-
 import { createClient, isSupabaseConfigured } from "./server";
 import type { Conversation, Message, ConversationInsert, MessageInsert } from "@/types/supabase";
 
-const DEMO_USER_ID = "demo-user";
+async function getAuthUserId(): Promise<string> {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error("Non autorisé");
+  return user.id;
+}
 
-/**
- * Récupère toutes les conversations de l'utilisateur
- */
 export async function getConversations(): Promise<Conversation[]> {
   if (!isSupabaseConfigured()) {
     console.warn("Supabase non configuré, retourne un tableau vide");
     return [];
   }
 
+  const userId = await getAuthUserId();
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("conversations")
     .select("*")
-    .eq("user_id", DEMO_USER_ID)
+    .eq("user_id", userId)
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -35,20 +30,18 @@ export async function getConversations(): Promise<Conversation[]> {
   return (data || []) as Conversation[];
 }
 
-/**
- * Récupère une conversation par son ID
- */
 export async function getConversationById(id: string): Promise<Conversation | null> {
   if (!isSupabaseConfigured()) {
     return null;
   }
 
+  const userId = await getAuthUserId();
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("conversations")
     .select("*")
     .eq("id", id)
-    .eq("user_id", DEMO_USER_ID)
+    .eq("user_id", userId)
     .single();
 
   if (error) {
@@ -59,9 +52,6 @@ export async function getConversationById(id: string): Promise<Conversation | nu
   return data as Conversation;
 }
 
-/**
- * Crée une nouvelle conversation
- */
 export async function createConversation(
   insert: ConversationInsert
 ): Promise<Conversation> {
@@ -69,11 +59,12 @@ export async function createConversation(
     throw new Error("Supabase n'est pas configuré");
   }
 
+  const userId = await getAuthUserId();
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("conversations")
     .insert({
-      user_id: insert.user_id || DEMO_USER_ID,
+      user_id: insert.user_id || userId,
       title: insert.title || null,
     })
     .select()
@@ -87,9 +78,6 @@ export async function createConversation(
   return data as Conversation;
 }
 
-/**
- * Récupère tous les messages d'une conversation
- */
 export async function getMessagesByConversationId(
   conversationId: string
 ): Promise<Message[]> {
@@ -112,9 +100,6 @@ export async function getMessagesByConversationId(
   return (data || []) as Message[];
 }
 
-/**
- * Crée un nouveau message
- */
 export async function createMessage(insert: MessageInsert): Promise<Message> {
   if (!isSupabaseConfigured()) {
     throw new Error("Supabase n'est pas configuré");
@@ -139,10 +124,6 @@ export async function createMessage(insert: MessageInsert): Promise<Message> {
   return data as Message;
 }
 
-/**
- * Récupère la dernière conversation de l'utilisateur
- * (ou crée une nouvelle si aucune n'existe)
- */
 export async function getOrCreateLatestConversation(): Promise<Conversation> {
   const conversations = await getConversations();
 
@@ -150,8 +131,9 @@ export async function getOrCreateLatestConversation(): Promise<Conversation> {
     return conversations[0];
   }
 
+  const userId = await getAuthUserId();
   return await createConversation({
-    user_id: DEMO_USER_ID,
+    user_id: userId,
     title: null,
   });
 }
