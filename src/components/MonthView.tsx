@@ -75,6 +75,7 @@ export function MonthView() {
       {/* ========== HEADER ========== */}
       <header className="
         sticky top-0 z-10
+        rounded-t-xl
         glass-panel glass-grain
         border-b border-[rgba(255,255,255,0.3)]
         px-4 md:px-6 lg:px-8 py-3 md:py-4
@@ -82,7 +83,7 @@ export function MonthView() {
         <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-4 mb-3 max-w-5xl mx-auto">
 
           {/* Sélecteur de mois */}
-          <div className="relative flex-1 md:flex-none md:w-48 glass rounded-xl hover:scale-[1.02] transition-all duration-200">
+          <div className="relative flex-1 md:flex-none md:w-48 glass rounded-xl hover:scale-[1.02] transition-all duration-200 focus-within:ring-2 focus-within:ring-[var(--focus-ring)]">
             <select
               value={selectedMonth}
               onChange={e => setSelectedMonth(Number(e.target.value))}
@@ -91,7 +92,7 @@ export function MonthView() {
             >
               {MONTHS.map((m, i) => <option key={i} value={i}>{m}</option>)}
             </select>
-            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#3D3D3D66]" aria-hidden="true">
+            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted-accessible)]" aria-hidden="true">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -99,7 +100,7 @@ export function MonthView() {
           </div>
 
           {/* Sélecteur d'année */}
-          <div className="relative flex-1 md:flex-none md:w-32 glass rounded-xl hover:scale-[1.02] transition-all duration-200">
+          <div className="relative flex-1 md:flex-none md:w-32 glass rounded-xl hover:scale-[1.02] transition-all duration-200 focus-within:ring-2 focus-within:ring-[var(--focus-ring)]">
             <select
               value={selectedYear}
               onChange={e => setSelectedYear(Number(e.target.value))}
@@ -108,7 +109,7 @@ export function MonthView() {
             >
               {availableYears.map(y => <option key={y} value={y}>{y}</option>)}
             </select>
-            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[#3D3D3D66]" aria-hidden="true">
+            <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--text-muted-accessible)]" aria-hidden="true">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M2 4l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
@@ -116,7 +117,7 @@ export function MonthView() {
           </div>
         </div>
 
-        {isCurrentMonth && <p className="text-xs text-[#3D3D3D99]">Mois actuel</p>}
+        {isCurrentMonth && <p className="text-xs text-[var(--text-secondary-accessible)]">Mois actuel</p>}
       </header>
 
       {/* ========== CONTENU ========== */}
@@ -139,7 +140,7 @@ export function MonthView() {
                         Aujourd'hui
                       </span>
                     )}
-                    <span className="text-xs text-[#3D3D3D66]">
+                    <span className="text-xs text-[var(--text-muted-accessible)]">
                       {dayEvents.length} événement{dayEvents.length > 1 ? "s" : ""}
                     </span>
                   </div>
@@ -150,16 +151,16 @@ export function MonthView() {
                         key={event.id}
                         className="flex items-start gap-3 p-3 md:p-4 rounded-xl glass-pink glass-highlight hover:scale-[1.01] transition-all duration-200"
                       >
-                        <div className="flex-shrink-0 w-16 text-xs text-[#3D3D3D99] font-medium pt-0.5">
+                        <div className="flex-shrink-0 w-16 text-xs text-[var(--text-secondary-accessible)] font-medium pt-0.5">
                           {formatTime(event.start)}
                         </div>
                         <div className="flex-1 min-w-0">
                           <div className="text-sm font-medium text-[var(--color-brand-black)]">{event.title}</div>
                           {event.description && (
-                            <div className="text-xs text-[#3D3D3D99] mt-1 line-clamp-2">{event.description}</div>
+                            <div className="text-xs text-[var(--text-secondary-accessible)] mt-1 line-clamp-2">{event.description}</div>
                           )}
                           {event.location && (
-                            <div className="text-xs text-[#3D3D3D66] mt-1 flex items-center gap-1">
+                            <div className="text-xs text-[var(--text-muted-accessible)] mt-1 flex items-center gap-1">
                               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                               </svg>
@@ -175,7 +176,7 @@ export function MonthView() {
             })}
           </div>
         ) : (
-          <div className="flex items-center justify-center h-full text-[#3D3D3D66]">
+          <div className="flex items-center justify-center h-full text-[var(--text-muted-accessible)]">
             <p className="text-sm md:text-base">
               Aucun événement pour {MONTHS[selectedMonth]} {selectedYear}
             </p>

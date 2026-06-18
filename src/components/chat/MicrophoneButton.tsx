@@ -10,7 +10,8 @@ interface MicrophoneButtonProps {
 
 export function MicrophoneButton({ status, isSupported, onClick }: MicrophoneButtonProps) {
   const isListening = status === "listening";
-  const isDisabled = !isSupported || status === "processing";
+  const isProcessing = status === "processing";
+  const isDisabled = !isSupported || isProcessing;
 
   return (
     <button
@@ -19,32 +20,37 @@ export function MicrophoneButton({ status, isSupported, onClick }: MicrophoneBut
       className={`
         relative w-20 h-20 rounded-full
         flex items-center justify-center
-        transition-all duration-300
-        focus:outline-none focus:ring-4
-        glass-highlight overflow-hidden
-        ${isListening
-          ? "glass-pink focus:ring-[#f4b4c8]/50 scale-110"
-          : "glass-pink hover:scale-105 focus:ring-[#f4b4c8]/50"
-        }
-        ${isDisabled ? "opacity-50 cursor-not-allowed" : ""}
-        ${isListening ? "animate-pulse" : ""}
+        glass-pink glass-highlight overflow-hidden
         shadow-lg
+        transition-all duration-300
+        focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[var(--focus-ring)]
+        ${isListening ? "scale-110" : "hover:scale-105"}
+        ${isDisabled ? "opacity-60 cursor-not-allowed" : "cursor-pointer"}
       `}
       aria-label={isListening ? "Arrêter l'écoute" : "Commencer l'écoute"}
       aria-pressed={isListening}
     >
+      {/* Halo d'écoute — feedback vocal animé (charte : animate-pulse-ring) */}
       {isListening && (
         <>
           <span
-            className="absolute w-20 h-20 rounded-full bg-[#f4b4c84d] animate-ping"
+            className="absolute inset-0 rounded-full bg-[var(--color-brand-pink)]/40 animate-pulse-ring"
             aria-hidden="true"
           />
           <span
-            className="absolute w-24 h-24 rounded-full border-2 border-[#f4b4c840] animate-ping"
-            style={{ animationDelay: "150ms" }}
+            className="absolute -inset-2 rounded-full border-2 border-[var(--color-brand-pink)]/40 animate-pulse-ring"
+            style={{ animationDelay: "200ms" }}
             aria-hidden="true"
           />
         </>
+      )}
+
+      {/* Anneau de réflexion — état « traitement » */}
+      {isProcessing && (
+        <span
+          className="absolute inset-1 rounded-full border-2 border-[var(--color-brand-pink)] border-t-transparent animate-spin"
+          aria-hidden="true"
+        />
       )}
 
       <svg

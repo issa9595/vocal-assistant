@@ -538,6 +538,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
     <div
       ref={modalRef}
       className="
+        app-shell
         fixed inset-0 z-50
         aurora-bg
         flex flex-col
@@ -565,10 +566,12 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
           className="
             w-10 h-10 rounded-full
             flex items-center justify-center
-            text-zinc-400 hover:text-zinc-200
-            hover:bg-zinc-800
-            transition-colors
-            focus:outline-none focus:ring-2 focus:ring-violet-500
+            cursor-pointer
+            text-[var(--text-secondary-accessible)]
+            hover:text-[var(--color-brand-black)]
+            hover:bg-[rgba(255,255,255,0.45)]
+            transition-all duration-200
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]
           "
           aria-label="Fermer l'assistant"
         >
@@ -594,8 +597,8 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
         {/* Indicateur de chargement initial */}
         {isLoadingInitial && (
           <div className="flex flex-col items-center justify-center h-full" role="status" aria-label="Chargement de l'historique">
-            <div className="w-8 h-8 border-2 border-violet-500 border-t-transparent rounded-full animate-spin mb-2" aria-hidden="true" />
-            <p className="text-sm text-[#3D3D3D99]">Chargement de l'historique...</p>
+            <div className="w-8 h-8 border-2 border-[var(--color-brand-pink)] border-t-transparent rounded-full animate-spin mb-2" aria-hidden="true" />
+            <p className="text-sm text-[var(--text-secondary-accessible)]">Chargement de l'historique...</p>
           </div>
         )}
         
@@ -629,7 +632,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
             <h3 className="text-lg font-medium text-(--color-brand-black) mb-2">
               Bonjour ! Je suis votre assistant.
             </h3>
-            <p className="text-sm text-[#3D3D3D99] max-w-xs mb-4">
+            <p className="text-sm text-[var(--text-secondary-accessible)] max-w-xs mb-4">
               Appuyez sur le bouton micro et parlez pour commencer.
             </p>
             
@@ -678,7 +681,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
       ">
         {/* Affichage de l'erreur si présente */}
         {errorMessage && (
-          <p role="alert" className="text-sm text-red-400 text-center mb-3">
+          <p role="alert" className="text-sm text-[var(--color-error)] text-center mb-3">
             {errorMessage}
           </p>
         )}
@@ -696,8 +699,8 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
         </div>
 
         {/* Aide contextuelle */}
-        <p className="text-xs text-[#3D3D3D0D]0 text-center mt-4">
-          {isSupported 
+        <p className="text-xs text-[var(--text-muted-accessible)] text-center mt-4">
+          {isSupported
             ? "Appuyez pour parler • Appuyez à nouveau pour arrêter"
             : "Votre navigateur ne supporte pas la reconnaissance vocale"
           }

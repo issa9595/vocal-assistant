@@ -12,6 +12,5 @@ export { CalendarView } from "./CalendarView";
 export { DailyCalendar } from "./DailyCalendar";
 export { WeekView } from "./WeekView";
 export { MonthView } from "./MonthView";
-export { YearView } from "./YearView";
 export { ViewSelector } from "./ViewSelector";
 

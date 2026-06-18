@@ -78,6 +78,21 @@
 
   /* Dégradé principal */
   --gradient-brand: linear-gradient(135deg, #f4b4c8 0%, #fcecd3 100%);
+
+  /* États sémantiques — dérivés saumon / teal, contraste ≥ 4.5:1 sur fond clair */
+  --color-error:           #a8473a;
+  --color-error-surface:   rgba(246, 185, 174, 0.20);
+  --color-success:         #2f6f5f;
+  --color-success-surface: rgba(157, 192, 188, 0.22);
+
+  /* Rayons — corrige les classes rounded-medium / rounded-large (sinon no-op) */
+  --radius-medium: 0.875rem;
+  --radius-large:  1.25rem;
+
+  /* Ombre douce — cartes hors-verre (ex. auth), cohérente avec les ombres glass */
+  --shadow-soft:
+    0 8px 30px rgba(150, 182, 221, 0.12),
+    0 2px 8px  rgba(197, 166, 207, 0.10);
 }
 
 /* ========== STYLES DE BASE ========== */
@@ -427,5 +442,21 @@ body {
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/*
+ * Respect de prefers-reduced-motion pour l'app (dashboard, modale IA, auth).
+ * Neutralise les animations en boucle (pulse-ring, ping, pulse, aurora-drift)
+ * et raccourcit les transitions, tout en gardant l'interface fonctionnelle.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .app-shell *,
+  .app-shell *::before,
+  .app-shell *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

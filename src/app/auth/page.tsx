@@ -106,8 +106,9 @@ function AuthForm() {
 
   return (
     <div className="
+      app-shell
       min-h-screen
-      bg-[var(--color-brand-white)]
+      aurora-bg
       flex flex-col items-center justify-center
       px-4
     ">
@@ -121,11 +122,9 @@ function AuthForm() {
       {/* Card */}
       <div className="
         w-full max-w-sm
-        border border-[var(--border-subtle)]
+        glass-panel glass-grain
         rounded-2xl
         p-8
-        shadow-soft
-        bg-[var(--color-brand-white)]
       ">
         {/* Onglets */}
         <div className="flex gap-2 mb-8">
@@ -133,7 +132,8 @@ function AuthForm() {
             type="button"
             onClick={() => switchMode("signin")}
             className={`
-              flex-1 py-2 rounded-full text-sm font-medium transition-all
+              flex-1 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]
               ${mode === "signin"
                 ? "bg-[var(--color-brand-black)] text-[var(--color-brand-white)]"
                 : "text-[var(--color-brand-black)] hover:bg-[var(--surface-soft)]"
@@ -146,7 +146,8 @@ function AuthForm() {
             type="button"
             onClick={() => switchMode("signup")}
             className={`
-              flex-1 py-2 rounded-full text-sm font-medium transition-all
+              flex-1 py-2 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]
               ${mode === "signup"
                 ? "bg-[var(--color-brand-black)] text-[var(--color-brand-white)]"
                 : "text-[var(--color-brand-black)] hover:bg-[var(--surface-soft)]"
@@ -175,7 +176,7 @@ function AuthForm() {
                 border border-[var(--border-subtle)]
                 rounded-xl text-sm
                 bg-[var(--color-brand-white)]
-                focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-black)]
+                focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)]
               "
             />
           </div>
@@ -196,7 +197,7 @@ function AuthForm() {
                 border border-[var(--border-subtle)]
                 rounded-xl text-sm
                 bg-[var(--color-brand-white)]
-                focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-black)]
+                focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)]
               "
             />
           </div>
@@ -218,7 +219,7 @@ function AuthForm() {
                   border border-[var(--border-subtle)]
                   rounded-xl text-sm
                   bg-[var(--color-brand-white)]
-                  focus:outline-none focus:ring-2 focus:ring-[var(--color-brand-black)]
+                  focus:outline-none focus:ring-2 focus:ring-[var(--focus-ring)]
                 "
               />
             </div>
@@ -226,14 +227,14 @@ function AuthForm() {
 
           {/* Message d'erreur */}
           {error && (
-            <p className="text-sm text-red-600 bg-red-50 px-4 py-2.5 rounded-xl">
+            <p className="text-sm text-[var(--color-error)] bg-[var(--color-error-surface)] px-4 py-2.5 rounded-xl">
               {error}
             </p>
           )}
 
           {/* Message de succès */}
           {message && (
-            <p className="text-sm text-green-700 bg-green-50 px-4 py-2.5 rounded-xl">
+            <p className="text-sm text-[var(--color-success)] bg-[var(--color-success-surface)] px-4 py-2.5 rounded-xl">
               {message}
             </p>
           )}
@@ -247,9 +248,11 @@ function AuthForm() {
               text-[var(--color-brand-white)]
               font-medium text-sm
               rounded-full
+              cursor-pointer
               hover:opacity-90
-              disabled:opacity-50
-              transition-all
+              disabled:opacity-50 disabled:cursor-not-allowed
+              transition-all duration-200
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]
             "
           >
             {loading
@@ -264,7 +267,7 @@ function AuthForm() {
         {/* Séparateur */}
         <div className="flex items-center gap-3 my-6">
           <div className="flex-1 h-px bg-[var(--border-subtle)]" />
-          <span className="text-xs text-[#3D3D3D80]">ou</span>
+          <span className="text-xs text-[var(--text-muted-accessible)]">ou</span>
           <div className="flex-1 h-px bg-[var(--border-subtle)]" />
         </div>
 
@@ -279,8 +282,10 @@ function AuthForm() {
             flex items-center justify-center gap-3
             text-sm font-medium
             text-[var(--color-brand-black)]
+            cursor-pointer
             hover:bg-[var(--surface-soft)]
-            transition-all
+            transition-all duration-200
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]
           "
         >
           {/* Icône Google */}

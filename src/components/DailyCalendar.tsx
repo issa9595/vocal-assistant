@@ -160,6 +160,7 @@ export function DailyCalendar() {
         aria-label="Navigation du jour"
         className="
           sticky top-0 z-10
+          rounded-t-xl md:rounded-t-none md:rounded-l-xl
           glass-panel glass-grain glass-highlight
           border-b md:border-b-0 md:border-r
           border-[rgba(255,255,255,0.3)]
@@ -192,7 +193,7 @@ export function DailyCalendar() {
               {formatDateHeader(dayStart)}
             </h2>
             {isToday && (
-              <p className="text-[10px] md:text-[10px] text-[#3D3D3D80] mt-0.5 font-medium">Aujourd'hui</p>
+              <p className="text-[10px] md:text-[10px] text-[var(--text-muted-accessible)] mt-0.5 font-medium">Aujourd'hui</p>
             )}
           </div>
 
@@ -214,7 +215,7 @@ export function DailyCalendar() {
                 hover:scale-110 hover:shadow-md
                 text-[var(--color-brand-black)]
                 transition-all duration-200
-                focus:outline-none focus:ring-2 focus:ring-[#96b6dd]
+                cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]
                 flex-shrink-0
               "
               aria-label="Jour précédent"
@@ -234,7 +235,7 @@ export function DailyCalendar() {
                 hover:scale-110 hover:shadow-md
                 text-[var(--color-brand-black)]
                 transition-all duration-200
-                focus:outline-none focus:ring-2 focus:ring-[#96b6dd]
+                cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]
                 flex-shrink-0
               "
               aria-label="Jour suivant"
@@ -260,7 +261,7 @@ export function DailyCalendar() {
                 px-3 py-1.5 rounded-full
                 hover:scale-105
                 transition-all duration-200
-                focus:outline-none focus:ring-2 focus:ring-[#f4b4c8]/50
+                cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]
               "
               aria-label="Revenir à aujourd'hui"
             >
@@ -323,7 +324,7 @@ export function DailyCalendar() {
                     flex-shrink-0
                     pt-2
                   ">
-                    <span className="text-xs md:text-sm text-[#3D3D3D80] font-medium">
+                    <span className="text-xs md:text-sm text-[var(--text-muted-accessible)] font-medium">
                       {formatHour(hour)}
                     </span>
                   </div>

@@ -56,7 +56,7 @@ export function DayEventsSummary({ events }: DayEventsSummaryProps) {
             <div aria-hidden="true" className="
               text-xs lg:text-sm
               font-semibold
-              text-[#3D3D3DB3]
+              text-[var(--text-secondary-accessible)]
               mb-1.5
             ">
               {formatTime(event.start)} - {formatTime(event.end)}
@@ -72,7 +72,7 @@ export function DayEventsSummary({ events }: DayEventsSummaryProps) {
             {event.description && (
               <div className="
                 text-xs lg:text-sm
-                text-[#3D3D3D80]
+                text-[var(--text-muted-accessible)]
                 mt-2
                 line-clamp-2
               ">

@@ -41,7 +41,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
           <span
             className={`
               text-xs mt-1 block
-              ${isUser ? "text-[#3D3D3D99]" : "text-[#3D3D3D66]"}
+              ${isUser ? "text-[var(--text-secondary-accessible)]" : "text-[var(--text-muted-accessible)]"}
             `}
           >
             {timestamp}

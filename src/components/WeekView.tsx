@@ -162,7 +162,7 @@ export function WeekView() {
       {/* ========== HEADER DE NAVIGATION ========== */}
       <header
         aria-label="Navigation de la semaine"
-        className="sticky top-0 z-10 glass-panel glass-grain border-b border-[rgba(255,255,255,0.3)] px-4 py-4"
+        className="sticky top-0 z-10 rounded-t-xl glass-panel glass-grain border-b border-[rgba(255,255,255,0.3)] px-4 py-4"
       >
         <div className="flex items-center justify-between mb-3">
           {/* Bouton semaine précédente */}
@@ -174,7 +174,7 @@ export function WeekView() {
               hover:scale-110 hover:shadow-md
               text-(--color-brand-black)
               transition-all duration-200
-              focus:outline-none focus:ring-2 focus:ring-[#96b6dd]/50
+              cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]
             "
             aria-label="Semaine précédente"
           >
@@ -190,7 +190,7 @@ export function WeekView() {
             </h2>
             <div className="flex items-center justify-center md:justify-start gap-2 mt-1">
               {isCurrentWeek ? (
-                <p aria-live="polite" className="text-[10px] md:text-xs text-[#3D3D3D80] font-medium">
+                <p aria-live="polite" className="text-[10px] md:text-xs text-[var(--text-muted-accessible)] font-medium">
                   Cette semaine
                 </p>
               ) : (
@@ -205,7 +205,7 @@ export function WeekView() {
                     px-2.5 py-1 rounded-full
                     hover:scale-105
                     transition-all duration-200
-                    focus:outline-none focus:ring-2 focus:ring-[#f4b4c8]/50
+                    cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]
                   "
                   aria-label="Revenir à la semaine actuelle"
                 >
@@ -227,7 +227,7 @@ export function WeekView() {
               hover:scale-110 hover:shadow-md
               text-(--color-brand-black)
               transition-all duration-200
-              focus:outline-none focus:ring-2 focus:ring-[#96b6dd]/50
+              cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]
             "
             aria-label="Semaine suivante"
           >
@@ -318,7 +318,7 @@ export function WeekView() {
                   </h3>
 
                   {/* Compteur */}
-                  <span className="text-[10px] text-[#3D3D3D80] font-medium">
+                  <span className="text-[10px] text-[var(--text-muted-accessible)] font-medium">
                     {dayEvents.length} événement{dayEvents.length > 1 ? "s" : ""}
                   </span>
                 </div>
@@ -347,7 +347,7 @@ export function WeekView() {
                           <div className="
                             w-10 md:w-10
                             text-[10px] md:text-[10px]
-                            text-[#3D3D3DB3]
+                            text-[var(--text-secondary-accessible)]
                             font-semibold
                             pt-0.5
                           ">
@@ -371,7 +371,7 @@ export function WeekView() {
                           {event.description && (
                             <div className="
                               text-[10px] md:text-[10px]
-                              text-[#3D3D3D99]
+                              text-[var(--text-secondary-accessible)]
                               mt-1
                               line-clamp-2
                               leading-relaxed
@@ -382,7 +382,7 @@ export function WeekView() {
                           {event.location && (
                             <div className="
                               text-[10px] md:text-[10px]
-                              text-[#3D3D3D80]
+                              text-[var(--text-muted-accessible)]
                               mt-1
                               flex items-center gap-1
                             ">
@@ -400,7 +400,7 @@ export function WeekView() {
                 ) : (
                   <p className="
                     text-xs md:text-sm
-                    text-[#3D3D3D66]
+                    text-[var(--text-muted-accessible)]
                     italic
                     py-2 md:py-3
                     text-center

@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useCalendarStore } from "@/store/useCalendarStore";
 import { createClient } from "@/lib/supabase/client";
 import { DailyCalendar } from "@/components/DailyCalendar";
 import { WeekView } from "@/components/WeekView";
 import { MonthView } from "@/components/MonthView";
-import { YearView } from "@/components/YearView";
 import { ViewSelector } from "@/components/ViewSelector";
 import { AiFabButton } from "@/components/AiFabButton";
 import { AiModal } from "@/components/AiModal";
@@ -21,9 +20,20 @@ import LumiaLogo from "@/components/LumiaLogo";
  * - Desktop (md+) : layout 80/20 avec calendrier à gauche (80%) et panneau à droite (20%)
  */
 export default function AppPage() {
-  const { viewMode } = useCalendarStore();
+  const { viewMode, setViewMode } = useCalendarStore();
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
   const router = useRouter();
+
+  // La vue « Année » a été retirée : on replie tout viewMode obsolète (ex. persisté
+  // en localStorage) sur « Mois » pour garder le sélecteur et le contenu cohérents.
+  useEffect(() => {
+    if (viewMode !== "day" && viewMode !== "week" && viewMode !== "month") {
+      setViewMode("month");
+    }
+  }, [viewMode, setViewMode]);
+
+  // Vue effectivement rendue (évite tout écran blanc le temps de la migration ci-dessus)
+  const view = viewMode === "day" || viewMode === "week" ? viewMode : "month";
 
   async function handleSignOut() {
     const supabase = createClient();
@@ -33,6 +43,7 @@ export default function AppPage() {
 
   return (
     <div className="
+      app-shell
       min-h-screen
       aurora-bg
       text-[var(--color-brand-black)]
@@ -60,7 +71,7 @@ export default function AppPage() {
             </h1>
             <p className="
               text-xs md:text-sm
-              text-[#3D3D3D80]
+              text-[var(--text-secondary-accessible)]
               mt-1
             ">
               Votre assistant vocal pour gérer votre calendrier
@@ -78,10 +89,11 @@ export default function AppPage() {
                 w-9 h-9
                 flex items-center justify-center
                 rounded-full
-                text-[#3D3D3D60]
+                cursor-pointer
+                text-[var(--text-muted-accessible)]
                 hover:text-[var(--color-brand-black)]
                 hover:bg-[rgba(255,255,255,0.4)]
-                transition-all
+                transition-all duration-200
               "
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -118,10 +130,9 @@ export default function AppPage() {
             md:w-full
             flex-1
           ">
-            {viewMode === "day" && <DailyCalendar />}
-            {viewMode === "week" && <WeekView />}
-            {viewMode === "month" && <MonthView />}
-            {viewMode === "year" && <YearView />}
+            {view === "day" && <DailyCalendar />}
+            {view === "week" && <WeekView />}
+            {view === "month" && <MonthView />}
           </div>
         </div>
       </main>

@@ -10,9 +10,10 @@ export function SuggestionChip({ text }: SuggestionChipProps) {
       aria-label={`Exemple : ${text}`}
       className="
         px-3 py-1.5 rounded-full
-        bg-[#f4b4c830] text-[#3D3D3D99]
+        bg-[var(--color-brand-pink)]/20
+        text-[var(--text-secondary-accessible)]
         text-xs
-        border border-zinc-700/50
+        border border-[rgba(244,180,200,0.40)]
       "
     >
       &quot;{text}&quot;

@@ -32,10 +32,10 @@ export function EventCard({ event, position, height }: EventCardProps) {
         minHeight: "70px",
       }}
     >
-      <div className="flex items-center gap-1.5 text-[9px] md:text-[10px] font-semibold text-[#3D3D3DB3] uppercase tracking-wide leading-none">
+      <div className="flex items-center gap-1.5 text-[9px] md:text-[10px] font-semibold text-[var(--text-secondary-accessible)] uppercase tracking-wide leading-none">
         <span>{formatTime(event.start)}</span>
         {height > 5 && (
-          <span className="text-[#3D3D3D80] font-medium normal-case">
+          <span className="text-[var(--text-muted-accessible)] font-medium normal-case">
             Jusqu'à {formatTime(event.end)}
           </span>
         )}
