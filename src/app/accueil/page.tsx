@@ -37,11 +37,14 @@ import Footer from "./_sections/Footer";
 export default function AccueilPage() {
   return (
     <div className="
+      landing-shell
       min-h-screen
-      bg-[var(--color-brand-white)]
       text-[var(--color-brand-black)]
       flex flex-col
     ">
+      {/* Champ aurore ambiant fixe — même base visuelle que l'app */}
+      <div className="fixed inset-0 -z-10 aurora-bg" aria-hidden="true" />
+
       <Header />
       <Hero />
       <ProblemMentalLoad />

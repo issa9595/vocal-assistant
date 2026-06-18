@@ -1,0 +1,2333 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumia Business Plan Jalon 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════
+   LUMIA Business Plan Jalon 2 (M1)
+   Charte : Rose #f5b5c9 · Crème #fdf8f8 · Violet #c5a6cf
+             Teal #9dc0bc · Pêche #f6b9ae · Dark #1d1d1b
+   ══════════════════════════════════════════════════ */
+
+:root {
+  --rose:        #f5b5c9;
+  --rose-deep:   #c0003a;
+  --rose-mid:    #e8829d;
+  --rose-light:  #fce8ef;
+  --rose-ultra:  #fef6f9;
+  --cream:       #fdf8f8;
+  --purple:      #c5a6cf;
+  --purple-light:#f0eaf6;
+  --teal:        #9dc0bc;
+  --teal-light:  #e8f3f2;
+  --peach:       #f6b9ae;
+  --peach-light: #fdf0ec;
+  --dark:        #1d1d1b;
+  --dark-2:      #3d3d3d;
+  --muted:       #8a8078;
+  --border:      #ede5ea;
+  --white:       #ffffff;
+  --sidebar-w:   220px;
+  --radius:      8px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 13px; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--dark);
+  background: var(--cream);
+  display: flex;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+strong { font-weight: 600; }
+
+/* ── SIDEBAR ──────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--dark);
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 1.2rem;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sb-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.sb-logo span { color: var(--rose); }
+.sb-sub {
+  font-size: 0.6rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-top: 0.2rem;
+  margin-bottom: 1.6rem;
+}
+.sb-nav { flex: 1; }
+.sb-nav li { margin-bottom: 0.05rem; }
+.nav-link {
+  display: block;
+  padding: 0.35rem 0.7rem;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: #6b6060;
+  transition: all 0.15s;
+}
+.nav-link:hover { color: #bbb; }
+.nav-link.active { background: rgba(245,181,201,.14); color: var(--rose); font-weight: 500; }
+.nav-num {
+  display: inline-block;
+  min-width: 1.1rem;
+  color: var(--muted);
+  font-size: 0.62rem;
+  margin-right: 0.3rem;
+  font-variant-numeric: tabular-nums;
+}
+.nav-link.active .nav-num { color: var(--rose-mid); }
+.sb-footer {
+  font-size: 0.58rem;
+  color: #3a3030;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 1.5rem;
+  line-height: 1.8;
+}
+
+/* ── MAIN ─────────────────────────────────────── */
+.main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
+
+/* ── PAGE ─────────────────────────────────────── */
+.page {
+  padding: 2.8rem 3rem 2.4rem;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 1rem;
+}
+.page-inner { max-width: 920px; }
+
+/* ── COVER ────────────────────────────────────── */
+.cover {
+  background: var(--dark);
+  padding: 4rem 3.5rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.cover-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.12;
+  pointer-events: none;
+}
+.blob-1 { width: 380px; height: 380px; background: var(--rose); top: -120px; right: -60px; }
+.blob-2 { width: 260px; height: 260px; background: var(--purple); bottom: -60px; right: 240px; }
+.blob-3 { width: 180px; height: 180px; background: var(--teal); top: 40%; left: 42%; }
+.cover-inner { position: relative; z-index: 2; }
+.cover-school {
+  font-size: 0.62rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-bottom: 1.2rem;
+}
+.cover-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(4.5rem, 9vw, 8rem);
+  color: var(--white);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.7rem;
+}
+.cover-title .dot { color: var(--rose); }
+.cover-tagline {
+  font-size: 1rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 1.2rem;
+}
+.cover-rule { width: 48px; height: 2px; background: var(--rose); margin-bottom: 1.2rem; }
+.cover-sub {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,.55);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+}
+.cover-team { font-size: 0.9rem; color: var(--white); font-weight: 500; margin-bottom: 1.5rem; }
+.btn-mvp {
+  display: inline-block;
+  padding: 0.55rem 1.2rem;
+  background: var(--rose);
+  color: var(--dark);
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+.btn-mvp:hover { opacity: 0.85; }
+
+/* ── TYPOGRAPHY ───────────────────────────────── */
+.stag {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--rose-deep);
+  margin-bottom: 0.4rem;
+}
+.stitle {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--dark);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 1.2rem;
+}
+.h3 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 1.4rem 0 0.6rem;
+  letter-spacing: -0.005em;
+}
+.h4 {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 1rem 0 0.4rem;
+}
+.intro-text {
+  font-size: 0.85rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  max-width: 720px;
+}
+.prose p {
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: var(--dark-2);
+  margin-bottom: 0.8rem;
+}
+.prose p:last-child { margin-bottom: 0; }
+
+/* ── EDITO (par section, exigé par la grille Jalon 2) ── */
+.edito {
+  background: var(--rose-ultra);
+  border-left: 2px solid var(--rose-mid);
+  padding: 1rem 1.2rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-bottom: 1.4rem;
+}
+.edito-lbl {
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--rose-deep);
+  margin-bottom: 0.4rem;
+}
+.edito p {
+  font-size: 0.78rem;
+  line-height: 1.7;
+  color: var(--dark-2);
+  font-style: italic;
+}
+.edito-sig {
+  font-size: 0.66rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  font-style: normal;
+}
+
+/* ── CALLOUT ──────────────────────────────────── */
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  background: var(--rose-ultra);
+  border-left: 2px solid var(--rose-mid);
+  padding: 0.8rem 1rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+.callout-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--rose-deep);
+  white-space: nowrap;
+  margin-top: 0.1rem;
+}
+
+/* ── STATS GRID ───────────────────────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 1.4rem;
+}
+.stat {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+}
+.stat.accent { background: var(--rose-ultra); border-color: var(--rose); }
+.stat-n {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.9rem;
+  color: var(--dark);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.stat.accent .stat-n { color: var(--rose-deep); }
+.stat-l { font-size: 0.72rem; color: var(--dark-2); line-height: 1.4; margin-bottom: 0.25rem; }
+.stat-s { font-size: 0.58rem; color: var(--muted); font-style: italic; }
+
+/* ── TWO COL ──────────────────────────────────── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 0.6rem; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; margin-top: 0.6rem; }
+
+.check-list li {
+  font-size: 0.76rem;
+  padding: 0.2rem 0 0.2rem 1.1rem;
+  position: relative;
+  color: var(--dark-2);
+  line-height: 1.4;
+}
+.check-list.green li::before { content: '+'; position: absolute; left: 0; color: #16a34a; font-weight: 700; }
+.check-list.red li::before   { content: '–'; position: absolute; left: 0; color: #dc2626; font-weight: 700; }
+.check-list.dot li::before   { content: '·'; position: absolute; left: 0; color: var(--rose-mid); font-weight: 700; }
+
+/* ── MARKET BLOCKS ────────────────────────────── */
+.mkt-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+}
+.mkt-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.mkt-block.accent { background: var(--rose-ultra); border-color: var(--rose); }
+.mkt-block h3 { font-size: 0.78rem; font-weight: 600; color: var(--dark); margin-bottom: 0.4rem; }
+.mkt-block p  { font-size: 0.74rem; line-height: 1.6; color: var(--dark-2); }
+.mkt-tag {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.1rem 0.45rem;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.58rem;
+  color: var(--muted);
+}
+
+/* ── TABLES ───────────────────────────────────── */
+.tbl-wrap { overflow-x: auto; margin: 0.6rem 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.74rem; }
+th {
+  background: var(--dark);
+  color: var(--white);
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+td {
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--dark-2);
+  vertical-align: top;
+  line-height: 1.4;
+}
+tr:nth-child(even) td { background: rgba(245,181,201,.03); }
+.muted-td { color: var(--muted); font-style: italic; }
+.num-td { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.total-row td { background: var(--dark) !important; color: var(--white); font-weight: 600; }
+.total-row td:first-child { border-left: none; }
+
+/* ── BADGES ───────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.45rem;
+  border-radius: 100px;
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+.bg-green  { background: #dcfce7; color: #15803d; }
+.bg-red    { background: #fee2e2; color: #dc2626; }
+.bg-yellow { background: #fef9c3; color: #a16207; }
+.bg-rose   { background: var(--rose-light); color: var(--rose-deep); }
+.bg-blue   { background: #dbeafe; color: #1d4ed8; }
+.bg-dark   { background: var(--dark); color: var(--white); }
+.bg-teal   { background: var(--teal-light); color: #166534; }
+.bg-purple { background: var(--purple-light); color: #6d28d9; }
+
+.row-lumia td { background: var(--rose-ultra) !important; }
+.row-lumia td:first-child { border-left: 2px solid var(--rose-mid); }
+.row-hl td { background: rgba(245,181,201,.05) !important; }
+
+/* ── VPC / GC ─────────────────────────────────── */
+.gc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
+.gc { padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border); }
+.gc-why  { background: var(--rose-ultra); border-color: var(--rose); }
+.gc-how  { background: var(--peach-light); border-color: var(--peach); }
+.gc-what { background: var(--teal-light); border-color: var(--teal); }
+.gc-lbl {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+.gc-why  .gc-lbl { color: var(--rose-deep); }
+.gc-how  .gc-lbl { color: #b45309; }
+.gc-what .gc-lbl { color: #166534; }
+.gc p { font-size: 0.76rem; line-height: 1.6; color: var(--dark-2); }
+
+/* ── HORIZONS ─────────────────────────────────── */
+.hor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; margin-bottom: 1.2rem; }
+.hor {
+  border-radius: var(--radius);
+  padding: 1rem;
+  border: 1px solid var(--border);
+}
+.hor-v1 { background: var(--rose-ultra); border-color: var(--rose); }
+.hor-v2 { background: #eff6ff; border-color: #93c5fd; }
+.hor-v3 { background: #f0fdf4; border-color: #86efac; }
+.hor-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 100px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.hor-v1 .hor-badge { background: var(--rose-deep); color: var(--white); }
+.hor-v2 .hor-badge { background: #1d4ed8; color: var(--white); }
+.hor-v3 .hor-badge { background: #15803d; color: var(--white); }
+.hor-period { font-size: 0.6rem; color: var(--muted); margin-bottom: 0.1rem; }
+.hor-title  { font-size: 0.88rem; font-weight: 700; color: var(--dark); margin-bottom: 0.4rem; }
+.hor p      { font-size: 0.71rem; line-height: 1.5; color: var(--dark-2); margin-bottom: 0.5rem; }
+.hor ul li  {
+  font-size: 0.66rem;
+  color: var(--dark-2);
+  padding: 0.1rem 0 0.1rem 0.7rem;
+  position: relative;
+}
+.hor ul li::before { content: '·'; position: absolute; left: 0; }
+
+/* ── UNIT ECO / KPI ───────────────────────────── */
+.ue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1.2rem; }
+.ue {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem;
+}
+.ue.accent { background: var(--rose-ultra); border-color: var(--rose); }
+.ue-v {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.7rem;
+  color: var(--dark);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.ue.accent .ue-v { color: var(--rose-deep); }
+.ue-l { font-size: 0.68rem; color: var(--muted); line-height: 1.4; }
+
+/* ── ROADMAP GANTT ────────────────────────────── */
+.gantt {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 0.6rem;
+  overflow-x: auto;
+  margin: 0.8rem 0 1.2rem;
+}
+.gantt-header,
+.gantt-row {
+  display: grid;
+  grid-template-columns: 220px repeat(12, 1fr);
+  gap: 4px;
+  align-items: center;
+  min-width: 760px;
+}
+.gantt-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+.gantt-month {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.gantt-task {
+  font-size: 0.72rem;
+  color: var(--dark);
+  padding: 0.35rem 0.6rem;
+  font-weight: 500;
+}
+.gantt-bar {
+  height: 18px;
+  border-radius: 4px;
+  background: var(--rose-mid);
+  position: relative;
+}
+.gantt-bar.b-rose   { background: var(--rose-mid); }
+.gantt-bar.b-purple { background: var(--purple); }
+.gantt-bar.b-teal   { background: var(--teal); }
+.gantt-bar.b-peach  { background: var(--peach); }
+.gantt-bar.b-blue   { background: #93c5fd; }
+.gantt-bar.b-green  { background: #86efac; }
+.gantt-bar.b-dark   { background: var(--dark); }
+.gantt-row.is-phase .gantt-task {
+  background: var(--cream);
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  color: var(--rose-deep);
+}
+
+/* ── TEAM ─────────────────────────────────────── */
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+.team-c {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.t-av {
+  width: 2.8rem; height: 2.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  color: var(--white);
+  margin: 1rem auto 0.4rem;
+}
+.av-r { background: linear-gradient(135deg, var(--rose), var(--rose-mid)); }
+.av-p { background: linear-gradient(135deg, var(--purple), #7c3aed); }
+.av-g { background: linear-gradient(135deg, var(--teal), #15803d); }
+.t-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--dark);
+  margin-bottom: 0.15rem;
+}
+.t-role {
+  font-size: 0.6rem;
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+  padding: 0 0.8rem;
+}
+.t-body { padding: 0.6rem 1rem 1rem; border-top: 1px solid var(--border); }
+.t-del-title {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--rose-deep);
+  margin-bottom: 0.4rem;
+}
+.t-body li {
+  font-size: 0.68rem;
+  color: var(--dark-2);
+  padding: 0.15rem 0 0.15rem 0.9rem;
+  position: relative;
+  line-height: 1.4;
+}
+.t-body li::before { content: '—'; position: absolute; left: 0; color: var(--rose-mid); font-size: 0.55rem; top: 0.25rem; }
+
+/* ── MISC ─────────────────────────────────────── */
+.dark-box {
+  background: var(--dark);
+  color: var(--white);
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  margin-top: 0.8rem;
+}
+.dark-box strong { color: var(--rose); }
+
+.info-bar {
+  background: var(--rose-ultra);
+  border-left: 2px solid var(--rose-mid);
+  padding: 0.7rem 0.95rem;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-top: 0.8rem;
+  color: var(--dark-2);
+}
+.info-bar strong { color: var(--rose-deep); }
+
+.info-box {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 0.8rem 0;
+}
+.info-box h4 { font-size: 0.78rem; font-weight: 600; color: var(--dark); margin-bottom: 0.5rem; }
+.info-box p  { font-size: 0.76rem; line-height: 1.6; color: var(--dark-2); }
+
+/* ── SMART OBJECTIVES ─────────────────────────── */
+.smart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7rem;
+}
+.smart-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  position: relative;
+}
+.smart-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--rose-mid);
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+.smart-h {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 0.3rem;
+}
+.smart-d { font-size: 0.72rem; color: var(--dark-2); line-height: 1.5; margin-bottom: 0.4rem; }
+.smart-kpi {
+  display: inline-block;
+  padding: 0.1rem 0.45rem;
+  background: var(--rose-light);
+  color: var(--rose-deep);
+  border-radius: 100px;
+  font-size: 0.6rem;
+  font-weight: 600;
+}
+
+/* ── RISK MATRIX ──────────────────────────────── */
+.risk-table th { font-size: 0.66rem; }
+.risk-prob, .risk-imp {
+  display: inline-block;
+  min-width: 60px;
+  text-align: center;
+  padding: 0.12rem 0.5rem;
+  border-radius: 100px;
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+.rp-h { background: #fee2e2; color: #dc2626; }
+.rp-m { background: #fef9c3; color: #a16207; }
+.rp-l { background: #dcfce7; color: #15803d; }
+
+/* ── BACKLOG ──────────────────────────────────── */
+.backlog-item {
+  display: grid;
+  grid-template-columns: 60px 1fr 90px 90px 70px;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.72rem;
+}
+.backlog-item:last-child { border-bottom: none; }
+.bl-id {
+  font-family: 'DM Sans', monospace;
+  font-size: 0.66rem;
+  color: var(--rose-deep);
+  font-weight: 600;
+}
+.bl-title { color: var(--dark); }
+.bl-meta { font-size: 0.66rem; color: var(--muted); text-align: center; }
+.bl-pts {
+  display: inline-block;
+  padding: 0.12rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  background: var(--cream);
+  color: var(--dark);
+  border: 1px solid var(--border);
+}
+.prio {
+  display: inline-block;
+  padding: 0.08rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.58rem;
+  font-weight: 700;
+}
+.p0 { background: #fee2e2; color: #dc2626; }
+.p1 { background: #fef9c3; color: #a16207; }
+.p2 { background: #dbeafe; color: #1d4ed8; }
+
+/* ── FINANCIAL CHART ──────────────────────────── */
+.fin-chart {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  margin: 0.6rem 0 1rem;
+}
+.legend {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.6rem;
+}
+.legend-i {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.66rem;
+  color: var(--dark-2);
+}
+.legend-sw {
+  width: 10px; height: 10px; border-radius: 2px;
+}
+
+/* ── PDF EXPORT BUTTON ────────────────────────── */
+.pdf-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 200;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.1rem;
+  background: var(--dark);
+  color: var(--white);
+  border: none;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(29, 29, 27, 0.18), 0 2px 6px rgba(192, 0, 58, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.pdf-fab::before {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: var(--rose);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.pdf-fab:hover {
+  background: var(--rose-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(192, 0, 58, 0.22), 0 3px 8px rgba(29, 29, 27, 0.12);
+}
+.pdf-fab:active { transform: translateY(0); }
+.pdf-fab .pdf-fab-hint {
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  margin-left: 0.4rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* ── PRINT ────────────────────────────────────── */
+@media print {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .page { page-break-after: always; }
+  .cover { page-break-after: always; }
+  .pdf-fab { display: none !important; }
+}
+@media (max-width: 900px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .stats-grid, .ue-grid { grid-template-columns: repeat(2,1fr); }
+  .two-col, .three-col, .hor-grid, .gc-grid, .smart-grid, .team-grid, .mkt-grid {
+    grid-template-columns: 1fr;
+  }
+  .backlog-item { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sb-logo">
+    <svg viewBox="115 90 610 420" width="48" height="34" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg1" x1="270" y1="499" x2="270" y2="95" gradientTransform="translate(796 4) rotate(-179.4) scale(.93 -1) skewX(-.09)" gradientUnits="userSpaceOnUse"><stop offset=".32" stop-color="#f0b5c9"/><stop offset="1" stop-color="#f8cdbc"/></linearGradient><linearGradient id="lg2" x1="532" y1="98" x2="532" y2="502" gradientTransform="translate(796 4) rotate(-179.4) scale(.93 -1) skewX(-.09)" gradientUnits="userSpaceOnUse"><stop offset=".22" stop-color="#efb4c8"/><stop offset="1" stop-color="#f8cebd"/></linearGradient></defs><path fill="url(#lg1)" d="M366.79,295.67v202.9s107.68,0,107.68,0v-202.9c0-61.83,27.27-87.96,67.49-87.96,40.19,0,67.49,26.14,67.49,87.96v202.9s107.68,0,107.68,0v-202.9c0-131.59-70.36-198.97-175.18-198.97-104.82,0-175.18,66.6-175.18,198.97Z"/><path fill="url(#lg2)" d="M124.74,295.67v202.9s107.68,0,107.68,0v-202.9c0-61.83,27.27-87.96,67.49-87.96,40.19,0,67.49,26.14,67.49,87.96v202.9s107.68,0,107.68,0v-202.9c0-131.59-70.36-198.97-175.18-198.97-104.82,0-175.18,66.6-175.18,198.97Z"/></svg>
+    <div style="margin-top:0.4rem">Lumia<span>.</span></div>
+  </div>
+  <div class="sb-sub">Business Plan · Jalon 2</div>
+  <ul class="sb-nav">
+    <li><a href="#cover"     class="nav-link active"><span class="nav-num">00</span>Couverture</a></li>
+    <li><a href="#intro"     class="nav-link"><span class="nav-num">—</span>Introduction</a></li>
+    <li><a href="#contexte"  class="nav-link"><span class="nav-num">01</span>Contexte &amp; opportunité</a></li>
+    <li><a href="#cibles"    class="nav-link"><span class="nav-num">02</span>Cibles &amp; valeur</a></li>
+    <li><a href="#strategie" class="nav-link"><span class="nav-num">03</span>Stratégie</a></li>
+    <li><a href="#roadmap"   class="nav-link"><span class="nav-num">04</span>Roadmap</a></li>
+    <li><a href="#equipe"    class="nav-link"><span class="nav-num">05</span>Équipe &amp; gouvernance</a></li>
+    <li><a href="#chiffrage" class="nav-link"><span class="nav-num">06</span>Chiffrage</a></li>
+    <li><a href="#finance"   class="nav-link"><span class="nav-num">07</span>Financement &amp; modèle</a></li>
+    <li><a href="#synthese"  class="nav-link"><span class="nav-num">08</span>Synthèse &amp; suites</a></li>
+    <li style="margin-top:0.8rem;padding-top:0.6rem;border-top:1px solid rgba(255,255,255,0.08)">
+      <a href="Dossier-principal.html" class="nav-link" style="color:var(--rose);font-weight:500">← Dossier Jalon 1</a>
+    </li>
+    <li><a href="business-model.html" class="nav-link" style="color:var(--rose);font-weight:500">← Business Model</a></li>
+  </ul>
+  <div class="sb-footer">MyDigitalSchool<br>MBA 2024–2026<br>Jalon 2 · Fin M1</div>
+</nav>
+
+<!-- BOUTON EXPORT PDF (flottant, masqué à l'impression) -->
+<button type="button" class="pdf-fab" onclick="window.print()" aria-label="Exporter le business plan en PDF" title="Ouvre la boîte de dialogue d'impression du navigateur · Choisir « Enregistrer en PDF »">
+  Exporter en PDF
+  <span class="pdf-fab-hint">Cmd / Ctrl + P</span>
+</button>
+
+<main class="main">
+
+<!-- ══════════════════════════════════════════════════
+     COVER
+     ══════════════════════════════════════════════════ -->
+<section id="cover" class="cover">
+  <div class="cover-blob blob-1"></div>
+  <div class="cover-blob blob-2"></div>
+  <div class="cover-blob blob-3"></div>
+  <div class="cover-inner">
+    <svg viewBox="115 90 610 420" width="80" height="56" style="margin-bottom:1rem;opacity:0.9" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="clg1" x1="270" y1="499" x2="270" y2="95" gradientTransform="translate(796 4) rotate(-179.4) scale(.93 -1) skewX(-.09)" gradientUnits="userSpaceOnUse"><stop offset=".32" stop-color="#f0b5c9"/><stop offset="1" stop-color="#f8cdbc"/></linearGradient><linearGradient id="clg2" x1="532" y1="98" x2="532" y2="502" gradientTransform="translate(796 4) rotate(-179.4) scale(.93 -1) skewX(-.09)" gradientUnits="userSpaceOnUse"><stop offset=".22" stop-color="#efb4c8"/><stop offset="1" stop-color="#f8cebd"/></linearGradient></defs><path fill="url(#clg1)" d="M366.79,295.67v202.9s107.68,0,107.68,0v-202.9c0-61.83,27.27-87.96,67.49-87.96,40.19,0,67.49,26.14,67.49,87.96v202.9s107.68,0,107.68,0v-202.9c0-131.59-70.36-198.97-175.18-198.97-104.82,0-175.18,66.6-175.18,198.97Z"/><path fill="url(#clg2)" d="M124.74,295.67v202.9s107.68,0,107.68,0v-202.9c0-61.83,27.27-87.96,67.49-87.96,40.19,0,67.49,26.14,67.49,87.96v202.9s107.68,0,107.68,0v-202.9c0-131.59-70.36-198.97-175.18-198.97-104.82,0-175.18,66.6-175.18,198.97Z"/></svg>
+    <div class="cover-school">MyDigitalSchool · MBA 2024–2026 · My Digital Start-up</div>
+    <h1 class="cover-title">Lumia<span class="dot">.</span></h1>
+    <p class="cover-tagline">« L'assistant qui pense à ta place »</p>
+    <div class="cover-rule"></div>
+    <div class="cover-sub">Business Plan · Jalon 2 Cadrage &amp; préproduction</div>
+    <div class="cover-team">Antonin · Maëlane · Issa</div>
+    <a href="https://vocal-assistant-two.vercel.app" target="_blank" class="btn-mvp">Voir le MVP live</a>
+    <a href="Dossier-principal.html" class="btn-mvp" style="background:transparent;border:1px solid var(--rose);color:var(--rose);margin-left:0.6rem">Dossier Jalon 1</a>
+    <button type="button" onclick="window.print()" class="btn-mvp" style="background:transparent;border:1px solid var(--rose);color:var(--rose);margin-left:0.6rem;font-family:var(--font-body);cursor:pointer">Exporter en PDF</button>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     INTRODUCTION
+     ══════════════════════════════════════════════════ -->
+<section id="intro" class="page">
+<div class="page-inner">
+  <div class="stag">Introduction</div>
+  <h2 class="stitle">Du « GO » à la phase de cadrage</h2>
+
+  <div class="edito">
+    <div class="edito-lbl">Édito du Jalon 2</div>
+    <p>« Le Jalon 1 nous a permis d'obtenir le GO du jury sur le potentiel entrepreneurial de Lumia. Ce business plan ne réécrit pas ce qui a déjà été démontré : il le structure, le chiffre et le projette dans le temps. L'enjeu de cette phase de cadrage est de transformer une intuition validée en une feuille de route opérationnelle, chiffrée et défendable. Ce que vous allez lire est notre engagement collectif sur 24 mois. »</p>
+    <div class="edito-sig">— Antonin (Entrepreneuriat &amp; Digital Business) · au nom de l'équipe Lumia</div>
+  </div>
+
+  <div class="prose">
+    <p>Le Jalon 1 a posé les fondations : un besoin documenté (la charge mentale des femmes actives 25-40 ans), une proposition de valeur testée (assistant vocal IA proactif), un MVP en production (<a href="https://vocal-assistant-two.vercel.app" target="_blank" style="color:var(--rose-deep);text-decoration:underline">vocal-assistant-two.vercel.app</a>), un business model unitaire viable (60% de marge brute, seuil de rentabilité à 400 abonnés). Le jury a validé cette première étape sans demande de pivot majeur.</p>
+    <p>Le Jalon 2 prend le relais avec une mission claire&nbsp;: <strong>structurer la préproduction</strong>. Concrètement, cela signifie chiffrer chaque dimension du projet (dev, design, marketing, data, conformité), poser une roadmap réaliste sur 6 à 24 mois, organiser la gouvernance d'équipe, et identifier les sources de financement permettant de tenir cette trajectoire. Aucun élément n'est laissé à l'intuition : tous les chiffres sont sourcés et justifiés.</p>
+    <p>Ce document est volontairement <strong>actionnable</strong>. Il sert à la fois de référentiel pour l'équipe, de support de discussion avec d'éventuels partenaires et investisseurs, et d'engagement vis-à-vis du jury Jalon 2. Les zones d'incertitude résiduelles sont identifiées en fin de dossier, avec les pistes prévues pour le Jalon 3.</p>
+  </div>
+
+  <div class="h3">Ce qui a changé depuis le Jalon 1</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Dimension</th><th>État Jalon 1</th><th>Évolution Jalon 2</th></tr></thead>
+      <tbody>
+        <tr><td>Proposition de valeur</td><td>Assistant vocal IA proactif (2 niveaux)</td><td><span class="badge bg-green">Confirmée</span> Pas de pivot, raffinement du positionnement « réducteur de charge mentale »</td></tr>
+        <tr><td>Cibles</td><td>Femmes actives 25-40 ans + alternants</td><td><span class="badge bg-green">Confirmées</span> Hiérarchisation explicite cœur / primaire / secondaire</td></tr>
+        <tr><td>Business model</td><td>Freemium + Premium 9,99€/mois</td><td><span class="badge bg-yellow">Affiné</span> Ajout plan famille V2 (14,99€) et licences B2B V3</td></tr>
+        <tr><td>Chiffrage</td><td>Unit economics validées</td><td><span class="badge bg-rose">Nouveau</span> Chiffrage complet 24 mois par filière</td></tr>
+        <tr><td>Roadmap</td><td>Vision V1 → V3 sur 3 ans</td><td><span class="badge bg-rose">Nouveau</span> Roadmap opérationnelle 24 mois avec dépendances inter-métiers</td></tr>
+        <tr><td>Gouvernance</td><td>Rôles répartis informellement</td><td><span class="badge bg-rose">Nouveau</span> Rituels formalisés, RACI, outils, reporting</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <span class="callout-label">Note de lecture</span>
+    <span>Le business plan est structuré en 8 chapitres alignés sur la grille d'évaluation Jalon 2 (annexe MyDigitalSchool). Chaque chapitre ouvre sur un édito rédigé par le ou les responsables de la dimension concernée, conformément à l'attendu du guide de référence.</span>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CHAPITRE 1 — CONTEXTE & OPPORTUNITÉ
+     ══════════════════════════════════════════════════ -->
+<section id="contexte" class="page">
+<div class="page-inner">
+  <div class="stag">01 Contexte &amp; opportunité</div>
+  <h2 class="stitle">Activité, environnement et opportunité de marché</h2>
+
+  <div class="edito">
+    <div class="edito-lbl">Édito · Contexte</div>
+    <p>« Le marché ne se contente plus d'attendre. Les usages de l'IA ont explosé en moins d'un an et la conversation vocale devient le standard d'interaction. C'est dans ce contexte que Lumia se positionne, non pas comme une nouvelle app de productivité, mais comme une réponse à un problème vieux comme le foyer&nbsp;: la charge mentale. Notre opportunité ne tient pas d'un effet de mode : elle tient d'un alignement rare entre besoin documenté, maturité technologique et fenêtre concurrentielle ouverte. »</p>
+    <div class="edito-sig">— Antonin · Entrepreneuriat &amp; Digital Business</div>
+  </div>
+
+  <!-- 1.1 L'ACTIVITÉ -->
+  <div class="h3">1.1 L'activité Lumia en une page</div>
+  <div class="prose">
+    <p>Lumia est un assistant de vie conversationnel basé sur l'IA générative, accessible en application web mobile-first et bientôt en application native. Son cœur fonctionnel repose sur deux niveaux de proactivité&nbsp;: la <strong>détection explicite</strong> (extraction d'intentions dans la conversation vocale, par exemple « on n'a plus de café ») et l'<strong>apprentissage des cycles</strong> de consommation et d'habitudes (rappels anticipés calculés à partir de l'historique).</p>
+    <p>Le MVP est en production depuis février 2025 et regroupe à ce stade&nbsp;: la reconnaissance vocale française, l'interprétation Gemini 2.5 Flash, la création d'événements et de plans multi-étapes, un calendrier 4 vues (jour / semaine / mois / année) et la persistance Supabase. Le Jalon 2 acte le passage de ce MVP de validation vers une <strong>V1 commercialisable</strong> intégrant authentification, RLS, notifications push proactives, modules courses et conformité RGPD complète.</p>
+  </div>
+
+  <div class="stats-grid" style="margin-top:1rem">
+    <div class="stat accent"><div class="stat-n">2025</div><div class="stat-l">Lancement V1 Lumia</div><div class="stat-s">MVP live sur vocal-assistant-two.vercel.app</div></div>
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l">Membres dans l'équipe (MBA mixte)</div><div class="stat-s">EDB · UXUI · DFS</div></div>
+    <div class="stat"><div class="stat-n">24 mois</div><div class="stat-l">Horizon couvert par ce business plan</div><div class="stat-s">2025–2027 · V1 → V3</div></div>
+  </div>
+
+  <!-- 1.2 MARCHÉ -->
+  <div class="h3">1.2 Environnement marché &amp; tendances sectorielles</div>
+  <p class="intro-text">Trois courbes structurent l'environnement de Lumia&nbsp;: l'adoption massive de l'IA grand public, la persistance documentée de la charge mentale, et la saturation des outils de productivité classiques.</p>
+
+  <div class="stats-grid">
+    <div class="stat accent"><div class="stat-n">+121%</div><div class="stat-l">Revenus des apps IA en Europe en 6 mois</div><div class="stat-s">Sensor Tower · State of AI Apps 2025</div></div>
+    <div class="stat"><div class="stat-n">59%</div><div class="stat-l">Français utilisateurs d'IA générative (76% chez les 18-34 ans)</div><div class="stat-s">We Are Social · Digital Report France 2025</div></div>
+    <div class="stat"><div class="stat-n">75%</div><div class="stat-l">3 femmes sur 4 en couple gèrent seules le quotidien du foyer</div><div class="stat-s">Fréquence Médicale 2024 · INSEE</div></div>
+    <div class="stat"><div class="stat-n">92,5%</div><div class="stat-l">9 femmes sur 10 disent que la charge mentale freine leur carrière</div><div class="stat-s">FairChore 2026</div></div>
+    <div class="stat"><div class="stat-n">2,18%</div><div class="stat-l">Conversion médiane freemium → premium à J+35</div><div class="stat-s">RevenueCat · State of Subscription Apps 2025</div></div>
+    <div class="stat accent"><div class="stat-n">3,1 M</div><div class="stat-l">Femmes actives 25-40 ans avec enfants en France (marché adressable)</div><div class="stat-s">INSEE 2025</div></div>
+  </div>
+
+  <div class="h4">Tendances sectorielles structurantes</div>
+  <div class="mkt-grid">
+    <div class="mkt-block">
+      <h3>IA conversationnelle vocale</h3>
+      <p>L'usage vocal des LLM passe du « gadget » au standard d'interaction. ChatGPT a dépassé 1 milliard de téléchargements fin 2024 et la fonction vocale est utilisée par 38% des utilisateurs mensuels. La maîtrise du français conversationnel est désormais à parité avec l'anglais sur les modèles Gemini 2.5 et GPT-4o.</p>
+      <span class="mkt-tag">Sensor Tower · OpenAI 2025</span>
+    </div>
+    <div class="mkt-block accent">
+      <h3>Charge mentale &amp; bien-être familial</h3>
+      <p>Sujet désormais traité hors des cercles militants&nbsp;: presse mainstream, dispositifs RH, contenus TikTok à audience millionnaire. La QVT entre dans les budgets RH structurés des grandes entreprises (1,8 Md€ en France en 2025, +14% YoY).</p>
+      <span class="mkt-tag">ANACT 2025 · Malakoff Humanis</span>
+    </div>
+    <div class="mkt-block">
+      <h3>Saturation productivité classique</h3>
+      <p>Todoist, Notion, Things, Asana&nbsp;: les leaders historiques croissent moins vite que la moyenne du sous-secteur. Le pain point identifié est unanime&nbsp;: ces outils demandent une discipline de saisie que les utilisateurs surchargés n'ont plus.</p>
+      <span class="mkt-tag">App Annie 2025</span>
+    </div>
+    <div class="mkt-block">
+      <h3>Régulation IA en accélération</h3>
+      <p>IA Act européen entré en vigueur progressivement (2024-2027). Pour une app destinée au grand public traitant des données comportementales, la conformité est désormais un pré-requis commercial, pas une option différenciante. Investissement à intégrer dès la conception.</p>
+      <span class="mkt-tag">Commission Européenne 2024-2025</span>
+    </div>
+  </div>
+
+  <!-- 1.3 OPPORTUNITÉ -->
+  <div class="h3">1.3 Crédibilité du positionnement &amp; opportunité quantifiée</div>
+  <div class="prose">
+    <p>Le marché adressable français (SAM) est composé de 3,1 millions de femmes actives entre 25 et 40 ans avec enfant(s). Notre cible « cœur » est plus resserrée&nbsp;: les femmes en charge principale du foyer, urbaines/péri-urbaines, CSP+, équipées smartphone, à fort taux d'usage des apps de service (~1,4 M de personnes). À cela s'ajoute notre cible « primaire » freemium : les 660 000 alternants du supérieur (chiffre MESR-SIES 2025, +14% en 2 ans).</p>
+    <p>Le seuil de rentabilité opérationnelle de Lumia se situe à <strong>400 abonnés Premium</strong>, soit 0,013% du SAM. Cet objectif modeste en V1 a été volontairement calibré pour pouvoir être atteint sans dépendre d'un financement externe massif. L'enjeu de la V1 n'est pas la conquête de marché, mais la <strong>preuve unitaire</strong>&nbsp;: démontrer que la rétention, l'ARPU et la marge brute tiennent leurs promesses sur une cohorte réelle.</p>
+  </div>
+
+  <div class="dark-box">
+    <strong>Notre pari documenté</strong> · Avec 3,1 millions de personnes dans notre marché adressable et un seuil de rentabilité à 400 abonnés, nous avons une marge de manœuvre considérable. La question n'est pas « est-ce qu'il y a un marché&nbsp;? »&nbsp;: la réponse est documentée par six sources publiques. La question est « combien de temps nous faut-il pour que la rétention prouve la valeur unitaire&nbsp;? ». C'est l'objet du Jalon 2.
+  </div>
+
+  <div class="h3">1.4 Lien avec le travail mené en Jalon 1</div>
+  <div class="prose">
+    <p>Ce chapitre s'appuie directement sur le <a href="Dossier-principal.html#veille" style="color:var(--rose-deep);text-decoration:underline">dossier technique Jalon 1</a>, en particulier les sections « Veille stratégique », « Étude de marché », « Analyse concurrentielle » et « SWOT ». Les éléments présentés ici ne sont pas une redite&nbsp;: ils retiennent uniquement les chiffres et conclusions qui structurent la décision business du Jalon 2. La synthèse complète de l'analyse marché (mapping concurrentiel, 65 questionnaires, interviews experts, tests utilisateurs) reste consultable dans le dossier de Jalon 1.</p>
+  </div>
+
+  <div class="info-bar">
+    <strong>Conclusion du chapitre 1.</strong> Le contexte sectoriel, l'environnement réglementaire, l'évolution des usages et la documentation chiffrée du besoin convergent. Le projet Lumia n'arrive ni trop tôt (l'IA conversationnelle est mature), ni trop tard (aucun acteur ne couvre la proactivité sur le foyer). Le positionnement est crédible, l'opportunité est quantifiée.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CHAPITRE 2 — CIBLES & PROPOSITION DE VALEUR
+     ══════════════════════════════════════════════════ -->
+<section id="cibles" class="page">
+<div class="page-inner">
+  <div class="stag">02 Cibles &amp; proposition de valeur</div>
+  <h2 class="stitle">Qui on sert, pourquoi, et comment on se différencie</h2>
+
+  <div class="edito">
+    <div class="edito-lbl">Édito · Cibles &amp; valeur</div>
+    <p>« Les cibles de Lumia ne se définissent pas seulement par leur âge ou leur revenu. Elles se définissent par un état émotionnel commun&nbsp;: l'épuisement silencieux de ceux qui portent la charge de coordination du quotidien. Notre proposition de valeur n'est pas une fonctionnalité, c'est une promesse&nbsp;: vous ne porterez plus seul ce que personne ne voit. Tout le reste — la voix, l'IA, les notifications — découle de cette promesse. »</p>
+    <div class="edito-sig">— Maëlane · UX/UI Design · au nom de l'équipe</div>
+  </div>
+
+  <!-- 2.1 HIÉRARCHIE DES CIBLES -->
+  <div class="h3">2.1 Hiérarchie des cibles</div>
+  <p class="intro-text">Construction de la hiérarchie cœur / primaire / secondaire à partir des 65 questionnaires terrain et des 10 interviews exploratoires menés au Jalon 1.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Niveau</th><th>Profil</th><th>Volume estimé (FR)</th><th>Modèle</th><th>Pourquoi cette priorité</th></tr></thead>
+      <tbody>
+        <tr class="row-lumia">
+          <td><span class="badge bg-rose">Cœur</span></td>
+          <td>Femmes actives 28-40 ans, CSP+, 1-2 enfants, urbaines/péri-urbaines</td>
+          <td class="num-td">~1,4 M</td>
+          <td>Premium 9,99€/mois</td>
+          <td>Plus forte verbalisation du pain point, capacité à payer, willingness to pay validée à 78% en interviews</td>
+        </tr>
+        <tr>
+          <td><span class="badge bg-rose">Primaire</span></td>
+          <td>Femmes actives 25-35 ans, 0 enfant, planificatrices intensives (couple, sport, vie sociale)</td>
+          <td class="num-td">~1,7 M</td>
+          <td>Premium 9,99€/mois</td>
+          <td>Convertibles à plus court terme, plus digital-native, levier de viralité TikTok</td>
+        </tr>
+        <tr>
+          <td><span class="badge bg-yellow">Secondaire</span></td>
+          <td>Alternants/étudiants supérieurs 18-25 ans</td>
+          <td class="num-td">~660 K</td>
+          <td>Freemium · 3 req IA/sem</td>
+          <td>Faible capacité de paiement immédiat mais vivier d'abonnés futurs + bouche-à-oreille zéro coût</td>
+        </tr>
+        <tr>
+          <td><span class="badge bg-blue">Future V2-V3</span></td>
+          <td>Couples co-gestionnaires foyer · DRH entreprises QVT · Universités</td>
+          <td class="num-td">B2B2C</td>
+          <td>Plan famille 14,99€ · Licences B2B</td>
+          <td>Ouverts après preuve de rétention V1 et NPS &gt; 40</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2.2 PERSONAS -->
+  <div class="h3">2.2 Buyer personas synthétiques</div>
+  <p class="intro-text">Personas détaillés disponibles dans le <a href="Dossier-principal.html#personas" style="color:var(--rose-deep);text-decoration:underline">dossier Jalon 1</a>. Synthèse opérationnelle ci-dessous.</p>
+
+  <div class="two-col">
+    <div class="info-box" style="background:var(--rose-ultra);border-color:var(--rose)">
+      <h4 style="color:var(--rose-deep)">Clara · 32 ans · Persona cœur (Premium)</h4>
+      <p><strong>Job-to-be-done&nbsp;:</strong> « Aide-moi à porter la charge de coordination du foyer sans que je doive tout configurer ni rien oublier. »</p>
+      <p style="margin-top:0.4rem"><strong>Pains principaux&nbsp;:</strong> charge mentale chronique, conjoint « bienveillant mais aveugle », outils existants abandonnés (Notion, Todoist, Google Agenda).</p>
+      <p style="margin-top:0.4rem"><strong>Gains attendus&nbsp;:</strong> dormir sans liste mentale, lâcher prise le week-end, sentiment d'être épaulée.</p>
+      <p style="margin-top:0.4rem"><strong>Déclencheur d'achat&nbsp;:</strong> une suggestion proactive juste à temps dans les 7 premiers jours.</p>
+      <p style="margin-top:0.4rem"><strong>WTP validée&nbsp;:</strong> 9,99€/mois confirmé en interviews (n=12, refus à 14,99€).</p>
+    </div>
+    <div class="info-box" style="background:var(--purple-light);border-color:var(--purple)">
+      <h4 style="color:#6d28d9">Thomas · 23 ans · Persona freemium</h4>
+      <p><strong>Job-to-be-done&nbsp;:</strong> « Évite-moi d'oublier les échéances quand l'école, le boulot et la coloc se mélangent. »</p>
+      <p style="margin-top:0.4rem"><strong>Pains principaux&nbsp;:</strong> deadlines simultanées école+entreprise, factures oubliées, budget perpétuellement flou.</p>
+      <p style="margin-top:0.4rem"><strong>Gains attendus&nbsp;:</strong> outil aussi simple que parler à un pote, gratuit pour tester.</p>
+      <p style="margin-top:0.4rem"><strong>Déclencheur d'usage&nbsp;:</strong> recommandation pair-à-pair en coloc, 1ʳᵉ valeur en &lt; 2 min.</p>
+      <p style="margin-top:0.4rem"><strong>Conversion projetée&nbsp;:</strong> 5 ans plus tard, devient Clara.</p>
+    </div>
+  </div>
+
+  <!-- 2.3 VALUE PROPOSITION CANVAS -->
+  <div class="h3">2.3 Value Proposition Canvas (Clara · cible cœur)</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Profil client</th><th>Réponse Lumia</th><th>Niveau de preuve</th></tr></thead>
+      <tbody>
+        <tr><td>Gérer le foyer sans sacrifier sa carrière</td><td>Coordination quotidienne assistée, Clara n'a plus à tout porter mentalement</td><td><span class="badge bg-green">Validé tests</span></td></tr>
+        <tr><td>Anticiper sans tout planifier manuellement</td><td>Apprentissage des cycles + suggestion proactive avant la formulation</td><td><span class="badge bg-yellow">À renforcer V1</span></td></tr>
+        <tr><td>Pain · oublis fréquents et anxiété</td><td>Détection des tâches implicites dans la conversation vocale</td><td><span class="badge bg-green">MVP fonctionnel</span></td></tr>
+        <tr><td>Pain · outils trop complexes à maintenir</td><td>Zéro configuration. Lumia observe et apprend. Pas besoin de l'alimenter.</td><td><span class="badge bg-green">Validé interviews</span></td></tr>
+        <tr><td>Pain · conjoint qui ne voit pas ce qu'il y a à faire</td><td>Agenda familial partagé + attribution automatique des tâches au conjoint</td><td><span class="badge bg-blue">Roadmap V1</span></td></tr>
+        <tr><td>Pain · culpabilité maternelle permanente</td><td>Ton bienveillant. Lumia ne juge pas, ne sanctionne pas.</td><td><span class="badge bg-green">Style guide validé</span></td></tr>
+        <tr><td>Gain · vrai lâcher prise le week-end</td><td>Détection surcharge + proposition de décompression</td><td><span class="badge bg-blue">Roadmap V1</span></td></tr>
+        <tr><td>Gain · harmonie familiale</td><td>Coordination automatique, moins de conflits « qui fait quoi »</td><td><span class="badge bg-blue">Roadmap V2</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2.4 GOLDEN CIRCLE -->
+  <div class="h3">2.4 Golden Circle</div>
+  <div class="gc-grid">
+    <div class="gc gc-why">
+      <div class="gc-lbl">WHY · Pourquoi on existe</div>
+      <p>Parce que les personnes qui comptent le plus pour vous méritent que vous soyez présent, pas occupé à ne rien oublier. La charge mentale vole du temps et de la présence. On existe pour rendre ça à ceux qui en ont besoin.</p>
+    </div>
+    <div class="gc gc-how">
+      <div class="gc-lbl">HOW · Comment on le fait</div>
+      <p>En écoutant les conversations pour détecter les besoins (niveau 1) et en apprenant les cycles de consommation au fil du temps (niveau 2). Lumia agit via des notifications push proactives, au bon moment, sans qu'on lui demande. Pas de formulaire, pas de configuration. Juste une conversation.</p>
+    </div>
+    <div class="gc gc-what">
+      <div class="gc-lbl">WHAT · Ce qu'on fait</div>
+      <p>Un assistant vocal IA qui écoute, retient et anticipe. V1&nbsp;: chat vocal intelligent + gestion des courses automatique. V2-V3&nbsp;: agenda familial, tâches, enfants, budget.</p>
+    </div>
+  </div>
+
+  <!-- 2.5 POSITIONNEMENT -->
+  <div class="h3">2.5 Positionnement &amp; triangle</div>
+  <p class="intro-text">Le triangle de positionnement croise les trois acteurs structurants du marché de l'IA conversationnelle grand public sur deux axes différenciants&nbsp;: capacité d'anticipation et apprentissage des habitudes.</p>
+
+  <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1rem;margin:0.8rem 0 1.2rem">
+    <svg viewBox="0 0 760 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;font-family:var(--font-body)">
+      <!-- Triangle -->
+      <polygon points="380,40 110,310 650,310" fill="none" stroke="#ede5ea" stroke-width="2"/>
+      <!-- Sommets : axes -->
+      <text x="380" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="#c0003a">PROACTIVITÉ</text>
+      <text x="380" y="42" text-anchor="middle" font-size="9" fill="#8a8078">Anticipe sans qu'on demande</text>
+      <text x="80" y="330" text-anchor="start" font-size="12" font-weight="700" fill="#1d4ed8">CONVERSATION VOCALE</text>
+      <text x="80" y="344" text-anchor="start" font-size="9" fill="#8a8078">Comprend la voix naturelle</text>
+      <text x="680" y="330" text-anchor="end" font-size="12" font-weight="700" fill="#15803d">APPRENTISSAGE HABITUDES</text>
+      <text x="680" y="344" text-anchor="end" font-size="9" fill="#8a8078">Calcule les cycles personnels</text>
+      <!-- Zones concurrents -->
+      <!-- ChatGPT : conversation forte, proactivité faible, apprentissage faible -->
+      <circle cx="180" cy="270" r="36" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text x="180" y="270" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">ChatGPT</text>
+      <text x="180" y="284" text-anchor="middle" font-size="8" fill="#1d4ed8">Gemini</text>
+      <!-- Google / Apple Calendar : faible partout -->
+      <circle cx="380" cy="290" r="30" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="380" y="292" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">Google Cal</text>
+      <!-- Todoist / Notion : apprentissage 0, vocal 0 -->
+      <circle cx="540" cy="278" r="32" fill="#fef9c3" stroke="#a16207" stroke-width="1.5"/>
+      <text x="540" y="280" text-anchor="middle" font-size="10" font-weight="700" fill="#a16207">Todoist /</text>
+      <text x="540" y="292" text-anchor="middle" font-size="10" font-weight="700" fill="#a16207">Notion</text>
+      <!-- LUMIA au centre haut -->
+      <circle cx="380" cy="135" r="52" fill="#fce8ef" stroke="#c0003a" stroke-width="2.5"/>
+      <text x="380" y="132" text-anchor="middle" font-size="16" font-weight="700" font-family="DM Serif Display" fill="#c0003a">Lumia</text>
+      <text x="380" y="148" text-anchor="middle" font-size="9" fill="#c0003a">3 dimensions</text>
+      <text x="380" y="160" text-anchor="middle" font-size="9" fill="#c0003a">combinées</text>
+      <!-- Légende -->
+      <text x="380" y="200" text-anchor="middle" font-size="9" fill="#8a8078" font-style="italic">Lumia est le seul à conjuguer proactivité, conversation vocale naturelle et apprentissage des habitudes</text>
+    </svg>
+  </div>
+
+  <!-- Triangle de positionnement classique 2 axes -->
+  <div class="h4">Mapping concurrentiel à deux axes (rappel Jalon 1)</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Acteur</th><th>Apprend les habitudes</th><th>Anticipe sans demander</th><th>Vocal natif fr-FR</th><th>Notifications proactives</th><th>Positionnement</th></tr></thead>
+      <tbody>
+        <tr class="row-lumia"><td><strong>Lumia</strong></td><td><span class="badge bg-green">Oui</span></td><td><span class="badge bg-green">Oui</span></td><td><span class="badge bg-green">Oui</span></td><td><span class="badge bg-green">Oui</span></td><td>Réducteur charge mentale</td></tr>
+        <tr><td>ChatGPT / Gemini</td><td><span class="badge bg-red">Non</span></td><td><span class="badge bg-red">Non</span></td><td><span class="badge bg-green">Oui</span></td><td><span class="badge bg-red">Non</span></td><td>Assistant généraliste</td></tr>
+        <tr><td>Google Agenda</td><td><span class="badge bg-red">Non</span></td><td><span class="badge bg-red">Non</span></td><td><span class="badge bg-red">Non</span></td><td><span class="badge bg-yellow">Rappels manuels</span></td><td>Calendrier passif</td></tr>
+        <tr><td>Todoist / Notion</td><td><span class="badge bg-red">Non</span></td><td><span class="badge bg-red">Non</span></td><td><span class="badge bg-red">Non</span></td><td><span class="badge bg-yellow">Rappels manuels</span></td><td>Productivité saisie manuelle</td></tr>
+        <tr><td>Siri / Alexa</td><td><span class="badge bg-red">Non</span></td><td><span class="badge bg-red">Non</span></td><td><span class="badge bg-green">Oui</span></td><td><span class="badge bg-red">Non</span></td><td>Assistant vocal réactif</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 2.6 PREUVES -->
+  <div class="h3">2.6 Éléments de preuve recueillis</div>
+  <div class="three-col">
+    <div class="info-box">
+      <h4>Questionnaires</h4>
+      <p><strong>65 répondants</strong> (janv-fév 2025). 81% verbalisent spontanément la charge mentale comme problème majeur. 67% ont essayé au moins 2 outils de productivité abandonnés dans les 30 jours.</p>
+    </div>
+    <div class="info-box">
+      <h4>Interviews</h4>
+      <p><strong>10 interviews</strong> qualitatives (45 min en moyenne). 8/10 ont exprimé un intérêt fort pour le concept. 78% prêts à payer 9,99€/mois après démonstration MVP.</p>
+    </div>
+    <div class="info-box">
+      <h4>Tests MVP</h4>
+      <p><strong>13 sessions de test</strong> sur le MVP en production. NPS provisoire à 47 (échantillon non représentatif). Demande récurrente&nbsp;: agenda familial partagé (priorisé V1).</p>
+    </div>
+  </div>
+
+  <div class="info-bar">
+    <strong>Conclusion du chapitre 2.</strong> Les cibles sont identifiées, hiérarchisées et chiffrées. La proposition de valeur est formalisée (VPC + Golden Circle). Le positionnement est différenciant sur trois axes simultanés (proactivité, vocal, apprentissage), preuve qui sera centrale dans tout le storytelling marketing du chapitre suivant.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CHAPITRE 3 — STRATÉGIE DE DÉVELOPPEMENT
+     ══════════════════════════════════════════════════ -->
+<section id="strategie" class="page">
+<div class="page-inner">
+  <div class="stag">03 Stratégie de développement</div>
+  <h2 class="stitle">Stratégie commerciale, marketing &amp; produit</h2>
+
+  <div class="edito">
+    <div class="edito-lbl">Édito · Stratégie</div>
+    <p>« Notre stratégie repose sur un principe simple&nbsp;: la preuve avant l'échelle. On ne lance pas une campagne payante avant d'avoir validé la rétention sur 30 jours. On ne signe pas un partenaire B2B avant que le NPS dépasse 40. Chaque phase déverrouille la suivante par des indicateurs mesurables, pas par des intuitions. Cette logique se retrouve dans tous les piliers&nbsp;: produit, acquisition, conversion, fidélisation. »</p>
+    <div class="edito-sig">— Antonin · Entrepreneuriat &amp; Digital Business</div>
+  </div>
+
+  <!-- 3.1 STRATÉGIE GLOBALE -->
+  <div class="h3">3.1 Vision stratégique &amp; logique séquentielle</div>
+  <p class="intro-text">Lumia adopte une stratégie de croissance par paliers de preuve. Chaque V doit avoir validé ses KPIs avant de débloquer la suivante. Pas de fuite en avant.</p>
+
+  <div class="hor-grid">
+    <div class="hor hor-v1">
+      <span class="hor-badge">V1 · 2025</span>
+      <div class="hor-period">Validation</div>
+      <div class="hor-title">Prouver la valeur</div>
+      <p>Chat vocal + module courses automatique. 400 abonnés Premium. Validation du mécanisme de proactivité (détection + cycles).</p>
+      <ul><li>NPS &gt; 40</li><li>Rétention J30 &gt; 40%</li><li>Conversion &gt; 2,18%</li><li>CAC &lt; 5€</li></ul>
+    </div>
+    <div class="hor hor-v2">
+      <span class="hor-badge">V2 · 2026</span>
+      <div class="hor-period">Croissance</div>
+      <div class="hor-title">Passer à l'échelle</div>
+      <p>App native iOS/Android. Modules agenda familial + tâches ménagères. Plan famille 14,99€. 1 000 abonnés Premium.</p>
+      <ul><li>MRR &gt; 10 000€</li><li>LTV &gt; 80€</li><li>Churn &lt; 5%/mois</li></ul>
+    </div>
+    <div class="hor hor-v3">
+      <span class="hor-badge">V3 · 2027</span>
+      <div class="hor-period">Expansion B2B</div>
+      <div class="hor-title">Licences entreprises</div>
+      <p>Modules budget + gestion enfants. Licences universités &amp; QVT entreprises. Thomas devient point d'entrée institutionnel.</p>
+      <ul><li>1er contrat B2B signé</li><li>ARR &gt; 50 000€</li></ul>
+    </div>
+  </div>
+
+  <!-- 3.2 STRATÉGIE COMMERCIALE -->
+  <div class="h3">3.2 Stratégie commerciale · cycle de vie client complet</div>
+  <p class="intro-text">La stratégie commerciale couvre les 5 phases du cycle de vie&nbsp;: découverte, activation, conversion, fidélisation, recommandation. Chaque phase a un canal principal, un KPI cible et un point de bascule.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Phase</th><th>Canal principal</th><th>Mécanisme</th><th>KPI clé</th><th>Cible V1</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. Découverte</strong></td><td>TikTok organique + bouche-à-oreille</td><td>Contenus authentiques charge mentale, témoignages persona Clara</td><td>CPM organique / impressions</td><td>5k impressions/sem dès M3</td></tr>
+        <tr><td><strong>2. Activation</strong></td><td>Onboarding vocal 3 questions</td><td>1ʳᵉ suggestion proactive sous 24h</td><td>Activation J1 (≥ 1 interaction)</td><td>&gt; 60%</td></tr>
+        <tr class="row-hl"><td><strong>3. Conversion</strong></td><td>Trigger contextuel in-app</td><td>Proposition Premium à J+35 sur insight personnalisé</td><td>Taux de conversion F→P</td><td>&gt; 2,18% (médian RevenueCat)</td></tr>
+        <tr><td><strong>4. Fidélisation</strong></td><td>Notifications &amp; emails proactifs</td><td>Rappel doux si inactivité, détection surcharge</td><td>Rétention J30 &amp; J90</td><td>J30 &gt; 40% · J90 &gt; 25%</td></tr>
+        <tr><td><strong>5. Recommandation</strong></td><td>Parrainage in-app + relations presse</td><td>1 mois offert / filleul, story Lumia média féminins</td><td>K-factor &amp; NPS</td><td>K &gt; 0,3 · NPS &gt; 40</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3.3 STRATÉGIE MARKETING -->
+  <div class="h3">3.3 Stratégie marketing digital</div>
+
+  <div class="h4">Leviers prioritaires &amp; mix budgétaire 12 mois</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Levier</th><th>Phase d'activation</th><th>% budget marketing</th><th>Objectif</th><th>Responsable</th></tr></thead>
+      <tbody>
+        <tr><td>TikTok organique</td><td>M1 → M24</td><td class="num-td">25%</td><td>Contenus quotidiens (Clara), inbound femmes 28-40</td><td>Antonin</td></tr>
+        <tr><td>TikTok Ads</td><td>M3 → M18 (si CPA &lt; 8€)</td><td class="num-td">35%</td><td>Scale uniquement après preuve organique</td><td>Antonin</td></tr>
+        <tr class="row-hl"><td>SEO + contenu blog</td><td>M2 → M24</td><td class="num-td">15%</td><td>2 articles/mois, mots-clés « charge mentale », « agenda famille »</td><td>Antonin</td></tr>
+        <tr><td>Partenariats prescripteurs</td><td>M4 → M24</td><td class="num-td">10%</td><td>Coachs de vie, psys, influenceuses parentalité</td><td>Antonin</td></tr>
+        <tr><td>Marketing automation (emailing)</td><td>M3 → M24</td><td class="num-td">10%</td><td>Drip onboarding J0-J30, séquence conversion J28-J35</td><td>Antonin</td></tr>
+        <tr><td>Relations presse</td><td>M6 + M12 (jalons)</td><td class="num-td">5%</td><td>Madame Figaro, Maman Travaille, Tech&amp;Co</td><td>Antonin</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h4">Calendrier éditorial type (mois courant)</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Semaine</th><th>Format</th><th>Sujet pilier</th><th>Canal</th><th>CTA</th></tr></thead>
+      <tbody>
+        <tr><td>S1</td><td>TikTok 30s</td><td>« La liste mentale du dimanche soir »</td><td>TikTok organique + repost Insta Reels</td><td>Lien bio MVP</td></tr>
+        <tr><td>S2</td><td>Article blog 1 200 mots</td><td>« 5 outils essayés et abandonnés : pourquoi&nbsp;? »</td><td>Blog Lumia + LinkedIn</td><td>Newsletter</td></tr>
+        <tr><td>S3</td><td>Carrousel Insta + TikTok</td><td>Témoignage Clara (avec accord)</td><td>Réseaux sociaux</td><td>Téléchargement</td></tr>
+        <tr><td>S4</td><td>Newsletter (drip)</td><td>« Cette semaine, Lumia a appris ces 3 choses »</td><td>Email à la base activée</td><td>Réactivation</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h4">Ligne éditoriale &amp; ton de marque</div>
+  <div class="prose">
+    <p>Lumia parle comme une amie posée qui sait écouter. Pas un robot, pas une coach motivationnelle. Le vocabulaire est concret (« courses », « bilan oublié », « samedi libre »), jamais corporate. Les contenus s'adressent à la personne, pas au foyer abstrait. <strong>Trois interdits éditoriaux&nbsp;:</strong> jamais culpabiliser, jamais survendre l'IA, jamais parler de « productivité » (mot anxiogène pour la cible).</p>
+  </div>
+
+  <!-- 3.4 STRATÉGIE PRODUIT -->
+  <div class="h3">3.4 Stratégie produit &amp; priorisation fonctionnelle</div>
+  <p class="intro-text">Synthèse de la roadmap produit V1 → V3. Détail technique dans le <a href="Dossier-principal.html#roadmap" style="color:var(--rose-deep);text-decoration:underline">dossier Jalon 1</a> et chapitre 4 ci-après.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Périmètre</th><th>V1 (2025)</th><th>V2 (2026)</th><th>V3 (2027)</th></tr></thead>
+      <tbody>
+        <tr><td>Chat vocal IA</td><td><span class="badge bg-green">Core</span></td><td>Multi-locuteur</td><td>Personnalité personnalisée</td></tr>
+        <tr><td>Détection cycles courses</td><td><span class="badge bg-green">Core</span></td><td>Liste partagée famille</td><td>Suggestions marchand partenaires</td></tr>
+        <tr><td>Agenda familial partagé</td><td><span class="badge bg-yellow">Beta</span></td><td><span class="badge bg-green">Core V2</span></td><td>Connecteur Workspace pro</td></tr>
+        <tr><td>Détection surcharge</td><td>Notification simple</td><td><span class="badge bg-green">Core V2</span></td><td>Recommandations bien-être</td></tr>
+        <tr><td>Module budget</td><td>—</td><td>Suivi simple</td><td><span class="badge bg-green">Core V3</span></td></tr>
+        <tr><td>Module enfants (activités, trajets)</td><td>—</td><td>Beta</td><td><span class="badge bg-green">Core V3</span></td></tr>
+        <tr><td>App native iOS/Android</td><td>—</td><td><span class="badge bg-green">Core V2</span></td><td>—</td></tr>
+        <tr><td>B2B (universités, QVT)</td><td>—</td><td>—</td><td><span class="badge bg-green">Core V3</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3.5 OBJECTIFS SMARTE -->
+  <div class="h3">3.5 Objectifs SMARTE 12 et 24 mois</div>
+  <div class="smart-grid">
+    <div class="smart-card">
+      <div class="smart-h">SMARTE 1 · Acquisition organique TikTok</div>
+      <div class="smart-d">Publier 4 vidéos / semaine sur le compte @lumia.app, atteindre 5 000 abonnés et 50k vues cumulées dans les 6 premiers mois post-lancement.</div>
+      <span class="smart-kpi">KPI · Abonnés TikTok</span> <span class="smart-kpi">CPM organique</span>
+    </div>
+    <div class="smart-card">
+      <div class="smart-h">SMARTE 2 · Acquisition payante &amp; CAC</div>
+      <div class="smart-d">Maintenir un CAC moyen &lt; 8€ sur les 12 premiers mois après activation des TikTok Ads, et un ratio LTV/CAC &gt; 3 sur cohorte M3.</div>
+      <span class="smart-kpi">KPI · CAC</span> <span class="smart-kpi">LTV/CAC</span>
+    </div>
+    <div class="smart-card">
+      <div class="smart-h">SMARTE 3 · Conversion freemium → premium</div>
+      <div class="smart-d">Atteindre 2,5% de conversion à J+35 sur la cohorte 6 premiers mois (vs 2,18% médian RevenueCat). 400 abonnés Premium fin M12.</div>
+      <span class="smart-kpi">KPI · Taux conversion</span> <span class="smart-kpi">Abonnés Premium</span>
+    </div>
+    <div class="smart-card">
+      <div class="smart-h">SMARTE 4 · Rétention &amp; NPS</div>
+      <div class="smart-d">Rétention J30 &gt; 40%, J90 &gt; 25% sur cohorte M3-M9. NPS mensuel &gt; 40 mesuré in-app via micro-enquête 1 question.</div>
+      <span class="smart-kpi">KPI · Rétention J30/J90</span> <span class="smart-kpi">NPS</span>
+    </div>
+    <div class="smart-card">
+      <div class="smart-h">SMARTE 5 · Revenus &amp; rentabilité unitaire</div>
+      <div class="smart-d">Atteindre 4 000€ de MRR fin M12 (scénario réaliste), seuil de rentabilité unitaire conservé à 400 abonnés (marge brute &gt; 60%).</div>
+      <span class="smart-kpi">KPI · MRR</span> <span class="smart-kpi">Marge brute</span>
+    </div>
+    <div class="smart-card">
+      <div class="smart-h">SMARTE 6 · Conformité &amp; RSE</div>
+      <div class="smart-d">RGPD &amp; IA Act 100% conformes à la mise en production V1 (audit blanc avant lancement). Accessibilité WCAG 2.1 AA sur les parcours clés.</div>
+      <span class="smart-kpi">KPI · Audit conformité</span> <span class="smart-kpi">Score WCAG</span>
+    </div>
+  </div>
+
+  <!-- 3.6 KPI DASHBOARD -->
+  <div class="h3">3.6 Tableau de bord KPI consolidé</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Catégorie</th><th>KPI</th><th>Cible M6</th><th>Cible M12</th><th>Cible M24</th><th>Fréquence</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="3">Acquisition</td><td>Abonnés TikTok</td><td class="num-td">1 500</td><td class="num-td">5 000</td><td class="num-td">25 000</td><td>Hebdo</td></tr>
+        <tr><td>Téléchargements MVP</td><td class="num-td">600</td><td class="num-td">3 500</td><td class="num-td">20 000</td><td>Hebdo</td></tr>
+        <tr><td>CAC blended (€)</td><td class="num-td">3</td><td class="num-td">5</td><td class="num-td">8</td><td>Mensuel</td></tr>
+        <tr><td rowspan="2">Activation</td><td>Activation J1</td><td class="num-td">55%</td><td class="num-td">60%</td><td class="num-td">65%</td><td>Hebdo</td></tr>
+        <tr><td>Wow moment J7</td><td class="num-td">25%</td><td class="num-td">35%</td><td class="num-td">45%</td><td>Hebdo</td></tr>
+        <tr><td rowspan="2">Conversion</td><td>Taux conversion F→P J+35</td><td class="num-td">1,8%</td><td class="num-td">2,5%</td><td class="num-td">3,2%</td><td>Mensuel</td></tr>
+        <tr><td>Abonnés Premium actifs</td><td class="num-td">120</td><td class="num-td">400</td><td class="num-td">1 000</td><td>Hebdo</td></tr>
+        <tr><td rowspan="2">Rétention</td><td>Rétention J30</td><td class="num-td">35%</td><td class="num-td">40%</td><td class="num-td">45%</td><td>Mensuel</td></tr>
+        <tr><td>Rétention J90</td><td class="num-td">20%</td><td class="num-td">25%</td><td class="num-td">30%</td><td>Mensuel</td></tr>
+        <tr><td rowspan="2">Revenus</td><td>MRR (€)</td><td class="num-td">1 200</td><td class="num-td">4 000</td><td class="num-td">10 000</td><td>Mensuel</td></tr>
+        <tr><td>Marge brute (%)</td><td class="num-td">58%</td><td class="num-td">60%</td><td class="num-td">62%</td><td>Mensuel</td></tr>
+        <tr><td rowspan="2">Qualité produit</td><td>NPS in-app</td><td class="num-td">35</td><td class="num-td">40</td><td class="num-td">45</td><td>Mensuel</td></tr>
+        <tr><td>Disponibilité (uptime)</td><td class="num-td">99,5%</td><td class="num-td">99,8%</td><td class="num-td">99,9%</td><td>Continu</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3.7 AJUSTEMENTS JALON 1 -->
+  <div class="h3">3.7 Ajustements issus des retours Jalon 1</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Retour jury / test</th><th>Action prise au Jalon 2</th><th>Impact sur la stratégie</th></tr></thead>
+      <tbody>
+        <tr><td>Manque de clarté sur la différenciation vs ChatGPT vocal</td><td>Ajout du triangle de positionnement 3-axes + storytelling « réducteur charge mentale »</td><td>Marketing : pivot du discours « assistant IA » → « réducteur charge mentale »</td></tr>
+        <tr><td>Doutes sur le coût Gemini à grande échelle</td><td>Architecture agnostique au LLM confirmée, migration Mistral prototypée (3 jours)</td><td>Stratégie de souveraineté numérique sortie comme axe de communication</td></tr>
+        <tr><td>Demande forte d'agenda familial partagé en tests</td><td>Priorisation V1 (passe de V2 à V1 beta)</td><td>Roadmap V1 enrichie : +120 j/h dev (cf. chapitre 6)</td></tr>
+        <tr><td>Préoccupation RGPD données familiales</td><td>Audit RGPD planifié avant V1, schéma de gouvernance data documenté</td><td>Conformité érigée en preuve commerciale et non charge</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 3.8 MATRICE DE RISQUES -->
+  <div class="h3">3.8 Matrice des risques &amp; plans d'atténuation</div>
+  <div class="tbl-wrap risk-table">
+    <table>
+      <thead><tr><th>Risque</th><th>Catégorie</th><th>Probabilité</th><th>Impact</th><th>Atténuation</th></tr></thead>
+      <tbody>
+        <tr><td>Coût API Gemini augmente significativement (+50%)</td><td>Technique</td><td><span class="risk-prob rp-m">Moyenne</span></td><td><span class="risk-imp rp-h">Fort</span></td><td>Architecture LLM-agnostique, migration Mistral prototypée, quota 300 req/mois inclus</td></tr>
+        <tr><td>TikTok organique ne décolle pas (&lt; 500 vues/vidéo M2)</td><td>Marketing</td><td><span class="risk-prob rp-m">Moyenne</span></td><td><span class="risk-imp rp-h">Fort</span></td><td>Activation TikTok Ads dès M3 sans attendre, A/B test 3 angles éditoriaux</td></tr>
+        <tr><td>CAC paid &gt; 10€ structurellement</td><td>Marketing</td><td><span class="risk-prob rp-m">Moyenne</span></td><td><span class="risk-imp rp-m">Modéré</span></td><td>Bascule sur prescripteurs (coachs, psys, influenceuses parentalité)</td></tr>
+        <tr><td>Churn Premium &gt; 8%/mois (vs 5% cible)</td><td>Produit</td><td><span class="risk-prob rp-m">Moyenne</span></td><td><span class="risk-imp rp-h">Fort</span></td><td>Sprint dédié rétention M6, programme parrainage activé dès M3</td></tr>
+        <tr><td>Concurrence directe lancée par GAFAM</td><td>Marché</td><td><span class="risk-prob rp-l">Faible</span></td><td><span class="risk-imp rp-h">Très fort</span></td><td>Pivot vers segment family/B2B QVT, défendabilité par data propriétaire cycles</td></tr>
+        <tr><td>Conformité RGPD/IA Act non atteinte au lancement</td><td>Réglementaire</td><td><span class="risk-prob rp-l">Faible</span></td><td><span class="risk-imp rp-h">Fort</span></td><td>Audit blanc obligatoire M-1 avant lancement V1, conseil juridique externalisé</td></tr>
+        <tr><td>Indisponibilité Supabase / Vercel critique</td><td>Technique</td><td><span class="risk-prob rp-l">Faible</span></td><td><span class="risk-imp rp-m">Modéré</span></td><td>SLA Vercel Pro souscrit V1, fallback localStorage en place sur le MVP</td></tr>
+        <tr><td>Départ d'un membre de l'équipe MBA</td><td>Humain</td><td><span class="risk-prob rp-l">Faible</span></td><td><span class="risk-imp rp-h">Fort</span></td><td>Documentation à jour, code reviews croisées, contributions traçables</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-bar">
+    <strong>Conclusion du chapitre 3.</strong> La stratégie Lumia est séquentielle, mesurée, et explicitement liée à des indicateurs de bascule. Chaque pari (organique avant paid, V1 avant V2, B2C avant B2B) est conditionné à des preuves intermédiaires. La matrice de risques couvre les 7 risques majeurs et propose pour chacun une réponse opérationnelle déjà planifiée dans la roadmap du chapitre suivant.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CHAPITRE 4 — ROADMAP & PLANIFICATION
+     ══════════════════════════════════════════════════ -->
+<section id="roadmap" class="page">
+<div class="page-inner">
+  <div class="stag">04 Roadmap &amp; planification</div>
+  <h2 class="stitle">Roadmap opérationnelle 24 mois</h2>
+
+  <div class="edito">
+    <div class="edito-lbl">Édito · Roadmap</div>
+    <p>« Un calendrier réaliste vaut mieux qu'un calendrier ambitieux. Cette roadmap est construite à partir de la capacité réelle de l'équipe (3 personnes en alternance), des dépendances inter-métiers identifiées, et de la nécessité absolue de prouver la rétention avant d'investir dans la croissance. Elle pourra être actualisée trimestriellement, mais ses jalons clés engagent l'équipe et conditionnent l'évaluation Jalon 3. »</p>
+    <div class="edito-sig">— Issa · MBA Développeur Full Stack · pilote planification technique</div>
+  </div>
+
+  <!-- 4.1 PHASES STRUCTURANTES -->
+  <div class="h3">4.1 Trois phases structurantes</div>
+  <div class="hor-grid">
+    <div class="hor hor-v1">
+      <span class="hor-badge">Phase 1 · Conception</span>
+      <div class="hor-period">M1 → M3</div>
+      <div class="hor-title">Cadrage &amp; specs</div>
+      <p>Finalisation des spécifications V1, validation de l'architecture cible, design system complet, recettage du MVP existant et préparation des sprints.</p>
+      <ul><li>Specs fonctionnelles V1 figées</li><li>Design system v1.0 publié</li><li>Backlog initial prêt</li></ul>
+    </div>
+    <div class="hor hor-v2">
+      <span class="hor-badge">Phase 2 · Production</span>
+      <div class="hor-period">M3 → M9</div>
+      <div class="hor-title">Build V1</div>
+      <p>Sprints de 2 semaines (Scrum), développement fonctionnalités V1, tests continus, intégration data, conformité RGPD/IA Act, mise en place infra production.</p>
+      <ul><li>6 sprints de 2 semaines</li><li>Couverture tests &gt; 70%</li><li>Audit conformité RGPD</li></ul>
+    </div>
+    <div class="hor hor-v3">
+      <span class="hor-badge">Phase 3 · Lancement</span>
+      <div class="hor-period">M9 → M24</div>
+      <div class="hor-title">Go-to-market &amp; itérations</div>
+      <p>Lancement public V1, campagne acquisition, mesure des KPIs, itérations produit, démarrage V2 (mobile native + plan famille).</p>
+      <ul><li>Lancement public M9</li><li>400 abonnés Premium M12</li><li>V2 amorcée M15</li></ul>
+    </div>
+  </div>
+
+  <!-- 4.2 DIAGRAMME GANTT -->
+  <div class="h3">4.2 Diagramme de planification 12 mois</div>
+  <div class="gantt">
+    <div class="gantt-header">
+      <div class="gantt-task" style="background:none;font-weight:600">Activité (responsable)</div>
+      <div class="gantt-month">M1</div><div class="gantt-month">M2</div><div class="gantt-month">M3</div><div class="gantt-month">M4</div><div class="gantt-month">M5</div><div class="gantt-month">M6</div><div class="gantt-month">M7</div><div class="gantt-month">M8</div><div class="gantt-month">M9</div><div class="gantt-month">M10</div><div class="gantt-month">M11</div><div class="gantt-month">M12</div>
+    </div>
+    <div class="gantt-row is-phase">
+      <div class="gantt-task">Phase 1 · Conception</div>
+      <div class="gantt-bar b-rose" style="grid-column:2 / span 3"></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">UX Research V1 (Maëlane)</div>
+      <div class="gantt-bar b-purple" style="grid-column:2 / span 2"></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">Design System v1 (Maëlane)</div>
+      <div></div><div class="gantt-bar b-purple" style="grid-column:3 / span 2"></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">Specs &amp; architecture V1 (Issa)</div>
+      <div class="gantt-bar b-teal" style="grid-column:2 / span 3"></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">Étude marché actualisée (Antonin)</div>
+      <div class="gantt-bar b-peach" style="grid-column:2 / span 2"></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <div class="gantt-row is-phase">
+      <div class="gantt-task">Phase 2 · Production</div>
+      <div></div><div></div><div></div><div class="gantt-bar b-rose" style="grid-column:5 / span 6"></div>
+      <div></div><div></div><div></div><div></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">Auth + RLS Supabase (Issa)</div>
+      <div></div><div></div><div></div><div class="gantt-bar b-teal" style="grid-column:5 / span 2"></div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">Cycle apprentissage courses (Issa)</div>
+      <div></div><div></div><div></div><div></div><div class="gantt-bar b-teal" style="grid-column:6 / span 3"></div>
+      <div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">Notifications push proactives (Issa)</div>
+      <div></div><div></div><div></div><div></div><div></div><div class="gantt-bar b-teal" style="grid-column:7 / span 2"></div>
+      <div></div><div></div><div></div><div></div><div></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">Agenda familial partagé (Issa)</div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div class="gantt-bar b-teal" style="grid-column:8 / span 2"></div>
+      <div></div><div></div><div></div><div></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">UI V1 + Tests utilisateurs (Maëlane)</div>
+      <div></div><div></div><div></div><div></div><div class="gantt-bar b-purple" style="grid-column:6 / span 4"></div>
+      <div></div><div></div><div></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">Conformité RGPD &amp; IA Act (transverse)</div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div class="gantt-bar b-dark" style="grid-column:8 / span 2"></div>
+      <div></div><div></div><div></div>
+    </div>
+    <div class="gantt-row is-phase">
+      <div class="gantt-task">Phase 3 · Lancement</div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="gantt-bar b-rose" style="grid-column:10 / span 4"></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">Campagne TikTok organique (Antonin)</div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="gantt-bar b-peach" style="grid-column:9 / span 5"></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">TikTok Ads test 200€ (Antonin)</div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="gantt-bar b-peach" style="grid-column:11 / span 2"></div>
+      <div></div>
+    </div>
+    <div class="gantt-row">
+      <div class="gantt-task">Itérations rétention &amp; NPS (équipe)</div>
+      <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="gantt-bar b-green" style="grid-column:11 / span 3"></div>
+    </div>
+    <div class="legend" style="margin-top:0.8rem">
+      <div class="legend-i"><span class="legend-sw" style="background:var(--purple)"></span>UX/UI · Maëlane</div>
+      <div class="legend-i"><span class="legend-sw" style="background:var(--teal)"></span>Dev · Issa</div>
+      <div class="legend-i"><span class="legend-sw" style="background:var(--peach)"></span>Marketing · Antonin</div>
+      <div class="legend-i"><span class="legend-sw" style="background:var(--dark)"></span>Transverse / conformité</div>
+      <div class="legend-i"><span class="legend-sw" style="background:#86efac"></span>Itérations équipe</div>
+      <div class="legend-i"><span class="legend-sw" style="background:var(--rose-mid)"></span>Phase structurante</div>
+    </div>
+  </div>
+
+  <!-- 4.3 DÉPENDANCES -->
+  <div class="h3">4.3 Dépendances inter-métiers</div>
+  <p class="intro-text">Les dépendances ont été identifiées en atelier équipe. Chaque flèche représente un livrable bloquant pour le métier en aval. Les chemins critiques sont indiqués en rose.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Livrable amont</th><th>Métier responsable</th><th>Livrable aval bloqué</th><th>Métier aval</th><th>Échéance critique</th></tr></thead>
+      <tbody>
+        <tr class="row-lumia"><td>User flows V1 finalisés</td><td>UX (Maëlane)</td><td>Specs techniques exhaustives</td><td>Dev (Issa)</td><td>Fin M2</td></tr>
+        <tr class="row-lumia"><td>Architecture data &amp; schéma BDD</td><td>Dev (Issa)</td><td>Politique de confidentialité &amp; charte utilisateur</td><td>Transverse (Antonin pilote)</td><td>Fin M3</td></tr>
+        <tr><td>Design System v1</td><td>UX (Maëlane)</td><td>Implémentation UI composants</td><td>Dev (Issa)</td><td>Fin M3</td></tr>
+        <tr class="row-lumia"><td>API Notifications push fonctionnelle</td><td>Dev (Issa)</td><td>Calendrier éditorial actif (drip)</td><td>Marketing (Antonin)</td><td>Fin M7</td></tr>
+        <tr><td>Cycle apprentissage courses opérationnel</td><td>Dev (Issa)</td><td>Storytelling « wow moment » TikTok</td><td>Marketing (Antonin)</td><td>Fin M8</td></tr>
+        <tr class="row-lumia"><td>V1 stable + Auth + RLS</td><td>Dev (Issa)</td><td>Audit RGPD blanc</td><td>Conseil juridique externe</td><td>M8</td></tr>
+        <tr><td>Audit RGPD validé</td><td>Conseil externe</td><td>Lancement public V1</td><td>Marketing (Antonin)</td><td>M9</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4.4 JALONS CLÉS -->
+  <div class="h3">4.4 Jalons clés validés collectivement</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Jalon</th><th>Date</th><th>Critère de validation</th><th>Décision possible</th></tr></thead>
+      <tbody>
+        <tr><td>Jalon J2-M0</td><td>Aujourd'hui</td><td>Business plan validé par le jury Jalon 2</td><td><span class="badge bg-green">Go production</span></td></tr>
+        <tr><td>Gate 1 · Fin Conception</td><td>M3</td><td>Specs V1 figées, design system livré, backlog prêt</td><td>Go / Adjust / No-go</td></tr>
+        <tr><td>Gate 2 · Mid-Production</td><td>M6</td><td>Auth + cycles + notifications fonctionnels en interne</td><td>Continue / Replan</td></tr>
+        <tr class="row-lumia"><td>Gate 3 · Audit conformité</td><td>M8</td><td>Audit RGPD/IA Act blanc passé sans bloquant</td><td><span class="badge bg-green">Go launch</span> ou No-go</td></tr>
+        <tr class="row-hl"><td>Lancement public V1</td><td>M9</td><td>App stable, monitoring en place, plan marketing actif</td><td>Phase 3 démarrée</td></tr>
+        <tr><td>Gate 4 · Bilan rétention</td><td>M12</td><td>Rétention J30 &gt; 35% + 200 abonnés Premium</td><td>Go V2 / Réorienter</td></tr>
+        <tr><td>Jalon 3 (M2)</td><td>Printemps 2027</td><td>Business plan + dossier technique + soutenance</td><td>Évaluation finale MBA</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 4.5 BACKLOG INITIAL -->
+  <div class="h3">4.5 Backlog initial V1 (DFS · Issa)</div>
+  <p class="intro-text">Découpage en epics et user stories prêts pour la planification. Estimations en story points (suite de Fibonacci) validées par planning poker équipe.</p>
+
+  <div class="h4">Epic 1 · Authentification &amp; sécurité</div>
+  <div class="info-box" style="padding:0">
+    <div class="backlog-item" style="background:var(--cream);font-weight:700;color:var(--dark)"><div class="bl-id">ID</div><div>User story</div><div class="bl-meta">Sprint</div><div class="bl-meta">Estimation</div><div class="bl-meta">Prio</div></div>
+    <div class="backlog-item"><div class="bl-id">AUTH-01</div><div class="bl-title">En tant qu'utilisateur, je peux créer un compte avec email + magic link</div><div class="bl-meta">S1</div><div class="bl-meta"><span class="bl-pts">5</span></div><div class="bl-meta"><span class="prio p0">P0</span></div></div>
+    <div class="backlog-item"><div class="bl-id">AUTH-02</div><div class="bl-title">En tant qu'utilisateur, je peux activer Google OAuth</div><div class="bl-meta">S1</div><div class="bl-meta"><span class="bl-pts">3</span></div><div class="bl-meta"><span class="prio p0">P0</span></div></div>
+    <div class="backlog-item"><div class="bl-id">AUTH-03</div><div class="bl-title">En tant que dev, je veux RLS activé sur toutes les tables Supabase</div><div class="bl-meta">S1</div><div class="bl-meta"><span class="bl-pts">5</span></div><div class="bl-meta"><span class="prio p0">P0</span></div></div>
+    <div class="backlog-item"><div class="bl-id">AUTH-04</div><div class="bl-title">En tant qu'utilisateur, je peux supprimer mon compte et toutes mes données (RGPD)</div><div class="bl-meta">S2</div><div class="bl-meta"><span class="bl-pts">8</span></div><div class="bl-meta"><span class="prio p0">P0</span></div></div>
+  </div>
+
+  <div class="h4">Epic 2 · Cycle d'apprentissage des habitudes</div>
+  <div class="info-box" style="padding:0">
+    <div class="backlog-item" style="background:var(--cream);font-weight:700;color:var(--dark)"><div class="bl-id">ID</div><div>User story</div><div class="bl-meta">Sprint</div><div class="bl-meta">Estimation</div><div class="bl-meta">Prio</div></div>
+    <div class="backlog-item"><div class="bl-id">CYCL-01</div><div class="bl-title">Détecter une intention d'achat dans la conversation vocale</div><div class="bl-meta">S2</div><div class="bl-meta"><span class="bl-pts">8</span></div><div class="bl-meta"><span class="prio p0">P0</span></div></div>
+    <div class="backlog-item"><div class="bl-id">CYCL-02</div><div class="bl-title">Marquer un item « acheté » et stocker la date</div><div class="bl-meta">S2</div><div class="bl-meta"><span class="bl-pts">3</span></div><div class="bl-meta"><span class="prio p0">P0</span></div></div>
+    <div class="backlog-item"><div class="bl-id">CYCL-03</div><div class="bl-title">Calculer l'intervalle moyen après 3 achats d'un même produit</div><div class="bl-meta">S3</div><div class="bl-meta"><span class="bl-pts">13</span></div><div class="bl-meta"><span class="prio p0">P0</span></div></div>
+    <div class="backlog-item"><div class="bl-id">CYCL-04</div><div class="bl-title">Planifier une notification push 1 jour avant la date estimée</div><div class="bl-meta">S3</div><div class="bl-meta"><span class="bl-pts">8</span></div><div class="bl-meta"><span class="prio p0">P0</span></div></div>
+    <div class="backlog-item"><div class="bl-id">CYCL-05</div><div class="bl-title">Apprentissage en continu : ajuster l'intervalle après chaque nouvel achat</div><div class="bl-meta">S4</div><div class="bl-meta"><span class="bl-pts">5</span></div><div class="bl-meta"><span class="prio p1">P1</span></div></div>
+  </div>
+
+  <div class="h4">Epic 3 · Agenda familial partagé (beta V1)</div>
+  <div class="info-box" style="padding:0">
+    <div class="backlog-item" style="background:var(--cream);font-weight:700;color:var(--dark)"><div class="bl-id">ID</div><div>User story</div><div class="bl-meta">Sprint</div><div class="bl-meta">Estimation</div><div class="bl-meta">Prio</div></div>
+    <div class="backlog-item"><div class="bl-id">FAM-01</div><div class="bl-title">Inviter un proche par lien (email ou SMS)</div><div class="bl-meta">S4</div><div class="bl-meta"><span class="bl-pts">5</span></div><div class="bl-meta"><span class="prio p0">P0</span></div></div>
+    <div class="backlog-item"><div class="bl-id">FAM-02</div><div class="bl-title">Synchroniser les événements partagés en temps réel</div><div class="bl-meta">S5</div><div class="bl-meta"><span class="bl-pts">13</span></div><div class="bl-meta"><span class="prio p0">P0</span></div></div>
+    <div class="backlog-item"><div class="bl-id">FAM-03</div><div class="bl-title">Attribuer automatiquement une tâche au conjoint via IA</div><div class="bl-meta">S5</div><div class="bl-meta"><span class="bl-pts">8</span></div><div class="bl-meta"><span class="prio p1">P1</span></div></div>
+    <div class="backlog-item"><div class="bl-id">FAM-04</div><div class="bl-title">Notifier l'attribution au membre concerné</div><div class="bl-meta">S6</div><div class="bl-meta"><span class="bl-pts">3</span></div><div class="bl-meta"><span class="prio p1">P1</span></div></div>
+  </div>
+
+  <div class="h4">Epic 4 · Conformité &amp; observabilité</div>
+  <div class="info-box" style="padding:0">
+    <div class="backlog-item" style="background:var(--cream);font-weight:700;color:var(--dark)"><div class="bl-id">ID</div><div>User story</div><div class="bl-meta">Sprint</div><div class="bl-meta">Estimation</div><div class="bl-meta">Prio</div></div>
+    <div class="backlog-item"><div class="bl-id">COMP-01</div><div class="bl-title">Bannière de consentement cookies/analytics RGPD</div><div class="bl-meta">S2</div><div class="bl-meta"><span class="bl-pts">3</span></div><div class="bl-meta"><span class="prio p0">P0</span></div></div>
+    <div class="backlog-item"><div class="bl-id">COMP-02</div><div class="bl-title">Page Politique de confidentialité &amp; CGU mise à jour</div><div class="bl-meta">S1</div><div class="bl-meta"><span class="bl-pts">2</span></div><div class="bl-meta"><span class="prio p0">P0</span></div></div>
+    <div class="backlog-item"><div class="bl-id">COMP-03</div><div class="bl-title">Monitoring Sentry + logs structurés</div><div class="bl-meta">S6</div><div class="bl-meta"><span class="bl-pts">5</span></div><div class="bl-meta"><span class="prio p1">P1</span></div></div>
+    <div class="backlog-item"><div class="bl-id">COMP-04</div><div class="bl-title">Tableau de bord KPI (Mixpanel ou PostHog)</div><div class="bl-meta">S6</div><div class="bl-meta"><span class="bl-pts">8</span></div><div class="bl-meta"><span class="prio p1">P1</span></div></div>
+  </div>
+
+  <!-- 4.6 PLANNING POKER & CAPACITÉ -->
+  <div class="h3">4.6 Planning poker &amp; capacité de l'équipe</div>
+  <div class="prose">
+    <p>L'estimation des user stories a été réalisée en planning poker collectif sur la suite de Fibonacci (1, 2, 3, 5, 8, 13, 21). Chaque membre a estimé indépendamment puis discussion collective pour aligner les écarts importants. <strong>Vélocité cible par sprint de 2 semaines&nbsp;: 25-30 story points</strong>, sur la base d'une disponibilité de 12h/semaine par membre (rythme alternance soutenable).</p>
+    <p>Pour les 6 premiers sprints (M3 → M9), la capacité totale estimée est de <strong>~165 story points</strong>. Le backlog ci-dessus représente ~115 story points, laissant ~50 points de marge pour les imprévus, dette technique et stories émergentes. Cette marge est volontaire&nbsp;: c'est elle qui permet d'absorber les retours utilisateurs sans repousser la date de lancement.</p>
+  </div>
+
+  <div class="info-bar">
+    <strong>Conclusion du chapitre 4.</strong> La roadmap est structurée en 3 phases, ponctuée de 4 gates de décision et étayée par un backlog initial de 17 user stories prêtes à être planifiées. La capacité de l'équipe est compatible avec un lancement public V1 en M9, sous réserve de tenir les jalons de conception (Gate 1) et de conformité (Gate 3). Le chiffrage de chaque dimension est détaillé au chapitre 6.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CHAPITRE 5 — ÉQUIPE & GOUVERNANCE
+     ══════════════════════════════════════════════════ -->
+<section id="equipe" class="page">
+<div class="page-inner">
+  <div class="stag">05 Équipe &amp; gouvernance</div>
+  <h2 class="stitle">Organisation, rôles et coordination</h2>
+
+  <div class="edito">
+    <div class="edito-lbl">Édito · Équipe</div>
+    <p>« Une équipe de 3 personnes, c'est petit. C'est aussi suffisant si chacun a un rôle clair, des livrables identifiés, et un cadre de coordination qui ne consomme pas plus de temps qu'il n'en fait gagner. La gouvernance présentée ici a été conçue pour cette taille&nbsp;: peu de rituels, beaucoup de discipline asynchrone, et des outils que tout le monde maîtrise déjà. »</p>
+    <div class="edito-sig">— Issa, Maëlane &amp; Antonin · équipe Lumia</div>
+  </div>
+
+  <!-- 5.1 STRUCTURE -->
+  <div class="h3">5.1 Structure organisationnelle</div>
+  <p class="intro-text">L'équipe Lumia est composée de 3 étudiants en MBA, chacun référent d'une des grandes dimensions du projet. La répartition s'appuie sur les filières et les compétences propres.</p>
+
+  <div class="team-grid">
+    <div class="team-c">
+      <div class="t-av av-p">A</div>
+      <div class="t-name">Antonin</div>
+      <div class="t-role">MBA Entrepreneuriat &amp; Digital Business · Lead stratégie &amp; marketing</div>
+      <div class="t-body">
+        <div class="t-del-title">Livrables Jalon 2</div>
+        <ul>
+          <li>Chapitres 1, 3, 7 (contexte, stratégie, financement)</li>
+          <li>Plan marketing &amp; calendrier éditorial</li>
+          <li>Chiffrage marketing &amp; commercial</li>
+          <li>Pilotage gouvernance projet</li>
+          <li>Networking experts &amp; prescripteurs</li>
+        </ul>
+      </div>
+    </div>
+    <div class="team-c">
+      <div class="t-av av-r">M</div>
+      <div class="t-name">Maëlane</div>
+      <div class="t-role">MBA UX/UI Design · Lead expérience &amp; design</div>
+      <div class="t-body">
+        <div class="t-del-title">Livrables Jalon 2</div>
+        <ul>
+          <li>Chapitre 2 (cibles, personas, VPC, positionnement)</li>
+          <li>Design System v1 (à livrer fin M3)</li>
+          <li>User flows V1 &amp; wireframes haute fidélité</li>
+          <li>Tests utilisateurs (protocole + restitution)</li>
+          <li>Chiffrage UX/UI &amp; planification design</li>
+        </ul>
+      </div>
+    </div>
+    <div class="team-c">
+      <div class="t-av av-g">I</div>
+      <div class="t-name">Issa</div>
+      <div class="t-role">MBA Développeur Full Stack · Lead technique &amp; produit</div>
+      <div class="t-body">
+        <div class="t-del-title">Livrables Jalon 2</div>
+        <ul>
+          <li>Chapitres 4, 5 (roadmap, gouvernance technique)</li>
+          <li>Architecture cible V1 &amp; infra de déploiement</li>
+          <li>Backlog initial &amp; planning poker</li>
+          <li>Chiffrage technique (dev + infra + data)</li>
+          <li>Maintien du MVP en production</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.2 RACI -->
+  <div class="h3">5.2 Matrice RACI des grandes activités</div>
+  <p class="intro-text">R = Responsable de l'exécution · A = Accountable (rend compte au jury) · C = Consulté · I = Informé. Chaque ligne a un unique « A ».</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Activité</th><th>Antonin (EDB)</th><th>Maëlane (UXUI)</th><th>Issa (DFS)</th><th>Externe</th></tr></thead>
+      <tbody>
+        <tr><td>Business plan &amp; chiffrage global</td><td><strong>R/A</strong></td><td>C</td><td>C</td><td>—</td></tr>
+        <tr><td>Étude de marché &amp; veille</td><td><strong>R/A</strong></td><td>C</td><td>I</td><td>—</td></tr>
+        <tr><td>Stratégie marketing &amp; calendrier édito</td><td><strong>R/A</strong></td><td>C</td><td>I</td><td>—</td></tr>
+        <tr><td>UX Research &amp; personas</td><td>C</td><td><strong>R/A</strong></td><td>I</td><td>Utilisateurs testeurs</td></tr>
+        <tr><td>Design System &amp; UI V1</td><td>C</td><td><strong>R/A</strong></td><td>C</td><td>—</td></tr>
+        <tr><td>Tests utilisateurs</td><td>I</td><td><strong>R/A</strong></td><td>C</td><td>10 testeurs prévus</td></tr>
+        <tr><td>Architecture technique V1</td><td>I</td><td>C</td><td><strong>R/A</strong></td><td>—</td></tr>
+        <tr><td>Développement V1</td><td>I</td><td>C</td><td><strong>R/A</strong></td><td>—</td></tr>
+        <tr><td>Conformité RGPD &amp; IA Act</td><td>C</td><td>I</td><td>R</td><td><strong>A · Conseil juridique</strong></td></tr>
+        <tr><td>Acquisition utilisateurs &amp; lancement</td><td><strong>R/A</strong></td><td>C</td><td>C</td><td>—</td></tr>
+        <tr><td>Reporting hebdo Jalon 2 → Jalon 3</td><td><strong>R/A</strong></td><td>C</td><td>C</td><td>Formateurs référents</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5.3 RITUELS -->
+  <div class="h3">5.3 Rituels &amp; gouvernance projet</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Rituel</th><th>Fréquence</th><th>Durée</th><th>Format</th><th>Participants</th><th>Livrable</th></tr></thead>
+      <tbody>
+        <tr><td>Daily async (Slack)</td><td>Quotidien</td><td>—</td><td>Message dans #lumia-daily</td><td>Équipe</td><td>3 lignes&nbsp;: hier / aujourd'hui / bloqueurs</td></tr>
+        <tr><td>Weekly sync</td><td>Hebdo · lundi</td><td>30 min</td><td>Visio + Notion partagé</td><td>Équipe</td><td>Compte rendu Notion</td></tr>
+        <tr class="row-hl"><td>Sprint planning</td><td>Toutes les 2 sem.</td><td>1h30</td><td>Visio + planning poker</td><td>Équipe</td><td>Sprint backlog</td></tr>
+        <tr><td>Sprint review &amp; démo</td><td>Toutes les 2 sem.</td><td>1h</td><td>Visio · démo MVP</td><td>Équipe + 1 invité</td><td>Vidéo de démo</td></tr>
+        <tr><td>Rétrospective</td><td>Toutes les 4 sem.</td><td>45 min</td><td>Format Start/Stop/Continue</td><td>Équipe</td><td>3 actions correctives</td></tr>
+        <tr><td>Point formateurs référents</td><td>Bi-mensuel</td><td>1h</td><td>Visio</td><td>Équipe + formateurs</td><td>PV synthétique</td></tr>
+        <tr><td>Comité de pilotage</td><td>Trimestriel</td><td>2h</td><td>Présidé Antonin</td><td>Équipe + 2 mentors externes</td><td>Décisions consignées</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5.4 OUTILS -->
+  <div class="h3">5.4 Outils de travail collaboratif</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Catégorie</th><th>Outil retenu</th><th>Coût mensuel</th><th>Pourquoi</th></tr></thead>
+      <tbody>
+        <tr><td>Gestion projet &amp; documentation</td><td>Notion (workspace équipe)</td><td class="num-td">0€ (plan free)</td><td>Wiki, roadmap, comptes rendus en un seul endroit. Plan free suffisant à 3.</td></tr>
+        <tr><td>Communication</td><td>Slack</td><td class="num-td">0€ (free 90 j)</td><td>Daily async, canaux thématiques. Migration Discord si limite 90j gênante.</td></tr>
+        <tr><td>Code &amp; CI/CD</td><td>GitHub (org Lumia)</td><td class="num-td">0€ (étudiants Pro)</td><td>Repo privé, PR reviews, Actions CI gratuites (GitHub for Education).</td></tr>
+        <tr><td>Design</td><td>Figma (équipe)</td><td class="num-td">0€ (Education)</td><td>Design system, prototypage, dev mode. Plan étudiant gratuit.</td></tr>
+        <tr><td>Sprint board</td><td>GitHub Projects</td><td class="num-td">0€</td><td>Lié aux issues, intégré au repo. Pas d'outil tiers.</td></tr>
+        <tr><td>Analytics produit</td><td>PostHog Cloud (free 1M events)</td><td class="num-td">0€</td><td>Funnels, rétention, feature flags. Plan free généreux.</td></tr>
+        <tr><td>Monitoring</td><td>Sentry Developer (free 5k events)</td><td class="num-td">0€</td><td>Error tracking front + back, suffisant en V1.</td></tr>
+        <tr><td>Stockage docs &amp; assets</td><td>Google Drive</td><td class="num-td">0€</td><td>Comptes étudiants gratuits, partage simple.</td></tr>
+      </tbody>
+      <tfoot><tr class="total-row"><td>Total outillage collaboratif Jalon 2</td><td colspan="2" class="num-td">0€ / mois</td><td>Optimisation par usage des plans Education / Free</td></tr></tfoot>
+    </table>
+  </div>
+
+  <!-- 5.5 REPORTING -->
+  <div class="h3">5.5 Reporting &amp; suivi d'avancement</div>
+  <div class="prose">
+    <p>Le reporting de Lumia s'appuie sur trois cycles complémentaires&nbsp;: un reporting interne hebdo (équipe), un reporting pédagogique mensuel (formateurs référents) et un reporting public trimestriel (page « Updates » du site Lumia pour les abonnés et partenaires).</p>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Reporting</th><th>Fréquence</th><th>Audience</th><th>Indicateurs clés suivis</th></tr></thead>
+      <tbody>
+        <tr><td>Tableau de bord équipe</td><td>Hebdo (lundi)</td><td>3 membres</td><td>Vélocité sprint, points en cours, bloqueurs</td></tr>
+        <tr><td>Compte rendu pédagogique</td><td>Bi-mensuel</td><td>Formateurs référents</td><td>Avancement vs roadmap, jalons franchis, écarts</td></tr>
+        <tr class="row-hl"><td>Dashboard produit (PostHog)</td><td>Continu</td><td>Équipe (accès lecture mentors)</td><td>DAU, conversion, rétention, NPS, erreurs</td></tr>
+        <tr><td>Bilan trimestriel</td><td>Tous les 3 mois</td><td>Mentors externes</td><td>MRR, abonnés, CAC, churn, NPS</td></tr>
+        <tr><td>Page Updates publique</td><td>Trimestrielle</td><td>Abonnés, partenaires</td><td>Nouveautés, jalons publics, feedbacks</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 5.6 COMPÉTENCES VS BESOINS -->
+  <div class="h3">5.6 Compétences disponibles vs besoins identifiés</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Compétence</th><th>Niveau disponible</th><th>Niveau requis V1</th><th>Écart</th><th>Plan d'action</th></tr></thead>
+      <tbody>
+        <tr><td>Développement Full Stack (Next.js, React, TS)</td><td>Issa · Avancé</td><td>Avancé</td><td><span class="badge bg-green">Couvert</span></td><td>—</td></tr>
+        <tr><td>Architecture data &amp; BDD</td><td>Issa · Intermédiaire</td><td>Avancé</td><td><span class="badge bg-yellow">Léger gap</span></td><td>Auto-formation Supabase + 1 session mentor data 2h</td></tr>
+        <tr><td>UX Research &amp; tests utilisateurs</td><td>Maëlane · Avancé</td><td>Avancé</td><td><span class="badge bg-green">Couvert</span></td><td>—</td></tr>
+        <tr><td>UI Design &amp; Design System</td><td>Maëlane · Avancé</td><td>Avancé</td><td><span class="badge bg-green">Couvert</span></td><td>—</td></tr>
+        <tr><td>Direction artistique &amp; motion design</td><td>Maëlane · Intermédiaire</td><td>Intermédiaire (V1) / Avancé (V2)</td><td><span class="badge bg-yellow">Gap V2</span></td><td>Identifier prestataire freelance pour V2 (cf. chiffrage)</td></tr>
+        <tr><td>Marketing digital &amp; acquisition</td><td>Antonin · Intermédiaire</td><td>Avancé</td><td><span class="badge bg-yellow">Gap</span></td><td>Formation TikTok Ads (40h en ligne) + 2 sessions mentor</td></tr>
+        <tr><td>Stratégie commerciale &amp; business plan</td><td>Antonin · Avancé</td><td>Avancé</td><td><span class="badge bg-green">Couvert</span></td><td>—</td></tr>
+        <tr><td>Data engineering / IA</td><td>Issa · Intermédiaire</td><td>Intermédiaire (V1) / Avancé (V3)</td><td><span class="badge bg-yellow">Gap V3</span></td><td>Recherche profil Data MBA pour rejoindre projet en M2</td></tr>
+        <tr><td>Direction artistique digitale (motion, brand video)</td><td>—</td><td>Optionnel V2</td><td><span class="badge bg-red">Absent</span></td><td>Prestation freelance ponctuelle (budget 1 500€ alloué)</td></tr>
+        <tr><td>Cybersécurité &amp; pentest</td><td>—</td><td>Souhaité V2</td><td><span class="badge bg-red">Absent</span></td><td>Audit externe pré-V2 (budget 2 000€ alloué)</td></tr>
+        <tr><td>Conseil juridique RGPD/IA Act</td><td>—</td><td>Pré-lancement V1</td><td><span class="badge bg-red">Absent</span></td><td>Conseil ponctuel (budget 1 200€ alloué pour audit + politique conf.)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-bar">
+    <strong>Conclusion du chapitre 5.</strong> L'équipe couvre les compétences cœur (dev, design, marketing/business) en interne. Trois compétences externes (juridique RGPD, motion design V2, cybersécurité V2) sont identifiées comme prestations ponctuelles intégrées au chiffrage du chapitre 6. La gouvernance est minimaliste mais structurée, adaptée à une équipe en alternance.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CHAPITRE 6 — CHIFFRAGE COMPLET
+     ══════════════════════════════════════════════════ -->
+<section id="chiffrage" class="page">
+<div class="page-inner">
+  <div class="stag">06 Chiffrage du projet</div>
+  <h2 class="stitle">Coûts &amp; ressources sur 24 mois</h2>
+
+  <div class="edito">
+    <div class="edito-lbl">Édito · Chiffrage</div>
+    <p>« Le chiffrage présenté ici n'est pas un budget officiel d'entreprise (Lumia n'est pas encore une société constituée), mais une valorisation pédagogique du projet&nbsp;: combien coûterait sa réalisation si chaque heure était facturée à son coût marché. Cette logique permet d'identifier l'effort réel à financer si l'équipe sortait du cadre scolaire et de prouver que le projet reste viable même chiffré au prix du marché. »</p>
+    <div class="edito-sig">— Issa · responsable chiffrage technique · au nom de l'équipe</div>
+  </div>
+
+  <!-- 6.1 HYPOTHÈSES -->
+  <div class="h3">6.1 Hypothèses de chiffrage</div>
+  <div class="prose">
+    <p>Toutes les estimations heures × TJM sont effectuées dans la perspective d'une valorisation au prix marché junior/intermédiaire 2025-2027. Ces coûts ne sont <strong>pas effectivement engagés</strong> en M1-M2 (les étudiants sont en formation), mais ils mesurent l'effort réel à financer dans une perspective de lancement post-MBA. Seuls les coûts marqués « cash out » correspondent à des sorties de trésorerie réelles immédiates.</p>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Profil</th><th>TJM marché (HT)</th><th>Hypothèse retenue</th><th>Source</th></tr></thead>
+      <tbody>
+        <tr><td>Développeur Full Stack Next/TS (junior+)</td><td>350 – 500 €</td><td><strong>400 €/jour</strong></td><td>Malt 2025 · Free-Work</td></tr>
+        <tr><td>UX/UI Designer (junior+)</td><td>300 – 450 €</td><td><strong>350 €/jour</strong></td><td>Malt 2025</td></tr>
+        <tr><td>Chef de projet / business analyst</td><td>350 – 500 €</td><td><strong>400 €/jour</strong></td><td>Malt 2025</td></tr>
+        <tr><td>Motion designer / DA freelance</td><td>400 – 600 €</td><td><strong>500 €/jour</strong></td><td>Malt 2025</td></tr>
+        <tr><td>Conseil juridique RGPD spécialisé</td><td>900 – 1 500 €</td><td><strong>1 200 € forfait</strong></td><td>Devis spécifique</td></tr>
+        <tr><td>Audit cybersécurité externe</td><td>1 500 – 3 000 €</td><td><strong>2 000 € forfait</strong></td><td>Devis spécifique</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6.2 CHIFFRAGE PAR DIMENSION -->
+  <div class="h3">6.2 Chiffrage par dimension · Phase 1 + 2 (M1 → M9)</div>
+
+  <div class="h4">A · Développement (focus DFS · Issa)</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Poste</th><th>Détail</th><th>Charge (j/h)</th><th>TJM</th><th>Coût valorisé</th><th>Cash out réel</th></tr></thead>
+      <tbody>
+        <tr><td>Architecture &amp; specs V1</td><td>Schémas, choix techno, ADRs</td><td class="num-td">10</td><td class="num-td">400 €</td><td class="num-td"><strong>4 000 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Auth Supabase + RLS + RGPD</td><td>Magic link, OAuth, isolation user_id</td><td class="num-td">12</td><td class="num-td">400 €</td><td class="num-td"><strong>4 800 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Cycle apprentissage courses</td><td>Détection, calcul intervalles, Edge Functions</td><td class="num-td">20</td><td class="num-td">400 €</td><td class="num-td"><strong>8 000 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Notifications push proactives</td><td>Web Push + planification + scheduling</td><td class="num-td">10</td><td class="num-td">400 €</td><td class="num-td"><strong>4 000 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Agenda familial partagé V1 beta</td><td>Sharing, sync temps réel, attribution IA</td><td class="num-td">18</td><td class="num-td">400 €</td><td class="num-td"><strong>7 200 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Intégration UI Design System</td><td>Composants React, dev mode Figma</td><td class="num-td">10</td><td class="num-td">400 €</td><td class="num-td"><strong>4 000 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Tests unitaires &amp; E2E (Playwright)</td><td>Couverture &gt; 70% sur core</td><td class="num-td">8</td><td class="num-td">400 €</td><td class="num-td"><strong>3 200 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>CI/CD &amp; observabilité (Sentry, PostHog)</td><td>GitHub Actions, monitoring</td><td class="num-td">5</td><td class="num-td">400 €</td><td class="num-td"><strong>2 000 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Documentation technique &amp; utilisateur</td><td>README, guide install, doc utilisateur V1</td><td class="num-td">5</td><td class="num-td">400 €</td><td class="num-td"><strong>2 000 €</strong></td><td class="num-td">—</td></tr>
+        <tr class="total-row"><td>Sous-total Développement</td><td>—</td><td class="num-td">98 j/h</td><td>—</td><td class="num-td">39 200 €</td><td class="num-td">—</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h4">B · UX/UI Design (Maëlane)</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Poste</th><th>Détail</th><th>Charge (j/h)</th><th>TJM</th><th>Coût valorisé</th><th>Cash out réel</th></tr></thead>
+      <tbody>
+        <tr><td>UX Research V1 actualisée</td><td>5 nouvelles interviews + analyse</td><td class="num-td">8</td><td class="num-td">350 €</td><td class="num-td"><strong>2 800 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>User flows V1 &amp; arborescence</td><td>Onboarding, courses, agenda familial</td><td class="num-td">6</td><td class="num-td">350 €</td><td class="num-td"><strong>2 100 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Design System v1 (Figma)</td><td>Tokens, composants, dev mode</td><td class="num-td">15</td><td class="num-td">350 €</td><td class="num-td"><strong>5 250 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Wireframes haute fidélité V1</td><td>40+ écrans</td><td class="num-td">12</td><td class="num-td">350 €</td><td class="num-td"><strong>4 200 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Prototypes interactifs Figma</td><td>3 parcours clés</td><td class="num-td">5</td><td class="num-td">350 €</td><td class="num-td"><strong>1 750 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Tests utilisateurs V1 + restitution</td><td>10 testeurs · protocole + rapport</td><td class="num-td">8</td><td class="num-td">350 €</td><td class="num-td"><strong>2 800 €</strong></td><td class="num-td">100 € (dédommagement)</td></tr>
+        <tr><td>Conformité accessibilité (WCAG 2.1 AA)</td><td>Audit + corrections design</td><td class="num-td">4</td><td class="num-td">350 €</td><td class="num-td"><strong>1 400 €</strong></td><td class="num-td">—</td></tr>
+        <tr class="total-row"><td>Sous-total UX/UI</td><td>—</td><td class="num-td">58 j/h</td><td>—</td><td class="num-td">20 300 €</td><td class="num-td">100 €</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h4">C · Marketing &amp; commercial (Antonin)</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Poste</th><th>Détail</th><th>Charge (j/h)</th><th>TJM / coût</th><th>Coût valorisé</th><th>Cash out réel</th></tr></thead>
+      <tbody>
+        <tr><td>Veille &amp; étude marché actualisée</td><td>Veille auto (Feedly), benchmark refresh</td><td class="num-td">6</td><td class="num-td">400 €</td><td class="num-td"><strong>2 400 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Stratégie marketing &amp; calendrier édito</td><td>Plan 12 mois, 6 piliers de contenu</td><td class="num-td">8</td><td class="num-td">400 €</td><td class="num-td"><strong>3 200 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Production contenus TikTok organique</td><td>16 vidéos / mois × 6 mois (phase production M3-M9)</td><td class="num-td">25</td><td class="num-td">400 €</td><td class="num-td"><strong>10 000 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Articles SEO blog</td><td>1 200 mots × 2/mois × 6 mois</td><td class="num-td">10</td><td class="num-td">400 €</td><td class="num-td"><strong>4 000 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Networking experts &amp; prescripteurs</td><td>10 entretiens + suivi</td><td class="num-td">6</td><td class="num-td">400 €</td><td class="num-td"><strong>2 400 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Budget TikTok Ads (test)</td><td>200 €/mois × 4 mois (M6→M9)</td><td class="num-td">—</td><td>Achat média</td><td class="num-td"><strong>800 €</strong></td><td class="num-td">800 €</td></tr>
+        <tr><td>Marketing automation (outils)</td><td>Brevo / Mailerlite plan free puis 25 €/mois × 3</td><td class="num-td">2</td><td>Setup + licences</td><td class="num-td"><strong>875 €</strong></td><td class="num-td">75 €</td></tr>
+        <tr class="total-row"><td>Sous-total Marketing</td><td>—</td><td class="num-td">57 j/h</td><td>—</td><td class="num-td">23 675 €</td><td class="num-td">875 €</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h4">D · Direction artistique &amp; identité (prestation freelance V2)</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Poste</th><th>Détail</th><th>Charge</th><th>Coût</th><th>Cash out réel</th></tr></thead>
+      <tbody>
+        <tr><td>Charte graphique V1.1 (refresh)</td><td>Internalisé Maëlane</td><td class="num-td">3 j/h</td><td class="num-td">1 050 €</td><td class="num-td">—</td></tr>
+        <tr><td>Motion design (1 vidéo signature)</td><td>Freelance (M8)</td><td class="num-td">3 j/h</td><td class="num-td">1 500 €</td><td class="num-td">1 500 €</td></tr>
+        <tr><td>Sons &amp; voix Lumia (notifications signatures)</td><td>Freelance sound design</td><td class="num-td">1 j/h</td><td class="num-td">500 €</td><td class="num-td">500 €</td></tr>
+        <tr class="total-row"><td>Sous-total DA</td><td>—</td><td class="num-td">7 j/h</td><td class="num-td">3 050 €</td><td class="num-td">2 000 €</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h4">E · Data, IA &amp; conformité</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Poste</th><th>Détail</th><th>Charge / coût</th><th>Coût valorisé</th><th>Cash out réel</th></tr></thead>
+      <tbody>
+        <tr><td>Conformité RGPD (politique, charte, registre)</td><td>Internalisé Issa + Antonin · 8 j/h</td><td class="num-td">8 j/h</td><td class="num-td"><strong>3 200 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Conseil juridique externe RGPD</td><td>Audit + revue documents (forfait)</td><td>Forfait</td><td class="num-td"><strong>1 200 €</strong></td><td class="num-td">1 200 €</td></tr>
+        <tr><td>Mise en place analytics &amp; consent management</td><td>PostHog + CMP open source</td><td class="num-td">3 j/h</td><td class="num-td"><strong>1 200 €</strong></td><td class="num-td">—</td></tr>
+        <tr><td>Documentation IA Act (model card, usage)</td><td>Note de cadrage + governance LLM</td><td class="num-td">3 j/h</td><td class="num-td"><strong>1 200 €</strong></td><td class="num-td">—</td></tr>
+        <tr class="total-row"><td>Sous-total Data &amp; conformité</td><td>—</td><td class="num-td">14 j/h</td><td class="num-td">6 800 €</td><td class="num-td">1 200 €</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h4">F · Infrastructure &amp; SaaS (Phase 1 + 2 · 9 mois)</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Poste</th><th>Détail</th><th>Coût mensuel</th><th>Total 9 mois</th><th>Cash out réel</th></tr></thead>
+      <tbody>
+        <tr><td>Vercel Pro (hébergement Next.js)</td><td>SLA, previews illimitées, monitoring</td><td class="num-td">20 €</td><td class="num-td"><strong>180 €</strong></td><td class="num-td">180 €</td></tr>
+        <tr><td>Supabase Pro (BDD + Auth + Edge Functions)</td><td>8 Go BDD, 250k MAU Auth</td><td class="num-td">25 €</td><td class="num-td"><strong>225 €</strong></td><td class="num-td">225 €</td></tr>
+        <tr><td>Gemini 2.5 Flash API</td><td>Faible volume pré-lancement &lt; 50 j/h actifs</td><td class="num-td">~15 €</td><td class="num-td"><strong>135 €</strong></td><td class="num-td">135 €</td></tr>
+        <tr><td>Nom de domaine + email pro</td><td>OVH / Google Workspace × 1 boîte</td><td class="num-td">8 €</td><td class="num-td"><strong>72 €</strong></td><td class="num-td">72 €</td></tr>
+        <tr><td>PostHog Cloud (analytics) &amp; Sentry</td><td>Plans free, dépassement très improbable V1</td><td class="num-td">0 €</td><td class="num-td"><strong>0 €</strong></td><td class="num-td">0 €</td></tr>
+        <tr><td>Outils design &amp; collab (Notion, Figma, GitHub)</td><td>Plans Education / Free</td><td class="num-td">0 €</td><td class="num-td"><strong>0 €</strong></td><td class="num-td">0 €</td></tr>
+        <tr class="total-row"><td>Sous-total Infrastructure</td><td>—</td><td class="num-td">68 €/mois</td><td class="num-td">612 €</td><td class="num-td">612 €</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6.3 TOTAL PHASE 1+2 -->
+  <div class="h3">6.3 Synthèse Phase 1 + 2 (M1 → M9)</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Dimension</th><th>Coût valorisé (TJM marché)</th><th>Cash out réel (sortie trésorerie)</th></tr></thead>
+      <tbody>
+        <tr><td>A · Développement (DFS · Issa)</td><td class="num-td">39 200 €</td><td class="num-td">—</td></tr>
+        <tr><td>B · UX/UI Design (Maëlane)</td><td class="num-td">20 300 €</td><td class="num-td">100 €</td></tr>
+        <tr><td>C · Marketing &amp; commercial (Antonin)</td><td class="num-td">23 675 €</td><td class="num-td">875 €</td></tr>
+        <tr><td>D · Direction artistique</td><td class="num-td">3 050 €</td><td class="num-td">2 000 €</td></tr>
+        <tr><td>E · Data, IA &amp; conformité</td><td class="num-td">6 800 €</td><td class="num-td">1 200 €</td></tr>
+        <tr><td>F · Infrastructure &amp; SaaS</td><td class="num-td">612 €</td><td class="num-td">612 €</td></tr>
+        <tr class="total-row"><td>TOTAL Phase 1 + 2 (préproduction + production)</td><td class="num-td"><strong>93 637 €</strong></td><td class="num-td"><strong>4 787 €</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <span class="callout-label">Lecture</span>
+    <span>Le coût valorisé total (93 637 €) correspond à l'effort réel à financer si Lumia était un projet d'entreprise. Le cash out réel (4 787 €) est l'investissement effectif que l'équipe doit mobiliser sur les 9 premiers mois pour atteindre le lancement. Ce delta met en évidence la valeur économique générée par l'engagement étudiant pendant le MBA.</span>
+  </div>
+
+  <!-- 6.4 PHASE 3 + V2 -->
+  <div class="h3">6.4 Chiffrage Phase 3 &amp; V2 (M9 → M24)</div>
+  <p class="intro-text">Phase de lancement, itérations rétention, puis enrichissement V2 (app native + plan famille). Hypothèses identiques aux phases précédentes pour les TJM.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Poste</th><th>Détail</th><th>Coût valorisé</th><th>Cash out réel</th></tr></thead>
+      <tbody>
+        <tr><td>Développement V1 → V2 (DFS · Issa)</td><td>~150 j/h sur 15 mois (mobile native, plan famille, modules)</td><td class="num-td">60 000 €</td><td class="num-td">—</td></tr>
+        <tr><td>UX/UI itérations + V2 (Maëlane)</td><td>~60 j/h</td><td class="num-td">21 000 €</td><td class="num-td">—</td></tr>
+        <tr><td>Marketing scale (Antonin)</td><td>~70 j/h + ads</td><td class="num-td">28 000 €</td><td class="num-td">—</td></tr>
+        <tr><td>TikTok Ads scaling</td><td>~500 €/mois × 12 mois</td><td class="num-td">6 000 €</td><td class="num-td">6 000 €</td></tr>
+        <tr><td>Audit cybersécurité externe (pré-V2)</td><td>Forfait</td><td class="num-td">2 000 €</td><td class="num-td">2 000 €</td></tr>
+        <tr><td>Renouvellement conseil RGPD</td><td>Mises à jour annuelles</td><td class="num-td">800 €</td><td class="num-td">800 €</td></tr>
+        <tr><td>Infrastructure &amp; API · scale</td><td>Coût variable (4 €/user actif) + fixes 70 €/mois</td><td class="num-td">Variable</td><td class="num-td">≈ 5 000 €</td></tr>
+        <tr><td>Prestations DA freelance V2</td><td>Identité refresh, motion 2.0</td><td class="num-td">3 000 €</td><td class="num-td">3 000 €</td></tr>
+        <tr class="total-row"><td>TOTAL Phase 3 + V2</td><td class="num-td"><strong>120 800 €</strong></td><td class="num-td"><strong>≈ 16 800 €</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 6.5 INVESTISSEMENT INITIAL VS RÉCURRENT -->
+  <div class="h3">6.5 Investissements initiaux vs coûts récurrents</div>
+  <div class="two-col">
+    <div class="info-box" style="background:var(--rose-ultra);border-color:var(--rose)">
+      <h4 style="color:var(--rose-deep)">Investissements initiaux (one-shot M1 → M9)</h4>
+      <ul class="check-list dot">
+        <li>Design System v1 (5 250 € valorisé)</li>
+        <li>Architecture &amp; specs V1 (4 000 €)</li>
+        <li>Audit RGPD initial (1 200 € cash)</li>
+        <li>Setup analytics &amp; CMP (1 200 €)</li>
+        <li>Motion design signature (1 500 € cash)</li>
+        <li><strong>Total cash one-shot · ~4 200 €</strong></li>
+      </ul>
+    </div>
+    <div class="info-box">
+      <h4>Coûts récurrents (mensuels)</h4>
+      <ul class="check-list dot">
+        <li>Hébergement Vercel + Supabase&nbsp;: ~50 €</li>
+        <li>API Gemini (pré-lancement)&nbsp;: ~15 €</li>
+        <li>Domaine + email pro&nbsp;: ~8 €</li>
+        <li>Outils SaaS divers&nbsp;: ~0 € (plans free/Education)</li>
+        <li>Budget acquisition TikTok Ads&nbsp;: 200 € (test) → 500 €/mois (scale)</li>
+        <li><strong>Total fixe mensuel · 68 → 600 € selon phase</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 6.6 ÉCHÉANCIER -->
+  <div class="h3">6.6 Échéancier des dépenses sur 24 mois</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Période</th><th>Phase</th><th>Cash out cumulé</th><th>Coût valorisé cumulé</th><th>Évènement clé</th></tr></thead>
+      <tbody>
+        <tr><td>M1 → M3</td><td>Conception</td><td class="num-td">~500 €</td><td class="num-td">~25 000 €</td><td>Setup infra, audit RGPD lancé</td></tr>
+        <tr><td>M4 → M6</td><td>Production</td><td class="num-td">~1 500 €</td><td class="num-td">~55 000 €</td><td>Outils marketing, motion design</td></tr>
+        <tr class="row-hl"><td>M7 → M9</td><td>Pré-lancement</td><td class="num-td">~4 800 €</td><td class="num-td">~93 600 €</td><td>Audit RGPD finalisé, ads test, lancement</td></tr>
+        <tr><td>M10 → M15</td><td>Lancement &amp; itérations</td><td class="num-td">~10 000 €</td><td class="num-td">~140 000 €</td><td>Scale ads, audit sécu</td></tr>
+        <tr><td>M16 → M24</td><td>V2 + B2B amorcé</td><td class="num-td">~21 500 €</td><td class="num-td">~215 000 €</td><td>App native, partenariats B2B</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-bar">
+    <strong>Conclusion du chapitre 6.</strong> Le projet Lumia représente sur 24 mois un effort valorisé total d'environ <strong>215 000 €</strong> et un cash out réel de <strong>~21 500 €</strong>. Cette structure de coûts faible-cash / fort-effort est typique d'un projet logiciel porté par une équipe en formation. Les sources de financement permettant de couvrir le cash out sont détaillées au chapitre suivant.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CHAPITRE 7 — FINANCEMENT & MODÈLE ÉCONOMIQUE
+     ══════════════════════════════════════════════════ -->
+<section id="finance" class="page">
+<div class="page-inner">
+  <div class="stag">07 Financement &amp; modèle économique</div>
+  <h2 class="stitle">Revenus, financement et rentabilité</h2>
+
+  <div class="edito">
+    <div class="edito-lbl">Édito · Financement</div>
+    <p>« Le modèle économique de Lumia repose sur une logique freemium éprouvée et une marge brute unitaire de 60% validée au Jalon 1. Le défi n'est pas l'unit economics — il est solide — mais le temps nécessaire pour atteindre la taille critique permettant de financer la croissance. Ce chapitre projette trois scénarios chiffrés sur 24 mois et propose une stratégie de financement adaptée à chacun, en privilégiant les ressources qui ne diluent pas l'équipe avant que la preuve de rétention soit faite. »</p>
+    <div class="edito-sig">— Antonin · Entrepreneuriat &amp; Digital Business</div>
+  </div>
+
+  <!-- 7.1 SOURCES DE REVENUS -->
+  <div class="h3">7.1 Sources de revenus</div>
+  <p class="intro-text">Détail complémentaire dans le <a href="business-model.html" style="color:var(--rose-deep);text-decoration:underline">business model</a>. Synthèse opérationnelle ci-dessous.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Source</th><th>Cible</th><th>Tarif</th><th>Marge brute</th><th>Activation</th></tr></thead>
+      <tbody>
+        <tr class="row-lumia"><td><strong>Abonnement Premium individuel</strong></td><td>Clara + personas 28-40</td><td class="num-td">9,99 €/mois</td><td class="num-td">~60%</td><td>V1 dès lancement</td></tr>
+        <tr><td>Freemium · usage limité</td><td>Thomas + alternants</td><td class="num-td">0 €</td><td>Perte ~3 €/user actif</td><td>V1 dès lancement</td></tr>
+        <tr><td>Plan famille</td><td>Couples + foyers</td><td class="num-td">14,99 €/mois</td><td class="num-td">~65%</td><td>V2 (M15)</td></tr>
+        <tr><td>Programme parrainage (réduction)</td><td>Premium actifs</td><td>-1 mois / filleul</td><td>Marketing levier viralité</td><td>V1 dès M3</td></tr>
+        <tr><td>Licences universités</td><td>MBA Étudiants 660k FR</td><td>~3 €/étudiant/an</td><td class="num-td">~80%</td><td>V3 (M20+)</td></tr>
+        <tr><td>Licences entreprises QVT</td><td>DRH 250+ salariés</td><td>~5 €/salarié/mois</td><td class="num-td">~75%</td><td>V3 (M22+)</td></tr>
+        <tr><td>Partenariats marchand contextuels (optionnel)</td><td>Marques produits courses</td><td>Commission au clic / panier</td><td>Marge variable</td><td>V3 hypothétique</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 7.2 UNIT ECONOMICS -->
+  <div class="h3">7.2 Unit economics (rappel et actualisation)</div>
+  <div class="ue-grid">
+    <div class="ue"><div class="ue-v">9,99 €</div><div class="ue-l">ARPU mensuel Premium</div></div>
+    <div class="ue"><div class="ue-v">~4 €</div><div class="ue-l">Coût variable / user actif (Gemini 3,40 € + infra 0,60 €)</div></div>
+    <div class="ue accent"><div class="ue-v">60%</div><div class="ue-l">Marge brute unitaire</div></div>
+    <div class="ue"><div class="ue-v">2,18%</div><div class="ue-l">Taux conversion médian J+35 (RevenueCat 2025)</div></div>
+    <div class="ue"><div class="ue-v">~60 €</div><div class="ue-l">LTV estimée sur 6 mois · à valider tests V1</div></div>
+    <div class="ue accent"><div class="ue-v">400</div><div class="ue-l">Abonnés Premium au seuil de rentabilité unitaire</div></div>
+  </div>
+
+  <!-- 7.3 3 SCÉNARIOS -->
+  <div class="h3">7.3 Trois scénarios financiers sur 24 mois</div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Scénario</th><th>Hypothèse acquisition</th><th>Churn</th><th>Abonnés An 1 fin M12</th><th>MRR M12</th><th>Abonnés M24</th><th>MRR M24</th><th>Seuil atteint</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge bg-yellow">Conservateur</span></td><td>Organique uniquement, pas d'ads</td><td class="num-td">10%</td><td class="num-td">150</td><td class="num-td">1 500 €</td><td class="num-td">400</td><td class="num-td">4 000 €</td><td>Fin M24</td></tr>
+        <tr class="row-lumia"><td><span class="badge bg-green">Réaliste</span></td><td>Mix organique + 500 €/mois ads</td><td class="num-td">5%</td><td class="num-td">350</td><td class="num-td">3 500 €</td><td class="num-td">800</td><td class="num-td">8 000 €</td><td>M18</td></tr>
+        <tr><td><span class="badge bg-rose">Optimiste</span></td><td>Viralité TikTok + parrainage actif</td><td class="num-td">3%</td><td class="num-td">700</td><td class="num-td">7 000 €</td><td class="num-td">1 500</td><td class="num-td">15 000 €</td><td>M15</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 7.4 COMPTE DE RÉSULTAT PRÉVISIONNEL -->
+  <div class="h3">7.4 Compte de résultat prévisionnel · scénario réaliste</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Poste (€)</th><th>An 1 (M1-M12)</th><th>An 2 (M13-M24)</th><th>Total 24 mois</th></tr></thead>
+      <tbody>
+        <tr><td>Chiffre d'affaires (abonnements Premium)</td><td class="num-td">12 600</td><td class="num-td">69 000</td><td class="num-td"><strong>81 600</strong></td></tr>
+        <tr><td>– Coûts variables (API + infra · ~4 €/user actif/mois)</td><td class="num-td">-5 040</td><td class="num-td">-27 600</td><td class="num-td">-32 640</td></tr>
+        <tr><td><strong>Marge brute</strong></td><td class="num-td"><strong>7 560</strong></td><td class="num-td"><strong>41 400</strong></td><td class="num-td"><strong>48 960</strong></td></tr>
+        <tr><td>– Hébergement &amp; SaaS fixes</td><td class="num-td">-700</td><td class="num-td">-900</td><td class="num-td">-1 600</td></tr>
+        <tr><td>– Budget acquisition (ads + outils)</td><td class="num-td">-1 800</td><td class="num-td">-6 000</td><td class="num-td">-7 800</td></tr>
+        <tr><td>– Prestations externes (juridique, motion, sécu)</td><td class="num-td">-3 200</td><td class="num-td">-3 800</td><td class="num-td">-7 000</td></tr>
+        <tr><td>– Autres frais (domaine, banque, juridique courant)</td><td class="num-td">-500</td><td class="num-td">-1 200</td><td class="num-td">-1 700</td></tr>
+        <tr class="total-row"><td>EBE (avant rémunération équipe)</td><td class="num-td">1 360</td><td class="num-td">29 500</td><td class="num-td"><strong>30 860</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-bar">
+    <strong>Lecture · </strong>Le scénario réaliste génère ~31 k€ d'excédent brut d'exploitation sur 24 mois avant toute rémunération de l'équipe. Cet excédent permet de constituer la trésorerie nécessaire au passage en V2 et à la consolidation B2B sans dilution capitalistique précoce. La rémunération de l'équipe (3 fondateurs) reste différée jusqu'à atteinte du MRR ≥ 10 000 € (objectif fin M24).
+  </div>
+
+  <!-- 7.5 PLAN DE TRÉSORERIE -->
+  <div class="h3">7.5 Plan de trésorerie indicatif · scénario réaliste</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Trimestre</th><th>Encaissements</th><th>Décaissements</th><th>Solde</th><th>Trésorerie cumulée</th></tr></thead>
+      <tbody>
+        <tr><td>T1 (M1-M3)</td><td class="num-td">0 €</td><td class="num-td">-500 €</td><td class="num-td">-500 €</td><td class="num-td">-500 €</td></tr>
+        <tr><td>T2 (M4-M6)</td><td class="num-td">0 €</td><td class="num-td">-1 000 €</td><td class="num-td">-1 000 €</td><td class="num-td">-1 500 €</td></tr>
+        <tr class="row-hl"><td>T3 (M7-M9) Lancement</td><td class="num-td">450 €</td><td class="num-td">-3 800 €</td><td class="num-td">-3 350 €</td><td class="num-td">-4 850 €</td></tr>
+        <tr><td>T4 (M10-M12)</td><td class="num-td">3 600 €</td><td class="num-td">-2 200 €</td><td class="num-td">+1 400 €</td><td class="num-td">-3 450 €</td></tr>
+        <tr><td>T5 (M13-M15)</td><td class="num-td">8 100 €</td><td class="num-td">-2 600 €</td><td class="num-td">+5 500 €</td><td class="num-td">+2 050 €</td></tr>
+        <tr><td>T6 (M16-M18)</td><td class="num-td">13 500 €</td><td class="num-td">-3 800 €</td><td class="num-td">+9 700 €</td><td class="num-td">+11 750 €</td></tr>
+        <tr><td>T7 (M19-M21)</td><td class="num-td">19 800 €</td><td class="num-td">-4 500 €</td><td class="num-td">+15 300 €</td><td class="num-td">+27 050 €</td></tr>
+        <tr><td>T8 (M22-M24)</td><td class="num-td">25 200 €</td><td class="num-td">-5 000 €</td><td class="num-td">+20 200 €</td><td class="num-td">+47 250 €</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <span class="callout-label">Pic de besoin</span>
+    <span>Le pic de besoin en trésorerie est atteint au trimestre 3 (lancement) avec un déficit cumulé de <strong>~4 850 €</strong>. C'est ce montant qu'il faut financer en amont pour ne jamais être en rupture. Ce besoin se résorbe naturellement à T5 (M15) lorsque le MRR récurrent dépasse les coûts fixes.</span>
+  </div>
+
+  <!-- 7.6 SOURCES DE FINANCEMENT -->
+  <div class="h3">7.6 Sources de financement mobilisables</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Source</th><th>Montant cible</th><th>Activation</th><th>Conditions / contreparties</th></tr></thead>
+      <tbody>
+        <tr class="row-lumia"><td><strong>Apports en compte courant des 3 fondateurs</strong></td><td class="num-td">1 500 € × 3 = 4 500 €</td><td>M1</td><td>Couvre le pic de trésorerie. Aucune dilution.</td></tr>
+        <tr><td>Bourse French Tech Tremplin</td><td class="num-td">~30 000 € (subvention)</td><td>M6 (instruction longue)</td><td>Critères diversité / 1ʳᵉ entreprise. Lumia éligible (équipe MBA, projet innovant).</td></tr>
+        <tr><td>Prêt d'honneur Réseau Entreprendre / Initiative France</td><td class="num-td">5 000 – 15 000 €</td><td>M9 (post lancement)</td><td>Taux zéro, accompagnement mentor inclus. Sans garantie.</td></tr>
+        <tr><td>Bourse BPI French Tech Emergence</td><td class="num-td">jusqu'à 90 000 €</td><td>M12 (V2 amorcée)</td><td>Avance remboursable. Validation projet R&amp;D Cycles d'apprentissage.</td></tr>
+        <tr><td>Incubation école (MyDigitalSchool Booster)</td><td>Locaux + mentoring</td><td>M3</td><td>Sans coût cash. Apport en accompagnement et réseau.</td></tr>
+        <tr><td>Crowdfunding KissKissBankBank</td><td class="num-td">5 000 – 15 000 €</td><td>M9 (campagne lancement)</td><td>Pré-ventes Premium 6 mois. Levier marketing et financement.</td></tr>
+        <tr><td>Business angels (optionnel V2)</td><td class="num-td">50 000 – 150 000 €</td><td>M18 (preuve rétention)</td><td>Dilution maîtrisée &lt; 15% recommandée. Activée seulement si MRR &gt; 8 k€.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="dark-box">
+    <strong>Plan de financement retenu (réaliste · ne diluant pas l'équipe avant la preuve)</strong>&nbsp;: apports fondateurs 4 500 € en M1 + dépôt dossier French Tech Tremplin en M3 + prêt d'honneur Réseau Entreprendre en M9 + ouverture business angels conditionnée à MRR &gt; 8 000 € (M18 minimum). Ce séquencement protège l'équité de l'équipe et garantit la trésorerie sans engagement trop précoce.
+  </div>
+
+  <!-- 7.7 SEUIL DE RENTABILITÉ -->
+  <div class="h3">7.7 Seuil de rentabilité &amp; sensibilité</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Scénario de stress</th><th>Variable impactée</th><th>Impact sur seuil de rentabilité</th><th>Réponse</th></tr></thead>
+      <tbody>
+        <tr><td>Coût Gemini +50%</td><td>Coût variable 3,40 € → 5,10 €</td><td>Seuil passe de 400 à ~510 abonnés (+27%)</td><td>Migration Mistral prototypée (3 j dev). Quota strict 300 req/mois.</td></tr>
+        <tr><td>ARPU à 7,99 € (élasticité prix)</td><td>Marge unitaire passe à 50%</td><td>Seuil passe à ~530 abonnés</td><td>Maintenir 9,99 € · stratégie de valeur perçue plutôt que prix bas</td></tr>
+        <tr><td>Churn à 8% (vs 5% cible)</td><td>LTV passe à 40 € (vs 60 €)</td><td>Délai pour atteindre 400 abonnés +6 mois</td><td>Sprint rétention M6 + parrainage actif dès M3</td></tr>
+        <tr class="row-lumia"><td>Augmentation usage moyen × 2,5</td><td>Coût variable monte à ~10 €/user actif</td><td>Marge négative</td><td>Quota 300 req inclus Premium · facturation au-delà</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-bar">
+    <strong>Souveraineté numérique &amp; résilience.</strong> L'architecture est <em>LLM-agnostique</em> (dépendance Gemini abstraite côté serveur). Une migration vers Mistral Large ou LLaMA 3.1 self-hosted est estimée à 3 jours de développement. Cette résilience technique a un impact financier direct&nbsp;: elle plafonne le risque coût variable et constitue un argument commercial pour les futurs clients B2B sensibles à la souveraineté.
+  </div>
+
+  <!-- 7.8 PERSPECTIVES & HYPOTHÈSES RENTABILITÉ -->
+  <div class="h3">7.8 Perspectives d'évolution &amp; hypothèses de rentabilité long terme</div>
+  <div class="prose">
+    <p>Au-delà des 24 mois couverts par ce business plan, plusieurs leviers ouvrent des perspectives de croissance significatives. La <strong>diversification produit</strong> (modules budget, gestion enfants, intégrations pro Microsoft 365/Google Workspace) augmente la valeur perçue par utilisateur et permet une montée tarifaire progressive. L'<strong>expansion B2B</strong> (licences universités et QVT entreprises) génère un revenu à plus forte marge unitaire (~75-80%) et moins sensible au churn individuel. Enfin, l'<strong>expansion géographique</strong> à l'Europe francophone (Belgique, Suisse, Luxembourg, Québec) double le marché adressable sans surcoût technologique majeur.</p>
+    <p>La rentabilité long terme (horizon 36-60 mois) suppose un MRR &gt; 30 000 € et un LTV/CAC &gt; 5. Ces seuils correspondent à une cohorte de ~3 000 abonnés Premium individuels, ~500 plans famille, et 2-3 contrats B2B annuels signés. À ce stade, l'EBE annuel projeté atteint 80-120 k€, ouvrant la possibilité d'embaucher (CTO ad-interim, head of growth) et de structurer une vraie société indépendante.</p>
+  </div>
+
+  <div class="info-bar">
+    <strong>Conclusion du chapitre 7.</strong> Le modèle économique de Lumia est solide unitairement (60% de marge brute) et nécessite un cash out de pic limité (~4 850 €). Le financement combiné des apports fondateurs, des dispositifs publics (French Tech, BPI, Réseau Entreprendre) et d'un crowdfunding ciblé permet de tenir la trajectoire sans dilution prématurée. Les zones d'incertitude résiduelles (cf. chapitre 8) sont quantifiées et accompagnées de plans de réponse.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     CHAPITRE 8 — SYNTHÈSE & SUITES (zones d'incertitude → Jalon 3)
+     ══════════════════════════════════════════════════ -->
+<section id="synthese" class="page">
+<div class="page-inner">
+  <div class="stag">08 Synthèse &amp; suites</div>
+  <h2 class="stitle">Synthèse, zones d'incertitude et préparation du Jalon 3</h2>
+
+  <div class="edito">
+    <div class="edito-lbl">Édito · Synthèse</div>
+    <p>« Ce business plan est l'engagement collectif que nous prenons devant le jury Jalon 2 et devant nous-mêmes. Il n'élimine pas l'incertitude — aucun business plan ne le peut — mais il l'identifie, la quantifie et propose pour chaque zone grise une réponse opérationnelle planifiée pour le Jalon 3. La suite, c'est l'exécution. Et nous y sommes prêts. »</p>
+    <div class="edito-sig">— Antonin, Maëlane &amp; Issa · équipe Lumia</div>
+  </div>
+
+  <!-- 8.1 SYNTHÈSE EXÉCUTIVE -->
+  <div class="h3">8.1 Synthèse exécutive en une page</div>
+  <div class="stats-grid">
+    <div class="stat accent"><div class="stat-n">3,1 M</div><div class="stat-l">Marché adressable femmes 25-40 ans avec enfants en France</div><div class="stat-s">INSEE 2025</div></div>
+    <div class="stat"><div class="stat-n">400</div><div class="stat-l">Abonnés Premium au seuil de rentabilité unitaire</div><div class="stat-s">Soit 0,013% du marché</div></div>
+    <div class="stat"><div class="stat-n">60%</div><div class="stat-l">Marge brute unitaire validée Jalon 1</div><div class="stat-s">ARPU 9,99 € · Coût variable ~4 €</div></div>
+    <div class="stat"><div class="stat-n">9 mois</div><div class="stat-l">Délai entre Jalon 2 et lancement public V1</div><div class="stat-s">Phase 1 (3m) + Phase 2 (6m)</div></div>
+    <div class="stat"><div class="stat-n">~93 K€</div><div class="stat-l">Effort total valorisé Phase 1+2</div><div class="stat-s">Cash out réel ~4 800 €</div></div>
+    <div class="stat accent"><div class="stat-n">21 K€</div><div class="stat-l">Cash out total cumulé sur 24 mois</div><div class="stat-s">Couvert par apports + dispositifs publics</div></div>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Dimension</th><th>Engagement Jalon 2</th></tr></thead>
+      <tbody>
+        <tr><td>Cible cœur</td><td>Femmes actives 28-40 ans, CSP+, 1-2 enfants (~1,4 M en France)</td></tr>
+        <tr><td>Proposition de valeur</td><td>Réducteur de charge mentale via IA proactive 2 niveaux (détection + cycles)</td></tr>
+        <tr><td>Modèle économique</td><td>Freemium + Premium 9,99 €/mois · plan famille 14,99 € en V2 · licences B2B V3</td></tr>
+        <tr><td>Roadmap</td><td>Lancement V1 fin M9 · V2 amorcée M15 · expansion B2B M22+</td></tr>
+        <tr><td>Capacité équipe</td><td>3 personnes en alternance · ~165 story points / 6 sprints · marge 30% imprévus</td></tr>
+        <tr><td>Financement</td><td>Apports 4 500 € + French Tech + Réseau Entreprendre + crowdfunding lancement</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 8.2 ZONES D'INCERTITUDE -->
+  <div class="h3">8.2 Zones d'incertitude résiduelles</div>
+  <p class="intro-text">Le guide MyDigitalSchool stipule explicitement&nbsp;: « certaines zones d'incertitude peuvent subsister. Elles doivent être clairement identifiées et accompagnées de pistes pour y répondre dans la suite du projet, notamment lors du Jalon 3. » Voici notre identification.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Zone d'incertitude</th><th>Pourquoi elle existe</th><th>Piste pour le Jalon 3</th><th>Métier pilote</th></tr></thead>
+      <tbody>
+        <tr class="row-lumia">
+          <td><strong>Rétention J30 réelle</strong></td>
+          <td>Aucun benchmark interne. Estimation à 40% basée sur médiane secteur, à confirmer cohorte M3-M9.</td>
+          <td>Mesure mensuelle, sprint dédié rétention si &lt; 35%, ajustement onboarding</td>
+          <td>Issa + Maëlane</td>
+        </tr>
+        <tr class="row-lumia">
+          <td><strong>CAC effectif TikTok Ads</strong></td>
+          <td>Pas encore testé en Ads payantes. Hypothèse 5 €, fourchette 3-12 € observée dans le secteur.</td>
+          <td>Test 200 € en M7-M8 sur 2 angles, mesure CPA, décision scale ou bascule prescripteurs</td>
+          <td>Antonin</td>
+        </tr>
+        <tr>
+          <td>Coût variable Gemini à 1 000 users</td>
+          <td>Estimation 3,40 €/user actif basée sur usage MVP (faible volume), à valider à grande échelle.</td>
+          <td>Suivi mensuel facturation Google, déclenchement migration Mistral si coût &gt; 5 €</td>
+          <td>Issa</td>
+        </tr>
+        <tr>
+          <td>Acceptation utilisateur de la proactivité</td>
+          <td>Risque que les notifications proactives soient perçues comme intrusives (vs anticipatives).</td>
+          <td>Tests utilisateurs dédiés sur intensité notification, A/B test fréquence</td>
+          <td>Maëlane</td>
+        </tr>
+        <tr>
+          <td>Conformité IA Act application complète</td>
+          <td>Cadre réglementaire en cours de stabilisation, jurisprudence inexistante en 2025-2026.</td>
+          <td>Revue juridique semestrielle, veille active CNIL, documentation model card mise à jour</td>
+          <td>Antonin + conseil ext.</td>
+        </tr>
+        <tr>
+          <td>Volonté de payer Plan famille</td>
+          <td>Hypothèse à 14,99 €/mois non testée. Aucun benchmark direct (segment niche).</td>
+          <td>Sondage cohorte Premium V1 fin M12, beta plan famille fermée M15</td>
+          <td>Antonin</td>
+        </tr>
+        <tr>
+          <td>Pénétration B2B (universités, QVT)</td>
+          <td>Cycle commercial B2B long (6-12 mois), pas d'expérience équipe à ce jour.</td>
+          <td>Démarrage prospection M20, accompagnement mentor entrepreneur senior</td>
+          <td>Antonin</td>
+        </tr>
+        <tr>
+          <td>Capacité d'exécution équipe en alternance</td>
+          <td>Charge cumulée (MBA + alternance + Lumia) potentiellement insoutenable sur 24 mois.</td>
+          <td>Rétrospective mensuelle dédiée bien-être équipe, recrutement junior dev possible M15</td>
+          <td>Équipe collective</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 8.3 PLAN D'ACTION JALON 3 -->
+  <div class="h3">8.3 Plan d'action vers le Jalon 3</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Période</th><th>Livrable Jalon 3 préparé</th><th>Lien avec le business plan Jalon 2</th></tr></thead>
+      <tbody>
+        <tr><td>M1 → M9</td><td>Solution V1 développée + déployée publiquement</td><td>Chapitres 4, 5, 6 · roadmap, équipe, chiffrage</td></tr>
+        <tr><td>M3</td><td>Dossier marketing &amp; analyse environnement actualisé (Antonin)</td><td>Chapitres 1, 3 · contexte et stratégie</td></tr>
+        <tr><td>M6</td><td>Dossier UX/UI complet (Maëlane) avec design system v1.0 et tests</td><td>Chapitres 2, 4 · personas et roadmap design</td></tr>
+        <tr><td>M9 → M12</td><td>Mesure des KPIs lancement, premiers ajustements rétention</td><td>Chapitre 3 · KPIs et boucle d'amélioration</td></tr>
+        <tr class="row-hl"><td>M12</td><td>Dossier individuel DFS (Issa) avec architecture, tests, déploiement</td><td>Chapitres 4, 5, 6 · backlog, infra, chiffrage technique</td></tr>
+        <tr><td>M15 → M20</td><td>V2 (app native, plan famille) en bêta puis production</td><td>Chapitres 3, 4, 6, 7 · stratégie, roadmap, chiffrage V2, modèle</td></tr>
+        <tr><td>M21 → M24</td><td>Business plan actualisé pour Jalon 3 sans zone d'incertitude résiduelle</td><td>Document complet réactualisé</td></tr>
+        <tr><td>Printemps 2027</td><td>Soutenance collective Jalon 3 + dossiers individuels</td><td>Aboutissement de ce business plan</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 8.4 ENGAGEMENT FINAL -->
+  <div class="h3">8.4 Engagement de l'équipe</div>
+  <div class="dark-box">
+    Nous, Antonin, Maëlane et Issa, certifions que ce business plan reflète notre compréhension la plus aboutie du projet Lumia à la date du Jalon 2. Les chiffres présentés sont sourcés et argumentés. Les zones d'incertitude sont identifiées et pour chacune, une piste de réponse est planifiée. <strong>Nous nous engageons à maintenir ce document vivant</strong>&nbsp;: il sera actualisé trimestriellement et constituera la base de la soutenance collective Jalon 3.
+  </div>
+
+  <div class="callout" style="margin-top:1.4rem">
+    <span class="callout-label">Remerciements</span>
+    <span>Merci aux 65 répondants au questionnaire, aux 10 interviewé·e·s, aux 13 testeurs et testeuses du MVP, aux mentors et formateurs référents qui nous ont accompagnés depuis le Jalon 0, et à toutes celles et ceux qui croient avec nous qu'un assistant peut vraiment alléger une vie. Lumia n'existerait pas sans ces 88 voix.</span>
+  </div>
+
+  <div class="info-bar" style="margin-top:1.2rem">
+    <strong>Lien continu vers le Jalon 1.</strong> Ce business plan vit en complément du <a href="Dossier-principal.html" style="color:var(--rose-deep);text-decoration:underline">dossier technique Jalon 1</a> et du <a href="business-model.html" style="color:var(--rose-deep);text-decoration:underline">business model</a>, qui restent les sources de vérité pour le détail des études, des tests utilisateurs et des choix techniques.
+  </div>
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     FOOTER
+     ══════════════════════════════════════════════════ -->
+<footer style="background:var(--dark);color:rgba(255,255,255,0.6);padding:2rem 3rem;font-size:0.7rem;line-height:1.6">
+  <div style="max-width:920px;display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap">
+    <div>
+      <div style="font-family:var(--font-display);font-size:1.2rem;color:var(--white)">Lumia<span style="color:var(--rose)">.</span></div>
+      <div style="margin-top:0.3rem">Business Plan · Jalon 2 · MyDigitalSchool MBA 2024–2026</div>
+    </div>
+    <div>
+      <div style="color:var(--rose);font-weight:600;margin-bottom:0.3rem">Équipe</div>
+      <div>Antonin · Entrepreneuriat &amp; Digital Business</div>
+      <div>Maëlane · UX/UI Design</div>
+      <div>Issa · Développeur Full Stack</div>
+    </div>
+    <div>
+      <div style="color:var(--rose);font-weight:600;margin-bottom:0.3rem">Ressources</div>
+      <div><a href="Dossier-principal.html" style="color:rgba(255,255,255,0.7)">Dossier technique Jalon 1</a></div>
+      <div><a href="business-model.html" style="color:rgba(255,255,255,0.7)">Business model</a></div>
+      <div><a href="https://vocal-assistant-two.vercel.app" target="_blank" style="color:rgba(255,255,255,0.7)">MVP live</a></div>
+    </div>
+  </div>
+  <div style="max-width:920px;margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.08);font-size:0.62rem;color:rgba(255,255,255,0.4)">
+    Document remis dans le cadre de l'évaluation collective Jalon 2 (M1). Aucun plan type ni nombre de pages n'est imposé · Aucune zone d'incertitude n'est dissimulée · Tous les chiffres présentés sont sourcés et argumentés conformément au guide de référence My Digital Start-up 2025-2027.
+  </div>
+</footer>
+
+<script>
+// Mise en surbrillance du lien actif dans la sidebar au scroll
+(function () {
+  var sections = document.querySelectorAll('section[id], #cover');
+  var links = document.querySelectorAll('.sb-nav .nav-link');
+  function onScroll() {
+    var pos = window.scrollY + 80;
+    var current = '';
+    sections.forEach(function (s) {
+      if (s.offsetTop <= pos) current = s.id;
+    });
+    links.forEach(function (l) {
+      l.classList.remove('active');
+      if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</main>
+</body>
+</html>

@@ -4,9 +4,9 @@
     {
       "name": "vocal-assistant",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["start"],
-      "port": 3001,
-      "autoPort": true
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "autoPort": false
     }
   ]
 }

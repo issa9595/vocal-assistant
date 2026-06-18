@@ -1,87 +1,74 @@
 "use client";
 
 import Link from "next/link";
+import { Reveal } from "./Reveal";
+import { ArrowRightIcon, WavesIcon } from "./Icons";
 
 /**
- * Section CTA finale
- * Titre + texte + slogan + bouton
- * Background avec dégradé vert/bleu
+ * CTA finale — grand panneau en verre rose, orbes vivants, sur l'aurore.
  */
 export default function FinalCTA() {
   return (
-    <section className="
-      py-16 md:py-24 lg:py-32
-      bg-[linear-gradient(135deg,#f4b4c8_0%,#fcecd3_100%)]
-    ">
-      <div className="
-        max-w-6xl
-        mx-auto
-        px-4 md:px-8 lg:px-12
-      ">
+    <section className="py-16 md:py-24 lg:py-28 px-4 md:px-8 lg:px-12">
+      <Reveal className="max-w-5xl mx-auto">
         <div className="
-          max-w-4xl
-          mx-auto
+          relative overflow-hidden
+          glass-pink glass-grain glass-highlight
+          rounded-[2rem] md:rounded-[2.5rem]
+          px-6 md:px-12 lg:px-16
+          py-16 md:py-24
           text-center
-          space-y-8 md:space-y-12
         ">
-          {/* Titre */}
-          <h2 className="
-            text-3xl md:text-4xl lg:text-5xl xl:text-6xl
-            font-bold
-            text-(--color-brand-black)
-          ">
-            Lumia n'est pas qu'un assistant. C'est votre futur allié du quotidien.
-          </h2>
+          {/* Orbes vivants (enfermés dans une couche de clip arrondie) */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden [transform:translateZ(0)]">
+            <div className="landing-orb absolute -top-20 -left-16 w-72 h-72 rounded-full blur-3xl bg-[radial-gradient(circle,#f4b4c8_0%,transparent_70%)]" />
+            <div className="landing-orb absolute -bottom-24 -right-16 w-80 h-80 rounded-full blur-3xl bg-[radial-gradient(circle,#c5a6cf_0%,transparent_70%)]" style={{ animationDelay: "1.5s" }} />
+          </div>
 
-          {/* Texte */}
-          <p className="
-            text-lg md:text-xl lg:text-2xl
-            landing-muted
-            leading-relaxed
-            font-light
-          ">
-            Le repas est organisé. La réunion est prête. La facture est relancée. Vous respirez.
-          </p>
-
-          {/* Slogan */}
-          <p className="
-            text-xl md:text-2xl lg:text-3xl
-            text-(--color-brand-black)
-            font-semibold
-          ">
-            Arrêtez de penser votre vie.{" "}
-            <span className="landing-gradient-text">
-              Commencez à la vivre.
+          <div className="relative max-w-3xl mx-auto flex flex-col items-center gap-8 md:gap-10">
+            <span className="w-16 h-16 rounded-2xl glass glass-highlight flex items-center justify-center text-(--color-brand-black)">
+              <WavesIcon size={30} />
             </span>
-          </p>
 
-          {/* Bouton */}
-          <div className="pt-4 md:pt-8">
+            <h2 className="
+              text-3xl md:text-5xl lg:text-6xl
+              font-bold text-(--color-brand-black) tracking-tight leading-[1.05]
+            ">
+              Lumia n&apos;est pas qu&apos;un assistant.
+              <br className="hidden md:block" />{" "}
+              <span className="landing-gradient-text">Votre futur allié du quotidien.</span>
+            </h2>
+
+            <p className="text-lg md:text-xl landing-muted leading-relaxed font-light">
+              Le repas est organisé. La réunion est prête. La facture est relancée. Vous respirez.
+            </p>
+
+            <p className="text-xl md:text-2xl lg:text-3xl text-(--color-brand-black) font-semibold">
+              Arrêtez de penser votre vie.{" "}
+              <span className="landing-gradient-text">Commencez à la vivre.</span>
+            </p>
+
             <Link
               href="/app"
               className="
-                inline-block
-                px-6 md:px-8 lg:px-10
-                py-2.5 md:py-3 lg:py-3.5
-                bg-(--color-brand-white)
-                text-(--color-brand-black)
-                font-semibold
-                text-sm md:text-base lg:text-lg
+                group inline-flex items-center gap-2.5
+                px-8 py-4
                 rounded-full
-                shadow-soft
-                hover:shadow-medium
-                hover:bg-(--surface-soft)
+                bg-(--color-brand-black) text-(--color-brand-white)
+                font-semibold text-base md:text-lg
+                shadow-[0_12px_34px_-10px_rgba(61,61,61,0.65)]
+                hover:shadow-[0_18px_44px_-12px_rgba(61,61,61,0.75)]
+                hover:-translate-y-0.5 active:translate-y-0
                 transition-all duration-300
-                transform hover:scale-[1.02]
-                active:scale-[0.98]
+                cursor-pointer
               "
             >
-              Accéder à l'app
+              Accéder à l&apos;app
+              <ArrowRightIcon size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
-

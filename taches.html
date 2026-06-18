@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumia · Tâches Jalon 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════
+   LUMIA · Checklist opérationnelle Jalon 2
+   ══════════════════════════════════════════════════ */
+:root {
+  --rose:        #f5b5c9;
+  --rose-deep:   #c0003a;
+  --rose-mid:    #e8829d;
+  --rose-light:  #fce8ef;
+  --rose-ultra:  #fef6f9;
+  --cream:       #fdf8f8;
+  --purple:      #c5a6cf;
+  --purple-light:#f0eaf6;
+  --teal:        #9dc0bc;
+  --teal-light:  #e8f3f2;
+  --peach:       #f6b9ae;
+  --peach-light: #fdf0ec;
+  --dark:        #1d1d1b;
+  --dark-2:      #3d3d3d;
+  --muted:       #8a8078;
+  --border:      #ede5ea;
+  --white:       #ffffff;
+  --sidebar-w:   220px;
+  --radius:      8px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 13px; }
+body {
+  font-family: var(--font-body);
+  color: var(--dark);
+  background: var(--cream);
+  display: flex;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+ul, ol { list-style: none; }
+button { font-family: inherit; }
+
+/* ── SIDEBAR ──────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--dark);
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 1.2rem;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sb-logo {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.sb-logo span { color: var(--rose); }
+.sb-sub {
+  font-size: 0.6rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-top: 0.2rem;
+  margin-bottom: 1.6rem;
+}
+.sb-nav { flex: 1; }
+.sb-nav li { margin-bottom: 0.05rem; }
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  color: #6b6060;
+  transition: all 0.15s;
+}
+.nav-link:hover { color: #bbb; }
+.nav-link.active { background: rgba(245,181,201,.14); color: var(--rose); font-weight: 500; }
+.nav-count {
+  font-size: 0.58rem;
+  color: var(--muted);
+  background: rgba(255,255,255,0.04);
+  padding: 0.1rem 0.4rem;
+  border-radius: 100px;
+  font-variant-numeric: tabular-nums;
+}
+.nav-link.active .nav-count { background: rgba(245,181,201,.2); color: var(--rose); }
+.sb-footer {
+  font-size: 0.58rem;
+  color: #3a3030;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 1.5rem;
+  line-height: 1.8;
+}
+
+/* ── MAIN ─────────────────────────────────────── */
+.main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
+
+/* ── HEADER (sticky) ──────────────────────────── */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+.topbar-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--dark);
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+.topbar-meta { font-size: 0.66rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.12em; }
+
+.progress-wrap {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.progress-track {
+  flex: 1;
+  height: 8px;
+  background: var(--border);
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--rose) 0%, var(--rose-mid) 100%);
+  width: 0%;
+  transition: width 0.4s ease;
+}
+.progress-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--dark);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.progress-detail { font-size: 0.62rem; color: var(--muted); white-space: nowrap; }
+
+.topbar-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.tb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 100px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--dark-2);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.tb-btn:hover { border-color: var(--rose-mid); color: var(--rose-deep); }
+.tb-btn.primary {
+  background: var(--dark);
+  color: var(--white);
+  border-color: var(--dark);
+}
+.tb-btn.primary:hover { background: var(--rose-deep); border-color: var(--rose-deep); color: var(--white); }
+.tb-btn.danger:hover { border-color: #dc2626; color: #dc2626; }
+
+/* ── FILTER BAR ──────────────────────────────── */
+.filter-bar {
+  padding: 0.7rem 2.5rem;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 0.7rem;
+}
+.filter-lbl {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  font-weight: 600;
+  margin-right: 0.3rem;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 100px;
+  font-size: 0.66rem;
+  font-weight: 500;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  color: var(--dark-2);
+  cursor: pointer;
+  transition: all 0.15s;
+  user-select: none;
+}
+.chip:hover { border-color: var(--rose-mid); }
+.chip.active {
+  background: var(--dark);
+  color: var(--white);
+  border-color: var(--dark);
+}
+.chip-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot-p0 { background: #dc2626; }
+.dot-p1 { background: #f59e0b; }
+.dot-p2 { background: #3b82f6; }
+.dot-a { background: var(--rose-mid); }
+.dot-m { background: var(--purple); }
+.dot-i { background: var(--teal); }
+.dot-e { background: var(--dark); }
+
+/* ── SECTION ──────────────────────────────────── */
+.section {
+  padding: 2rem 2.5rem 2.4rem;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 7rem;
+}
+.section-inner { max-width: 900px; }
+.s-tag {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--rose-deep);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.s-title {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--dark);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 0.4rem;
+}
+.s-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+  max-width: 680px;
+}
+.s-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.7rem;
+  background: var(--rose-ultra);
+  border: 1px solid var(--rose-light);
+  border-radius: 100px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--rose-deep);
+  margin-bottom: 1rem;
+}
+.s-progress-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--rose-mid);
+}
+.section.is-complete .s-progress { background: #dcfce7; color: #15803d; border-color: #86efac; }
+.section.is-complete .s-progress-dot { background: #15803d; }
+
+.subgroup {
+  margin-top: 1rem;
+  margin-bottom: 0.4rem;
+}
+.subgroup-h {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.subgroup-h::before {
+  content: '';
+  width: 12px; height: 2px;
+  background: var(--rose-mid);
+  border-radius: 100px;
+}
+
+/* ── TÂCHE ────────────────────────────────────── */
+.task {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.6rem 0.9rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 0.35rem;
+  transition: background 0.15s, opacity 0.15s, transform 0.15s;
+  cursor: pointer;
+}
+.task:hover { border-color: var(--rose-mid); }
+.task.done {
+  background: rgba(220, 252, 231, 0.35);
+  border-color: #bbf7d0;
+}
+.task.done .task-text { color: var(--muted); text-decoration: line-through; text-decoration-color: rgba(138, 128, 120, 0.5); }
+.task.hidden { display: none; }
+
+.task-cb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--border);
+  border-radius: 5px;
+  background: var(--white);
+  cursor: pointer;
+  flex-shrink: 0;
+  margin-top: 0.18rem;
+  position: relative;
+  transition: all 0.15s;
+}
+.task-cb:hover { border-color: var(--rose-mid); }
+.task-cb:checked {
+  background: var(--rose-deep);
+  border-color: var(--rose-deep);
+}
+.task-cb:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px; top: 1px;
+  width: 5px; height: 10px;
+  border: solid var(--white);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.task-body { flex: 1; min-width: 0; }
+.task-text {
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--dark);
+}
+.task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.08rem 0.45rem;
+  border-radius: 100px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.tag-p0 { background: #fee2e2; color: #dc2626; }
+.tag-p1 { background: #fef3c7; color: #b45309; }
+.tag-p2 { background: #dbeafe; color: #1d4ed8; }
+.tag-a  { background: var(--rose-light); color: var(--rose-deep); }
+.tag-m  { background: var(--purple-light); color: #6d28d9; }
+.tag-i  { background: var(--teal-light); color: #166534; }
+.tag-e  { background: #1d1d1b; color: var(--white); }
+.tag-sp { background: var(--cream); color: var(--dark-2); border: 1px solid var(--border); }
+.tag-eta { background: var(--peach-light); color: #b45309; }
+
+/* ── KPI TABLE ───────────────────────────────── */
+.kpi-tbl-wrap {
+  overflow-x: auto;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-top: 0.6rem;
+}
+.kpi-tbl { width: 100%; border-collapse: collapse; font-size: 0.74rem; }
+.kpi-tbl th {
+  background: var(--dark);
+  color: var(--white);
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.kpi-tbl td {
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--dark-2);
+}
+.kpi-tbl tr:last-child td { border-bottom: none; }
+.kpi-tbl td.num { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; color: var(--dark); }
+
+/* ── GATES TABLE ─────────────────────────────── */
+.gate-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7rem;
+}
+.gate {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.gate::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--rose-mid);
+}
+.gate-h {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: baseline;
+  margin-bottom: 0.4rem;
+}
+.gate-title { font-size: 0.82rem; font-weight: 700; color: var(--dark); }
+.gate-when { font-size: 0.62rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+.gate-crit { font-size: 0.72rem; color: var(--dark-2); line-height: 1.5; }
+
+/* ── EMPTY / RESET ───────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--dark);
+  color: var(--white);
+  padding: 0.7rem 1.2rem;
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 200;
+  box-shadow: 0 8px 24px rgba(29,29,27,0.2);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast .check { color: var(--rose); margin-right: 0.4rem; font-weight: 700; }
+
+/* ── PRINT ───────────────────────────────────── */
+@media print {
+  .sidebar, .topbar-actions, .filter-bar { display: none; }
+  .main { margin-left: 0; }
+  .topbar { position: static; }
+  .task { break-inside: avoid; }
+  .section { break-inside: avoid; }
+}
+@media (max-width: 900px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .topbar, .filter-bar, .section { padding-left: 1.2rem; padding-right: 1.2rem; }
+  .gate-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sb-logo">
+    <svg viewBox="115 90 610 420" width="48" height="34" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg1" x1="270" y1="499" x2="270" y2="95" gradientTransform="translate(796 4) rotate(-179.4) scale(.93 -1) skewX(-.09)" gradientUnits="userSpaceOnUse"><stop offset=".32" stop-color="#f0b5c9"/><stop offset="1" stop-color="#f8cdbc"/></linearGradient><linearGradient id="lg2" x1="532" y1="98" x2="532" y2="502" gradientTransform="translate(796 4) rotate(-179.4) scale(.93 -1) skewX(-.09)" gradientUnits="userSpaceOnUse"><stop offset=".22" stop-color="#efb4c8"/><stop offset="1" stop-color="#f8cebd"/></linearGradient></defs><path fill="url(#lg1)" d="M366.79,295.67v202.9s107.68,0,107.68,0v-202.9c0-61.83,27.27-87.96,67.49-87.96,40.19,0,67.49,26.14,67.49,87.96v202.9s107.68,0,107.68,0v-202.9c0-131.59-70.36-198.97-175.18-198.97-104.82,0-175.18,66.6-175.18,198.97Z"/><path fill="url(#lg2)" d="M124.74,295.67v202.9s107.68,0,107.68,0v-202.9c0-61.83,27.27-87.96,67.49-87.96,40.19,0,67.49,26.14,67.49,87.96v202.9s107.68,0,107.68,0v-202.9c0-131.59-70.36-198.97-175.18-198.97-104.82,0-175.18,66.6-175.18,198.97Z"/></svg>
+    <div style="margin-top:0.4rem">Lumia<span>.</span></div>
+  </div>
+  <div class="sb-sub">Tâches · Jalon 2</div>
+  <ul class="sb-nav" id="sidebarNav">
+    <li><a href="#done" class="nav-link active" data-section="done"><span>✓ Production J2</span><span class="nav-count" data-count-for="done">0/0</span></a></li>
+    <li><a href="#s0" class="nav-link" data-section="s0"><span>00 · Avant dépôt</span><span class="nav-count" data-count-for="s0">0/0</span></a></li>
+    <li><a href="#s1" class="nav-link" data-section="s1"><span>01 · Conception M1-M3</span><span class="nav-count" data-count-for="s1">0/0</span></a></li>
+    <li><a href="#s2" class="nav-link" data-section="s2"><span>02 · Production M3-M9</span><span class="nav-count" data-count-for="s2">0/0</span></a></li>
+    <li><a href="#s3" class="nav-link" data-section="s3"><span>03 · Gates de décision</span><span class="nav-count" data-count-for="s3">0/0</span></a></li>
+    <li><a href="#s4" class="nav-link" data-section="s4"><span>04 · Pré-lancement</span><span class="nav-count" data-count-for="s4">0/0</span></a></li>
+    <li><a href="#s5" class="nav-link" data-section="s5"><span>05 · Financement</span><span class="nav-count" data-count-for="s5">0/0</span></a></li>
+    <li><a href="#s6" class="nav-link" data-section="s6"><span>06 · Suivi &amp; gouvernance</span><span class="nav-count" data-count-for="s6">0/0</span></a></li>
+    <li><a href="#s7" class="nav-link" data-section="s7"><span>07 · Préparation Jalon 3</span><span class="nav-count" data-count-for="s7">0/0</span></a></li>
+    <li><a href="#kpi" class="nav-link" data-section="kpi"><span>KPIs cibles</span></a></li>
+    <li style="margin-top:0.8rem;padding-top:0.6rem;border-top:1px solid rgba(255,255,255,0.08)">
+      <a href="business-plan.html" class="nav-link" style="color:var(--rose);font-weight:500">← Business Plan</a>
+    </li>
+    <li><a href="Dossier-principal.html" class="nav-link" style="color:var(--rose);font-weight:500">← Dossier Jalon 1</a></li>
+  </ul>
+  <div class="sb-footer">MyDigitalSchool<br>MBA 2024–2026</div>
+</nav>
+
+<main class="main">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div>
+    <div class="topbar-title">Checklist Jalon 2</div>
+    <div class="topbar-meta">Lumia · Cadrage &amp; préproduction</div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-track"><div class="progress-fill" id="globalFill"></div></div>
+    <div>
+      <div class="progress-label" id="globalLabel">0%</div>
+      <div class="progress-detail" id="globalDetail">0 / 0 tâches</div>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <button type="button" class="tb-btn" onclick="window.print()">Imprimer / PDF</button>
+    <button type="button" class="tb-btn danger" id="resetBtn">Réinitialiser</button>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filter-bar">
+  <span class="filter-lbl">Filtrer</span>
+  <span class="chip" data-filter-type="status" data-filter="all">Toutes</span>
+  <span class="chip" data-filter-type="status" data-filter="todo">À faire</span>
+  <span class="chip" data-filter-type="status" data-filter="done">Terminées</span>
+  <span style="width:1px;height:18px;background:var(--border);margin:0 0.4rem"></span>
+  <span class="filter-lbl">Priorité</span>
+  <span class="chip" data-filter-type="prio" data-filter="all">Toutes</span>
+  <span class="chip" data-filter-type="prio" data-filter="p0"><span class="chip-dot dot-p0"></span>P0</span>
+  <span class="chip" data-filter-type="prio" data-filter="p1"><span class="chip-dot dot-p1"></span>P1</span>
+  <span class="chip" data-filter-type="prio" data-filter="p2"><span class="chip-dot dot-p2"></span>P2</span>
+  <span style="width:1px;height:18px;background:var(--border);margin:0 0.4rem"></span>
+  <span class="filter-lbl">Responsable</span>
+  <span class="chip" data-filter-type="who" data-filter="all">Tous</span>
+  <span class="chip" data-filter-type="who" data-filter="a"><span class="chip-dot dot-a"></span>Antonin</span>
+  <span class="chip" data-filter-type="who" data-filter="m"><span class="chip-dot dot-m"></span>Maëlane</span>
+  <span class="chip" data-filter-type="who" data-filter="i"><span class="chip-dot dot-i"></span>Issa</span>
+  <span class="chip" data-filter-type="who" data-filter="e"><span class="chip-dot dot-e"></span>Équipe</span>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION DONE — PRODUCTION JALON 2 (déjà réalisé)
+     ══════════════════════════════════════════════════ -->
+<section id="done" class="section" data-section-id="done">
+  <div class="section-inner">
+    <div class="s-tag" style="color:#15803d">✓ Production Jalon 2</div>
+    <h2 class="s-title">Travail déjà réalisé · livrable Jalon 2</h2>
+    <p class="s-desc">Récapitulatif des actions effectuées pour produire le business plan Lumia et ses outils d'accompagnement. Toutes ces tâches sont marquées comme terminées.</p>
+    <div class="s-progress"><span class="s-progress-dot"></span><span data-section-progress="done">0 / 0</span></div>
+
+    <div class="subgroup-h">Analyse &amp; cadrage</div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-1" checked><label class="task-body" for="t-done-1"><div class="task-text">Analyse complète du guide MyDigitalStartup 2025-2027 (extraction exigences Jalon 2)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-2" checked><label class="task-body" for="t-done-2"><div class="task-text">Identification des 8 critères d'évaluation Jalon 2 et de leurs livrables attendus</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-3" checked><label class="task-body" for="t-done-3"><div class="task-text">Plan détaillé Jalon 2 (8 chapitres, dépendances, ordre d'exécution)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-4" checked><label class="task-body" for="t-done-4"><div class="task-text">Choix du format de livrable : HTML autonome aligné sur la charte Jalon 1</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+
+    <div class="subgroup-h">Charte &amp; squelette technique</div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-5" checked><label class="task-body" for="t-done-5"><div class="task-text">Création du squelette <code>business-plan.html</code> (head, body, sidebar fixe, 8 sections)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-6" checked><label class="task-body" for="t-done-6"><div class="task-text">Reprise de la charte Lumia (palette rose/crème/violet/teal/pêche, DM Serif + DM Sans) depuis le Dossier Jalon 1</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="e"><input type="checkbox" class="task-cb" id="t-done-7" checked><label class="task-body" for="t-done-7"><div class="task-text">Sidebar de navigation 8 chapitres avec highlight de scroll JS</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-e">Équipe</span></div></label></div>
+
+    <div class="subgroup-h">Rédaction des 8 chapitres du business plan</div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-8" checked><label class="task-body" for="t-done-8"><div class="task-text">Chapitre 1 — Contexte &amp; opportunité (marché, tendances, environnement PESTEL, édito d'introduction)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-9" checked><label class="task-body" for="t-done-9"><div class="task-text">Chapitre 2 — Cibles &amp; proposition de valeur (personas, Value Proposition Canvas, Golden Circle, triangle de positionnement SVG)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-10" checked><label class="task-body" for="t-done-10"><div class="task-text">Chapitre 3 — Stratégie de développement (commerciale, marketing, produit, objectifs SMARTE, dashboard KPIs, matrice de risques)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-11" checked><label class="task-body" for="t-done-11"><div class="task-text">Chapitre 4 — Roadmap 6-24 mois (Gantt CSS, 3 phases conception/production/lancement, sprints DFS, backlog user stories)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-12" checked><label class="task-body" for="t-done-12"><div class="task-text">Chapitre 5 — Organisation &amp; gouvernance (matrice RACI complète, rituels agiles, outils, reporting)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-13" checked><label class="task-body" for="t-done-13"><div class="task-text">Chapitre 6 — Chiffrage complet par dimension (marketing, UX, dev, DA, data, frais généraux, focus coûts DFS)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-14" checked><label class="task-body" for="t-done-14"><div class="task-text">Chapitre 7 — Financement &amp; modèle économique (sources de revenus, sources de financement, 3 scénarios, prévisions 12-24 mois, seuil de rentabilité)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-15" checked><label class="task-body" for="t-done-15"><div class="task-text">Chapitre 8 — Synthèse &amp; perspectives (passe finale forme, éditos par section, cohérence visuelle Jalon 1)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+
+    <div class="subgroup-h">Export PDF &amp; impression</div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-16" checked><label class="task-body" for="t-done-16"><div class="task-text">Bouton flottant « Exporter en PDF » + bouton secondaire sur la page de couverture</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="e"><input type="checkbox" class="task-cb" id="t-done-17" checked><label class="task-body" for="t-done-17"><div class="task-text">CSS <code>@media print</code> optimisé (masquage des contrôles, sauts de page, marges)</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-e">Équipe</span></div></label></div>
+
+    <div class="subgroup-h">Outils d'accompagnement</div>
+    <div class="task" data-prio="p1" data-who="e"><input type="checkbox" class="task-cb" id="t-done-18" checked><label class="task-body" for="t-done-18"><div class="task-text">Création de <code>taches.html</code> interactif (checkboxes persistantes localStorage, filtres, barre de progression)</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-done-19" checked><label class="task-body" for="t-done-19"><div class="task-text">Mise à jour d'<code>Instruction.md</code> avec traçabilité complète des actions Jalon 2</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 00 — AVANT DÉPÔT
+     ══════════════════════════════════════════════════ -->
+<section id="s0" class="section" data-section-id="s0">
+  <div class="section-inner">
+    <div class="s-tag">00 · Avant dépôt Jalon 2</div>
+    <h2 class="s-title">Finalisation du livrable</h2>
+    <p class="s-desc">Tâches à terminer impérativement avant le dépôt du business plan auprès de l'équipe pédagogique.</p>
+    <div class="s-progress"><span class="s-progress-dot"></span><span data-section-progress="s0">0 / 0</span></div>
+
+    <div class="subgroup-h">Relecture &amp; qualité</div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s0-1"><label class="task-body" for="t-s0-1"><div class="task-text">Relecture orthographe / syntaxe complète de <code>business-plan.html</code></div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s0-2"><label class="task-body" for="t-s0-2"><div class="task-text">Vérifier la cohérence des chiffres entre business-plan, Dossier Jalon 1 et business-model</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s0-3"><label class="task-body" for="t-s0-3"><div class="task-text">Tester le rendu PDF (Cmd+P → Enregistrer en PDF) sur Chrome ET Safari</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s0-4"><label class="task-body" for="t-s0-4"><div class="task-text">Vérifier que tous les liens internes (sidebar + cross-refs Jalon 1) fonctionnent</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="i"><input type="checkbox" class="task-cb" id="t-s0-5"><label class="task-body" for="t-s0-5"><div class="task-text">Tester l'affichage mobile responsive du business plan</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-i">Issa</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="a"><input type="checkbox" class="task-cb" id="t-s0-6"><label class="task-body" for="t-s0-6"><div class="task-text">Faire relire le dossier par un mentor externe avant dépôt</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-a">Antonin</span></div></label></div>
+
+    <div class="subgroup-h">Dépôt</div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s0-7"><label class="task-body" for="t-s0-7"><div class="task-text">Récupérer la date limite de dépôt auprès de l'équipe pédagogique</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s0-8"><label class="task-body" for="t-s0-8"><div class="task-text">Convertir <code>business-plan.html</code> en PDF final</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s0-9"><label class="task-body" for="t-s0-9"><div class="task-text">Déposer le PDF sur la plateforme MyDigitalSchool à la date communiquée</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s0-10"><label class="task-body" for="t-s0-10"><div class="task-text">Confirmer le bon dépôt par mail aux formateurs référents</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span></div></label></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 01 — CONCEPTION M1→M3
+     ══════════════════════════════════════════════════ -->
+<section id="s1" class="section" data-section-id="s1">
+  <div class="section-inner">
+    <div class="s-tag">01 · Phase Conception</div>
+    <h2 class="s-title">M1 → M3 · Cadrage &amp; specs</h2>
+    <p class="s-desc">Démarrage immédiat post-Jalon 2. Trois mois pour figer specs, design system et backlog avant d'entrer en production.</p>
+    <div class="s-progress"><span class="s-progress-dot"></span><span data-section-progress="s1">0 / 0</span></div>
+
+    <div class="subgroup-h">UX/UI · Maëlane</div>
+    <div class="task" data-prio="p0" data-who="m"><input type="checkbox" class="task-cb" id="t-s1-1"><label class="task-body" for="t-s1-1"><div class="task-text">UX Research V1 actualisée · 5 nouvelles interviews + analyse</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-m">Maëlane</span><span class="tag tag-sp">8 j/h</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="m"><input type="checkbox" class="task-cb" id="t-s1-2"><label class="task-body" for="t-s1-2"><div class="task-text">User flows V1 · onboarding, courses, agenda familial</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-m">Maëlane</span><span class="tag tag-sp">6 j/h</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="m"><input type="checkbox" class="task-cb" id="t-s1-3"><label class="task-body" for="t-s1-3"><div class="task-text">Arborescence finale V1 figée</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-m">Maëlane</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="m"><input type="checkbox" class="task-cb" id="t-s1-4"><label class="task-body" for="t-s1-4"><div class="task-text">Design System v1.0 (Figma) · tokens, composants, dev mode</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-m">Maëlane</span><span class="tag tag-sp">15 j/h</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="m"><input type="checkbox" class="task-cb" id="t-s1-5"><label class="task-body" for="t-s1-5"><div class="task-text">Wireframes haute fidélité V1 · 40+ écrans (démarrer fin M2)</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-m">Maëlane</span><span class="tag tag-sp">12 j/h</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="m"><input type="checkbox" class="task-cb" id="t-s1-6"><label class="task-body" for="t-s1-6"><div class="task-text">Prototype interactif Figma · 3 parcours clés</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-m">Maëlane</span><span class="tag tag-sp">5 j/h</span></div></label></div>
+
+    <div class="subgroup-h">Développement · Issa</div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s1-7"><label class="task-body" for="t-s1-7"><div class="task-text">Specs techniques V1 figées</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">5 j/h</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s1-8"><label class="task-body" for="t-s1-8"><div class="task-text">Architecture cible documentée · schémas + ADRs</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">5 j/h</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s1-9"><label class="task-body" for="t-s1-9"><div class="task-text">Setup environnement dev / staging / prod</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s1-10"><label class="task-body" for="t-s1-10"><div class="task-text">Mise en place CI/CD GitHub Actions</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">3 j/h</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="i"><input type="checkbox" class="task-cb" id="t-s1-11"><label class="task-body" for="t-s1-11"><div class="task-text">Setup monitoring Sentry + PostHog</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">2 j/h</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="i"><input type="checkbox" class="task-cb" id="t-s1-12"><label class="task-body" for="t-s1-12"><div class="task-text">Documentation README + guide install</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">1 j/h</span></div></label></div>
+
+    <div class="subgroup-h">Marketing &amp; business · Antonin</div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s1-13"><label class="task-body" for="t-s1-13"><div class="task-text">Veille concurrentielle actualisée (Feedly auto + benchmark)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span><span class="tag tag-sp">3 j/h</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s1-14"><label class="task-body" for="t-s1-14"><div class="task-text">Plan marketing 12 mois figé + calendrier éditorial</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span><span class="tag tag-sp">8 j/h</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s1-15"><label class="task-body" for="t-s1-15"><div class="task-text">Identifier 10 experts / prescripteurs à contacter</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span><span class="tag tag-sp">2 j/h</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="a"><input type="checkbox" class="task-cb" id="t-s1-16"><label class="task-body" for="t-s1-16"><div class="task-text">Création compte TikTok @lumia.app + 4 premières vidéos</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-a">Antonin</span><span class="tag tag-sp">4 j/h</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="a"><input type="checkbox" class="task-cb" id="t-s1-17"><label class="task-body" for="t-s1-17"><div class="task-text">Setup Brevo / Mailerlite (gratuit) pour drip email</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-a">Antonin</span><span class="tag tag-sp">2 j/h</span></div></label></div>
+    <div class="task" data-prio="p2" data-who="a"><input type="checkbox" class="task-cb" id="t-s1-18"><label class="task-body" for="t-s1-18"><div class="task-text">Réflexion sur le storytelling de marque (édito blog)</div><div class="task-meta"><span class="tag tag-p2">P2</span><span class="tag tag-a">Antonin</span><span class="tag tag-sp">3 j/h</span></div></label></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 02 — PRODUCTION M3→M9 (sprints)
+     ══════════════════════════════════════════════════ -->
+<section id="s2" class="section" data-section-id="s2">
+  <div class="section-inner">
+    <div class="s-tag">02 · Phase Production</div>
+    <h2 class="s-title">M3 → M9 · Build V1 en 6 sprints</h2>
+    <p class="s-desc">Sprints de 2 semaines. Vélocité cible 25-30 SP / sprint. Backlog complet documenté dans le chapitre 4 du business plan.</p>
+    <div class="s-progress"><span class="s-progress-dot"></span><span data-section-progress="s2">0 / 0</span></div>
+
+    <div class="subgroup-h">Sprint 1 (M3-M4) · Auth &amp; socle</div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-1"><label class="task-body" for="t-s2-1"><div class="task-text">AUTH-01 · Compte email + magic link</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">5 SP</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-2"><label class="task-body" for="t-s2-2"><div class="task-text">AUTH-02 · Google OAuth</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">3 SP</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-3"><label class="task-body" for="t-s2-3"><div class="task-text">AUTH-03 · RLS Supabase sur toutes les tables</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">5 SP</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-4"><label class="task-body" for="t-s2-4"><div class="task-text">COMP-02 · Politique de confidentialité + CGU</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">2 SP</span></div></label></div>
+
+    <div class="subgroup-h">Sprint 2 (M4-M5) · RGPD + cycles</div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-5"><label class="task-body" for="t-s2-5"><div class="task-text">AUTH-04 · Suppression compte + RGPD</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">8 SP</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-6"><label class="task-body" for="t-s2-6"><div class="task-text">CYCL-01 · Détection intention d'achat dans la voix</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">8 SP</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-7"><label class="task-body" for="t-s2-7"><div class="task-text">CYCL-02 · Marquer un item « acheté » + date</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">3 SP</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-8"><label class="task-body" for="t-s2-8"><div class="task-text">COMP-01 · Bannière consentement RGPD</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">3 SP</span></div></label></div>
+
+    <div class="subgroup-h">Sprint 3 (M5-M6) · Apprentissage</div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-9"><label class="task-body" for="t-s2-9"><div class="task-text">CYCL-03 · Calcul intervalle après 3 achats</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">13 SP</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-10"><label class="task-body" for="t-s2-10"><div class="task-text">CYCL-04 · Planification notification push 1 j avant</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">8 SP</span></div></label></div>
+
+    <div class="subgroup-h">Sprint 4 (M6-M7) · Apprentissage continu + famille</div>
+    <div class="task" data-prio="p1" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-11"><label class="task-body" for="t-s2-11"><div class="task-text">CYCL-05 · Ajustement intervalle au fil des achats</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">5 SP</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-12"><label class="task-body" for="t-s2-12"><div class="task-text">FAM-01 · Inviter un proche par lien</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">5 SP</span></div></label></div>
+
+    <div class="subgroup-h">Sprint 5 (M7-M8) · Agenda familial</div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-13"><label class="task-body" for="t-s2-13"><div class="task-text">FAM-02 · Sync événements partagés temps réel</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">13 SP</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-14"><label class="task-body" for="t-s2-14"><div class="task-text">FAM-03 · Attribution automatique IA tâche conjoint</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">8 SP</span></div></label></div>
+
+    <div class="subgroup-h">Sprint 6 (M8-M9) · Observabilité &amp; polish</div>
+    <div class="task" data-prio="p1" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-15"><label class="task-body" for="t-s2-15"><div class="task-text">FAM-04 · Notification de l'attribution</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">3 SP</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-16"><label class="task-body" for="t-s2-16"><div class="task-text">COMP-03 · Monitoring Sentry + logs structurés</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">5 SP</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-17"><label class="task-body" for="t-s2-17"><div class="task-text">COMP-04 · Dashboard KPI (PostHog)</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">8 SP</span></div></label></div>
+
+    <div class="subgroup-h">Tâches transverses Phase 2</div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-18"><label class="task-body" for="t-s2-18"><div class="task-text">UI V1 + intégration Design System (avec Maëlane)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">10 j/h</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-19"><label class="task-body" for="t-s2-19"><div class="task-text">Tests unitaires + E2E Playwright · couverture &gt; 70%</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">8 j/h</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="m"><input type="checkbox" class="task-cb" id="t-s2-20"><label class="task-body" for="t-s2-20"><div class="task-text">Tests utilisateurs V1 · 10 testeurs</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-m">Maëlane</span><span class="tag tag-sp">8 j/h</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="m"><input type="checkbox" class="task-cb" id="t-s2-21"><label class="task-body" for="t-s2-21"><div class="task-text">Audit accessibilité WCAG 2.1 AA</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-m">Maëlane</span><span class="tag tag-sp">4 j/h</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-22"><label class="task-body" for="t-s2-22"><div class="task-text">Mise en place analytics + CMP open source</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">3 j/h</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-23"><label class="task-body" for="t-s2-23"><div class="task-text">Note de cadrage IA Act + model card (avec Antonin)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">3 j/h</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s2-24"><label class="task-body" for="t-s2-24"><div class="task-text">Documentation utilisateur V1</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-sp">5 j/h</span></div></label></div>
+
+    <div class="subgroup-h">Marketing &amp; contenus en parallèle · Antonin</div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s2-25"><label class="task-body" for="t-s2-25"><div class="task-text">16 vidéos TikTok / mois × 6 mois</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span><span class="tag tag-sp">25 j/h</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="a"><input type="checkbox" class="task-cb" id="t-s2-26"><label class="task-body" for="t-s2-26"><div class="task-text">2 articles blog SEO / mois × 6 mois</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-a">Antonin</span><span class="tag tag-sp">10 j/h</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="a"><input type="checkbox" class="task-cb" id="t-s2-27"><label class="task-body" for="t-s2-27"><div class="task-text">6 entretiens experts / prescripteurs</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-a">Antonin</span><span class="tag tag-sp">3 j/h</span></div></label></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 03 — GATES
+     ══════════════════════════════════════════════════ -->
+<section id="s3" class="section" data-section-id="s3">
+  <div class="section-inner">
+    <div class="s-tag">03 · Gates de décision</div>
+    <h2 class="s-title">4 gates à valider collectivement</h2>
+    <p class="s-desc">Chaque gate déverrouille la phase suivante. Pas de bascule sans validation explicite des critères.</p>
+    <div class="s-progress"><span class="s-progress-dot"></span><span data-section-progress="s3">0 / 0</span></div>
+
+    <div class="gate-grid">
+      <div class="gate">
+        <div class="gate-h"><div class="gate-title">Gate 1 · Fin Conception</div><div class="gate-when">M3</div></div>
+        <div class="gate-crit">Specs V1 figées · Design System v1.0 livré · Backlog prêt et priorisé</div>
+      </div>
+      <div class="gate">
+        <div class="gate-h"><div class="gate-title">Gate 2 · Mid-Production</div><div class="gate-when">M6</div></div>
+        <div class="gate-crit">Auth + cycles d'apprentissage + notifications fonctionnels en interne</div>
+      </div>
+      <div class="gate">
+        <div class="gate-h"><div class="gate-title">Gate 3 · Audit conformité</div><div class="gate-when">M8</div></div>
+        <div class="gate-crit">Audit RGPD blanc passé sans bloquant · Note IA Act validée</div>
+      </div>
+      <div class="gate">
+        <div class="gate-h"><div class="gate-title">Gate 4 · Bilan rétention</div><div class="gate-when">M12</div></div>
+        <div class="gate-crit">Rétention J30 &gt; 40% · 400 abonnés Premium · NPS &gt; 40</div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.2rem">
+      <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s3-1"><label class="task-body" for="t-s3-1"><div class="task-text">Gate 1 validé (M3) · réunion de validation avec formateurs référents</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span><span class="tag tag-eta">M3</span></div></label></div>
+      <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s3-2"><label class="task-body" for="t-s3-2"><div class="task-text">Gate 2 validé (M6) · démo interne complète</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span><span class="tag tag-eta">M6</span></div></label></div>
+      <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s3-3"><label class="task-body" for="t-s3-3"><div class="task-text">Gate 3 validé (M8) · audit RGPD externe terminé</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span><span class="tag tag-eta">M8</span></div></label></div>
+      <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s3-4"><label class="task-body" for="t-s3-4"><div class="task-text">Gate 4 validé (M12) · KPIs rétention atteints</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span><span class="tag tag-eta">M12</span></div></label></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 04 — PRÉ-LANCEMENT
+     ══════════════════════════════════════════════════ -->
+<section id="s4" class="section" data-section-id="s4">
+  <div class="section-inner">
+    <div class="s-tag">04 · Pré-lancement</div>
+    <h2 class="s-title">M8 → M9 · Conformité, finition et go-live</h2>
+    <p class="s-desc">Dernière ligne droite avant le lancement public V1. La conformité externalisée est bloquante.</p>
+    <div class="s-progress"><span class="s-progress-dot"></span><span data-section-progress="s4">0 / 0</span></div>
+
+    <div class="subgroup-h">Conformité externalisée</div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s4-1"><label class="task-body" for="t-s4-1"><div class="task-text">Identifier et briefer le conseil juridique RGPD · budget 1 200 €</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s4-2"><label class="task-body" for="t-s4-2"><div class="task-text">Audit RGPD blanc complet (conseil externe) · Gate 3</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s4-3"><label class="task-body" for="t-s4-3"><div class="task-text">Politique de confidentialité validée juridiquement</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s4-4"><label class="task-body" for="t-s4-4"><div class="task-text">Registre des activités de traitement rédigé (avec Antonin)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s4-5"><label class="task-body" for="t-s4-5"><div class="task-text">Charte utilisateur publiée</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span></div></label></div>
+
+    <div class="subgroup-h">Préparation lancement</div>
+    <div class="task" data-prio="p0" data-who="m"><input type="checkbox" class="task-cb" id="t-s4-6"><label class="task-body" for="t-s4-6"><div class="task-text">Tests utilisateurs finaux V1</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-m">Maëlane</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s4-7"><label class="task-body" for="t-s4-7"><div class="task-text">Recettage final basé sur les scénarios de test</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s4-8"><label class="task-body" for="t-s4-8"><div class="task-text">Bug bash équipe sur V1 (1 demi-journée)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s4-9"><label class="task-body" for="t-s4-9"><div class="task-text">Vérifier monitoring + alerting</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s4-10"><label class="task-body" for="t-s4-10"><div class="task-text">Page « Updates » publique mise en ligne (avec Maëlane)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s4-11"><label class="task-body" for="t-s4-11"><div class="task-text">Setup paiement Stripe pour Premium</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s4-12"><label class="task-body" for="t-s4-12"><div class="task-text">Préparer la campagne TikTok Ads test 200 €</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span></div></label></div>
+
+    <div class="subgroup-h">Direction artistique</div>
+    <div class="task" data-prio="p1" data-who="a"><input type="checkbox" class="task-cb" id="t-s4-13"><label class="task-body" for="t-s4-13"><div class="task-text">Briefer un freelance motion design · budget 1 500 €</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-a">Antonin</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="a"><input type="checkbox" class="task-cb" id="t-s4-14"><label class="task-body" for="t-s4-14"><div class="task-text">Vidéo signature 30 s livrée</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-a">Antonin</span></div></label></div>
+    <div class="task" data-prio="p2" data-who="a"><input type="checkbox" class="task-cb" id="t-s4-15"><label class="task-body" for="t-s4-15"><div class="task-text">Sons &amp; voix Lumia (notifications signatures) · budget 500 €</div><div class="task-meta"><span class="tag tag-p2">P2</span><span class="tag tag-a">Antonin</span></div></label></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 05 — FINANCEMENT
+     ══════════════════════════════════════════════════ -->
+<section id="s5" class="section" data-section-id="s5">
+  <div class="section-inner">
+    <div class="s-tag">05 · Financement séquencé</div>
+    <h2 class="s-title">Mobilisation des ressources financières</h2>
+    <p class="s-desc">Séquencement protégeant l'équité : pas de dilution avant que la rétention soit prouvée.</p>
+    <div class="s-progress"><span class="s-progress-dot"></span><span data-section-progress="s5">0 / 0</span></div>
+
+    <div class="subgroup-h">Court terme · M1 → M6</div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s5-1"><label class="task-body" for="t-s5-1"><div class="task-text">Apports en compte courant fondateurs · 1 500 € × 3 = 4 500 €</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span><span class="tag tag-eta">M1</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s5-2"><label class="task-body" for="t-s5-2"><div class="task-text">Préparer dossier French Tech Tremplin (instruction longue)</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span><span class="tag tag-eta">M3</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="e"><input type="checkbox" class="task-cb" id="t-s5-3"><label class="task-body" for="t-s5-3"><div class="task-text">Inscrire le projet au Booster MyDigitalSchool</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-e">Équipe</span><span class="tag tag-eta">M3</span></div></label></div>
+
+    <div class="subgroup-h">Moyen terme · M6 → M12</div>
+    <div class="task" data-prio="p1" data-who="a"><input type="checkbox" class="task-cb" id="t-s5-4"><label class="task-body" for="t-s5-4"><div class="task-text">Dossier Réseau Entreprendre / Initiative France · post-lancement</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-a">Antonin</span><span class="tag tag-eta">M9</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="a"><input type="checkbox" class="task-cb" id="t-s5-5"><label class="task-body" for="t-s5-5"><div class="task-text">Campagne crowdfunding KissKissBankBank lancement</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-a">Antonin</span><span class="tag tag-eta">M9</span></div></label></div>
+    <div class="task" data-prio="p2" data-who="a"><input type="checkbox" class="task-cb" id="t-s5-6"><label class="task-body" for="t-s5-6"><div class="task-text">Dossier BPI French Tech Emergence · V2 amorcée</div><div class="task-meta"><span class="tag tag-p2">P2</span><span class="tag tag-a">Antonin</span><span class="tag tag-eta">M12</span></div></label></div>
+
+    <div class="subgroup-h">Long terme · M18+</div>
+    <div class="task" data-prio="p2" data-who="a"><input type="checkbox" class="task-cb" id="t-s5-7"><label class="task-body" for="t-s5-7"><div class="task-text">Approche business angels · conditionnée à MRR &gt; 8 000 €</div><div class="task-meta"><span class="tag tag-p2">P2</span><span class="tag tag-a">Antonin</span><span class="tag tag-eta">M18+</span></div></label></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 06 — SUIVI & GOUVERNANCE
+     ══════════════════════════════════════════════════ -->
+<section id="s6" class="section" data-section-id="s6">
+  <div class="section-inner">
+    <div class="s-tag">06 · Suivi &amp; gouvernance</div>
+    <h2 class="s-title">Rituels et reporting projet</h2>
+    <p class="s-desc">Discipline minimaliste mais structurée. La régularité prime sur la lourdeur.</p>
+    <div class="s-progress"><span class="s-progress-dot"></span><span data-section-progress="s6">0 / 0</span></div>
+
+    <div class="subgroup-h">Rituels équipe</div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s6-1"><label class="task-body" for="t-s6-1"><div class="task-text">Daily async Slack #lumia-daily · quotidien</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s6-2"><label class="task-body" for="t-s6-2"><div class="task-text">Weekly sync · lundi 30 min</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s6-3"><label class="task-body" for="t-s6-3"><div class="task-text">Sprint planning + planning poker · bi-hebdo</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s6-4"><label class="task-body" for="t-s6-4"><div class="task-text">Sprint review &amp; démo · bi-hebdo</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="e"><input type="checkbox" class="task-cb" id="t-s6-5"><label class="task-body" for="t-s6-5"><div class="task-text">Rétrospective Start/Stop/Continue · toutes les 4 semaines</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="e"><input type="checkbox" class="task-cb" id="t-s6-6"><label class="task-body" for="t-s6-6"><div class="task-text">Point formateurs référents · bi-mensuel</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p2" data-who="e"><input type="checkbox" class="task-cb" id="t-s6-7"><label class="task-body" for="t-s6-7"><div class="task-text">Comité de pilotage trimestriel · 2 mentors externes</div><div class="task-meta"><span class="tag tag-p2">P2</span><span class="tag tag-e">Équipe</span></div></label></div>
+
+    <div class="subgroup-h">Reporting</div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s6-8"><label class="task-body" for="t-s6-8"><div class="task-text">Mise à jour d'<code>Instruction.md</code> à chaque session de travail</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s6-9"><label class="task-body" for="t-s6-9"><div class="task-text">Mise à jour de cette checklist toutes les semaines</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s6-10"><label class="task-body" for="t-s6-10"><div class="task-text">Compte rendu pédagogique bi-mensuel</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="a"><input type="checkbox" class="task-cb" id="t-s6-11"><label class="task-body" for="t-s6-11"><div class="task-text">Bilan trimestriel mentors externes</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-a">Antonin</span></div></label></div>
+
+    <div class="subgroup-h">Veille &amp; risques</div>
+    <div class="task" data-prio="p1" data-who="a"><input type="checkbox" class="task-cb" id="t-s6-12"><label class="task-body" for="t-s6-12"><div class="task-text">Veille concurrentielle automatisée (Feedly)</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-a">Antonin</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="i"><input type="checkbox" class="task-cb" id="t-s6-13"><label class="task-body" for="t-s6-13"><div class="task-text">Surveillance facturation Google Gemini · mensuelle</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-i">Issa</span></div></label></div>
+    <div class="task" data-prio="p1" data-who="e"><input type="checkbox" class="task-cb" id="t-s6-14"><label class="task-body" for="t-s6-14"><div class="task-text">Revue mensuelle de la matrice de risques</div><div class="task-meta"><span class="tag tag-p1">P1</span><span class="tag tag-e">Équipe</span></div></label></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     SECTION 07 — PRÉPARATION JALON 3
+     ══════════════════════════════════════════════════ -->
+<section id="s7" class="section" data-section-id="s7">
+  <div class="section-inner">
+    <div class="s-tag">07 · Préparation Jalon 3</div>
+    <h2 class="s-title">M15 → printemps 2027</h2>
+    <p class="s-desc">Aboutissement individuel et collectif du projet MBA. Tous les dossiers sont préparés en parallèle de la V2.</p>
+    <div class="s-progress"><span class="s-progress-dot"></span><span data-section-progress="s7">0 / 0</span></div>
+
+    <div class="subgroup-h">Livrables individuels</div>
+    <div class="task" data-prio="p0" data-who="i"><input type="checkbox" class="task-cb" id="t-s7-1"><label class="task-body" for="t-s7-1"><div class="task-text">Dossier individuel DFS · architecture, dev, tests, déploiement</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-i">Issa</span><span class="tag tag-eta">M21</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="m"><input type="checkbox" class="task-cb" id="t-s7-2"><label class="task-body" for="t-s7-2"><div class="task-text">Dossier individuel UX/UI · stratégie, conception, conformité</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-m">Maëlane</span><span class="tag tag-eta">M21</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s7-3"><label class="task-body" for="t-s7-3"><div class="task-text">Dossier marketing digital · analyse, stratégie, plan</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span><span class="tag tag-eta">M21</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="a"><input type="checkbox" class="task-cb" id="t-s7-4"><label class="task-body" for="t-s7-4"><div class="task-text">Écrit réflexif management d'équipe · 15-20 pages</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-a">Antonin</span><span class="tag tag-eta">M21</span></div></label></div>
+
+    <div class="subgroup-h">Livrables collectifs</div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s7-5"><label class="task-body" for="t-s7-5"><div class="task-text">Business plan actualisé sans zone d'incertitude</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span><span class="tag tag-eta">M21</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s7-6"><label class="task-body" for="t-s7-6"><div class="task-text">Dossier technique consolidé</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span><span class="tag tag-eta">M21</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s7-7"><label class="task-body" for="t-s7-7"><div class="task-text">Solution V1 + V2 déployée publiquement</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span><span class="tag tag-eta">M22</span></div></label></div>
+    <div class="task" data-prio="p0" data-who="e"><input type="checkbox" class="task-cb" id="t-s7-8"><label class="task-body" for="t-s7-8"><div class="task-text">Soutenance collective 60 min · pitch anglais 3 min</div><div class="task-meta"><span class="tag tag-p0">P0</span><span class="tag tag-e">Équipe</span><span class="tag tag-eta">Printemps 2027</span></div></label></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════
+     KPI CIBLES
+     ══════════════════════════════════════════════════ -->
+<section id="kpi" class="section" data-section-id="kpi">
+  <div class="section-inner">
+    <div class="s-tag">KPI</div>
+    <h2 class="s-title">Chiffres clés à atteindre</h2>
+    <p class="s-desc">Indicateurs cibles consolidés depuis le chapitre 3 du business plan.</p>
+
+    <div class="kpi-tbl-wrap">
+      <table class="kpi-tbl">
+        <thead><tr><th>Cible</th><th style="text-align:right">M6</th><th style="text-align:right">M12</th><th style="text-align:right">M24</th></tr></thead>
+        <tbody>
+          <tr><td>Abonnés Premium</td><td class="num">120</td><td class="num">350</td><td class="num">800</td></tr>
+          <tr><td>MRR (€)</td><td class="num">1 200</td><td class="num">3 500</td><td class="num">8 000</td></tr>
+          <tr><td>Rétention J30</td><td class="num">35 %</td><td class="num">40 %</td><td class="num">45 %</td></tr>
+          <tr><td>NPS in-app</td><td class="num">35</td><td class="num">40</td><td class="num">45</td></tr>
+          <tr><td>CAC blended (€)</td><td class="num">3</td><td class="num">5</td><td class="num">8</td></tr>
+          <tr><td>Marge brute</td><td class="num">58 %</td><td class="num">60 %</td><td class="num">62 %</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:0.7rem;color:var(--muted);margin-top:1rem;font-style:italic">Pour le détail des KPIs et leur fréquence de mesure, voir le tableau de bord consolidé du chapitre 3 du <a href="business-plan.html#strategie" style="color:var(--rose-deep);text-decoration:underline">business plan</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- TOAST -->
+<div class="toast" id="toast"><span class="check">✓</span><span id="toastMsg">Progression sauvegardée</span></div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'lumia.taches.j2.v1';
+  var checkboxes = document.querySelectorAll('.task-cb');
+  var sections = document.querySelectorAll('.section[data-section-id]');
+  var navLinks = document.querySelectorAll('.sb-nav .nav-link[data-section]');
+  var filters = { status: 'all', prio: 'all', who: 'all' };
+
+  // ── Restore state from localStorage ──
+  // Si une entrée existe pour la case, on l'applique (true ou false).
+  // Sinon, on conserve la valeur par défaut HTML (utile pour les tâches
+  // déjà cochées en dur comme la section "Production J2").
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var saved = JSON.parse(raw);
+      checkboxes.forEach(function (cb) {
+        if (Object.prototype.hasOwnProperty.call(saved, cb.id)) {
+          cb.checked = !!saved[cb.id];
+        }
+      });
+    } catch (e) {}
+  }
+
+  // ── Save state ──
+  // On sauvegarde l'état explicite (true/false) de chaque case
+  // pour préserver les modifications utilisateur sur les défauts HTML.
+  function save() {
+    var state = {};
+    checkboxes.forEach(function (cb) {
+      state[cb.id] = cb.checked;
+    });
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {}
+  }
+
+  // ── Update task visual + progress ──
+  function refresh() {
+    var totalDone = 0;
+    var total = checkboxes.length;
+
+    checkboxes.forEach(function (cb) {
+      var task = cb.closest('.task');
+      if (cb.checked) {
+        task.classList.add('done');
+        totalDone++;
+      } else {
+        task.classList.remove('done');
+      }
+    });
+
+    // Global progress
+    var pct = total ? Math.round((totalDone / total) * 100) : 0;
+    document.getElementById('globalFill').style.width = pct + '%';
+    document.getElementById('globalLabel').textContent = pct + '%';
+    document.getElementById('globalDetail').textContent = totalDone + ' / ' + total + ' tâches';
+
+    // Section progress
+    sections.forEach(function (section) {
+      var id = section.getAttribute('data-section-id');
+      var sectionCbs = section.querySelectorAll('.task-cb');
+      var sectionDone = 0;
+      sectionCbs.forEach(function (cb) { if (cb.checked) sectionDone++; });
+      var sectionTotal = sectionCbs.length;
+
+      var label = section.querySelector('[data-section-progress="' + id + '"]');
+      if (label) label.textContent = sectionDone + ' / ' + sectionTotal;
+
+      var navCount = document.querySelector('[data-count-for="' + id + '"]');
+      if (navCount) navCount.textContent = sectionDone + '/' + sectionTotal;
+
+      section.classList.toggle('is-complete', sectionTotal > 0 && sectionDone === sectionTotal);
+    });
+  }
+
+  // ── Apply filters ──
+  function applyFilters() {
+    document.querySelectorAll('.task').forEach(function (task) {
+      var isDone = task.classList.contains('done');
+      var prio = task.getAttribute('data-prio') || '';
+      var who = task.getAttribute('data-who') || '';
+      var match = true;
+      if (filters.status === 'todo' && isDone) match = false;
+      if (filters.status === 'done' && !isDone) match = false;
+      if (filters.prio !== 'all' && prio !== filters.prio) match = false;
+      if (filters.who !== 'all' && who !== filters.who) match = false;
+      task.classList.toggle('hidden', !match);
+    });
+  }
+
+  // ── Toast helper ──
+  var toast = document.getElementById('toast');
+  var toastMsg = document.getElementById('toastMsg');
+  var toastTimer = null;
+  function showToast(msg) {
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1800);
+  }
+
+  // ── Listeners ──
+  checkboxes.forEach(function (cb) {
+    cb.addEventListener('change', function () {
+      save();
+      refresh();
+      applyFilters();
+      showToast(cb.checked ? 'Tâche terminée' : 'Tâche réouverte');
+    });
+  });
+
+  // Filter chips
+  document.querySelectorAll('.chip[data-filter-type]').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      var type = chip.getAttribute('data-filter-type');
+      var value = chip.getAttribute('data-filter');
+      filters[type] = value;
+      document.querySelectorAll('.chip[data-filter-type="' + type + '"]').forEach(function (c) {
+        c.classList.toggle('active', c === chip);
+      });
+      applyFilters();
+    });
+  });
+  // Set defaults
+  document.querySelector('.chip[data-filter-type="status"][data-filter="all"]').classList.add('active');
+  document.querySelector('.chip[data-filter-type="prio"][data-filter="all"]').classList.add('active');
+  document.querySelector('.chip[data-filter-type="who"][data-filter="all"]').classList.add('active');
+
+  // Reset
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    if (!confirm('Réinitialiser toutes les tâches ? Cette action est irréversible.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    checkboxes.forEach(function (cb) { cb.checked = false; });
+    refresh();
+    applyFilters();
+    showToast('Checklist réinitialisée');
+  });
+
+  // Active link on scroll
+  function onScroll() {
+    var pos = window.scrollY + 120;
+    var current = '';
+    document.querySelectorAll('.section').forEach(function (s) {
+      if (s.offsetTop <= pos) current = s.id;
+    });
+    navLinks.forEach(function (l) {
+      l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Init
+  load();
+  refresh();
+  applyFilters();
+  onScroll();
+})();
+</script>
+
+</body>
+</html>

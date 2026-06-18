@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumia Business Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════
+   LUMIA — Business Model
+   Variables globales + Charte graphique
+   ══════════════════════════════════════════════════ */
+
+:root {
+  /* ── COULEURS ── */
+  --rose:        #f4b4c8;
+  --rose-deep:   #c0003a;
+  --rose-mid:    #e8829d;
+  --rose-light:  #fce8ef;
+  --rose-ultra:  #fef6f9;
+  --cream:       #fdf8f8;
+  --purple:      #c5a6cf;
+  --purple-light:#f0eaf6;
+  --teal:        #9dc0bc;
+  --teal-light:  #e8f3f2;
+  --peach:       #f6b9ae;
+  --peach-light: #fdf0ec;
+  --blue:        #96b6dd;
+  --blue-light:  #e8eef6;
+  --vanilla:     #fcecd3;
+  --dark:        #3d3d3d;
+  --dark-2:      #5a5a5a;
+  --muted:       #8a8078;
+  --border:      #ede5ea;
+  --white:       #ffffff;
+
+  /* ── TYPOGRAPHIE ── */
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* ── LAYOUT ── */
+  --max-w:       1100px;
+  --radius:      10px;
+  --radius-lg:   16px;
+  --gap:         1.2rem;
+  --section-py:  4rem;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 15px; }
+body {
+  font-family: var(--font-body);
+  color: var(--dark);
+  background: var(--cream);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+/* ── UTILITIES ── */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+.section { padding: var(--section-py) 0; }
+.section + .section { border-top: 1px solid var(--border); }
+.stag { font-size: 0.7rem; font-weight: 600; color: var(--rose-deep); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 0.4rem; }
+.stitle { font-family: var(--font-display); font-size: 2.2rem; color: var(--dark); line-height: 1.15; margin-bottom: 0.5rem; }
+.intro { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 700px; margin-bottom: 2rem; }
+.h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--dark); margin: 2rem 0 0.8rem; }
+
+/* ── COVER ── */
+.cover {
+  background: var(--dark);
+  padding: 5rem 2rem 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cover::before, .cover::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.12;
+  pointer-events: none;
+}
+.cover::before { width: 400px; height: 400px; background: var(--rose); top: -150px; right: -80px; }
+.cover::after { width: 300px; height: 300px; background: var(--purple); bottom: -80px; left: 20%; }
+.cover-inner { position: relative; z-index: 2; }
+.cover-school { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 1.5rem; }
+.cover-title { font-family: var(--font-display); font-size: clamp(3rem, 7vw, 5rem); color: var(--white); line-height: 1; margin-bottom: 0.5rem; }
+.cover-title .dot { color: var(--rose); }
+.cover-sub { font-size: 1.6rem; color: var(--rose); font-family: var(--font-display); font-weight: 400; margin-bottom: 1rem; }
+.cover-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); max-width: 500px; margin: 0 auto; }
+
+/* ── GRIDS ── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); }
+
+/* ── CARDS ── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.4rem;
+}
+.card-accent { border-left: 4px solid var(--rose); }
+.card-dark { background: var(--dark); color: var(--white); border-color: transparent; }
+.card-rose { background: var(--rose-light); border-color: var(--rose); }
+.card-teal { background: var(--teal-light); border-color: var(--teal); }
+.card-purple { background: var(--purple-light); border-color: var(--purple); }
+.card-blue { background: var(--blue-light); border-color: var(--blue); }
+.card-vanilla { background: var(--vanilla); border-color: #e8d9b8; }
+
+.card-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+.card-value { font-family: var(--font-display); font-size: 2rem; line-height: 1.1; margin-bottom: 0.3rem; }
+.card-desc { font-size: 0.82rem; line-height: 1.5; }
+
+/* ── TABLE ── */
+.tbl { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+.tbl th { background: var(--rose-light); color: var(--rose-deep); font-weight: 600; text-align: left; padding: 0.6rem 0.8rem; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.tbl td { padding: 0.6rem 0.8rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+.tbl tr:last-child td { border-bottom: none; }
+.tbl .highlight { background: var(--rose-ultra); font-weight: 600; }
+
+/* ── LEAN CANVAS ── */
+.canvas {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 2px;
+  background: var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.canvas-cell {
+  background: var(--white);
+  padding: 1rem;
+  min-height: 160px;
+}
+.canvas-cell.span-top { grid-row: 1; }
+.canvas-cell.span-bottom { grid-row: 2; }
+.canvas-cell.span-full { grid-column: span 5; grid-row: auto; }
+.canvas-cell.span-2-5 { grid-column: span 2; }
+.canvas-cell.span-3-5 { grid-column: span 3; }
+.canvas-label { font-size: 0.6rem; font-weight: 700; color: var(--rose-deep); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+.canvas-text { font-size: 0.75rem; color: var(--dark); line-height: 1.5; }
+.canvas-text li { margin-bottom: 0.3rem; list-style: none; padding-left: 0.8rem; position: relative; }
+.canvas-text li::before { content: '·'; position: absolute; left: 0; color: var(--rose-deep); font-weight: 700; }
+
+/* ── PRICING ── */
+.price-card {
+  background: var(--white);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.price-card:hover { transform: translateY(-4px); }
+.price-card.featured { border-color: var(--rose-deep); position: relative; }
+.price-card.featured::before {
+  content: 'Populaire';
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--rose-deep); color: var(--white);
+  font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 0.2rem 0.8rem; border-radius: 20px;
+}
+.price-name { font-family: var(--font-display); font-size: 1.3rem; color: var(--dark); margin-bottom: 0.3rem; }
+.price-amount { font-family: var(--font-display); font-size: 2.8rem; color: var(--rose-deep); line-height: 1; }
+.price-amount span { font-size: 0.9rem; color: var(--muted); font-family: var(--font-body); }
+.price-desc { font-size: 0.78rem; color: var(--muted); margin: 0.8rem 0 1.2rem; }
+.price-features { text-align: left; font-size: 0.78rem; color: var(--dark); }
+.price-features li { padding: 0.4rem 0; border-bottom: 1px solid var(--border); list-style: none; padding-left: 1.2rem; position: relative; }
+.price-features li::before { content: '✓'; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+
+/* ── SCENARIO ── */
+.scenario { border-radius: var(--radius-lg); padding: 1.4rem; }
+.scenario-pess { background: var(--peach-light); border: 1px solid var(--peach); }
+.scenario-real { background: var(--teal-light); border: 1px solid var(--teal); }
+.scenario-opti { background: var(--purple-light); border: 1px solid var(--purple); }
+.scenario-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem; }
+.scenario-rev { font-family: var(--font-display); font-size: 1.8rem; line-height: 1.1; margin-bottom: 0.3rem; }
+
+/* ── KPI ── */
+.kpi { text-align: center; padding: 1.5rem 1rem; }
+.kpi-value { font-family: var(--font-display); font-size: 2.4rem; color: var(--rose-deep); line-height: 1; }
+.kpi-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.3rem; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .canvas { grid-template-columns: 1fr; }
+  .canvas-cell { grid-column: 1 !important; grid-row: auto !important; min-height: auto; }
+  .canvas-cell.span-2-5, .canvas-cell.span-3-5, .canvas-cell.span-full { grid-column: 1 !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ COVER ══════════════ -->
+<header class="cover">
+  <div class="cover-inner">
+    <div class="cover-school">MyDigitalSchool · MBA 2024-2025 · My Digital Start-up</div>
+    <h1 class="cover-title">Lumia<span class="dot">.</span></h1>
+    <div class="cover-sub">Business Model</div>
+    <p class="cover-desc">L'assistant de vie conversationnel qui pense a votre place. Modele economique, pricing, projections et strategie de monetisation.</p>
+  </div>
+</header>
+
+<!-- ══════════════ PROPOSITION DE VALEUR ══════════════ -->
+<section class="section">
+<div class="container">
+  <div class="stag">01</div>
+  <h2 class="stitle">Proposition de valeur</h2>
+  <p class="intro">Lumia detecte les besoins dans la conversation, apprend les cycles de consommation, et agit avant que l'utilisateur n'y pense. Deux niveaux de proactivite qu'aucun concurrent ne propose.</p>
+
+  <div class="grid-2" style="margin-bottom:2rem">
+    <div>
+      <div class="h3">Problematique</div>
+      <div class="card card-accent">
+        <div class="card-desc">
+          <p style="margin-bottom:0.6rem"><strong>75% des femmes en couple</strong> gerent seules le quotidien du foyer. 92,5% estiment que cette charge freine leur carriere.</p>
+          <p style="margin-bottom:0.6rem">Les outils existants (Todoist, Notion, Google Agenda) demandent de la discipline et une mise a jour manuelle. Ils <strong>ajoutent</strong> de la charge mentale au lieu d'en retirer.</p>
+          <p>Le marche ne propose aucune solution qui anticipe les besoins sans qu'on le lui demande.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="h3">Solution Lumia</div>
+      <div class="card card-rose">
+        <div class="card-desc">
+          <p style="margin-bottom:0.6rem"><strong>Niveau 1 — Detection explicite.</strong> Clara dit "on n'a plus de cafe". Lumia enregistre et envoie un rappel au bon moment.</p>
+          <p style="margin-bottom:0.6rem"><strong>Niveau 2 — Apprentissage des cycles.</strong> Clara achete du PQ chaque semaine, du lait tous les 4 jours. Lumia apprend le rythme et anticipe : "Tu as bientot besoin de lait."</p>
+          <p><strong>V1 :</strong> Chat vocal intelligent + gestion des courses automatique.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="h3">Avantages competitifs</div>
+  <div class="grid-3">
+    <div class="card card-teal">
+      <div class="card-label" style="color:#2d7d75">Proactif</div>
+      <div class="card-desc">Seul produit qui agit avant qu'on lui demande. Les concurrents attendent une commande.</div>
+    </div>
+    <div class="card card-purple">
+      <div class="card-label" style="color:#6b4c8a">Familial</div>
+      <div class="card-desc">Concu pour gerer le foyer entier. Pas un outil individuel de productivite.</div>
+    </div>
+    <div class="card card-vanilla">
+      <div class="card-label" style="color:#8a6d30">Bienveillant</div>
+      <div class="card-desc">S'adapte au rythme de l'utilisateur. Notifications douces. Jamais de culpabilisation.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════ LEAN CANVAS ══════════════ -->
+<section class="section">
+<div class="container">
+  <div class="stag">02</div>
+  <h2 class="stitle">Lean Canvas</h2>
+  <p class="intro">Vue synthetique du modele economique, des hypotheses cles et des metriques de succes.</p>
+
+  <div class="canvas">
+    <!-- Row 1 -->
+    <div class="canvas-cell span-top">
+      <div class="canvas-label">Probleme</div>
+      <ul class="canvas-text">
+        <li>75% des femmes gerent seules le foyer</li>
+        <li>Outils existants ajoutent de la charge mentale</li>
+        <li>Aucun outil n'anticipe les besoins</li>
+      </ul>
+    </div>
+    <div class="canvas-cell span-top">
+      <div class="canvas-label">Solution</div>
+      <ul class="canvas-text">
+        <li>Chat vocal IA qui retient et apprend</li>
+        <li>Detection des besoins dans la conversation</li>
+        <li>Apprentissage des cycles de consommation</li>
+        <li>Notifications push proactives</li>
+      </ul>
+    </div>
+    <div class="canvas-cell span-top">
+      <div class="canvas-label">Proposition de valeur unique</div>
+      <div class="canvas-text" style="font-family:var(--font-display);font-size:0.9rem;color:var(--rose-deep);font-style:italic;margin-bottom:0.5rem">"L'assistant qui pense a ta place"</div>
+      <ul class="canvas-text">
+        <li>Proactif : agit avant la demande</li>
+        <li>Apprend les habitudes automatiquement</li>
+        <li>Zero configuration, zero discipline</li>
+      </ul>
+    </div>
+    <div class="canvas-cell span-top">
+      <div class="canvas-label">Avantage injuste</div>
+      <ul class="canvas-text">
+        <li>Data comportementale proprietaire</li>
+        <li>Algorithme de prediction des cycles</li>
+        <li>Marque bienveillante (identite forte)</li>
+      </ul>
+    </div>
+    <div class="canvas-cell span-top">
+      <div class="canvas-label">Segments clients</div>
+      <ul class="canvas-text">
+        <li><strong>Premium :</strong> Femme active 25-40 ans avec enfants</li>
+        <li><strong>Freemium :</strong> Etudiant/alternant 18-25 ans</li>
+        <li><strong>B2B V3 :</strong> Universites, entreprises QVT</li>
+      </ul>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="canvas-cell span-bottom span-2-5">
+      <div class="canvas-label">Metriques cles</div>
+      <ul class="canvas-text">
+        <li>Retention J7 > 40% (actuel 71%)</li>
+        <li>Retention J30 > 40% (a mesurer)</li>
+        <li>Conversion freemium > 2,18% (benchmark)</li>
+        <li>NPS > 40 (actuel +57)</li>
+        <li>CPA < 5€ (hypothese, a valider)</li>
+        <li>LTV/CAC > 3</li>
+      </ul>
+    </div>
+    <div class="canvas-cell span-bottom">
+      <div class="canvas-label">Canaux</div>
+      <ul class="canvas-text">
+        <li>TikTok organique (CPA ~0€)</li>
+        <li>Paid social 200€ test</li>
+        <li>Prescripteurs (coachs, psys)</li>
+        <li>Bouche-a-oreille etudiants</li>
+        <li>Parrainage Premium</li>
+      </ul>
+    </div>
+    <div class="canvas-cell span-bottom span-2-5">
+      <div class="canvas-label">Structure de couts</div>
+      <ul class="canvas-text">
+        <li>Gemini API : ~3,40€/user actif/mois</li>
+        <li>Infra (Vercel + Supabase) : ~0,60€/user</li>
+        <li>Cout variable total : ~4€/user/mois</li>
+        <li>Budget acquisition : 500-1 000€/mois</li>
+        <li>Hebergement fixe : ~50€/mois</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════ SEGMENTS CLIENTS ══════════════ -->
+<section class="section">
+<div class="container">
+  <div class="stag">03</div>
+  <h2 class="stitle">Segments clients</h2>
+  <p class="intro">Deux cibles distinctes avec des besoins, des usages et des modeles de monetisation differents.</p>
+
+  <div class="grid-2">
+    <div class="card" style="border-top:4px solid var(--rose-deep)">
+      <div class="card-label" style="color:var(--rose-deep)">Cible 1 — Premium</div>
+      <div class="card-value" style="font-size:1.4rem;color:var(--dark)">Femme active 25-40 ans</div>
+      <div class="card-desc" style="margin-top:0.8rem">
+        <p style="margin-bottom:0.5rem">Surcharge mentale quotidienne. Gere travail + foyer + enfants. Conjoint bienveillant mais ne voit pas ce qu'il y a a faire.</p>
+        <p style="margin-bottom:0.5rem"><strong>Besoin :</strong> Quelqu'un qui pense a sa place, sans ajouter un outil de plus a gerer.</p>
+        <p style="margin-bottom:0.5rem"><strong>Usage :</strong> Quotidien, vocal, en situation (cuisine, voiture, soir).</p>
+        <p><strong>Monetisation :</strong> Premium 9,99€/mois. Conversion naturelle apres le moment "wow" (J1-J7).</p>
+      </div>
+    </div>
+    <div class="card" style="border-top:4px solid var(--purple)">
+      <div class="card-label" style="color:#6b4c8a">Cible 2 — Freemium</div>
+      <div class="card-value" style="font-size:1.4rem;color:var(--dark)">Etudiant/alternant 18-25 ans</div>
+      <div class="card-desc" style="margin-top:0.8rem">
+        <p style="margin-bottom:0.5rem">Premiere vie autonome. Gere ecole + boulot + budget serre. Oublie les deadlines, les factures, les courses.</p>
+        <p style="margin-bottom:0.5rem"><strong>Besoin :</strong> Ultra-rapide, zero friction, zero configuration. Gratuit pour tester.</p>
+        <p style="margin-bottom:0.5rem"><strong>Usage :</strong> Ponctuel, 3 requetes IA/semaine en freemium.</p>
+        <p><strong>Monetisation :</strong> Freemium → viralite → conversion Premium a +30 ans sur cycle de vie naturel.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════ PRICING ══════════════ -->
+<section class="section">
+<div class="container">
+  <div class="stag">04</div>
+  <h2 class="stitle">Strategie de pricing</h2>
+  <p class="intro">Un modele freemium progressif concu pour ancrer l'habitude avant de monetiser. Le prix Premium (9,99€) est fixe sous le seuil psychologique de 10€.</p>
+
+  <div class="grid-4">
+    <div class="price-card">
+      <div class="price-name">Freemium</div>
+      <div class="price-amount">0€</div>
+      <div class="price-desc">3 requetes IA / semaine</div>
+      <ul class="price-features">
+        <li>Chat vocal intelligent</li>
+        <li>Detection besoins basique</li>
+        <li>Historique 7 jours</li>
+        <li>1 liste de courses</li>
+      </ul>
+    </div>
+    <div class="price-card featured">
+      <div class="price-name">Premium</div>
+      <div class="price-amount">9,99€<span>/mois</span></div>
+      <div class="price-desc">Usage illimite</div>
+      <ul class="price-features">
+        <li>Requetes illimitees</li>
+        <li>Apprentissage des cycles</li>
+        <li>Notifications proactives</li>
+        <li>Connexion calendrier</li>
+        <li>Historique illimite</li>
+      </ul>
+    </div>
+    <div class="price-card">
+      <div class="price-name">Famille</div>
+      <div class="price-amount">14,99€<span>/mois</span></div>
+      <div class="price-desc">Jusqu'a 4 membres — V2</div>
+      <ul class="price-features">
+        <li>Tout Premium inclus</li>
+        <li>Agenda familial partage</li>
+        <li>Gestion taches menageres</li>
+        <li>4 profils, 1 foyer</li>
+      </ul>
+    </div>
+    <div class="price-card">
+      <div class="price-name">B2B</div>
+      <div class="price-amount">Sur devis</div>
+      <div class="price-desc">Universites / Entreprises — V3</div>
+      <ul class="price-features">
+        <li>Licences groupees</li>
+        <li>Dashboard admin</li>
+        <li>Analytics QVT</li>
+        <li>Support dedie</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════ MODELE ECONOMIQUE ══════════════ -->
+<section class="section">
+<div class="container">
+  <div class="stag">05</div>
+  <h2 class="stitle">Modele economique</h2>
+  <p class="intro">Un modele SaaS recurent avec une marge brute de 60% par abonne Premium. Le seuil de rentabilite est fixe a 400 abonnes Premium.</p>
+
+  <div class="grid-3" style="margin-bottom:2rem">
+    <div class="card card-dark">
+      <div class="card-label" style="color:var(--rose)">Structure de couts</div>
+      <div class="card-desc" style="color:rgba(255,255,255,0.85)">
+        <p style="margin-bottom:0.5rem"><strong style="color:var(--rose)">API Gemini :</strong> ~3,40€/user actif/mois</p>
+        <p style="margin-bottom:0.5rem"><strong style="color:var(--rose)">Infra :</strong> ~0,60€/user/mois (Vercel + Supabase)</p>
+        <p style="margin-bottom:0.5rem"><strong style="color:var(--rose)">Hebergement fixe :</strong> ~50€/mois</p>
+        <p style="margin-bottom:0.5rem"><strong style="color:var(--rose)">Acquisition :</strong> 500-1 000€/mois</p>
+        <p><strong style="color:var(--rose)">Cout variable total :</strong> ~4€/user actif/mois</p>
+      </div>
+    </div>
+    <div class="card card-rose">
+      <div class="card-label" style="color:var(--rose-deep)">Revenus recurrents</div>
+      <div class="card-desc">
+        <p style="margin-bottom:0.5rem"><strong>Premium :</strong> 9,99€ x abonnes/mois</p>
+        <p style="margin-bottom:0.5rem"><strong>Famille (V2) :</strong> 14,99€ x abonnes/mois</p>
+        <p style="margin-bottom:0.5rem"><strong>B2B (V3) :</strong> Sur devis, licences</p>
+        <p style="margin-top:1rem;font-family:var(--font-display);font-size:1.1rem;color:var(--rose-deep)">LTV 12 mois = 119,88€/user</p>
+      </div>
+    </div>
+    <div class="card card-teal">
+      <div class="card-label" style="color:#2d7d75">Justification des prix</div>
+      <div class="card-desc">
+        <p style="margin-bottom:0.5rem"><strong>9,99€ < 10€ :</strong> Seuil psychologique</p>
+        <p style="margin-bottom:0.5rem"><strong>Marge brute :</strong> 9,99 - 4 = 5,99€ → 60%</p>
+        <p style="margin-bottom:0.5rem"><strong>Freemium :</strong> Ancre l'habitude avant de monetiser</p>
+        <p><strong>LTV/CAC cible :</strong> > 3 (viable)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unit Economics -->
+  <div class="h3">Unit economics — par abonne Premium</div>
+  <div class="grid-4" style="margin-bottom:2rem">
+    <div class="card kpi"><div class="kpi-value">9,99€</div><div class="kpi-label">ARPU mensuel</div></div>
+    <div class="card kpi"><div class="kpi-value">4,00€</div><div class="kpi-label">Cout variable/mois</div></div>
+    <div class="card kpi"><div class="kpi-value" style="color:var(--teal)">5,99€</div><div class="kpi-label">Marge brute/mois</div></div>
+    <div class="card kpi"><div class="kpi-value" style="color:var(--teal)">60%</div><div class="kpi-label">Taux de marge</div></div>
+  </div>
+
+  <!-- Seuil de rentabilite -->
+  <div class="h3">Seuil de rentabilite</div>
+  <div class="card" style="text-align:center;padding:2rem">
+    <div style="font-size:0.8rem;color:var(--muted);margin-bottom:0.5rem">Couts fixes mensuels estimes : ~2 400€ (hebergement + acquisition + outils)</div>
+    <div style="font-family:var(--font-display);font-size:3rem;color:var(--rose-deep)">400 abonnes Premium</div>
+    <div style="font-size:0.9rem;color:var(--dark);margin-top:0.3rem">400 × 5,99€ marge = 2 396€/mois → Equilibre</div>
+    <div style="font-size:0.78rem;color:var(--muted);margin-top:0.5rem">Represente 0,013% du marche adressable (3,1M femmes actives 25-40 ans avec enfants)</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════ INDICATEURS DE PERFORMANCE ══════════════ -->
+<section class="section">
+<div class="container">
+  <div class="stag">06</div>
+  <h2 class="stitle">Indicateurs de performance</h2>
+  <p class="intro">Metriques de validation a chaque etape, calibrees sur les benchmarks du marche des apps IA et productivite.</p>
+
+  <table class="tbl">
+    <thead>
+      <tr><th>KPI</th><th>Benchmark marche</th><th>Objectif Lumia V1</th><th>Mesure actuelle</th><th>Statut</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Retention J7</strong></td><td>7,2% apps productivite</td><td>> 40%</td><td>71% (7 testeurs)</td><td style="color:var(--teal);font-weight:600">Valide</td></tr>
+      <tr><td><strong>Retention J30</strong></td><td>—</td><td>> 40%</td><td>Non mesuree</td><td style="color:#b45309;font-weight:600">A valider</td></tr>
+      <tr><td><strong>NPS</strong></td><td>—</td><td>> 40</td><td>47 (13 sessions de test)</td><td style="color:var(--teal);font-weight:600">Valide</td></tr>
+      <tr><td><strong>Conversion freemium</strong></td><td>2,18% median J+35</td><td>> 2,18%</td><td>Non mesuree</td><td style="color:#b45309;font-weight:600">A valider</td></tr>
+      <tr><td><strong>CPA</strong></td><td>—</td><td>< 5€</td><td>Estime 3-5€</td><td style="color:#b45309;font-weight:600">Hypothese</td></tr>
+      <tr><td><strong>LTV/CAC</strong></td><td>> 3 pour viabilite</td><td>> 3</td><td>Estime 119,88/5 = 24</td><td style="color:var(--teal);font-weight:600">Coherent</td></tr>
+      <tr><td><strong>Interet declare</strong></td><td>—</td><td>> 60%</td><td>82% (65 repondants)</td><td style="color:var(--teal);font-weight:600">Valide</td></tr>
+      <tr><td><strong>Intention de paiement</strong></td><td>—</td><td>> 30%</td><td>54% prets a payer 5-15€</td><td style="color:var(--teal);font-weight:600">Valide</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- ══════════════ SCENARIOS ══════════════ -->
+<section class="section">
+<div class="container">
+  <div class="stag">07</div>
+  <h2 class="stitle">Scenarios de projection</h2>
+  <p class="intro">Trois scenarios a 12 mois bases sur le marche adressable de 3,1 millions de femmes actives 25-40 ans avec enfants en France (INSEE 2025). Alignes sur le business plan Jalon 2.</p>
+
+  <div class="grid-3" style="margin-bottom:2rem">
+    <div class="scenario scenario-pess">
+      <div class="scenario-label" style="color:#b45309">Conservateur</div>
+      <div class="scenario-rev" style="color:#b45309">150 abonnes</div>
+      <div class="card-desc">
+        <p><strong>An 1 :</strong> 150 Premium</p>
+        <p>MRR : 1 499€</p>
+        <p>ARR : 17 982€</p>
+        <p style="margin-top:0.5rem;font-size:0.72rem;color:var(--muted)">Acquisition organique uniquement. Sous le seuil de rentabilite. Seuil atteint fin M24.</p>
+      </div>
+    </div>
+    <div class="scenario scenario-real">
+      <div class="scenario-label" style="color:#2d7d75">Realiste</div>
+      <div class="scenario-rev" style="color:#2d7d75">350 abonnes</div>
+      <div class="card-desc">
+        <p><strong>An 1 :</strong> 350 Premium</p>
+        <p>MRR : 3 497€</p>
+        <p>ARR : 41 958€</p>
+        <p style="margin-top:0.5rem;font-size:0.72rem;color:var(--muted)">Mix organique + 500€/mois ads. Seuil de rentabilite atteint a M18.</p>
+      </div>
+    </div>
+    <div class="scenario scenario-opti">
+      <div class="scenario-label" style="color:#6b4c8a">Optimiste</div>
+      <div class="scenario-rev" style="color:#6b4c8a">700 abonnes</div>
+      <div class="card-desc">
+        <p><strong>An 1 :</strong> 700 Premium</p>
+        <p>MRR : 6 993€</p>
+        <p>ARR : 83 916€</p>
+        <p style="margin-top:0.5rem;font-size:0.72rem;color:var(--muted)">Viralite TikTok + parrainage actif. Seuil atteint M15. Lancement plan Famille V2.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="h3">Revenue annuel par abonne : 119,88€</div>
+  <table class="tbl">
+    <thead>
+      <tr><th>Scenario</th><th>% marche capte</th><th>Abonnes Premium</th><th>MRR</th><th>ARR</th><th>Marge nette/mois</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Conservateur</td><td>0,005%</td><td>150</td><td>1 499€</td><td>17 982€</td><td style="color:#b45309">-1 502€</td></tr>
+      <tr class="highlight"><td><strong>Realiste</strong></td><td><strong>0,011%</strong></td><td><strong>350</strong></td><td><strong>3 497€</strong></td><td><strong>41 958€</strong></td><td style="color:#b45309"><strong>-304€</strong></td></tr>
+      <tr><td>Optimiste</td><td>0,023%</td><td>700</td><td>6 993€</td><td>83 916€</td><td style="color:var(--teal)">+1 793€</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- ══════════════ CANAUX ══════════════ -->
+<section class="section">
+<div class="container">
+  <div class="stag">08</div>
+  <h2 class="stitle">Canaux de distribution</h2>
+  <p class="intro">Strategie d'acquisition sequencee avec declencheurs de bascule entre chaque phase.</p>
+
+  <table class="tbl">
+    <thead>
+      <tr><th>Phase</th><th>Periode</th><th>Canal</th><th>Objectif</th><th>Declencheur suivant</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Phase 1</strong></td><td>J0-J60</td><td>TikTok organique + LinkedIn + reseau pairs</td><td>50 telechargements, CPA ~0€</td><td>Si &lt; 50 DL a J45 → Phase 2</td></tr>
+      <tr><td><strong>Phase 2</strong></td><td>J60-J90</td><td>TikTok Ads test 200€, femmes 28-38 ans</td><td>Mesurer CPA reel</td><td>Si CPA > 10€ → Phase 3</td></tr>
+      <tr><td><strong>Phase 3</strong></td><td>J90+</td><td>Prescripteurs (coachs, psychologues)</td><td>Parrainage lien dedie, UTM</td><td>CPA ~0€, NPS > 40</td></tr>
+      <tr><td><strong>Phase B2B</strong></td><td>V3</td><td>DRH, universites, QVT</td><td>Licences entreprises</td><td>Retention J30 > 40% + MRR > 5 000€</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<!-- ══════════════ STACK & COUTS TECHNIQUES ══════════════ -->
+<section class="section">
+<div class="container">
+  <div class="stag">09</div>
+  <h2 class="stitle">Stack technique & couts</h2>
+  <p class="intro">Architecture optimisee pour minimiser les couts fixes et rendre le cout variable proportionnel au nombre d'utilisateurs actifs.</p>
+
+  <table class="tbl">
+    <thead>
+      <tr><th>Composant</th><th>Technologie</th><th>Cout estime</th><th>Role</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Frontend</strong></td><td>Next.js + Vercel</td><td>0€ (plan gratuit) → ~20€/mois si scale</td><td>Interface web app mobile, SSR</td></tr>
+      <tr><td><strong>Backend / Auth</strong></td><td>Supabase</td><td>0€ (plan gratuit) → 25€/mois Pro</td><td>PostgreSQL, Auth, Edge Functions, Push</td></tr>
+      <tr><td><strong>IA conversationnelle</strong></td><td>Gemini API (Google)</td><td>~3,40€/user actif/mois</td><td>Chat vocal intelligent, analyse des conversations</td></tr>
+      <tr><td><strong>Vocal</strong></td><td>Web Speech API</td><td>0€ (API navigateur native)</td><td>Speech-to-Text + Text-to-Speech</td></tr>
+      <tr><td><strong>Calendrier</strong></td><td>Google + Apple Calendar API</td><td>0€</td><td>Synchronisation evenements</td></tr>
+      <tr><td><strong>Notifications</strong></td><td>Web Push API → FCM/APNs en V2</td><td>0€</td><td>Notifications proactives</td></tr>
+    </tbody>
+  </table>
+
+  <div class="card" style="margin-top:1.5rem;text-align:center;padding:1.5rem">
+    <div style="font-size:0.78rem;color:var(--muted)">Cout technique total estime pour 400 users actifs</div>
+    <div style="font-family:var(--font-display);font-size:2rem;color:var(--rose-deep);margin:0.3rem 0">~1 645€/mois</div>
+    <div style="font-size:0.78rem;color:var(--dark)">50€ fixe + (400 × 3,40€ Gemini) + (400 × 0,60€ infra)</div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════ PARTENAIRES ══════════════ -->
+<section class="section">
+<div class="container">
+  <div class="stag">10</div>
+  <h2 class="stitle">Partenaires cles</h2>
+
+  <div class="grid-3">
+    <div class="card"><div class="card-label" style="color:var(--rose-deep)">Technologie</div><div class="card-desc">Google (Gemini API, Calendar) · Vercel · Supabase · Apple (Calendar, Push)</div></div>
+    <div class="card"><div class="card-label" style="color:var(--rose-deep)">Prescripteurs</div><div class="card-desc">Therapeutes et coachs de vie · Psychologues · Pediatres · Associations de parents · DRH</div></div>
+    <div class="card"><div class="card-label" style="color:var(--rose-deep)">Distribution V3</div><div class="card-desc">Universites · Entreprises QVT · Mutuelles · Ecoles de commerce</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer style="background:var(--dark);padding:2rem;text-align:center">
+  <div style="font-family:var(--font-display);font-size:1.4rem;color:var(--white)">Lumia<span style="color:var(--rose)">.</span></div>
+  <div style="font-size:0.65rem;color:var(--muted);margin-top:0.3rem;text-transform:uppercase;letter-spacing:0.12em">MyDigitalSchool · MBA 2024-2025 · Antonin · Maelane · Issa</div>
+</footer>
+
+</body>
+</html>

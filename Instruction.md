@@ -1,7 +1,117 @@
 # Instruction.md - Journal des actions
 
 > Ce fichier trace les actions effectuées sur le projet "Lumia".
-> Dernière mise à jour : 10 décembre 2025
+> Dernière mise à jour : 12 mai 2026 — Jalon 2 livré · `taches.html` interactif
+
+---
+
+## 🆕 Session Jalon 2 du 12/05/2026 — Business Plan (préproduction & cadrage)
+
+### Objectif de la session
+Produire le livrable collectif unique du Jalon 2 (M1) conformément au guide MyDigitalStartup 2025-2027 : un **business plan** consolidé reprenant et approfondissant le travail du Jalon 1.
+
+### Source d'entrée
+- `MyDigitalStartup - Guide de référence 2025-2027 1 (1).pdf` (analyse complète des attendus Jalon 2 et grille d'évaluation /80 page 21)
+- `Dossier-principal.html` (livrable Jalon 1 validé)
+- `business-model.html` (livrable Jalon 1 validé)
+
+### Plan suivi
+- 8 chapitres alignés sur la grille d'évaluation Jalon 2 (chaque critère /10) — plan déposé dans `.cursor/plans/plan_jalon_2_lumia_*.plan.md`.
+
+### Livrable produit
+- **`business-plan.html`** — fichier autonome 2 280 lignes, charte Lumia (rose / crème / violet / teal / pêche), fonts DM Serif Display + DM Sans, sidebar fixe avec navigation ancrée et highlight au scroll, optimisé impression PDF.
+
+### Structure du document (alignement grille d'évaluation Jalon 2)
+
+| # | Chapitre | Critère grille /10 |
+|---|----------|--------------------|
+| 0 | Couverture + Introduction | — |
+| 1 | Contexte & opportunité du projet | Contexte et opportunité du projet |
+| 2 | Cibles & proposition de valeur | Cibles et proposition de valeur |
+| 3 | Stratégie de développement | Stratégie de développement |
+| 4 | Roadmap & planification | Roadmap et planification |
+| 5 | Équipe & gouvernance | Organisation de l'équipe et gouvernance |
+| 6 | Chiffrage complet du projet | Chiffrage du projet |
+| 7 | Financement & modèle économique | Financement et modèle économique |
+| 8 | Synthèse & zones d'incertitude (préparation Jalon 3) | Cohérence collective et qualité du document |
+
+### Éléments structurants intégrés (selon attendus du guide page 10)
+- [x] Contexte de l'activité et son environnement (chapitre 1)
+- [x] Cibles retenues et besoins identifiés (chapitre 2)
+- [x] Proposition de valeur et positionnement (chapitre 2)
+- [x] Stratégie globale de développement (chapitre 3)
+- [x] Roadmap structurée avec dépendances et priorités (chapitre 4)
+- [x] Organisation de l'équipe et gouvernance (chapitre 5)
+- [x] Chiffrage complet par dimension (chapitre 6)
+- [x] Mode de financement (chapitre 7)
+- [x] Perspectives d'évolution et hypothèses de rentabilité (chapitre 7)
+- [x] Zones d'incertitude identifiées + pistes Jalon 3 (chapitre 8)
+- [x] Édito par grande partie (exigence guide) — un édito par chapitre, signé par le responsable de la dimension
+
+### Spécificités intégrées
+- **Focus DFS (Issa)** : chiffrage technique détaillé (98 j/h Phase 1+2), backlog initial 17 user stories réparties en 4 epics, planning poker formalisé, vélocité cible 25-30 SP/sprint, dépendances inter-métiers cartographiées
+- **3 scénarios financiers** : conservateur, réaliste, optimiste sur 24 mois avec compte de résultat prévisionnel et plan de trésorerie trimestriel
+- **Sources de financement** séquencées sans dilution prématurée : apports fondateurs (4 500 €) + French Tech Tremplin + Réseau Entreprendre + crowdfunding lancement
+- **Matrice de risques** : 8 risques majeurs avec probabilité, impact et plan d'atténuation
+- **Stress-test financier** : 4 scénarios de stress (coût Gemini +50%, churn 8%, CAC paid 12 €, usage intensif)
+- **Diagramme Gantt 12 mois** rendu en CSS pur (pas de dépendance externe)
+- **Triangle de positionnement** + mapping concurrentiel SVG
+
+### Conformité avec la grille d'évaluation Jalon 2 (/80)
+| Critère grille | Couverture |
+|----------------|------------|
+| Contexte et opportunité du projet | ✅ Chapitre 1 |
+| Cibles et proposition de valeur | ✅ Chapitre 2 |
+| Stratégie de développement | ✅ Chapitre 3 |
+| Roadmap et planification | ✅ Chapitre 4 + Gantt |
+| Organisation de l'équipe et gouvernance | ✅ Chapitre 5 + RACI |
+| Chiffrage du projet | ✅ Chapitre 6 (6 dimensions) |
+| Financement et modèle économique | ✅ Chapitre 7 + 3 scénarios |
+| Cohérence collective et qualité du document | ✅ Charte Lumia, éditos par section, sidebar nav, footer |
+
+### Ordre des prompts à conduire ensuite (Jalon 3 / M2)
+1. Tenir la roadmap M1 → M3 (Phase Conception)
+2. Maintenir un suivi trimestriel de ce business plan (actualisation des chiffres)
+3. Lancer l'audit RGPD blanc avant M8
+4. Démarrer la campagne TikTok organique dès M3
+
+### Patch du 12/05/2026 — Bouton export PDF
+- Ajout d'un **bouton flottant (FAB)** en bas à droite de `business-plan.html` qui déclenche `window.print()`.
+- Ajout d'un **bouton secondaire « Exporter en PDF »** dans la couverture (à côté de « Voir le MVP » et « Dossier Jalon 1 »).
+- Les boutons sont **masqués à l'impression** via `@media print { .pdf-fab { display: none !important; } }` pour ne pas apparaître dans le PDF généré.
+- Workflow utilisateur : clic sur le bouton → boîte de dialogue d'impression native du navigateur → choisir destination « Enregistrer en PDF » → confirmer.
+- Aucune dépendance externe (pas de bibliothèque jsPDF/html2pdf) : fichier reste autonome.
+
+### Patch du 12/05/2026 — Création de `taches.md` (remplacé)
+- Création initiale du fichier **`taches.md`** : checklist opérationnelle complète pour le Jalon 2 et la préparation du Jalon 3.
+- Organisation en 7 sections : (0) Avant dépôt Jalon 2 · (1) Phase Conception M1-M3 · (2) Phase Production M3-M9 avec sprints détaillés · (3) Gates de décision · (4) Pré-lancement M8-M9 · (5) Financement séquencé · (6) Suivi & gouvernance · (7) Préparation Jalon 3.
+- Système de priorité (P0/P1/P2) et d'attribution par responsable (A/M/I/E).
+- **Fichier supprimé et remplacé par `taches.html`** (voir patch suivant).
+
+---
+
+### Patch du 12/05/2026 — Ajout de la section « Production Jalon 2 » dans `taches.html`
+- Ajout d'une nouvelle section **`#done`** en tête de checklist : **« ✓ Production Jalon 2 »** regroupant 19 tâches déjà réalisées par l'agent durant la production du livrable Jalon 2.
+- Tâches pré-cochées (attribut `checked` HTML) couvrant : analyse du guide, plan détaillé, squelette HTML, reprise de la charte Lumia, rédaction des 8 chapitres du business plan, export PDF, création de `taches.html`, mise à jour d'Instruction.md.
+- Sidebar enrichie d'une entrée dédiée avec icône ✓ et compteur dynamique.
+- **Refonte de la logique localStorage** : `save()` stocke désormais l'état explicite (true/false) de chaque case et `load()` n'applique que les entrées présentes. Ainsi les tâches pré-cochées HTML restent cochées sur premier chargement, mais peuvent être décochées par l'utilisateur sans être ré-écrasées au prochain refresh.
+
+---
+
+### Patch du 12/05/2026 — Conversion en `taches.html` interactif
+- Conversion du fichier `taches.md` en **`taches.html`** : checklist interactive autoportée, dans la même charte Lumia que `Dossier-principal.html` et `business-plan.html`.
+- Fonctionnalités ajoutées par rapport au Markdown :
+  - **Cases à cocher persistantes** via `localStorage` (clé `lumia.taches.j2.v1`) : la progression est conservée entre les sessions, sans backend.
+  - **Barre de progression globale** (pourcentage + ratio terminées/total) en sticky topbar.
+  - **Compteur par section** dans la sidebar (ex. `5/12`) et badge de progression par chapitre, vert quand la section est 100 % complétée.
+  - **Filtres** par statut (toutes / à faire / terminées), par priorité (P0/P1/P2) et par responsable (Antonin / Maëlane / Issa / Équipe).
+  - **Bouton de réinitialisation** (avec confirmation) pour repartir d'une checklist vierge.
+  - **Bouton « Imprimer / PDF »** déclenchant `window.print()` avec CSS `@media print` adapté (sidebar et filtres masqués).
+  - **Toast** discret à chaque action (sauvegarde, reset, tâche cochée/décochée).
+  - **Highlight sidebar** : le lien actif suit le scroll.
+- Structure identique au Markdown initial : 8 sections (00 Avant dépôt → 07 Préparation Jalon 3 + KPI cibles) avec tags de priorité et de responsable colorés, et story points / mois cibles affichés en badges.
+- Liens croisés vers `business-plan.html` et `Dossier-principal.html` depuis la sidebar.
+- Suppression de `taches.md` (remplacé).
 
 ---
 

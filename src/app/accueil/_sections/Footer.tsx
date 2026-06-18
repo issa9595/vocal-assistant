@@ -1,38 +1,34 @@
 "use client";
 
+import LumiaLogo from "@/components/LumiaLogo";
+
 /**
- * Footer minimaliste
+ * Footer — panneau en verre, cohérent avec le header
  */
 export default function Footer() {
   return (
-    <footer className="
-      w-full
-      py-8 md:py-12
-      border-t border-(--border-subtle)
-      bg-(--color-brand-white)
-    ">
+    <footer className="w-full px-3 md:px-6 pb-4 md:pb-6 mt-4">
       <div className="
-        max-w-6xl
-        mx-auto
-        px-4 md:px-8 lg:px-12
-        text-center
-        text-sm md:text-base
-        landing-muted
+        glass-panel glass-grain glass-highlight
+        max-w-6xl mx-auto rounded-[1.5rem]
+        px-6 md:px-10 py-8 md:py-10
+        flex flex-col items-center gap-4 text-center
       ">
-        <p>
+        <LumiaLogo height={26} />
+
+        <p className="text-sm md:text-base landing-muted">
           © 2025{" "}
-          <span className="landing-gradient-text font-bold">
-            Lumia
-          </span>
+          <span className="landing-gradient-text font-bold">Lumia</span>
           . Tous droits réservés.
         </p>
-        <p className="mt-2 text-xs md:text-sm">
+
+        <p className="text-xs md:text-sm landing-subtle">
           Created by{" "}
           <a
             href="https://mada-dev.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold landing-link"
+            className="font-semibold landing-link cursor-pointer"
           >
             MADA-DEV.COM
           </a>
@@ -41,4 +37,3 @@ export default function Footer() {
     </footer>
   );
 }
-

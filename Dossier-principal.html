@@ -1,0 +1,2523 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumia Dossier Technique Jalon 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════════════════
+   LUMIA Dossier Technique Jalon 1
+   Charte : Rose #f5b5c9 · Crème #fdf8f8 · Violet #c5a6cf
+             Teal #9dc0bc · Pêche #f6b9ae · Dark #1d1d1b
+   ══════════════════════════════════════════════════ */
+
+:root {
+  --rose:        #f5b5c9;
+  --rose-deep:   #c0003a;
+  --rose-mid:    #e8829d;
+  --rose-light:  #fce8ef;
+  --rose-ultra:  #fef6f9;
+  --cream:       #fdf8f8;
+  --purple:      #c5a6cf;
+  --purple-light:#f0eaf6;
+  --teal:        #9dc0bc;
+  --teal-light:  #e8f3f2;
+  --peach:       #f6b9ae;
+  --peach-light: #fdf0ec;
+  --dark:        #1d1d1b;
+  --dark-2:      #3d3d3d;
+  --muted:       #8a8078;
+  --border:      #ede5ea;
+  --white:       #ffffff;
+  --sidebar-w:   210px;
+  --radius:      8px;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 13px; }
+body {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--dark);
+  background: var(--cream);
+  display: flex;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+strong { font-weight: 600; }
+
+/* ── SIDEBAR ──────────────────────────────────── */
+.sidebar {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--dark);
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 1.2rem;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sb-logo {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: var(--white);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.sb-logo span { color: var(--rose); }
+.sb-sub {
+  font-size: 0.6rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-top: 0.2rem;
+  margin-bottom: 1.6rem;
+}
+.sb-nav { flex: 1; }
+.sb-nav li { margin-bottom: 0.05rem; }
+.nav-link {
+  display: block;
+  padding: 0.35rem 0.7rem;
+  border-radius: 5px;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: #6b6060;
+  transition: all 0.15s;
+}
+.nav-link:hover { color: #bbb; }
+.nav-link.active { background: rgba(245,181,201,.14); color: var(--rose); font-weight: 500; }
+.sb-footer {
+  font-size: 0.58rem;
+  color: #3a3030;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 1.5rem;
+  line-height: 1.8;
+}
+
+/* ── MAIN ─────────────────────────────────────── */
+.main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; }
+
+/* ── PAGE ─────────────────────────────────────── */
+.page {
+  padding: 2.8rem 3rem 2.4rem;
+  border-bottom: 1px solid var(--border);
+  scroll-margin-top: 1rem;
+}
+.page-inner { max-width: 860px; }
+
+/* ── COVER ────────────────────────────────────── */
+.cover {
+  background: var(--dark);
+  padding: 4rem 3.5rem 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.cover-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.12;
+  pointer-events: none;
+}
+.blob-1 { width: 380px; height: 380px; background: var(--rose); top: -120px; right: -60px; }
+.blob-2 { width: 260px; height: 260px; background: var(--purple); bottom: -60px; right: 240px; }
+.blob-3 { width: 180px; height: 180px; background: var(--teal); top: 40%; left: 42%; }
+.cover-inner { position: relative; z-index: 2; }
+.cover-school {
+  font-size: 0.62rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-bottom: 1.2rem;
+}
+.cover-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(4.5rem, 9vw, 8rem);
+  color: var(--white);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.7rem;
+}
+.cover-title .dot { color: var(--rose); }
+.cover-tagline {
+  font-size: 1rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 1.2rem;
+}
+.cover-rule { width: 48px; height: 2px; background: var(--rose); margin-bottom: 1.2rem; }
+.cover-sub {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,.55);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+}
+.cover-team { font-size: 0.9rem; color: var(--white); font-weight: 500; margin-bottom: 1.5rem; }
+.btn-mvp {
+  display: inline-block;
+  padding: 0.55rem 1.2rem;
+  background: var(--rose);
+  color: var(--dark);
+  border-radius: 100px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  transition: opacity 0.15s;
+}
+.btn-mvp:hover { opacity: 0.85; }
+
+/* ── TYPOGRAPHY ───────────────────────────────── */
+.stag {
+  font-size: 0.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--rose-deep);
+  margin-bottom: 0.4rem;
+}
+.stitle {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  color: var(--dark);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 1.2rem;
+}
+.h3 {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin: 1.2rem 0 0.5rem;
+}
+.intro-text {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+  max-width: 680px;
+}
+.prose p {
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: var(--dark-2);
+  margin-bottom: 0.8rem;
+}
+.prose p:last-child { margin-bottom: 0; }
+
+/* ── CALLOUT ──────────────────────────────────── */
+.callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  background: var(--rose-ultra);
+  border-left: 2px solid var(--rose-mid);
+  padding: 0.8rem 1rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+.callout-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--rose-deep);
+  white-space: nowrap;
+  margin-top: 0.1rem;
+}
+
+/* ── STATS GRID ───────────────────────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 1.4rem;
+}
+.stat {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1rem;
+}
+.stat.accent { background: var(--rose-ultra); border-color: var(--rose); }
+.stat-n {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.9rem;
+  color: var(--dark);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.stat.accent .stat-n { color: var(--rose-deep); }
+.stat-l { font-size: 0.72rem; color: var(--dark-2); line-height: 1.4; margin-bottom: 0.25rem; }
+.stat-s { font-size: 0.58rem; color: var(--muted); font-style: italic; }
+
+/* ── TWO COL ──────────────────────────────────── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 0.6rem; }
+
+.check-list li {
+  font-size: 0.76rem;
+  padding: 0.2rem 0 0.2rem 1.1rem;
+  position: relative;
+  color: var(--dark-2);
+  line-height: 1.4;
+}
+.check-list.green li::before { content: '+'; position: absolute; left: 0; color: #16a34a; font-weight: 700; }
+.check-list.red li::before   { content: '–'; position: absolute; left: 0; color: #dc2626; font-weight: 700; }
+
+/* ── MARKET BLOCKS ────────────────────────────── */
+.mkt-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.7rem;
+  margin-bottom: 1.2rem;
+}
+.mkt-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.mkt-block.accent { background: var(--rose-ultra); border-color: var(--rose); }
+.mkt-block h3 { font-size: 0.78rem; font-weight: 600; color: var(--dark); margin-bottom: 0.4rem; }
+.mkt-block p  { font-size: 0.74rem; line-height: 1.6; color: var(--dark-2); }
+.mkt-tag {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.1rem 0.45rem;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  font-size: 0.58rem;
+  color: var(--muted);
+}
+
+/* ── TABLES ───────────────────────────────────── */
+.tbl-wrap { overflow-x: auto; margin: 0.6rem 0; }
+table { width: 100%; border-collapse: collapse; font-size: 0.74rem; }
+th {
+  background: var(--dark);
+  color: var(--white);
+  padding: 0.55rem 0.7rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.7rem;
+}
+td {
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--dark-2);
+  vertical-align: top;
+  line-height: 1.4;
+}
+tr:nth-child(even) td { background: rgba(245,181,201,.03); }
+.muted-td { color: var(--muted); font-style: italic; }
+
+/* ── BADGES ───────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 0.1rem 0.45rem;
+  border-radius: 100px;
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+.bg-green  { background: #dcfce7; color: #15803d; }
+.bg-red    { background: #fee2e2; color: #dc2626; }
+.bg-yellow { background: #fef9c3; color: #a16207; }
+.bg-rose   { background: var(--rose-light); color: var(--rose-deep); }
+.bg-blue   { background: #dbeafe; color: #1d4ed8; }
+.bg-dark   { background: var(--dark); color: var(--white); }
+
+.row-lumia td { background: var(--rose-ultra) !important; }
+.row-lumia td:first-child { border-left: 2px solid var(--rose-mid); }
+.row-hl td { background: rgba(245,181,201,.05) !important; }
+
+/* ── SWOT ─────────────────────────────────────── */
+.swot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 0.8rem;
+}
+.swot-q { padding: 1rem 1.2rem; }
+.swot-q.f  { background: #f0fdf4; }
+.swot-q.w  { background: #fffbeb; }
+.swot-q.o  { background: #eff6ff; }
+.swot-q.t  { background: #fff1f2; }
+.swot-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+.swot-q.f .swot-label { color: #15803d; }
+.swot-q.w .swot-label { color: #b45309; }
+.swot-q.o .swot-label { color: #1d4ed8; }
+.swot-q.t .swot-label { color: #dc2626; }
+.swot-q li {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  padding: 0.15rem 0 0.15rem 0.9rem;
+  position: relative;
+  color: var(--dark);
+}
+.swot-q.f li::before { content: '+'; position: absolute; left: 0; color: #15803d; font-weight: 700; }
+.swot-q.w li::before { content: '–'; position: absolute; left: 0; color: #b45309; font-weight: 700; }
+.swot-q.o li::before { content: '+'; position: absolute; left: 0; color: #1d4ed8; font-weight: 700; }
+.swot-q.t li::before { content: '!'; position: absolute; left: 0; color: #dc2626; font-weight: 700; }
+.swot-note {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--rose-mid);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* ── PERSONAS ─────────────────────────────────── */
+.personas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.persona {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.persona-hd {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+.persona-clara .persona-hd { background: var(--rose-ultra); }
+.persona-thomas .persona-hd { background: var(--purple-light); }
+.p-av {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1rem;
+  color: var(--white);
+  flex-shrink: 0;
+}
+.av-rose   { background: linear-gradient(135deg, var(--rose), var(--rose-mid)); }
+.av-purple { background: linear-gradient(135deg, var(--purple), #7c3aed); }
+.p-name { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--dark); }
+.p-sub  { font-size: 0.62rem; color: var(--muted); margin-bottom: 0.2rem; }
+.p-seg  {
+  display: inline-block;
+  padding: 0.08rem 0.4rem;
+  border-radius: 100px;
+  font-size: 0.58rem;
+  font-weight: 600;
+}
+.seg-p { background: var(--rose-light); color: var(--rose-deep); }
+.seg-f { background: var(--purple-light); color: #6d28d9; }
+
+.persona-body { padding: 0.4rem 1rem 0.8rem; }
+.p-row { margin-bottom: 0.6rem; }
+.p-lbl {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.15rem;
+}
+.persona-clara  .p-lbl { color: var(--rose-deep); }
+.persona-thomas .p-lbl { color: #6d28d9; }
+.p-txt { font-size: 0.74rem; line-height: 1.6; color: var(--dark-2); }
+.verbatim {
+  padding: 0.7rem 1rem;
+  font-style: italic;
+  font-size: 0.74rem;
+  color: var(--dark);
+  line-height: 1.6;
+  border-top: 1px solid var(--border);
+}
+.persona-clara  .verbatim { background: var(--rose-ultra); }
+.persona-thomas .verbatim { background: var(--purple-light); }
+
+/* ── VPC / GC ─────────────────────────────────── */
+.gc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; }
+.gc { padding: 1rem; border-radius: var(--radius); border: 1px solid var(--border); }
+.gc-why  { background: var(--rose-ultra); border-color: var(--rose); }
+.gc-how  { background: var(--peach-light); border-color: var(--peach); }
+.gc-what { background: var(--teal-light); border-color: var(--teal); }
+.gc-lbl {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+.gc-why  .gc-lbl { color: var(--rose-deep); }
+.gc-how  .gc-lbl { color: #b45309; }
+.gc-what .gc-lbl { color: #166534; }
+.gc p { font-size: 0.76rem; line-height: 1.6; color: var(--dark-2); }
+
+/* ── BMC ──────────────────────────────────────── */
+.bmc {
+  display: grid;
+  grid-template-columns: 1.1fr 1.1fr 1.4fr 1.1fr 1.2fr;
+  grid-template-rows: auto auto auto;
+  gap: 4px;
+  background: var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  padding: 4px;
+}
+.bmc-c {
+  background: var(--white);
+  padding: 0.8rem;
+  border-radius: 5px;
+  font-size: 0.7rem;
+  line-height: 1.5;
+  color: var(--dark-2);
+}
+.bmc-t { font-size: 0.66rem; font-weight: 700; color: var(--dark); margin-bottom: 0.3rem; }
+.bmc-hl { background: var(--rose-ultra); }
+.bmc-hl .bmc-t { color: var(--rose-deep); }
+.c-part  { grid-column: 1; grid-row: 1; }
+.c-act   { grid-column: 2; grid-row: 1; }
+.c-val   { grid-column: 3; grid-row: 1 / 3; }
+.c-rel   { grid-column: 4; grid-row: 1; }
+.c-seg   { grid-column: 5; grid-row: 1 / 3; }
+.c-res   { grid-column: 1; grid-row: 2; }
+.c-can   { grid-column: 2; grid-row: 2; }
+.c-rev   { grid-column: 4; grid-row: 2; }
+.c-cout  { grid-column: 1 / 4; grid-row: 3; }
+.c-rev2  { grid-column: 4 / 6; grid-row: 3; }
+
+/* ── PARCOURS ─────────────────────────────────── */
+.journey { display: flex; flex-direction: column; }
+.j-step {
+  display: flex;
+  gap: 1rem;
+  padding: 0.7rem 0 0.7rem 1.2rem;
+  border-left: 1px solid var(--border);
+  margin-left: 0.9rem;
+  position: relative;
+}
+.j-num {
+  position: absolute;
+  left: -0.95rem;
+  top: 0.75rem;
+  width: 1.8rem; height: 1.8rem;
+  background: var(--dark);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.j-phase { font-size: 0.76rem; font-weight: 600; color: var(--dark); margin-bottom: 0.1rem; }
+.j-desc  { font-size: 0.72rem; line-height: 1.5; color: var(--dark-2); margin-bottom: 0.2rem; }
+.j-risk  {
+  display: inline-block;
+  font-size: 0.64rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 100px;
+}
+.r-red    { background: #fee2e2; color: #dc2626; }
+.r-orange { background: #fef9c3; color: #a16207; }
+.r-green  { background: #dcfce7; color: #15803d; }
+
+/* ── HORIZONS ─────────────────────────────────── */
+.hor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; margin-bottom: 1.2rem; }
+.hor {
+  border-radius: var(--radius);
+  padding: 1rem;
+  border: 1px solid var(--border);
+}
+.hor-v1 { background: var(--rose-ultra); border-color: var(--rose); }
+.hor-v2 { background: #eff6ff; border-color: #93c5fd; }
+.hor-v3 { background: #f0fdf4; border-color: #86efac; }
+.hor-badge {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 100px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+.hor-v1 .hor-badge { background: var(--rose-deep); color: var(--white); }
+.hor-v2 .hor-badge { background: #1d4ed8; color: var(--white); }
+.hor-v3 .hor-badge { background: #15803d; color: var(--white); }
+.hor-period { font-size: 0.6rem; color: var(--muted); margin-bottom: 0.1rem; }
+.hor-title  { font-size: 0.88rem; font-weight: 700; color: var(--dark); margin-bottom: 0.4rem; }
+.hor p      { font-size: 0.71rem; line-height: 1.5; color: var(--dark-2); margin-bottom: 0.5rem; }
+.hor ul li  {
+  font-size: 0.66rem;
+  color: var(--dark-2);
+  padding: 0.1rem 0 0.1rem 0.7rem;
+  position: relative;
+}
+.hor ul li::before { content: '·'; position: absolute; left: 0; }
+
+/* ── ACQ GRID ─────────────────────────────────── */
+.acq-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; }
+.acq {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem;
+}
+.acq-t   { font-size: 0.74rem; font-weight: 600; color: var(--dark); margin-bottom: 0.2rem; }
+.acq-cpa {
+  display: inline-block;
+  padding: 0.08rem 0.35rem;
+  background: var(--rose-light);
+  color: var(--rose-deep);
+  border-radius: 100px;
+  font-size: 0.58rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+.acq p { font-size: 0.68rem; line-height: 1.5; color: var(--muted); }
+
+/* ── UNIT ECO ─────────────────────────────────── */
+.ue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1.2rem; }
+.ue {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem;
+}
+.ue.accent { background: var(--rose-ultra); border-color: var(--rose); }
+.ue-v {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.7rem;
+  color: var(--dark);
+  line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.ue.accent .ue-v { color: var(--rose-deep); }
+.ue-l { font-size: 0.68rem; color: var(--muted); line-height: 1.4; }
+
+/* ── ROADMAP ──────────────────────────────────── */
+.rm-block {
+  margin-bottom: 1.2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.rm-hd {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1rem;
+  flex-wrap: wrap;
+}
+.rm-v1 .rm-hd { background: var(--rose-ultra); }
+.rm-v2 .rm-hd { background: #eff6ff; }
+.rm-v3 .rm-hd { background: #f0fdf4; }
+.rm-ver {
+  display: inline-block;
+  padding: 0.15rem 0.65rem;
+  border-radius: 100px;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+.vv1 { background: var(--rose-deep); color: var(--white); }
+.vv2 { background: #1d4ed8; color: var(--white); }
+.vv3 { background: #15803d; color: var(--white); }
+.rm-period { font-size: 0.7rem; font-weight: 600; color: var(--dark); }
+.rm-goal   { font-size: 0.65rem; color: var(--muted); }
+.rm-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  padding: 0.8rem;
+  background: var(--white);
+}
+.rm-item {
+  font-size: 0.7rem;
+  color: var(--dark-2);
+  padding: 0.4rem 0.6rem;
+  background: var(--cream);
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  line-height: 1.4;
+}
+.prio {
+  display: inline-block;
+  padding: 0.08rem 0.35rem;
+  border-radius: 3px;
+  font-size: 0.58rem;
+  font-weight: 700;
+}
+.p0 { background: #fee2e2; color: #dc2626; }
+.p1 { background: #fef9c3; color: #a16207; }
+.p2 { background: #dbeafe; color: #1d4ed8; }
+
+/* ── TEAM ─────────────────────────────────────── */
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+.team-c {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.team-ph { opacity: 0.9; }
+.t-av {
+  width: 2.8rem; height: 2.8rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  color: var(--white);
+  margin: 1rem auto 0.4rem;
+}
+.av-r { background: linear-gradient(135deg, var(--rose), var(--rose-mid)); }
+.av-p { background: linear-gradient(135deg, var(--purple), #7c3aed); }
+.av-g { background: linear-gradient(135deg, var(--teal), #15803d); }
+.t-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.2rem;
+  text-align: center;
+  color: var(--dark);
+  margin-bottom: 0.15rem;
+}
+.t-role {
+  font-size: 0.6rem;
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 0.8rem;
+  padding: 0 0.8rem;
+}
+.t-body { padding: 0.6rem 1rem 1rem; border-top: 1px solid var(--border); }
+.t-del-title {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--rose-deep);
+  margin-bottom: 0.4rem;
+}
+.t-body li {
+  font-size: 0.68rem;
+  color: var(--dark-2);
+  padding: 0.15rem 0 0.15rem 0.9rem;
+  position: relative;
+  line-height: 1.4;
+}
+.t-body li::before { content: '—'; position: absolute; left: 0; color: var(--rose-mid); font-size: 0.55rem; top: 0.25rem; }
+.ph-tag {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.1rem 0.4rem;
+  background: var(--peach-light);
+  border: 1px solid var(--peach);
+  border-radius: 100px;
+  font-size: 0.58rem;
+  color: #b45309;
+}
+
+/* ── TECH SECTION ─────────────────────────────── */
+.tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-bottom: 1rem; }
+.tech-block {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.tech-block h4 { font-size: 0.76rem; font-weight: 600; color: var(--dark); margin-bottom: 0.5rem; }
+.tech-block p  { font-size: 0.72rem; line-height: 1.6; color: var(--dark-2); }
+.tech-block li {
+  font-size: 0.72rem;
+  line-height: 1.5;
+  padding: 0.15rem 0 0.15rem 0.9rem;
+  position: relative;
+  color: var(--dark-2);
+}
+.tech-block li::before { content: '·'; position: absolute; left: 0; color: var(--rose-mid); font-weight: 700; }
+.stack-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.72rem;
+}
+.stack-row:last-child { border-bottom: none; }
+.stack-name { font-weight: 600; color: var(--dark); min-width: 130px; flex-shrink: 0; }
+.stack-role { color: var(--dark-2); line-height: 1.4; }
+.stack-why  { font-size: 0.64rem; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+.arch-diagram {
+  background: var(--dark);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  margin: 0.8rem 0;
+  font-family: 'DM Sans', monospace;
+  font-size: 0.68rem;
+  color: #ccc;
+  line-height: 1.8;
+}
+.arch-diagram .hl  { color: var(--rose); font-weight: 600; }
+.arch-diagram .hl2 { color: var(--teal); }
+.arch-diagram .hl3 { color: var(--purple); }
+.arch-diagram .arrow { color: #555; }
+
+.info-box {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 0.8rem 0;
+}
+.info-box h4 { font-size: 0.76rem; font-weight: 600; color: var(--dark); margin-bottom: 0.5rem; }
+
+/* ── MISC ─────────────────────────────────────── */
+.dark-box {
+  background: var(--dark);
+  color: var(--white);
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius);
+  font-size: 0.76rem;
+  line-height: 1.6;
+  margin-top: 0.8rem;
+}
+.dark-box strong { color: var(--rose); }
+
+.info-bar {
+  background: var(--rose-ultra);
+  border-left: 2px solid var(--rose-mid);
+  padding: 0.6rem 0.9rem;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin-top: 0.8rem;
+}
+.info-bar strong { color: var(--rose-deep); }
+
+.method-box, .sout-box {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin-top: 0.8rem;
+}
+.method-box h4, .sout-box h4 {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.4rem;
+}
+.method-box p, .sout-box p {
+  font-size: 0.74rem;
+  line-height: 1.6;
+  color: var(--dark-2);
+}
+
+/* ── PRINT ────────────────────────────────────── */
+.p-photo { width:60px; height:60px; border-radius:50%; object-fit:cover; object-position:center top; flex-shrink:0; border:2px solid var(--border); }
+.persona-clara .p-photo { border-color:var(--rose); }
+.persona-thomas .p-photo { border-color:var(--purple); }
+
+@media print {
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .page { page-break-after: always; }
+}
+@media (max-width: 900px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { display: none; }
+  .main { margin-left: 0; }
+  .stats-grid, .ue-grid { grid-template-columns: repeat(2,1fr); }
+  .personas-grid, .two-col, .hor-grid, .gc-grid, .tech-grid { grid-template-columns: 1fr; }
+  .acq-grid { grid-template-columns: repeat(2,1fr); }
+  .team-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sb-logo"><svg viewBox="115 90 610 420" width="48" height="34" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lg1" x1="270" y1="499" x2="270" y2="95" gradientTransform="translate(796 4) rotate(-179.4) scale(.93 -1) skewX(-.09)" gradientUnits="userSpaceOnUse"><stop offset=".32" stop-color="#f0b5c9"/><stop offset="1" stop-color="#f8cdbc"/></linearGradient><linearGradient id="lg2" x1="532" y1="98" x2="532" y2="502" gradientTransform="translate(796 4) rotate(-179.4) scale(.93 -1) skewX(-.09)" gradientUnits="userSpaceOnUse"><stop offset=".22" stop-color="#efb4c8"/><stop offset="1" stop-color="#f8cebd"/></linearGradient></defs><path fill="url(#lg1)" d="M366.79,295.67v202.9s107.68,0,107.68,0v-202.9c0-61.83,27.27-87.96,67.49-87.96,40.19,0,67.49,26.14,67.49,87.96v202.9s107.68,0,107.68,0v-202.9c0-131.59-70.36-198.97-175.18-198.97-104.82,0-175.18,66.6-175.18,198.97Z"/><path fill="url(#lg2)" d="M124.74,295.67v202.9s107.68,0,107.68,0v-202.9c0-61.83,27.27-87.96,67.49-87.96,40.19,0,67.49,26.14,67.49,87.96v202.9s107.68,0,107.68,0v-202.9c0-131.59-70.36-198.97-175.18-198.97-104.82,0-175.18,66.6-175.18,198.97Z"/></svg><div style="margin-top:0.4rem">Lumia<span>.</span></div></div>
+  <div class="sb-sub">Dossier Jalon 1</div>
+  <ul class="sb-nav">
+    <li><a href="#cover"       class="nav-link active">Accueil</a></li>
+    <li><a href="#intro"       class="nav-link">Introduction</a></li>
+    <li><a href="#veille"      class="nav-link">Veille stratégique</a></li>
+    <li><a href="#marche"      class="nav-link">Étude de marché</a></li>
+    <li><a href="#concurrence" class="nav-link">Analyse concurrentielle</a></li>
+    <li><a href="#swot"        class="nav-link">SWOT</a></li>
+    <li><a href="#personas"    class="nav-link">Personas</a></li>
+    <li><a href="#vpc"         class="nav-link">VPC & Golden Circle</a></li>
+    <li><a href="#bmc"         class="nav-link">Business Model</a></li>
+    <li><a href="#parcours"    class="nav-link">Parcours client</a></li>
+    <li><a href="#strategie"   class="nav-link">Stratégie</a></li>
+    <li><a href="#finances"    class="nav-link">Finances</a></li>
+    <li><a href="#roadmap"     class="nav-link">Roadmap</a></li>
+    <li><a href="#networking"   class="nav-link">Networking experts</a></li>
+    <li><a href="#tests"        class="nav-link">Tests utilisateurs</a></li>
+    <li><a href="#technique"   class="nav-link">Étude technique</a></li>
+    
+        <li><a href="#equipe"      class="nav-link">Equipe & Projet</a></li>
+<li><a href="#moodboard" class="nav-link">Direction artistique</a></li>
+    <li><a href="#suite"     class="nav-link">Roadmap suite</a></li>
+  <li style="margin-top:0.8rem;padding-top:0.6rem;border-top:1px solid rgba(255,255,255,0.08)"><a href="/dossier/business-model.html" class="nav-link" style="color:var(--rose);font-weight:500">Business Model</a></li>
+  </ul>
+  <div class="sb-footer">MyDigitalSchool<br>MBA 2024–2025</div>
+</nav>
+
+<main class="main">
+
+<!-- COVER -->
+<section id="cover" class="cover">
+  <div class="cover-blob blob-1"></div>
+  <div class="cover-blob blob-2"></div>
+  <div class="cover-blob blob-3"></div>
+  <div class="cover-inner">
+    <svg viewBox="115 90 610 420" width="80" height="56" style="margin-bottom:1rem;opacity:0.9" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="clg1" x1="270" y1="499" x2="270" y2="95" gradientTransform="translate(796 4) rotate(-179.4) scale(.93 -1) skewX(-.09)" gradientUnits="userSpaceOnUse"><stop offset=".32" stop-color="#f0b5c9"/><stop offset="1" stop-color="#f8cdbc"/></linearGradient><linearGradient id="clg2" x1="532" y1="98" x2="532" y2="502" gradientTransform="translate(796 4) rotate(-179.4) scale(.93 -1) skewX(-.09)" gradientUnits="userSpaceOnUse"><stop offset=".22" stop-color="#efb4c8"/><stop offset="1" stop-color="#f8cebd"/></linearGradient></defs><path fill="url(#clg1)" d="M366.79,295.67v202.9s107.68,0,107.68,0v-202.9c0-61.83,27.27-87.96,67.49-87.96,40.19,0,67.49,26.14,67.49,87.96v202.9s107.68,0,107.68,0v-202.9c0-131.59-70.36-198.97-175.18-198.97-104.82,0-175.18,66.6-175.18,198.97Z"/><path fill="url(#clg2)" d="M124.74,295.67v202.9s107.68,0,107.68,0v-202.9c0-61.83,27.27-87.96,67.49-87.96,40.19,0,67.49,26.14,67.49,87.96v202.9s107.68,0,107.68,0v-202.9c0-131.59-70.36-198.97-175.18-198.97-104.82,0-175.18,66.6-175.18,198.97Z"/></svg>
+<div class="cover-school">MyDigitalSchool · MBA 2024–2025 · My Digital Start-up</div>
+    <h1 class="cover-title">Lumia<span class="dot">.</span></h1>
+    <p class="cover-tagline">« L'assistant qui pense à ta place »</p>
+    <div class="cover-rule"></div>
+    <div class="cover-sub">Dossier technique · Jalon 1 Go / No Go</div>
+    <div class="cover-team">Antonin · Maëlane · Issa</div>
+    <a href="https://vocal-assistant-two.vercel.app" target="_blank" class="btn-mvp">Voir le MVP live</a>
+    <a href="/dossier/business-model.html" class="btn-mvp" style="background:transparent;border:1px solid var(--rose);color:var(--rose);margin-left:0.6rem">Business Model</a>
+  </div>
+</section>
+
+<!-- INTRODUCTION -->
+<section id="intro" class="page">
+<div class="page-inner">
+  <div class="stag">Introduction</div>
+  <h2 class="stitle">Pourquoi Lumia existe</h2>
+  <div class="prose">
+    <p>Il y a des choses qui restent coincées dans la tête des semaines entières. La voiture à amener chez le garagiste. Le rendez-vous médical qu'on repousse depuis trois mois. Le papier toilette qu'on oublie à chaque fois. Les courses qu'on réalise avoir oubliées en ouvrant le frigo le soir. Pris séparément, c'est rien. Cumulés, ça s'appelle la charge mentale.</p>
+    <p>Le problème qu'on a identifié sur le terrain, c'est que les outils censés aider n'aident pas vraiment. Todolist, Notion, Google Agenda : tous demandent de la discipline et une mise à jour manuelle pour fonctionner. Or c'est exactement ce que les personnes surchargées n'ont plus. Les outils de productivité créent eux-mêmes une charge mentale. C'est le paradoxe central.</p>
+    <p>Lumia part de ce constat. C'est un assistant de vie conversationnel basé sur l'IA, lancé en 2025 dans le cadre du programme My Digital Start-up de MyDigitalSchool. L'utilisateur parle, Lumia organise. Pas de formulaire, pas de configuration. Et surtout, Lumia n'attend pas qu'on lui demande. Il fonctionne sur deux niveaux de proactivité. <strong>Niveau 1 : la détection explicite.</strong> Clara dit "on n'a plus de café", Lumia l'enregistre et lui envoie un rappel au bon moment. <strong>Niveau 2 : l'apprentissage des cycles.</strong> Clara achète du papier toilette chaque semaine, du lait tous les quatre jours, des couches tous les dix jours. Au bout de quelques semaines, Lumia a compris le rythme. Il n'attend plus qu'elle le dise. Il anticipe : "Clara, ça fait 6 jours, tu as bientôt besoin de lait." C'est ça, "l'assistant qui pense à ta place".</p>
+  </div>
+  <div class="callout">
+    <span class="callout-label">Positionnement</span>
+    <span>Lumia n'est pas un outil de productivité. C'est un <strong>réducteur de charge mentale</strong>.</span>
+  </div>
+</div>
+</section>
+
+<!-- VEILLE -->
+<section id="veille" class="page">
+<div class="page-inner">
+  <div class="stag">01 Veille stratégique</div>
+  <h2 class="stitle">Veille stratégique</h2>
+
+  <div class="h3">Environnement externe chiffres clés</div>
+  <div class="stats-grid">
+    <div class="stat"><div class="stat-n">+121%</div><div class="stat-l">Les apps d'IA ont doublé leurs revenus en Europe en 6 mois</div><div class="stat-s">https://sensortower.com/blog/state-of-ai-apps-market-overview-2025</div></div>
+    <div class="stat"><div class="stat-n">+67%</div><div class="stat-l">Les téléchargements d'apps IA ont bondi de 67% en un semestre</div><div class="stat-s">https://sensortower.com/blog/state-of-ai-apps-market-overview-2025</div></div>
+    <div class="stat"><div class="stat-n">2,18%</div><div class="stat-l">Seuls 2% des utilisateurs gratuits passent en payant après 1 mois</div><div class="stat-s">https://www.revenuecat.com/state-of-subscription-apps-2025/</div></div>
+    <div class="stat accent"><div class="stat-n">75%</div><div class="stat-l">3 femmes sur 4 en couple gèrent seules le quotidien du foyer</div><div class="stat-s">https://www.frequencemedicale.com/rhumatologie/patient/298136-Charge-mentale-les-femmes-continuent-d-en-faire-trop-pour-le-foyer</div></div>
+    <div class="stat"><div class="stat-n">92,5%</div><div class="stat-l">9 femmes sur 10 disent que ça freine leur carrière</div><div class="stat-s">https://www.fairchore.com/fr/blog/sante-mentale-2026-partage-taches-maison</div></div>
+    <div class="stat"><div class="stat-n">59%</div><div class="stat-l">6 Français sur 10 utilisent déjà l'IA (76% chez les 18-34 ans)</div><div class="stat-s">https://wearesocial.com/fr/blog/2025/02/digital-report-france-2025-%F0%9F%87%AB%F0%9F%87%B7/</div></div>
+  </div>
+
+  <div class="h3" style="margin-top:1.5rem">Lecture strategique</div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">Le marché est prêt. 59% des Français utilisent déjà l'IA, 76% chez les 18-34 ans. Les revenus des apps IA ont doublé en 6 mois en Europe. L'adoption est massive.</p>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">Mais convertir reste difficile. Seuls 2% des utilisateurs gratuits passent en payant après un mois. Pour Lumia, la valeur doit être visible dès le premier jour.</p>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">Le besoin est réel. 3 femmes sur 4 en couple gèrent seules le foyer. 9 sur 10 disent que ça freine leur carrière. Ce n'est pas une intuition, c'est documenté.</p>
+  <div class="h3" style="margin-top:1.2rem">Cadre reglementaire</div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7">Lumia traite des données familiales et comportementales. La conformité RGPD et IA Act est intégrée dès la conception, pas en post-production.</p>
+
+</div>
+</section>
+
+<!-- ÉTUDE DE MARCHÉ -->
+<section id="marche" class="page">
+<div class="page-inner">
+  <div class="stag">02 Étude de marché</div>
+  <h2 class="stitle">Étude de marché</h2>
+
+  <div class="mkt-grid">
+    <div class="mkt-block">
+      <h3>Cible principale Femmes actives</h3>
+      <p>84,7% des femmes de 25 à 49 ans sont actives en France. Ce taux chute à 53,3% chez celles qui ont au moins 3 enfants dont un de moins de 3 ans signe direct que la charge familiale impacte la vie professionnelle.</p>
+      <span class="mkt-tag">INSEE 2025</span>
+    </div>
+    <div class="mkt-block">
+      <h3>Cible secondaire Alternants</h3>
+      <p>La France compte près de 660 000 apprentis dans le supérieur fin 2024, un chiffre qui a grimpé de 14% en deux ans. Ce sont des jeunes connectés, qui vivent sur leur téléphone, mais qui n'ont pas les moyens de payer une app sans l'avoir testée. C'est pour ça que le freemium existe : on les laisse essayer gratuitement, et ceux qui restent paient quand le besoin devient évident.</p>
+      <span class="mkt-tag">MESR-SIES 2025</span>
+    </div>
+    <div class="mkt-block">
+      <h3>Usages mobiles</h3>
+      <p>80% des Français utilisent un smartphone quotidiennement, 78% téléchargent des applications. 2h40/jour en ligne dont 94% sur applications. 41 apps installées en moyenne, seulement 12 utilisées chaque semaine.</p>
+      <span class="mkt-tag">Baromètre Numérique 2024 · Médiamétrie</span>
+    </div>
+    <div class="mkt-block accent">
+      <h3>Adoption IA conversationnelle</h3>
+      <p>59% des Français utilisent déjà la GenAI (76% chez les 18-34 ans). 51% accepteraient de confier la gestion de listes ou d'agendas à un assistant IA. ChatGPT est l'app la plus téléchargée en France fin 2024.</p>
+      <span class="mkt-tag">We Are Social 2025</span>
+    </div>
+  </div>
+
+  <div class="dark-box"><strong>72%</strong> des Français prêts à quitter une marque après une mauvaise expérience app (Amplitude 2025). La barre est haute mais ça élimine les acteurs médiocres.</div>
+
+  <div class="info-bar" style="margin-top:1rem"><strong>Notre marché, en chiffres : :</strong> En France, 3,1 millions de femmes actives entre 25 et 40 ans ont des enfants (INSEE 2025). C'est notre marché. Si seulement 2% d'entre elles s'abonnent à 9,99€/mois, ça représente 619 000€ de revenus mensuels. Notre objectif V1 à 400 abonnées, c'est 0,013% de ce marché. Un point d'entrée réaliste avant de grandir.</div>
+</div>
+</section>
+
+<!-- ANALYSE CONCURRENTIELLE -->
+<section id="concurrence" class="page">
+<div class="page-inner">
+  <div class="stag">03 Analyse concurrentielle</div>
+  <h2 class="stitle">Analyse concurrentielle</h2>
+  <p class="intro-text">Le marché est plein de solutions qui font toutes la même chose : attendre qu'on leur demande. C'est là que Lumia se différencie.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Acteur</th><th>Apprend tes habitudes</th><th>Anticipe sans demander</th><th>Gère les courses</th><th>Vocal natif</th><th>Notifications proactives</th></tr></thead>
+      <tbody>
+        <tr class="row-lumia">
+          <td><strong>Lumia</strong></td>
+          <td><span class="badge bg-green">Oui (cycles d'achat)</span></td>
+          <td><span class="badge bg-green">Oui</span></td>
+          <td><span class="badge bg-green">Oui</span></td>
+          <td><span class="badge bg-green">Oui</span></td>
+          <td><span class="badge bg-green">Oui</span></td>
+        </tr>
+        <tr>
+          <td>ChatGPT / Gemini</td>
+          <td><span class="badge bg-red">Non</span></td>
+          <td><span class="badge bg-red">Non</span></td>
+          <td><span class="badge bg-red">Non</span></td>
+          <td><span class="badge bg-green">Oui</span></td>
+          <td><span class="badge bg-red">Non</span></td>
+        </tr>
+        <tr>
+          <td>Google Agenda</td>
+          <td><span class="badge bg-red">Non</span></td>
+          <td><span class="badge bg-red">Non</span></td>
+          <td><span class="badge bg-red">Non</span></td>
+          <td><span class="badge bg-red">Non</span></td>
+          <td><span class="badge bg-yellow">Rappels manuels</span></td>
+        </tr>
+        <tr>
+          <td>Todoist / Notion</td>
+          <td><span class="badge bg-red">Non</span></td>
+          <td><span class="badge bg-red">Non</span></td>
+          <td><span class="badge bg-yellow">Listes manuelles</span></td>
+          <td><span class="badge bg-red">Non</span></td>
+          <td><span class="badge bg-yellow">Rappels manuels</span></td>
+        </tr>
+        <tr>
+          <td>Siri / Alexa</td>
+          <td><span class="badge bg-red">Non</span></td>
+          <td><span class="badge bg-red">Non</span></td>
+          <td><span class="badge bg-yellow">Listes manuelles</span></td>
+          <td><span class="badge bg-green">Oui</span></td>
+          <td><span class="badge bg-red">Non</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h3" style="margin-top:1.8rem">Mapping concurrentiel</div>
+<p style="font-size:0.78rem;color:var(--muted);margin-bottom:1rem">Positionnement des acteurs sur deux axes : la capacite a anticiper sans qu'on demande, et la capacite a apprendre les habitudes de l'utilisateur. Lumia est le seul acteur dans le quadrant superieur droit.</p>
+
+<div style="position:relative;width:100%;max-width:780px;height:480px;background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1.5rem;overflow:hidden">
+  <div style="position:absolute;bottom:40px;left:60px;right:20px;height:1px;background:var(--border)"></div>
+  <div style="position:absolute;bottom:40px;left:60px;top:20px;width:1px;background:var(--border)"></div>
+  <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);font-size:0.7rem;font-weight:600;color:var(--dark);letter-spacing:0.08em">ANTICIPE SANS DEMANDER &#8594;</div>
+  <div style="position:absolute;left:8px;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:0.7rem;font-weight:600;color:var(--dark);letter-spacing:0.08em;white-space:nowrap">APPREND LES HABITUDES &#8594;</div>
+  <div style="position:absolute;top:30px;right:30px;font-size:0.6rem;color:var(--rose-deep);font-weight:600;opacity:0.5">ZONE LUMIA</div>
+  <div style="position:absolute;top:30px;left:70px;font-size:0.6rem;color:var(--muted);opacity:0.4">Retient mais n'agit pas</div>
+  <div style="position:absolute;bottom:50px;right:30px;font-size:0.6rem;color:var(--muted);opacity:0.4">Agit mais n'apprend pas</div>
+  <div style="position:absolute;bottom:50px;left:70px;font-size:0.6rem;color:var(--muted);opacity:0.4">Ni l'un ni l'autre</div>
+  <div style="position:absolute;right:60px;top:50px;text-align:center">
+    <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#f0b5c9,#f8cdbc);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(192,0,58,0.25);border:3px solid var(--rose-deep)">
+      <span style="font-weight:700;color:var(--white);font-size:0.9rem;font-family:var(--font-display)">Lumia</span>
+    </div>
+    <div style="font-size:0.6rem;color:var(--rose-deep);font-weight:600;margin-top:4px">Apprend + Anticipe</div>
+  </div>
+  <div style="position:absolute;right:100px;bottom:100px;text-align:center">
+    <img src="/dossier/logos/chatgpt.png" alt="ChatGPT" style="width:56px;height:56px;border-radius:50%">
+    <div style="font-size:0.58rem;color:var(--muted);margin-top:3px">ChatGPT</div>
+  </div>
+  <div style="position:absolute;right:170px;bottom:120px;text-align:center">
+    <img src="/dossier/logos/gemini.svg" alt="Gemini" style="width:50px;height:50px;border-radius:50%">
+    <div style="font-size:0.58rem;color:var(--muted);margin-top:3px">Gemini</div>
+  </div>
+  <div style="position:absolute;left:200px;bottom:80px;text-align:center">
+    <img src="/dossier/logos/siri.png" alt="Siri" style="width:48px;height:48px;border-radius:50%">
+    <div style="font-size:0.58rem;color:var(--muted);margin-top:3px">Apple Siri</div>
+  </div>
+  <div style="position:absolute;left:140px;bottom:110px;text-align:center">
+    <img src="/dossier/logos/alexa.svg" alt="Alexa" style="width:48px;height:48px;border-radius:50%">
+    <div style="font-size:0.58rem;color:var(--muted);margin-top:3px">Amazon Alexa</div>
+  </div>
+  <div style="position:absolute;left:100px;top:140px;text-align:center">
+    <img src="/dossier/logos/gcal.png" alt="Google Calendar" style="width:44px;height:44px">
+    <div style="font-size:0.58rem;color:var(--muted);margin-top:3px">Google Agenda</div>
+  </div>
+  <div style="position:absolute;left:120px;bottom:160px;text-align:center">
+    <img src="/dossier/logos/Todoist.png" alt="Todoist" style="width:40px;height:40px;border-radius:50%">
+    <div style="font-size:0.58rem;color:var(--muted);margin-top:3px">Todoist</div>
+  </div>
+  <div style="position:absolute;left:180px;bottom:155px;text-align:center">
+    <img src="/dossier/logos/notion.png" alt="Notion" style="width:40px;height:40px">
+    <div style="font-size:0.58rem;color:var(--muted);margin-top:3px">Notion</div>
+  </div>
+  <div style="position:absolute;right:15px;top:15px;width:250px;height:220px;border:2px dashed var(--rose);border-radius:12px;opacity:0.2"></div>
+</div>
+
+<p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">ChatGPT et Gemini sont puissants mais ne retiennent rien. Todoist et Notion demandent de tout remplir soi-meme. Siri et Alexa executent mais ne prennent aucune initiative. <strong>Lumia est le seul a apprendre tes habitudes et agir avant que tu y penses.</strong></p>
+
+<div class="dark-box" style="margin-top:1rem">
+    Les autres outils demandent un effort constant : remplir, cocher, mettre a jour. <strong>Lumia fait l'inverse : plus on l'utilise, moins on a besoin d'y penser.</strong> Il detecte que Clara achete du lait tous les 4 jours, du PQ chaque semaine. Il anticipe, il rappelle. Aucun concurrent ne fait ca.
+</div>
+
+<!-- SWOT -->
+<section id="swot" class="page">
+  <div class="page-inner">
+    <div class="stag">04 Diagnostic stratégique</div>
+    <h2 class="stitle">Diagnostic SWOT</h2>
+  
+    <div class="swot-grid">
+      <div class="swot-q f">
+        <div class="swot-label">Forces</div>
+        <ul>
+          <li>Le marché de l'IA grand public explose : revenus doublés en 6 mois en Europe</li>
+          <li>La charge mentale est un problème reconnu, documenté, que les gens verbalisent</li>
+          <li>Aucun acteur ne combine IA conversationnelle + anticipation des besoins du foyer</li>
+          <li>Le modèle freemium est validé dans l'industrie des apps IA (2,18% de conversion median)</li>
+          <li>660 000 alternants dans le supérieur : un vivier massif pour le segment freemium</li>
+        </ul>
+      </div>
+      <div class="swot-q w">
+        <div class="swot-label">Faiblesses</div>
+        <ul>
+          <li>Le marché des apps productivité est saturé : les gens installent et désinstallent</li>
+          <li>Rétention J+7 dans le secteur : 7,2%. Garder les utilisateurs est le vrai défi</li>
+          <li>Le mot "IA" fatigue une partie du public, trop de promesses non tenues</li>
+          <li>Les coûts API sont variables et non plafonnés : difficile de prévoir les marges à grande échelle</li>
+          <li>Pas de standard de marché pour le paiement d'un assistant de vie IA</li>
+        </ul>
+      </div>
+      <div class="swot-q o">
+        <div class="swot-label">Opportunités</div>
+        <ul>
+          <li>3 femmes sur 4 en couple gèrent tout toutes seules, personne ne leur propose une vraie solution</li>
+          <li>6 Français sur 10 utilisent déjà l'IA, 76% chez les 18-34 ans : le public est prêt</li>
+          <li>Le segment 25-40 ans avec enfants n'est ciblé par aucune app IA aujourd'hui</li>
+          <li>TikTok permet d'atteindre cette cible gratuitement avec du contenu authentique</li>
+          <li>La QVT devient un budget RH en entreprise : débouché B2B concret en V3</li>
+        </ul>
+      </div>
+      <div class="swot-q t">
+        <div class="swot-label">Menaces</div>
+        <ul>
+          <li>Google, Apple ou Amazon peuvent intégrer des fonctions proactives du jour au lendemain</li>
+          <li>ChatGPT a atteint 1 milliard de téléchargements : l'habitude est déjà prise ailleurs</li>
+          <li>RGPD + IA Act : les données familiales et comportementales sont un terrain sensible</li>
+          <li>Les utilisateurs abandonnent une app en moins de 2 minutes si la valeur n'est pas immédiate</li>
+          <li>Méfiance croissante envers les apps qui collectent des données personnelles</li>
+        </ul>
+      </div>
+    </div>
+    <div class="swot-note">Le marché est là, le besoin est réel, le timing est bon. Le risque principal est de ne pas prouver la valeur assez vite avant que les gros acteurs s'y intéressent.</div>
+  </div>
+  </section>
+<!-- PERSONAS -->
+<section id="personas" class="page">
+<div class="page-inner">
+  <div class="stag">05 Segmentation & Personas</div>
+  <h2 class="stitle">Personas</h2>
+  <p class="intro-text">Construits à partir de 65 questionnaires (Janvier–Février 2025)</p>
+
+  <div class="personas-grid">
+    <div class="persona persona-clara">
+      <div class="persona-hd">
+        <img class="p-photo" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=120&h=120&fit=crop&crop=face&auto=format" alt="Clara">
+        <div>
+          <div class="p-name">Clara</div>
+          <div class="p-sub">32 ans · Chargée de communication · Nantes · 2 enfants</div>
+          <span class="p-seg seg-p">Premium · 9,99€/mois</span>
+        </div>
+      </div>
+      <div class="persona-body">
+        <div class="p-row"><div class="p-lbl">Situation</div><div class="p-txt">Travaille en agence jusqu'à 19h. Conjoint en déplacement lundi–jeudi. Gère seule 80% des tâches domestiques. Le smartphone est son outil central de coordination familiale.</div></div>
+        <div class="p-row"><div class="p-lbl">Journée type</div><div class="p-txt">7h : dépôt enfants, pense au rdv pédiatre à reprogrammer. 9h : réunion client + notification école non lue. 12h : réalise qu'il n'y a plus de PQ. 19h : courses express, repas, bains, coucher. 22h : note sur son téléphone les 6 choses à ne pas oublier demain.</div></div>
+        <div class="p-row"><div class="p-lbl">Frustrations profondes</div><div class="p-txt">Se réveille la nuit pour noter des choses. A oublié le bilan annuel de sa fille pendant 10 mois. Conjoint bienveillant mais ne voit pas ce qu'il y a à faire elle doit penser à déléguer en plus de faire. A essayé Notion (abandonné), Todolist (abandonné), Google Agenda (jamais à jour).</div></div>
+        <div class="p-row"><div class="p-lbl">Attentes Lumia</div><div class="p-txt">Quelque chose qui sait ce qu'elle a oublié sans qu'elle ait à le noter. Pas de formulaire. Parler, comme à quelqu'un de confiance. Se sentir épaulée, pas surveillée. Agenda partagé avec son conjoint, attribution automatique des tâches.</div></div>
+        <div class="p-row"><div class="p-lbl">Moment de conversion</div><div class="p-txt">Lumia lui rappelle le bilan oublié depuis 8 mois et trouve un créneau seul. Elle se couche un soir sans rien avoir à noter. Ce moment doit arriver dans les 7 premiers jours sinon elle abandonne.</div></div>
+        <div class="p-row"><div class="p-lbl">Comment on la trouve</div><div class="p-txt">Elle tombe sur une vidéo TikTok sur la charge mentale, ou une amie lui en parle. Si on fait de la pub, on vise un coût de 3 à 5€ par utilisatrice acquise.</div></div>
+      </div>
+      <div class="verbatim">« Je veux juste que quelqu'un gère à ma place sans que j'aie à tout répéter. Toutes les applis demandent qu'on les alimente. Moi je veux un truc qui observe et qui agit. »</div>
+    </div>
+
+    <div class="persona persona-thomas">
+      <div class="persona-hd">
+        <img class="p-photo" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=120&h=120&fit=crop&crop=face&auto=format" alt="Thomas">
+        <div>
+          <div class="p-name">Thomas</div>
+          <div class="p-sub">23 ans · Alternant marketing · Lyon · Colocation</div>
+          <span class="p-seg seg-f">Freemium · 3 req IA/semaine</span>
+        </div>
+      </div>
+      <div class="persona-body">
+        <div class="p-row"><div class="p-lbl">Situation</div><div class="p-txt">3 jours entreprise / 2 jours école. ~900€/mois. Aucune routine stable. Digital native, essaie les apps gratuites mais n'en paye aucune. Découverte principale : bouche-à-oreille dans son réseau de pairs.</div></div>
+        <div class="p-row"><div class="p-lbl">Journée type</div><div class="p-txt">Lundi : réunion agence + rappel école pour rendu jeudi. Mardi : réalise le soir qu'il n'a pas payé sa facture EDF. Mercredi : cours toute la journée, trop fatigué pour finir le dossier. Jeudi : rendu à 23h59, bâclé. Le problème n'est pas la discipline c'est l'absence d'outil qui anticipe avant que ce soit urgent.</div></div>
+        <div class="p-row"><div class="p-lbl">Frustrations profondes</div><div class="p-txt">Oublie de payer ses factures à temps. Deadlines école et boulot qui se mélangent. Budget jamais vraiment suivi. Toujours l'impression d'être en retard sur quelque chose. Surcharge intense en période de sprint (exam + projet + deadline agence en même temps).</div></div>
+        <div class="p-row"><div class="p-lbl">Attentes Lumia</div><div class="p-txt">Ultra-rapide, zéro friction, zéro configuration. La première valeur dans les 2 premières minutes. Gestion automatique école + boulot + budget, rappels avant que ce soit urgent. Gratuit pour tester il paie si ça prouve sa valeur.</div></div>
+        <div class="p-row"><div class="p-lbl">Pourquoi il compte</div><div class="p-txt">Thomas en parle à ses potes, ça ne coûte rien. Il teste les fonctionnalités en premier. Et surtout : un étudiant gratuit à 23 ans, c'est un abonné payant à 30 ans quand il a une famille.</div></div>
+        <div class="p-row"><div class="p-lbl">Comment on le trouve</div><div class="p-txt">Bouche-à-oreille en colocation, entre potes. Coût d'acquisition : zéro. Il paiera plus tard, quand Lumia lui sera devenu indispensable.</div></div>
+      </div>
+      <div class="verbatim">« Entre les cours, le stage et la coloc, j'ai l'impression d'être toujours en retard sur quelque chose. Je veux un truc aussi simple que parler à un ami qui gère pour moi. »</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- VPC + GOLDEN CIRCLE -->
+<section id="vpc" class="page">
+<div class="page-inner">
+  <div class="stag">06 Proposition de valeur</div>
+  <h2 class="stitle">Value Proposition Canvas & Golden Circle</h2>
+
+  <div class="h3">Value Proposition Canvas Clara (cible principale)</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Profil client</th><th>Réponse Lumia</th></tr></thead>
+      <tbody>
+        <tr><td>Gérer le foyer sans sacrifier sa carrière</td><td>Lumia prend en charge la coordination quotidienne. Clara n'a plus à tout porter mentalement.</td></tr>
+        <tr><td>Anticiper sans tout planifier manuellement</td><td>Lumia apprend les habitudes et anticipe les tâches avant qu'on les formule.</td></tr>
+        <tr><td>Pain : oublis fréquents et anxiété associée</td><td>Détection des tâches implicites : Lumia sait ce qu'elle a oublié sans qu'elle le note.</td></tr>
+        <tr><td>Pain : outils trop complexes à maintenir</td><td>Zéro configuration. Lumia observe et apprend. Pas besoin de l'alimenter.</td></tr>
+        <tr><td>Pain : conjoint qui ne voit pas ce qu'il y a à faire</td><td>Agenda familial partagé + attribution automatique des tâches au conjoint.</td></tr>
+        <tr><td>Pain : culpabilité maternelle permanente</td><td>Ton bienveillant. Lumia ne juge pas, ne sanctionne pas. Il accompagne.</td></tr>
+        <tr><td>Gain : vrai lâcher prise le week-end</td><td>Détection surcharge + proposition de décompression. "Libère samedi matin ?"</td></tr>
+        <tr><td>Gain : harmonie familiale</td><td>Coordination automatique, moins de conflits sur "qui fait quoi".</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h3" style="margin-top:1.5rem">Golden Circle</div>
+  <div class="gc-grid">
+    <div class="gc gc-why">
+      <div class="gc-lbl">WHY Pourquoi on existe</div>
+      <p>Parce que les personnes qui comptent le plus pour vous méritent que vous soyez présent, pas occupé à ne rien oublier. La charge mentale vole du temps et de la présence. On existe pour rendre ça à ceux qui en ont besoin.</p>
+    </div>
+    <div class="gc gc-how">
+      <div class="gc-lbl">HOW Comment on le fait</div>
+      <p>En ecoutant les conversations pour detecter les besoins (niveau 1) et en apprenant les cycles de consommation au fil du temps (niveau 2). Lumia agit via des notifications push proactives, au bon moment, sans qu'on lui demande. Pas de formulaire, pas de configuration. Juste une conversation.</p>
+    </div>
+    <div class="gc gc-what">
+      <div class="gc-lbl">WHAT Ce qu'on fait</div>
+      <p>Un assistant vocal IA qui ecoute, retient et anticipe. V1 : chat vocal intelligent et gestion des courses automatique (detection explicite + apprentissage des cycles). V2-V3 : agenda familial, taches, enfants, budget.</p>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- BMC -->
+<section id="bmc" class="page">
+<div class="page-inner">
+  <div class="stag">07 Business Model Canvas</div>
+  <h2 class="stitle">Business Model Canvas</h2>
+
+  <div class="bmc">
+    <div class="bmc-c c-part"><div class="bmc-t">Partenaires clés</div>Google (Gemini API, Calendar, Maps) · Vercel · Supabase · Thérapeutes & coachs de vie · </div>
+    <div class="bmc-c c-act"><div class="bmc-t">Activités clés</div>Developpement moteur IA conversationnel · Algorithme de detection des cycles d'achat · Systeme de notifications push proactives · Acquisition et retention · Conformite RGPD</div>
+    <div class="bmc-c c-val bmc-hl"><div class="bmc-t">Proposition de valeur</div>Lumia pense a ce que vous oubliez de demander. Il detecte vos besoins dans la conversation, apprend vos cycles d'achat, et vous rappelle avant que vous n'y pensiez. Proactif, bienveillant, familial.</div>
+    <div class="bmc-c c-rel"><div class="bmc-t">Relations clients</div>On lui pose 3 questions vocales à l'inscription, c'est fait en 2 minutes · Lumia apprend ses habitudes au fil du temps · Il envoie des rappels doux, jamais de pression</div>    <div class="bmc-c c-seg"><div class="bmc-t">Segments</div><strong>Premium :</strong> Femme active 25-35 ans, débordée, prête à payer 9,99€/mois<br><strong>Freemium :</strong> Étudiant 18-25 ans, 3 requêtes gratuites par semaine<br><strong>B2B V3 :</strong> Universités et entreprises qui veulent améliorer le bien-être</div>
+    <div class="bmc-c c-res"><div class="bmc-t">Ressources clés</div>Équipe full stack · Gemini API · Data comportementale propriétaire · Marque Lumia · MVP en production</div>
+    <div class="bmc-c c-can"><div class="bmc-t">Canaux</div>TikTok pour toucher les femmes actives gratuitement · Pubs ciblées si besoin (3 à 5€ par utilisateur) · Coachs et psys qui recommandent Lumia · Étudiants qui en parlent entre eux</div>
+    <div class="bmc-c c-rev"><div class="bmc-t">Relations B2B</div>Des coachs de vie recommandent Lumia à leurs clients · Des universités l'intègrent pour leurs étudiants en V2-V3 · Les abonnés parrainent leurs proches</div>
+    <div class="bmc-c c-cout"><div class="bmc-t">Structure de coûts</div>Hébergement Vercel + Supabase : ~50€/mois · Gemini API : ~3,40€/user actif/mois · Infra : ~0,60€/user · Budget acquisition : 500–1 000€/mois · Coût variable total : ~4€/user actif/mois</div>
+    <div class="bmc-c c-rev2"><div class="bmc-t">Sources de revenus</div>Gratuit pour tester, 9,99€/mois pour débloquer tout · Plan famille 14,99€/mois en V2 · Licences pour universités et entreprises en V3 · <strong>On garde 60% de chaque euro gagné</strong></div>
+  </div>
+
+  <div class="h3" style="margin-top:1.5rem">Logique economique</div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">Le modele repose sur un mecanisme freemium classique adapte aux deux segments. Les etudiants accedent gratuitement a 3 requetes IA par semaine, suffisamment pour ancrer l'habitude et decouvrir la valeur. Les femmes actives, dont le besoin est plus intense et quotidien, basculent naturellement vers le Premium a 9,99&#8364;/mois. Le cout variable par utilisateur actif est estime a 4&#8364;/mois (3,40&#8364; d'API Gemini + 0,60&#8364; d'infra), ce qui degage une marge brute unitaire d'environ 60% sur chaque abonne Premium.</p>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7">Le seuil de rentabilite se situe a 400 abonnes Premium. C'est un objectif volontairement bas pour une V1 : il represente 0,013% du marche adressable. L'enjeu n'est pas de conquerir le marche en V1, mais de prouver que le modele fonctionne unitairement avant de scaler. En V2, le plan famille a 14,99&#8364;/mois et les licences B2B (universites, entreprises QVT) ouvrent des sources de revenus complementaires a plus forte marge.</p>
+
+</div>
+</section>
+
+<!-- PARCOURS CLIENT -->
+<section id="parcours" class="page">
+<div class="page-inner">
+  <div class="stag">08 Parcours client</div>
+  <h2 class="stitle">Modélisation du parcours client</h2>
+  <p class="intro-text">Modélisé sur Clara de la découverte à la recommandation.</p>
+
+  <div class="journey">
+    <div class="j-step"><div class="j-num">1</div><div><div class="j-phase">Découverte</div><div class="j-desc">TikTok organique ou recommandation. Landing page avec copywriting centré charge mentale, pas productivité.</div></span></div></div>
+    <div class="j-step"><div class="j-num">2</div><div><div class="j-phase">Inscription</div><div class="j-desc">Téléchargement. Onboarding vocal : 3 questions, 2 minutes. Profil généré immédiatement, première suggestion dans les 24h.</div><span class="j-risk r-orange">Risque : onboarding > 5 min = abandon</span></div></div>
+    <div class="j-step"><div class="j-num">3</div><div><div class="j-phase">Activation J1–J7</div><div class="j-desc">Premiere suggestion proactive dans les 24h. Clara mentionne "on n'a plus de cafe" lors d'une conversation. Le lendemain, elle recoit une notification : "Clara, tu voulais racheter du cafe. Je l'ajoute a ta liste ?" C'est le moment "wow" a declencher imperativement dans les 7 premiers jours.</div><span class="j-risk r-red">Rétention J1 apps productivité : 17,1% (Sendbird 2024)</span></div></div>
+    <div class="j-step"><div class="j-num">4</div><div><div class="j-phase">Apprentissage J7–J30</div><div class="j-desc">Lumia passe au niveau 2 : il detecte les cycles. Clara achete du lait tous les 4 jours, du PQ chaque semaine. Au bout de 3 achats, Lumia a calcule le rythme. Il envoie desormais des rappels avant meme qu'elle y pense. Les suggestions deviennent de plus en plus pertinentes.</div><span class="j-risk r-orange">Risque : pas d'amélioration visible = abandon</span></div></div>
+    <div class="j-step"><div class="j-num">5</div><div><div class="j-phase">Conversion Premium</div><div class="j-desc">Proposition contextuelle, sans friction, au bon moment. Une phrase, un tap.</div><span class="j-risk r-green">Conversion médiane marché : 2,18% à J+35 (RevenueCat)</span></div></div>
+    <div class="j-step"><div class="j-num">6</div><div><div class="j-phase">Fidélisation</div><div class="j-desc">Usage quotidien ancré. Rappel doux si absence 5 jours. Détection de surcharge.</div><span class="j-risk r-orange">Risque : semaine sans usage (vacances)</span></div></div>
+    <div class="j-step"><div class="j-num">7</div><div><div class="j-phase">Recommandation</div><div class="j-desc">Clara en parle à 2-3 amies. Programme parrainage intégré. Levier d'acquisition le plus puissant.</div><span class="j-risk r-green">CPA ~0€ si NPS élevé</span></div></div>
+  </div>
+
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-top:1.2rem">Ce parcours n'est pas theorique. Chaque etape a ete calibree a partir des donnees terrain : le taux d'abandon onboarding median des apps mobiles (73% selon Amplitude 2025), la retention J1 des apps productivite (17,1% selon Sendbird 2024), et le taux de conversion freemium median (2,18% a J+35 selon RevenueCat). Les points de risque identifies a chaque etape correspondent a des signaux concrets observes lors des tests utilisateurs.</p>
+
+</div>
+</section>
+
+<!-- FLOW 1 ONBOARDING -->
+<div class="h3">User flow 1 Onboarding & premier usage</div>
+<div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1rem;margin-bottom:1.4rem;overflow-x:auto">
+  <svg viewBox="0 0 860 260" xmlns="http://www.w3.org/2000/svg" style="min-width:700px;width:100%;height:auto;display:block;font-family:var(--font-body)">
+
+    <!-- LÉGENDE -->
+    <rect x="640" y="12" width="14" height="14" rx="2" fill="#1d1d1b"/>
+    <text x="658" y="23" font-size="9" fill="#6b7280">Étape</text>
+    <polygon points="680,19 694,12 708,19 694,26" fill="none" stroke="#c0003a" stroke-width="1.5"/>
+    <text x="712" y="23" font-size="9" fill="#6b7280">Décision</text>
+    <rect x="748" y="14" width="14" height="10" rx="2" fill="#f5b5c9"/>
+    <text x="766" y="23" font-size="9" fill="#6b7280">Friction</text>
+
+    <!-- DÉBUT -->
+    <rect x="14" y="108" width="56" height="30" rx="14" fill="#1d1d1b"/>
+    <text x="42" y="127" text-anchor="middle" font-size="9" fill="white" font-weight="600">DÉBUT</text>
+    <line x1="70" y1="123" x2="86" y2="123" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- ÉTAPE 1 Ouvre l'app -->
+    <rect x="86" y="108" width="88" height="30" rx="3" fill="#1d1d1b"/>
+    <text x="130" y="121" text-anchor="middle" font-size="8.5" fill="white">Ouvre</text>
+    <text x="130" y="131" text-anchor="middle" font-size="8.5" fill="white">l'application</text>
+    <line x1="174" y1="123" x2="190" y2="123" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- DÉCISION 1 Reconnaissance vocale dispo ? -->
+    <polygon points="230,103 278,123 230,143 182,123" fill="none" stroke="#c0003a" stroke-width="1.5"/>
+    <text x="230" y="119" text-anchor="middle" font-size="8" fill="#c0003a">Micro</text>
+    <text x="230" y="129" text-anchor="middle" font-size="8" fill="#c0003a">disponible ?</text>
+    <!-- Oui -->
+    <text x="292" y="119" font-size="8" fill="#15803d">Oui</text>
+    <line x1="278" y1="123" x2="312" y2="123" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- Non vers bas -->
+    <text x="233" y="158" font-size="8" fill="#dc2626">Non</text>
+    <line x1="230" y1="143" x2="230" y2="165" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="182" y="165" width="96" height="26" rx="3" fill="#fce8ef" stroke="#f5b5c9" stroke-width="1"/>
+    <text x="230" y="178" text-anchor="middle" font-size="7.5" fill="#c0003a">Fallback mode texte</text>
+    <text x="230" y="187" text-anchor="middle" font-size="7.5" fill="#6b7280">T7 : bruit transports</text>
+
+    <!-- ÉTAPE 2 Parle à Lumia -->
+    <rect x="312" y="108" width="88" height="30" rx="3" fill="#1d1d1b"/>
+    <text x="356" y="121" text-anchor="middle" font-size="8.5" fill="white">Parle à Lumia</text>
+    <text x="356" y="131" text-anchor="middle" font-size="8.5" fill="white">(fr-FR)</text>
+    <line x1="400" y1="123" x2="416" y2="123" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- DÉCISION 2 Gemini comprend ? -->
+    <polygon points="456,103 504,123 456,143 408,123" fill="none" stroke="#c0003a" stroke-width="1.5"/>
+    <text x="456" y="119" text-anchor="middle" font-size="8" fill="#c0003a">Intention</text>
+    <text x="456" y="129" text-anchor="middle" font-size="8" fill="#c0003a">reconnue ?</text>
+    <!-- Oui -->
+    <text x="518" y="119" font-size="8" fill="#15803d">Oui</text>
+    <line x1="504" y1="123" x2="538" y2="123" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- Non remonte -->
+    <text x="458" y="98" font-size="8" fill="#dc2626">Non</text>
+    <path d="M456,103 L456,82 L356,82 L356,108" stroke="#9ca3af" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+    <rect x="310" y="64" width="92" height="18" rx="3" fill="#fce8ef" stroke="#f5b5c9" stroke-width="1"/>
+    <text x="356" y="76" text-anchor="middle" font-size="7.5" fill="#c0003a">Demande reformulation</text>
+
+    <!-- ÉTAPE 3 Action exécutée -->
+    <rect x="538" y="108" width="88" height="30" rx="3" fill="#1d1d1b"/>
+    <text x="582" y="121" text-anchor="middle" font-size="8.5" fill="white">Action exécutée</text>
+    <text x="582" y="131" text-anchor="middle" font-size="8.5" fill="white">(événement créé)</text>
+    <line x1="626" y1="123" x2="642" y2="123" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
+
+    <!-- DÉCISION 3 Confirm ? -->
+    <polygon points="682,103 730,123 682,143 634,123" fill="none" stroke="#c0003a" stroke-width="1.5"/>
+    <text x="682" y="119" text-anchor="middle" font-size="8" fill="#c0003a">Utilisateur</text>
+    <text x="682" y="129" text-anchor="middle" font-size="8" fill="#c0003a">valide ?</text>
+    <!-- Oui -->
+    <text x="744" y="119" font-size="8" fill="#15803d">Oui</text>
+    <line x1="730" y1="123" x2="760" y2="123" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- Non -->
+    <text x="684" y="158" font-size="8" fill="#dc2626">Non</text>
+    <line x1="682" y1="143" x2="682" y2="165" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr)"/>
+    <rect x="636" y="165" width="92" height="18" rx="3" fill="#fce8ef" stroke="#f5b5c9" stroke-width="1"/>
+    <text x="682" y="177" text-anchor="middle" font-size="7.5" fill="#c0003a">Annule / modifie</text>
+
+    <!-- FIN SUCCESS -->
+    <rect x="760" y="108" width="72" height="30" rx="14" fill="#15803d"/>
+    <text x="796" y="121" text-anchor="middle" font-size="8.5" fill="white" font-weight="600">Calendrier</text>
+    <text x="796" y="131" text-anchor="middle" font-size="8.5" fill="white" font-weight="600">mis à jour</text>
+
+    <!-- Flèche marker -->
+    <defs>
+      <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#9ca3af"/>
+      </marker>
+    </defs>
+  </svg>
+  <div style="font-size:0.62rem;color:var(--muted);text-align:center;margin-top:0.5rem">User flow onboarding · T1 à T7 Les rectangles roses indiquent les points de friction observés en test</div>
+</div>
+
+<!-- FLOW 2 CRÉATION ÉVÉNEMENT VOCAL -->
+<div class="h3">User flow 2 Création d'un événement complexe (create_plan)</div>
+<div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1rem;margin-bottom:1.4rem;overflow-x:auto">
+  <svg viewBox="0 0 900 240" xmlns="http://www.w3.org/2000/svg" style="min-width:720px;width:100%;height:auto;display:block;font-family:var(--font-body)">
+    <defs>
+      <marker id="arr2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#9ca3af"/>
+      </marker>
+    </defs>
+
+    <!-- DÉBUT -->
+    <rect x="14" y="95" width="56" height="30" rx="14" fill="#1d1d1b"/>
+    <text x="42" y="114" text-anchor="middle" font-size="9" fill="white" font-weight="600">DÉBUT</text>
+    <line x1="70" y1="110" x2="86" y2="110" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+    <!-- ÉTAPE 1 Énonce le plan -->
+    <rect x="86" y="95" width="96" height="30" rx="3" fill="#1d1d1b"/>
+    <text x="134" y="108" text-anchor="middle" font-size="8.5" fill="white">« Prépare mon</text>
+    <text x="134" y="118" text-anchor="middle" font-size="8.5" fill="white">dîner de ce soir »</text>
+    <line x1="182" y1="110" x2="198" y2="110" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+    <!-- DÉCISION 1 create_plan détecté ? -->
+    <polygon points="242,90 294,110 242,130 190,110" fill="none" stroke="#c0003a" stroke-width="1.5"/>
+    <text x="242" y="106" text-anchor="middle" font-size="8" fill="#c0003a">create_plan</text>
+    <text x="242" y="116" text-anchor="middle" font-size="8" fill="#c0003a">détecté ?</text>
+    <!-- Oui -->
+    <text x="308" y="106" font-size="8" fill="#15803d">Oui</text>
+    <line x1="294" y1="110" x2="326" y2="110" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <!-- Non -->
+    <text x="244" y="145" font-size="8" fill="#dc2626">Non</text>
+    <line x1="242" y1="130" x2="242" y2="152" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <rect x="192" y="152" width="100" height="20" rx="3" fill="#fce8ef" stroke="#f5b5c9" stroke-width="1"/>
+    <text x="242" y="165" text-anchor="middle" font-size="7.5" fill="#c0003a">add_event simple uniquement</text>
+
+    <!-- ÉTAPE 2 Génère 3 étapes -->
+    <rect x="326" y="95" width="100" height="30" rx="3" fill="#1d1d1b"/>
+    <text x="376" y="108" text-anchor="middle" font-size="8.5" fill="white">Gemini génère</text>
+    <text x="376" y="118" text-anchor="middle" font-size="8.5" fill="white">3 étapes implicites</text>
+    <line x1="426" y1="110" x2="442" y2="110" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+    <!-- DÉCISION 2 Créneau libre ? -->
+    <polygon points="490,90 542,110 490,130 438,110" fill="none" stroke="#c0003a" stroke-width="1.5"/>
+    <text x="490" y="106" text-anchor="middle" font-size="8" fill="#c0003a">Créneau</text>
+    <text x="490" y="116" text-anchor="middle" font-size="8" fill="#c0003a">disponible ?</text>
+    <!-- Oui -->
+    <text x="556" y="106" font-size="8" fill="#15803d">Oui</text>
+    <line x1="542" y1="110" x2="574" y2="110" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <!-- Non -->
+    <text x="492" y="145" font-size="8" fill="#dc2626">Non</text>
+    <line x1="490" y1="130" x2="490" y2="152" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <rect x="440" y="152" width="100" height="20" rx="3" fill="#fce8ef" stroke="#f5b5c9" stroke-width="1"/>
+    <text x="490" y="165" text-anchor="middle" font-size="7.5" fill="#c0003a">Propose horaires alternatifs</text>
+
+    <!-- ÉTAPE 3 Affiche le plan -->
+    <rect x="574" y="95" width="100" height="30" rx="3" fill="#1d1d1b"/>
+    <text x="624" y="108" text-anchor="middle" font-size="8.5" fill="white">Affiche les 3 étapes</text>
+    <text x="624" y="118" text-anchor="middle" font-size="8.5" fill="white">groupées (groupId)</text>
+    <line x1="674" y1="110" x2="690" y2="110" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+    <!-- DÉCISION 3 Utilisateur confirme ? -->
+    <polygon points="734,90 786,110 734,130 682,110" fill="none" stroke="#c0003a" stroke-width="1.5"/>
+    <text x="734" y="106" text-anchor="middle" font-size="8" fill="#c0003a">Confirme</text>
+    <text x="734" y="116" text-anchor="middle" font-size="8" fill="#c0003a">tout ?</text>
+    <!-- Oui -->
+    <text x="800" y="106" font-size="8" fill="#15803d">Oui</text>
+    <line x1="786" y1="110" x2="816" y2="110" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <!-- Non partiel -->
+    <text x="736" y="145" font-size="8" fill="#a16207">Partiel</text>
+    <line x1="734" y1="130" x2="734" y2="152" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr2)"/>
+    <rect x="686" y="152" width="96" height="20" rx="3" fill="#fef9c3" stroke="#fcd34d" stroke-width="1"/>
+    <text x="734" y="165" text-anchor="middle" font-size="7.5" fill="#92400e">Supprime étapes choisies</text>
+
+    <!-- FIN -->
+    <rect x="816" y="95" width="68" height="30" rx="14" fill="#15803d"/>
+    <text x="850" y="108" text-anchor="middle" font-size="8.5" fill="white" font-weight="600">Plan enregistré</text>
+    <text x="850" y="118" text-anchor="middle" font-size="8.5" fill="white" font-weight="600">dans l'agenda</text>
+  </svg>
+  <div style="font-size:0.62rem;color:var(--muted);text-align:center;margin-top:0.5rem">User flow create_plan · principalement observé chez T1, T3, T5</div>
+</div>
+
+<!-- FLOW 3 RAPPEL TÂCHE OUBLIÉE -->
+<div class="h3">User flow 3 Détection d'une tâche implicite (cas Clara)</div>
+<div style="background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem 1rem;margin-bottom:1.4rem;overflow-x:auto">
+  <svg viewBox="0 0 820 220" xmlns="http://www.w3.org/2000/svg" style="min-width:680px;width:100%;height:auto;display:block;font-family:var(--font-body)">
+    <defs>
+      <marker id="arr3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#9ca3af"/>
+      </marker>
+    </defs>
+
+    <!-- DÉBUT -->
+    <rect x="10" y="88" width="56" height="30" rx="14" fill="#1d1d1b"/>
+    <text x="38" y="107" text-anchor="middle" font-size="9" fill="white" font-weight="600">DÉBUT</text>
+    <line x1="66" y1="103" x2="82" y2="103" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+    <!-- ÉTAPE 1 Usage quotidien J+7 -->
+    <rect x="82" y="88" width="96" height="30" rx="3" fill="#1d1d1b"/>
+    <text x="130" y="101" text-anchor="middle" font-size="8.5" fill="white">Usage quotidien</text>
+    <text x="130" y="111" text-anchor="middle" font-size="8.5" fill="white">J+7 minimum</text>
+    <line x1="178" y1="103" x2="194" y2="103" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+    <!-- DÉCISION 1 Habit détecté ? -->
+    <polygon points="238,83 290,103 238,123 186,103" fill="none" stroke="#c0003a" stroke-width="1.5"/>
+    <text x="238" y="99" text-anchor="middle" font-size="8" fill="#c0003a">Habitude</text>
+    <text x="238" y="109" text-anchor="middle" font-size="8" fill="#c0003a">détectée ?</text>
+    <!-- Non -->
+    <text x="240" y="138" font-size="8" fill="#dc2626">Non</text>
+    <path d="M238,123 L238,145 L130,145 L130,118" stroke="#9ca3af" stroke-width="1.5" fill="none" marker-end="url(#arr3)"/>
+    <text x="168" y="158" font-size="7.5" fill="#6b7280">Continue l'apprentissage</text>
+    <!-- Oui -->
+    <text x="304" y="99" font-size="8" fill="#15803d">Oui</text>
+    <line x1="290" y1="103" x2="322" y2="103" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+    <!-- DÉCISION 2 Tâche en retard ? -->
+    <polygon points="366,83 418,103 366,123 314,103" fill="none" stroke="#c0003a" stroke-width="1.5"/>
+    <text x="366" y="99" text-anchor="middle" font-size="8" fill="#c0003a">Tâche récurrente</text>
+    <text x="366" y="109" text-anchor="middle" font-size="8" fill="#c0003a">en retard ?</text>
+    <!-- Non -->
+    <text x="368" y="138" font-size="8" fill="#6b7280">Non</text>
+    <line x1="366" y1="123" x2="366" y2="150" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="366" y="163" text-anchor="middle" font-size="7.5" fill="#6b7280">Aucune action</text>
+    <!-- Oui -->
+    <text x="432" y="99" font-size="8" fill="#15803d">Oui</text>
+    <line x1="418" y1="103" x2="450" y2="103" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+    <!-- ÉTAPE 2 Génère suggestion -->
+    <rect x="450" y="88" width="100" height="30" rx="3" fill="#1d1d1b"/>
+    <text x="500" y="101" text-anchor="middle" font-size="8.5" fill="white">Lumia génère</text>
+    <text x="500" y="111" text-anchor="middle" font-size="8.5" fill="white">une suggestion</text>
+    <line x1="550" y1="103" x2="566" y2="103" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr3)"/>
+
+    <!-- DÉCISION 3 Notif acceptée ? -->
+    <polygon points="610,83 662,103 610,123 558,103" fill="none" stroke="#c0003a" stroke-width="1.5"/>
+    <text x="610" y="99" text-anchor="middle" font-size="8" fill="#c0003a">Notif</text>
+    <text x="610" y="109" text-anchor="middle" font-size="8" fill="#c0003a">acceptée ?</text>
+    <!-- Oui -->
+    <text x="676" y="99" font-size="8" fill="#15803d">Oui</text>
+    <line x1="662" y1="103" x2="694" y2="103" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr3)"/>
+    <!-- Non -->
+    <text x="612" y="138" font-size="8" fill="#dc2626">Non</text>
+    <line x1="610" y1="123" x2="610" y2="145" stroke="#9ca3af" stroke-width="1.5" marker-end="url(#arr3)"/>
+    <rect x="562" y="145" width="96" height="20" rx="3" fill="#fce8ef" stroke="#f5b5c9" stroke-width="1"/>
+    <text x="610" y="158" text-anchor="middle" font-size="7.5" fill="#c0003a">Rappel différé (J+2)</text>
+
+    <!-- FIN -->
+    <rect x="694" y="88" width="110" height="30" rx="14" fill="#15803d"/>
+    <text x="749" y="101" text-anchor="middle" font-size="8.5" fill="white" font-weight="600">Tâche planifiée</text>
+    <text x="749" y="111" text-anchor="middle" font-size="8.5" fill="white" font-weight="600">automatiquement</text>
+  </svg>
+  <div style="font-size:0.62rem;color:var(--muted);text-align:center;margin-top:0.5rem">User flow détection implicite · Cas observé T1 (bilan pédiatre) et T3 (renouvellement ordonnance) · Ce flow est la différenciation centrale de Lumia</div>
+</div>
+
+
+<!-- STRATÉGIE -->
+<section id="strategie" class="page">
+<div class="page-inner">
+  <div class="stag">09 Stratégie de développement</div>
+  <h2 class="stitle">Stratégie de développement</h2>
+  <p class="intro-text">La strategie de developpement de Lumia suit une logique de preuve progressive. Chaque phase ne demarre que si la precedente a atteint ses indicateurs de validation. Pas de fuite en avant : on prouve, puis on scale.</p>
+
+
+  <div class="hor-grid">
+    <div class="hor hor-v1">
+      <span class="hor-badge">V1</span>
+      <div class="hor-period">2025 Validation</div>
+      <div class="hor-title">Prouver la valeur</div>
+      <p>Chat vocal intelligent + module courses automatique. 400 users premium. Validation du mecanisme de proactivite sur les deux niveaux (detection explicite + apprentissage des cycles).</p>
+      <ul><li>NPS > 40</li><li>Rétention J30 > 40%</li><li>Conversion > 2,18%</li><li>CAC < 5€</li></ul>
+    </div>
+    <div class="hor hor-v2">
+      <span class="hor-badge">V2</span>
+      <div class="hor-period">2026 Croissance</div>
+      <div class="hor-title">Passer à l'échelle</div>
+      <p>App native iOS/Android. Modules agenda familial + taches menageres. Plan famille 14,99€. 1 000 users premium.</p>
+      <ul><li>MRR > 10 000€</li><li>LTV > 80€</li><li>Churn < 5%/mois</li></ul>
+    </div>
+    <div class="hor hor-v3">
+      <span class="hor-badge">V3</span>
+      <div class="hor-period">2027 Expansion B2B</div>
+      <div class="hor-title">Licences entreprises</div>
+      <p>Modules gestion enfants + budget familial. Licences B2B universites et entreprises QVT. Thomas comme point d'entree institutionnel.</p>
+      <ul><li>1er contrat B2B signé</li><li>ARR > 50 000€</li></ul>
+    </div>
+  </div>
+
+  <div class="h3">Plan d'acquisition séquencé avec déclencheurs de bascule</div>
+  <div class="tbl-wrap" style="margin-bottom:1rem">
+    <table>
+      <thead><tr><th>Phase</th><th>Période</th><th>Canal</th><th>Objectif</th><th>Déclencheur bascule suivante</th></tr></thead>
+      <tbody>
+        <tr class="row-hl"><td><strong>Phase 1</strong></td><td>J0–J60</td><td>TikTok organique + LinkedIn + réseau pairs Thomas</td><td>50 téléchargements, CPA ~0€</td><td>Si < 50 DL à J45 → Phase 2</td></tr>
+        <tr><td><strong>Phase 2</strong></td><td>J60–J90</td><td>TikTok Ads test 200€, ciblage femmes 28-38 ans France</td><td>Mesurer CPA réel sur 2 semaines</td><td>Si CPA > 10€ → Phase 3. Si CPA < 8€ → scaler.</td></tr>
+        <tr><td><strong>Phase 3</strong></td><td>J90+</td><td>Canal prescripteurs Sophie Marchand, Dr. Prévost + réseau</td><td>Parrainage lien dédié, tracking UTM</td><td>CPA ~0€ direct. Déclencheur : NPS > 40</td></tr>
+        <tr><td><strong>Phase B2B</strong></td><td>V3 uniquement</td><td>DRH, universités, QVT</td><td>Licences entreprises</td><td>Conditionné à rétention J30 > 40% et MRR > 5 000€ prouvés</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h3">Matrice risques acquisition</div>
+  <div class="tbl-wrap" style="margin-bottom:1rem">
+    <table>
+      <thead><tr><th>Risque</th><th>Probabilité</th><th>Impact</th><th>Atténuation</th></tr></thead>
+      <tbody>
+        <tr><td>TikTok organique ne décolle pas (< 500 vues/vidéo)</td><td>Moyen</td><td>Fort sur Phase 1</td><td>Activation Phase 2 dès J45 sans attendre J60</td></tr>
+        <tr><td>CPA paid > 10€</td><td>Moyen</td><td>Modéré LTV/CAC reste > 3</td><td>Basculer sur prescripteurs Phase 3 exclusivement</td></tr>
+        <tr><td>Prescripteurs ne convertissent pas</td><td>Faible</td><td>Modéré</td><td>Tracker les clics sur liens parrainage dès V1 pour mesurer</td></tr>
+        <tr><td>Bouche-à-oreille seul insuffisant</td><td>Fort à court terme</td><td>Faible c'est prévu</td><td>Jamais le canal principal toujours combiné Phase 1+2+3</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- FINANCES -->
+<section id="finances" class="page">
+<div class="page-inner">
+  <div class="stag">10 Projections financières</div>
+  <h2 class="stitle">Projections financières</h2>
+
+  <div class="h3">Unit economics</div>
+  <div class="ue-grid">
+    <div class="ue"><div class="ue-v">9,99€</div><div class="ue-l">ARPU mensuel Premium</div></div>
+    <div class="ue"><div class="ue-v">~4€</div><div class="ue-l">Coût variable / user actif (Gemini 3,40€ + infra 0,60€)</div></div>
+    <div class="ue accent"><div class="ue-v">60%</div><div class="ue-l">Marge brute unitaire</div></div>
+    <div class="ue"><div class="ue-v">2,18%</div><div class="ue-l">Taux conversion médian J+35 (RevenueCat 2025)</div></div>
+    <div class="ue"><div class="ue-v">~60€</div><div class="ue-l">LTV estimée sur 6 mois à valider tests utilisateurs</div></div>
+    <div class="ue accent"><div class="ue-v">400</div><div class="ue-l">Users Premium pour atteindre le seuil de rentabilité</div></div>
+  </div>
+
+  <div class="h3">3 scénarios An 1 & An 2</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Scénario</th><th>Hypothèse</th><th>Users An 1</th><th>MRR An 1</th><th>Users An 2</th><th>MRR An 2</th><th>Seuil</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge bg-yellow">Conservateur</span></td><td>Organique uniquement, churn 10%/mois</td><td>150</td><td>1 500€</td><td>400</td><td>4 000€</td><td>Fin An 2</td></tr>
+        <tr class="row-hl"><td><span class="badge bg-green">Réaliste</span></td><td>Mix organique + paid 500€/mois, churn 5%</td><td>350</td><td>3 500€</td><td>800</td><td>8 000€</td><td>Q3 An 2</td></tr>
+        <tr><td><span class="badge bg-rose">Optimiste</span></td><td>Viralité forte, churn 3%/mois</td><td>700</td><td>7 000€</td><td>1 500</td><td>15 000€</td><td>Q2 An 2</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h3" style="margin-top:1rem">Stress-test Scénarios de risque modélisés</div>
+  <div class="tbl-wrap" style="margin-bottom:1rem">
+    <table>
+      <thead><tr><th>Scénario de risque</th><th>Impact</th><th>Marge brute résultante</th><th>Réponse prévue</th></tr></thead>
+      <tbody>
+        <tr><td>Gemini augmente ses tarifs de +50%</td><td>Coût variable passe de 3,40€ à 5,10€/user actif</td><td><strong>49%</strong> (vs 60% baseline)</td><td>Quota 300 req/mois inclus. Migration Mistral estimée à 3 jours dev prototypée.</td></tr>
+        <tr><td>Churn Premium à 8%/mois (2x hypothèse réaliste)</td><td>400 users atteints au mois 18 au lieu de 12</td><td>Viable délai seulement</td><td>Activation programme parrainage + contenu rétention dès J30</td></tr>
+        <tr><td>CPA paid réel à 12€ (au lieu de 5€)</td><td>CAC total monte à 12€ · LTV/CAC = 5 (encore acceptable)</td><td>Non bloquant en V1</td><td>Renforcement organique TikTok + prescripteurs si CPA > 8€ mesuré</td></tr>
+        <tr class="row-hl"><td>Usage intensif (25 req IA/jour)</td><td>Coût Gemini monte à 15,75€/user marge négative</td><td><strong>Risque réel</strong></td><td>Quota strict 300 req Premium incluses. Usage additionnel facturable au-delà.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout" style="margin-bottom:1rem">
+    <span class="callout-label">Souveraineté numérique</span>
+    <span>L'architecture /api/assistant est agnostique au fournisseur IA. Migration vers Mistral Large ($0,040/1M tokens) ou LLaMA 3.1 self-hosted est estimée à 3 jours de développement sans toucher le front-end. Cette migration a été prototypée sur 2 requêtes test le résultat est fonctionnel.</span>
+  </div>
+
+  <div class="h3" style="margin-top:1rem">Structure de coûts</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Poste</th><th>Coût fixe mensuel</th><th>Coût variable</th><th>Remarque</th></tr></thead>
+      <tbody>
+        <tr><td>Hébergement Vercel + Supabase</td><td>~50€</td><td>—</td><td>Fixe jusqu'à ~5 000 users actifs</td></tr>
+        <tr><td>API Gemini</td><td>Variable</td><td>~3,40€/user actif</td><td>Principal coût variable à surveiller à la croissance</td></tr>
+        <tr><td>Infra supplémentaire</td><td>Variable</td><td>~0,60€/user actif</td><td>Stockage données comportementales</td></tr>
+        <tr><td>Budget acquisition paid</td><td>0 à 1 000€</td><td>Variable selon CPA</td><td>Démarré seulement si LTV/CAC > 3</td></tr>
+        <tr><td>Outils & licences dev</td><td>~100€</td><td>—</td><td>GitHub, outils design, monitoring</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap" class="page">
+<div class="page-inner">
+  <div class="stag">11 Roadmap produit</div>
+  <h2 class="stitle">Roadmap V1 → V3</h2>
+  <p class="intro-text">On ne passe à V2 que quand V1 a prouvé la rétention. On ne passe à V3 que quand V2 a prouvé le modèle économique.</p>
+
+  <div class="rm-block rm-v1">
+    <div class="rm-hd">
+      <span class="rm-ver vv1">V1</span>
+      <span class="rm-period">2025 Validation</span>
+      <span class="rm-goal">Objectif : 400 users premium · Prouver la rétention</span>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Epic</th><th>User story clé</th><th>Resp.</th><th>Prio</th></tr></thead>
+        <tbody>
+          <tr><td>Onboarding vocal</td><td>Créer son profil en 3 questions vocales, moins de 2 min, sans formulaire</td><td>Issa</td><td><span class="prio p0">P0</span></td></tr>
+          <tr><td>Détection tâches implicites</td><td>Lumia rappelle bilan médical, contrôle technique, facture oubliée sans que l'utilisateur les ait saisies</td><td>Issa</td><td><span class="prio p0">P0</span></td></tr>
+          <tr><td>Agenda familial partagé</td><td>Partager agenda et attribuer automatiquement des tâches au conjoint</td><td>Issa</td><td><span class="prio p0">P0</span></td></tr>
+          <tr><td>Gestion courses</td><td>Lumia anticipe les courses récurrentes avant rupture de stock</td><td>Issa</td><td><span class="prio p1">P1</span></td></tr>
+          <tr><td>Détection surcharge</td><td>Détecte les semaines chargées et propose de réorganiser automatiquement</td><td>Issa</td><td><span class="prio p1">P1</span></td></tr>
+          <tr><td>Charte graphique & UI V1</td><td>Interface cohérente avec l'identité Lumia rose, glassmorphism, bienveillant</td><td>Maëlane</td><td><span class="prio p0">P0</span></td></tr>
+          <tr><td>Tests utilisateurs formels</td><td>5-10 profils cibles testés avec retours documentés</td><td>Antonin</td><td><span class="prio p0">P0</span></td></tr>
+          <tr><td>Networking experts</td><td>3-5 échanges documentés avec psys, coachs de vie, DRH</td><td>Antonin</td><td><span class="prio p0">P0</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="rm-block rm-v2">
+    <div class="rm-hd">
+      <span class="rm-ver vv2">V2</span>
+      <span class="rm-period">2026 Croissance</span>
+      <span class="rm-goal">Objectif : 1 000 users premium · Plan famille · Partenariats</span>
+    </div>
+    <div class="rm-items">
+      <div class="rm-item">Plan famille 14,99€ profils multiples, sync temps réel</div>
+      <div class="rm-item">Module budget familial suivi auto, alertes préventives</div>
+      <div class="rm-item">Module gestion enfants activités, trajets, agenda scolaire</div>
+      <div class="rm-item">Widgets adaptatifs dashboard recomposé par l'IA</div>
+      <div class="rm-item">Programme parrainage 1 mois offert par filleul</div>
+      <div class="rm-item">App mobile native iOS + Android</div>
+    </div>
+  </div>
+
+  <div class="rm-block rm-v3">
+    <div class="rm-hd">
+      <span class="rm-ver vv3">V3</span>
+      <span class="rm-period">2027 Expansion B2B</span>
+      <span class="rm-goal">Objectif : ARR > 50 000€ · Licences universités + entreprises</span>
+    </div>
+    <div class="rm-items">
+      <div class="rm-item">Licences universités Lumia Étudiant en marque blanche</div>
+      <div class="rm-item">Licences entreprises QVT partenariats DRH</div>
+      <div class="rm-item">Tableau de bord RH mesure bien-être anonymisée</div>
+      <div class="rm-item">Intégrations pro Teams, Slack, Google Workspace</div>
+      <div class="rm-item">IA proactive niveau 2 horizons 3-6 mois</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ÉTUDE TECHNIQUE ISSA -->
+<section id="technique" class="page">
+<div class="page-inner">
+  <div class="stag">12 Étude technique</div>
+  <h2 class="stitle">Architecture technique & Stack</h2>
+  <p class="intro-text">Contribution Issa MBA Développeur Full Stack. Dossier technique complet : validation du périmètre, choix de la solution, architecture, stack justifiée, infrastructure, stratégie de tests et roadmap technique.</p>
+
+  <div class="h3" style="margin-top:1.5rem">Mecanisme de proactivite : comment Lumia anticipe</div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">La proactivite est le coeur technique de Lumia. Elle repose sur deux mecanismes distincts, implementes cote serveur via Supabase.</p>
+
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.6rem"><strong>Niveau 1 : Detection explicite.</strong> Quand Clara dit vocalement "on n'a plus de lait" ou "faut que je rachete des couches", le moteur Gemini analyse la conversation en temps reel et extrait les intentions d'achat. Ces items sont stockes dans une table <code>shopping_items</code> sur Supabase, avec un statut (a_acheter, achete, recurrent) et un timestamp. Lumia envoie ensuite une notification push mobile au moment pertinent, par exemple le lendemain matin ou avant le week-end.</p>
+
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.6rem"><strong>Niveau 2 : Apprentissage des cycles.</strong> C'est la ou Lumia se differencie fondamentalement des chatbots classiques. A chaque achat marque comme "fait" par l'utilisateur, Lumia enregistre la date. Au bout de 3 occurrences d'un meme produit, l'algorithme calcule l'intervalle moyen entre les achats (papier toilette : ~7 jours, lait : ~4 jours, couches : ~10 jours). Une fois le cycle detecte, une Supabase Edge Function planifie automatiquement une notification push 1 jour avant la date estimee du prochain besoin. Clara recoit : "Ca fait 6 jours, tu as bientot besoin de lait. Je l'ajoute a ta liste ?"</p>
+
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.6rem"><strong>Architecture technique du cycle :</strong> Supabase stocke les profils utilisateurs et l'historique des achats. Un cron job (Supabase Edge Function, execute toutes les 6 heures) parcourt les items marques comme "recurrent", calcule si la date du prochain achat estime approche, et declenche une notification push via l'API Web Push du navigateur. En V2 (app native), les push seront geres via Firebase Cloud Messaging (Android) et APNs (iOS).</p>
+
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:1rem"><strong>Modele de donnees simplifie :</strong></p>
+  <table style="width:100%;font-size:0.72rem;margin-bottom:1rem">
+    <thead><tr style="background:var(--rose-light)"><th style="padding:0.4rem 0.6rem;text-align:left">Table</th><th style="padding:0.4rem 0.6rem;text-align:left">Champs cles</th><th style="padding:0.4rem 0.6rem;text-align:left">Role</th></tr></thead>
+    <tbody>
+      <tr><td style="padding:0.4rem 0.6rem;border-bottom:1px solid var(--border)"><code>users</code></td><td style="padding:0.4rem 0.6rem;border-bottom:1px solid var(--border)">id, name, preferences, onboarding_data</td><td style="padding:0.4rem 0.6rem;border-bottom:1px solid var(--border)">Profil et preferences apprises</td></tr>
+      <tr><td style="padding:0.4rem 0.6rem;border-bottom:1px solid var(--border)"><code>conversations</code></td><td style="padding:0.4rem 0.6rem;border-bottom:1px solid var(--border)">id, user_id, messages[], created_at</td><td style="padding:0.4rem 0.6rem;border-bottom:1px solid var(--border)">Historique des echanges vocaux</td></tr>
+      <tr><td style="padding:0.4rem 0.6rem;border-bottom:1px solid var(--border)"><code>shopping_items</code></td><td style="padding:0.4rem 0.6rem;border-bottom:1px solid var(--border)">id, user_id, name, status, cycle_days, last_bought, next_reminder</td><td style="padding:0.4rem 0.6rem;border-bottom:1px solid var(--border)">Liste de courses + cycles appris</td></tr>
+      <tr><td style="padding:0.4rem 0.6rem;border-bottom:1px solid var(--border)"><code>notifications</code></td><td style="padding:0.4rem 0.6rem;border-bottom:1px solid var(--border)">id, user_id, type, content, scheduled_at, sent</td><td style="padding:0.4rem 0.6rem;border-bottom:1px solid var(--border)">Push planifies et envoyes</td></tr>
+      <tr><td style="padding:0.4rem 0.6rem"><code>calendar_sync</code></td><td style="padding:0.4rem 0.6rem">id, user_id, provider, token, events[]</td><td style="padding:0.4rem 0.6rem">Connexion Google/Apple Calendar</td></tr>
+    </tbody>
+  </table>
+
+
+  <!-- 1. VALIDATION DU PÉRIMÈTRE -->
+  <div class="h3">1. Validation du périmètre pourquoi un développement custom</div>
+  <p style="font-size:0.78rem;color:var(--dark-2);line-height:1.7;margin-bottom:0.8rem">Avant de démarrer, l'équipe a évalué trois familles de solutions : les outils no-code (Bubble, Webflow, Framer), les générateurs IA-first (v0, Bolt) et le développement custom Next.js.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Approche</th><th>Avantages évalués</th><th>Raisons d'exclusion</th><th>Décision</th></tr></thead>
+      <tbody>
+        <tr><td>No-code (Bubble, Webflow)</td><td>Rapidité, pas de dev requis</td><td>Propriété du code impossible · Limitations intégration IA · Coûts récurrents</td><td><span class="badge bg-red">Exclu</span></td></tr>
+        <tr><td>IA-first / Vibe coding (v0, Bolt)</td><td>Génération rapide d'interfaces, bonne base visuelle</td><td>Utilisé uniquement en idéation (maquette) même problème de propriété et de personnalisation</td><td><span class="badge bg-yellow">Idéation uniquement</span></td></tr>
+        <tr class="row-lumia"><td><strong>Développement custom Next.js</strong></td><td>Propriété totale du code · Liberté de modification · Coût faible · Stack maîtrisée</td><td>Aucune</td><td><span class="badge bg-green">Retenu</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-bar" style="margin-top:0.8rem">L'outil v0 (Vercel) a été utilisé en phase d'idéation pour générer une première version visuelle. Cela a permis d'explorer des pistes de design sans retenir le code généré comme base de production. Le développement final est entièrement custom.</div>
+
+  <!-- PÉRIMÈTRE DEV VS DÉLÉGUÉ -->
+  <div class="h3" style="margin-top:1.2rem">2. Périmètre développé vs délégué à des services tiers</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Responsabilité</th><th>Ce que l'équipe développe</th><th>Ce qui est délégué</th></tr></thead>
+      <tbody>
+        <tr><td>Interface utilisateur</td><td>Composants React (DailyCalendar, WeekView, MonthView, YearView, AiModal, AiFabButton) · Design system Tailwind · Responsive mobile-first</td><td>—</td></tr>
+        <tr><td>Intelligence IA</td><td>Prompt système · Function declarations (add_event, create_plan…) · Parsing des réponses · Gestion du fallback</td><td>Modèle LLM : Google Gemini 2.5 Flash</td></tr>
+        <tr><td>État & logique métier</td><td>Stores Zustand (useCalendarStore, useChatStore) · Sync localStorage/Supabase · Gestion des créneaux · Détection de conflits</td><td>—</td></tr>
+        <tr><td>Persistance des données</td><td>Schéma SQL (supabase/schema.sql) · API Routes Next.js (/api/events, /api/conversations) · Logique de sync et fallback</td><td>Infrastructure BDD : Supabase (PostgreSQL managé)</td></tr>
+        <tr><td>Reconnaissance vocale</td><td>Hook useSpeechRecognition · Gestion des états (idle, listening, processing, error) · Fallback navigateurs non compatibles</td><td>Moteur transcription : Web Speech API (navigateur natif)</td></tr>
+        <tr><td>Hébergement & déploiement</td><td>Configuration CI/CD · Variables d'environnement · Structure des branches GitHub</td><td>Infrastructure serveur & CDN : Vercel (Edge Network mondial)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- EXCLUSIONS PÉRIMÈTRE J1 -->
+  <div class="h3" style="margin-top:1.2rem">3. Fonctionnalités exclues du Jalon 1 décisions documentées</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Fonctionnalité exclue</th><th>Raison principale</th><th>Impact Jalon 1</th><th>Prévu en</th></tr></thead>
+      <tbody>
+        <tr><td>App mobile native iOS / Android</td><td>Délai trop long, deux codebases à maintenir</td><td>Aucun la PWA couvre le cas mobile</td><td><span class="badge bg-blue">V2/V3</span></td></tr>
+        <tr><td>Authentification utilisateurs</td><td>Non prioritaire pour valider le concept DEMO_USER_ID utilisé en attendant</td><td>Données non isolées, acceptable en phase de test</td><td><span class="badge bg-yellow">V1</span></td></tr>
+        <tr><td>Souveraineté numérique (remplacement Gemini)</td><td>Architecture agnostique au modèle IA migration vers Mistral/LLaMA prévue sans modifier le front-end</td><td>Dépendance temporaire Google, acceptable en MVP</td><td><span class="badge bg-blue">V2</span></td></tr>
+        <tr><td>Modules courses, budget, gestion enfants</td><td>Priorité au cœur du produit : assistant vocal + calendrier</td><td>MVP centré sur la proposition de valeur principale</td><td><span class="badge bg-yellow">V1/V2</span></td></tr>
+        <tr><td>Text-to-Speech (réponse vocale)</td><td>Ajout de valeur mais non critique pour tester l'hypothèse principale</td><td>L'assistant répond par texte uniquement</td><td><span class="badge bg-yellow">V1</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ÉTAT MVP V0 -->
+  <div class="h3" style="margin-top:1.2rem">4. État du MVP V0 live depuis février 2025</div>
+  <div class="two-col">
+    <div>
+      <div style="font-size:0.7rem;font-weight:700;color:#15803d;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem">Fonctionnalités livrées</div>
+      <ul class="check-list green">
+        <li>Reconnaissance vocale fr-FR (Chrome, Edge, Safari)</li>
+        <li>Interprétation Gemini 2.5 Flash (function calling)</li>
+        <li>Création d'événements par la voix</li>
+        <li>Calendrier 4 vues (Jour, Semaine, Mois, Année)</li>
+        <li>Planification multi-étapes (create_plan)</li>
+        <li>Persistance Supabase + fallback localStorage</li>
+        <li>Déploiement Vercel continu depuis GitHub</li>
+        <li>Design system Tailwind palette Lumia</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:0.7rem;font-weight:700;color:#b45309;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem">Chantier V1</div>
+      <ul class="check-list red">
+        <li>Authentification utilisateurs (Supabase Auth)</li>
+        <li>RLS activé (isolation des données par user_id)</li>
+        <li>Text-to-Speech (réponse vocale de l'assistant)</li>
+        <li>PWA (mode offline, notifications push)</li>
+        <li>Tests unitaires et E2E</li>
+        <li>Optimistic UI (mise à jour sans attendre l'API)</li>
+        <li>Modules courses, budget, gestion enfants</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-bar" style="margin-top:0.8rem">Tests utilisateurs informels menés sur proches : prototype apprécié dans son concept. Retours principaux : besoin d'interface plus épurée (améliorée en sessions 6-10), fort intérêt pour la planification automatique des étapes implicites, meilleure lisibilité vue semaine (optimisée en sessions 11-13).</div>
+
+  <!-- STACK -->
+  <div class="h3" style="margin-top:1.2rem">5. Stack technologique complète justification des choix</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Couche</th><th>Technologie</th><th>Version</th><th>Justification</th></tr></thead>
+      <tbody>
+        <tr><td>Frontend</td><td><strong>Next.js</strong></td><td>16.0.8</td><td>App Router · API Routes intégrées · Déploiement Vercel optimisé · Server Components pour V1</td></tr>
+        <tr><td>UI</td><td><strong>React</strong></td><td>19.2.1</td><td>Concurrent Mode · Hooks avancés · Performances accrues pour les mises à jour d'état fréquentes</td></tr>
+        <tr><td>Langage</td><td><strong>TypeScript</strong></td><td>5.x strict</td><td>Types centralisés dans src/types/ · Mode strict · Réduction des bugs runtime</td></tr>
+        <tr><td>Styling</td><td><strong>Tailwind CSS</strong></td><td>v4 PostCSS</td><td>CSS-in-JS évité · Tokens design via variables CSS · Palette brand cohérente</td></tr>
+        <tr><td>État global</td><td><strong>Zustand</strong></td><td>5.0.9</td><td>API minimaliste · Persist middleware localStorage · Pattern store aligné calendrier/chat</td></tr>
+        <tr><td>IA</td><td><strong>Gemini 2.5 Flash</strong></td><td>@google/genai 1.32</td><td>Meilleur rapport coût/latence · Function calling natif · x33 moins cher que GPT-4o</td></tr>
+        <tr><td>Base de données</td><td><strong>Supabase (PostgreSQL)</strong></td><td>2.87.1</td><td>RLS natif pour l'isolation des données · API REST auto-générée · Client JS officiel</td></tr>
+        <tr><td>Vocal input</td><td><strong>Web Speech API</strong></td><td>Navigateur natif</td><td>Zéro dépendance externe · fr-FR natif · Pas de coût API · Chrome/Edge/Safari</td></tr>
+        <tr><td>Déploiement</td><td><strong>Vercel</strong></td><td>Edge Network</td><td>CI/CD automatique depuis GitHub · Previews par PR · Rollback instantané</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- COMPARATIF IA -->
+  <div class="h3" style="margin-top:1.2rem">Comparatif modèles d'IA justification Gemini 2.5 Flash</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Critère</th><th>Gemini 2.5 Flash</th><th>GPT-4o</th><th>Claude 3.5 Sonnet</th></tr></thead>
+      <tbody>
+        <tr class="row-lumia"><td>Coût input / 1M tokens</td><td><strong>$0,075</strong></td><td>$2,50</td><td>$3,00</td></tr>
+        <tr class="row-lumia"><td>Coût output / 1M tokens</td><td><strong>$0,30</strong></td><td>$10,00</td><td>$15,00</td></tr>
+        <tr class="row-lumia"><td>Rapport vs Gemini Flash</td><td><strong>x1</strong></td><td>x33</td><td>x50</td></tr>
+        <tr><td>Function calling</td><td>Natif JSON Schema</td><td>Natif</td><td>Natif</td></tr>
+        <tr><td>Latence moyenne</td><td><strong>&lt; 1,5 s</strong></td><td>~2 s</td><td>~2,5 s</td></tr>
+        <tr><td>Coût mensuel 500 users</td><td><strong>&lt; 2€</strong></td><td>~15€</td><td>~25€</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ARCHITECTURE -->
+  <div class="h3" style="margin-top:1.2rem">6. Architecture système</div>
+  <div class="arch-diagram">
+    <span class="hl">CLIENT (Next.js PWA)</span><br>
+    &nbsp;&nbsp;Web Speech API <span class="arrow">→</span> transcription vocale fr-FR<br>
+    &nbsp;&nbsp;Composants React : DailyCalendar · WeekView · MonthView · YearView · AiModal · AiFabButton<br>
+    &nbsp;&nbsp;Stores Zustand : useCalendarStore · useChatStore<br>
+    &nbsp;&nbsp;Fallback localStorage si Supabase indisponible<br>
+    <br>
+    <span class="arrow">↕ HTTPS API Routes Next.js</span><br>
+    <br>
+    <span class="hl2">BACKEND (Next.js API Routes)</span><br>
+    &nbsp;&nbsp;/api/assistant <span class="arrow">→</span> orchestration Gemini + parsing function calling<br>
+    &nbsp;&nbsp;/api/events <span class="arrow">→</span> CRUD événements calendrier<br>
+    &nbsp;&nbsp;/api/conversations <span class="arrow">→</span> historique sessions IA<br>
+    &nbsp;&nbsp;GEMINI_API_KEY exclusivement côté serveur jamais exposée au client<br>
+    <br>
+    <span class="arrow">↕ SDK Supabase 2.87.1</span><br>
+    <br>
+    <span class="hl3">DATA (Supabase PostgreSQL hébergement UE)</span><br>
+    &nbsp;&nbsp;events · conversations · messages<br>
+    &nbsp;&nbsp;RLS activé en V1 isolation stricte par user_id<br>
+    &nbsp;&nbsp;Chiffrement TLS en transit · AES-256 au repos<br>
+    <br>
+    <span class="arrow">↕ API REST Gemini</span><br>
+    <br>
+    <span class="hl">SERVICE EXTERNE</span><br>
+    &nbsp;&nbsp;Google Gemini 2.5 Flash <span class="arrow">→</span> function calling (add_event, create_plan, delete_event…)<br>
+    &nbsp;&nbsp;Architecture agnostique : Gemini remplaçable par Mistral/LLaMA en V2 sans modifier le front-end
+  </div>
+
+  <!-- MODÈLE DE DONNÉES -->
+  <div class="h3" style="margin-top:1.2rem">7. Modèle de données Supabase</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Table</th><th>Colonne</th><th>Type</th><th>Contrainte</th><th>Rôle</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="7"><strong>events</strong></td><td>id</td><td>UUID</td><td>PRIMARY KEY · gen_random_uuid()</td><td>Identifiant unique de l'événement</td></tr>
+        <tr><td>user_id</td><td>TEXT</td><td>NOT NULL</td><td>Identifiant utilisateur (DEMO_USER_ID en V0, Supabase Auth en V1)</td></tr>
+        <tr><td>title</td><td>TEXT</td><td>NOT NULL · len > 0</td><td>Titre de l'événement</td></tr>
+        <tr><td>start_time</td><td>TIMESTAMPTZ</td><td>NOT NULL</td><td>Début de l'événement</td></tr>
+        <tr><td>end_time</td><td>TIMESTAMPTZ</td><td>CHECK > start_time</td><td>Fin calculée à +1h si absente</td></tr>
+        <tr><td>source</td><td>TEXT</td><td>CHECK (voice|manual|ai)</td><td>Origine de l'événement</td></tr>
+        <tr><td>meta</td><td>JSONB</td><td>NULL</td><td>{ groupId } relie les événements d'un même plan</td></tr>
+        <tr><td rowspan="3"><strong>conversations</strong></td><td>id</td><td>UUID</td><td>PRIMARY KEY</td><td>Session de conversation</td></tr>
+        <tr><td>user_id</td><td>TEXT</td><td>NOT NULL</td><td>Identifiant utilisateur</td></tr>
+        <tr><td>created_at</td><td>TIMESTAMPTZ</td><td>DEFAULT now()</td><td>Horodatage</td></tr>
+        <tr><td rowspan="4"><strong>messages</strong></td><td>id</td><td>UUID</td><td>PRIMARY KEY</td><td>Message individuel</td></tr>
+        <tr><td>conversation_id</td><td>UUID</td><td>FK → conversations ON DELETE CASCADE</td><td>Lien à la session</td></tr>
+        <tr><td>role</td><td>TEXT</td><td>CHECK (user | assistant)</td><td>Émetteur du message</td></tr>
+        <tr><td>content</td><td>TEXT</td><td>NOT NULL · len > 0</td><td>Contenu du message</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- INFRASTRUCTURE -->
+  <div class="h3" style="margin-top:1.2rem">8. Infrastructure de déploiement</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Environnement</th><th>URL</th><th>Déclencheur</th><th>Configuration</th></tr></thead>
+      <tbody>
+        <tr><td>Développement</td><td>localhost:3000</td><td>npm run dev</td><td>.env.local non versionné</td></tr>
+        <tr><td>Préproduction</td><td>Vercel Preview URL (auto)</td><td>Chaque pull request GitHub</td><td>Vars Vercel projet · Supabase staging</td></tr>
+        <tr class="row-hl"><td><strong>Production</strong></td><td><strong>vocal-assistant-two.vercel.app</strong></td><td>Merge sur branche main</td><td>Vars Vercel production · Supabase prod</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-box" style="margin-top:0.8rem">
+    <h4>Variables d'environnement & sécurité</h4>
+    <div class="tbl-wrap" style="margin-top:0.4rem">
+      <table>
+        <thead><tr><th>Variable</th><th>Visibilité</th><th>Usage</th></tr></thead>
+        <tbody>
+          <tr><td><strong>GEMINI_API_KEY</strong></td><td><span class="badge bg-dark">Serveur uniquement</span></td><td>Clé API Google Gemini uniquement dans /api/assistant. Jamais exposée dans le bundle JS client.</td></tr>
+          <tr><td>NEXT_PUBLIC_SUPABASE_URL</td><td>Client + Serveur</td><td>URL du projet Supabase</td></tr>
+          <tr><td>NEXT_PUBLIC_SUPABASE_ANON_KEY</td><td>Client + Serveur</td><td>Clé anonyme lecture/écriture soumise au RLS</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="h3" style="margin-top:1rem">Pipeline CI/CD</div>
+  <div class="info-box">
+    <p style="font-size:0.74rem;line-height:1.7;color:var(--dark-2)">Chaque push sur GitHub déclenche automatiquement : <strong>1.</strong> Vérification lint ESLint (eslint-config-next + TypeScript ESLint) <strong>2.</strong> Build Next.js avec vérification TypeScript strict <strong>3.</strong> Déploiement atomique sur le Vercel Edge Network (CDN mondial) <strong>4.</strong> Rollback automatique si le build échoue.</p>
+  </div>
+
+  <!-- COÛTS INFRA -->
+  <div class="h3" style="margin-top:1.2rem">9. Analyse des coûts d'infrastructure An 1</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Service</th><th>Plan actuel</th><th>Limite avant upgrade</th><th>Coût mensuel</th></tr></thead>
+      <tbody>
+        <tr><td>Vercel hébergement</td><td>Hobby (gratuit)</td><td>100 GB bandwidth · 100k invocations</td><td><strong>0€</strong></td></tr>
+        <tr><td>Supabase base de données</td><td>Free (gratuit)</td><td>500 MB BDD · 50k lignes · 2 GB bandwidth</td><td><strong>0€</strong></td></tr>
+        <tr><td>Google Gemini API</td><td>Pay-as-you-go</td><td>15 RPM gratuits puis $0,075/1M tokens</td><td>~3,40€ / 100 users actifs</td></tr>
+        <tr class="row-hl"><td><strong>Total 500 users actifs</strong></td><td></td><td></td><td><strong>&lt; 20€/mois</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- TESTS -->
+  <div class="h3" style="margin-top:1.2rem">10. Stratégie de tests pyramide adaptée MVP</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Niveau</th><th>Type</th><th>Outil</th><th>Périmètre</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge bg-red">Niveau 1</span></td><td>Tests unitaires</td><td>Jest + React Testing Library</td><td>Stores Zustand · Utils dates · Parsing actions Gemini</td></tr>
+        <tr><td><span class="badge bg-yellow">Niveau 2</span></td><td>Tests d'intégration API</td><td>Jest + MSW (Mock Service Worker)</td><td>Routes /api/assistant · /api/events · /api/conversations</td></tr>
+        <tr><td><span class="badge bg-yellow">Niveau 3</span></td><td>Tests composants</td><td>React Testing Library</td><td>AiModal · DailyCalendar · ViewSelector</td></tr>
+        <tr><td><span class="badge bg-blue">Niveau 4</span></td><td>Tests E2E</td><td>Playwright</td><td>Scénarios complets : voix → événement créé → visible dans le calendrier</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h3" style="margin-top:1rem">Scénarios d'intégration API prioritaires</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>ID</th><th>Scénario</th><th>Entrée mock</th><th>Résultat attendu</th></tr></thead>
+      <tbody>
+        <tr><td>T-01</td><td>Création d'un événement simple</td><td>POST /api/events 1 événement valide</td><td>HTTP 200 · events[] avec id Supabase</td></tr>
+        <tr><td>T-02</td><td>create_plan 3 événements liés</td><td>events[3] avec même groupId dans meta</td><td>3 événements créés · meta.groupId identique</td></tr>
+        <tr><td>T-03</td><td>Suppression via DELETE /api/events/[id]</td><td>id = 'evt_test_123'</td><td>HTTP 200 · { success: true }</td></tr>
+        <tr><td>T-04</td><td>Mode fallback sans GEMINI_API_KEY</td><td>API_KEY = undefined · 'Ajoute un rdv'</td><td>HTTP 200 · action add_event générée</td></tr>
+        <tr><td>T-05</td><td>Contrainte end_time > start_time violée</td><td>end_time = start_time</td><td>Erreur Supabase 400</td></tr>
+        <tr><td>T-06</td><td>Dépassement quota Gemini (429)</td><td>Mock retourne 429 RESOURCE_EXHAUSTED</td><td>HTTP 429 · message d'erreur · action 'none'</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ROADMAP TECHNIQUE -->
+  <div class="h3" style="margin-top:1.2rem">11. Roadmap technique V0 → V3</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Phase</th><th>Période</th><th>Livrables techniques</th><th>Jalon business</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge bg-green">V0</span></td><td>Déc 2024 – Fév 2025</td><td>Assistant vocal · Gemini function calling · Calendrier 4 vues · Supabase · Vercel CI/CD</td><td><strong>Live en production</strong></td></tr>
+        <tr><td><span class="badge bg-yellow">V1</span></td><td>Mar – Juin 2025</td><td>Auth Supabase · RLS activé · Text-to-Speech · PWA · Tests unitaires & E2E · Optimistic UI</td><td>Paiement actif</td></tr>
+        <tr><td><span class="badge bg-blue">V2</span></td><td>Juil – Nov 2025</td><td>Module courses & drive · Module budget · Agenda partagé famille · Notifications push</td><td>Plan famille 14,99€</td></tr>
+        <tr><td><span class="badge bg-dark">V3</span></td><td>Déc 2025 – Mar 2026</td><td>Module gestion enfants · Intégrations Google/Apple Calendar · API B2B · Dashboard QVT</td><td>Licences B2B</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DETTES TECHNIQUES -->
+  <div class="h3" style="margin-top:1.2rem">12. Dettes techniques documentées</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Dette technique</th><th>Criticité</th><th>Plan de résolution V1</th></tr></thead>
+      <tbody>
+        <tr><td>DEMO_USER_ID fixe en dur dans toutes les routes API</td><td><span class="badge bg-red">Critique</span></td><td>Implémenter Supabase Auth · Remplacer par auth.user.id partout</td></tr>
+        <tr><td>RLS Supabase désactivé (disable row level security)</td><td><span class="badge bg-red">Critique</span></td><td>Activer RLS · Créer politiques SELECT/INSERT/UPDATE/DELETE par user_id</td></tr>
+        <tr><td>Absence d'optimistic updates (fetch bloquant avant affichage)</td><td><span class="badge bg-yellow">Modérée</span></td><td>Mettre à jour le store avant la confirmation API · Rollback en cas d'erreur</td></tr>
+        <tr><td>Pas de gestion d'erreur réseau dans addEvent() / addEvents()</td><td><span class="badge bg-yellow">Modérée</span></td><td>Retry logic · Toast d'erreur utilisateur · Rollback store</td></tr>
+        <tr><td>useMemo interdit dans .map() bug hooks React</td><td><span class="badge bg-green">Mineur</span></td><td>Déjà résolu dans MonthView et YearView (sessions 14 & 15)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- RGPD -->
+  <div class="h3" style="margin-top:1.2rem">13. Conformité RGPD & IA Act</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Catégorie</th><th>Traitement actuel</th><th>Mesure V1</th><th>Base légale</th></tr></thead>
+      <tbody>
+        <tr><td>Événements calendrier (titre, date, lieu)</td><td>Supabase UE · Chiffrement TLS</td><td>RLS par user_id · Politique rétention</td><td>Contrat</td></tr>
+        <tr><td>Historique conversations IA</td><td>Stockage Supabase · Table messages</td><td>Suppression sur demande · 90 jours max</td><td>Contrat</td></tr>
+        <tr><td>Données vocales (transcription)</td><td>Web Speech API (Google) non stockées par Lumia</td><td>Mention dans politique de confidentialité</td><td>Consentement</td></tr>
+        <tr><td>Données enfants (V2)</td><td>Non implémenté</td><td>Consentement parental · Chiffrement renforcé</td><td>Consentement + obligation légale</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout" style="margin-top:0.8rem">
+    <span class="callout-label">IA Act</span>
+    <span>Lumia est classifié <strong>risque limité</strong>. Transparence : la mention "Propulsé par Gemini" est affichée dans la modale assistant. Contrôle humain : l'utilisateur valide ou annule chaque action proposée par l'IA pas d'action autonome irréversible. Données utilisateurs non utilisées pour entraîner les modèles (politique Google Gemini API for Developers).</span>
+  </div>
+
+  <div style="margin-top:1rem;font-size:0.68rem;color:var(--muted);font-style:italic;border-top:1px solid var(--border);padding-top:0.6rem">
+    Lumia · Dossier Technique · MBA Développeur Full Stack · My Digital School · 2025 · GitHub : github.com/issa9595/vocal-assistant
+  </div>
+</div>
+</section>
+
+<!-- ÉQUIPE -->
+<!-- NETWORKING -->
+<section id="networking" class="page">
+<div class="page-inner">
+  <div class="stag">14 Networking experts</div>
+  <h2 class="stitle">Networking experts</h2>
+  <p class="intro-text">7 prises de contact menées entre janvier et avril 2025 avec des professionnels directement concernés par la problématique de Lumia. Chaque échange a eu un impact documenté sur une décision produit ou business. Ce n'est pas une démarche de validation ponctuelle c'est le début d'un réseau prescripteur activable dès la V1.</p>
+
+  <!-- TABLEAU SYNTHÈSE CONTACTS -->
+  <div class="h3">Tableau de suivi du réseau 7 contacts</div>
+  <div class="tbl-wrap" style="margin-bottom:1.4rem">
+    <table>
+      <thead><tr><th>Contact</th><th>Profil</th><th>Date</th><th>Format</th><th>Statut</th><th>Impact produit direct</th></tr></thead>
+      <tbody>
+        <tr class="row-hl"><td><strong>Sophie Marchand</strong></td><td>Coach de vie, Paris, 12 ans d'expérience</td><td>18 fév. 2025</td><td>Visio 45 min</td><td><span class="badge bg-green">Terminé</span></td><td>Ton bienveillant promu exigence non-négociable brief Maëlane ajusté</td></tr>
+        <tr class="row-hl"><td><strong>Karine Tessier</strong></td><td>DRH, 320 collaborateurs, Nantes</td><td>7 mars 2025</td><td>Présentiel 40 min</td><td><span class="badge bg-green">Terminé</span></td><td>Séparation données perso/RH by design dès V1 architecture Issa modifiée</td></tr>
+        <tr class="row-hl"><td><strong>Dr. Laurent Prévost</strong></td><td>Pédiatre libéral, Lyon</td><td>2 avr. 2025</td><td>Tél. 25 min</td><td><span class="badge bg-green">Terminé</span></td><td>Cas "bilan pédiatrique" promu de P1 à P0 dans la roadmap Issa</td></tr>
+        <tr><td><strong>Nadia Ferrara</strong></td><td>Psychologue clinicienne, cabinet libéral, Bordeaux</td><td>9 avr. 2025</td><td>Visio 30 min</td><td><span class="badge bg-green">Terminé</span></td><td>Notion de "permission cognitive" Lumia doit demander avant d'agir, jamais imposer</td></tr>
+        <tr><td><strong>Marc Delacour</strong></td><td>Responsable digital mutuelle santé, Lyon</td><td>11 avr. 2025</td><td>LinkedIn + appel 20 min</td><td><span class="badge bg-green">Terminé</span></td><td>Potentiel partenariat B2B2C mutuelle piste V3 documentée</td></tr>
+        <tr><td><strong>Isabelle Nguyen</strong></td><td>Responsable association parents d'élèves, Paris</td><td>3 avr. 2025</td><td>Email + échange 15 min</td><td><span class="badge bg-green">Terminé</span></td><td>Cas d'usage "gestion agenda scolaire partagé" confirmé comme priorité familiale réelle</td></tr>
+        <tr><td><strong>Thomas Girard</strong></td><td>Directeur pédagogique école de commerce, Nantes</td><td>En cours</td><td>Email envoyé réponse attendue</td><td><span class="badge bg-yellow">En attente</span></td><td>Piste B2B universités V3 licence étudiante en marque blanche</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ÉCHANGE 1 SOPHIE MARCHAND -->
+  <div class="info-box" style="margin-bottom:1rem">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.8rem;flex-wrap:wrap;gap:0.4rem">
+      <div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--dark)">Sophie Marchand</div>
+        <div style="font-size:0.7rem;color:var(--muted)">Coach de vie certifiée · Paris · 12 ans d'expérience · Spécialité : charge mentale et parentalité</div>
+      </div>
+      <div style="text-align:right">
+        <span class="badge bg-rose" style="font-size:0.62rem">Échange 1</span>
+        <div style="font-size:0.62rem;color:var(--muted);margin-top:0.2rem">Visioconférence 18 février 2025 · 45 min</div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Thème abordé</th><th>Ce qu'on a appris</th><th>Décision produit prise</th></tr></thead>
+        <tbody>
+          <tr><td>Profil des clientes typiques</td><td>80% de ses clientes : femmes actives 30-45 ans avec enfants. La charge mentale est systématiquement citée comme première source d'épuisement, avant le travail lui-même.</td><td>Persona Clara validé terrain par une professionnelle.</td></tr>
+          <tr><td>Pourquoi les outils existants échouent</td><td>"Mes clientes abandonnent Todolist en 3 semaines. Ça demande encore de l'énergie pour l'alimenter. Elles n'en ont plus." Corrobore exactement notre hypothèse centrale.</td><td>Positionnement proactif confirmé comme différenciateur réel, pas marketing.</td></tr>
+          <tr><td>Ton et posture de l'assistant</td><td>"Si ça juge, si ça sanctionne, si ça envoie des rappels agressifs elles désinstallent le lendemain." Le ton bienveillant n'est pas une option UX, c'est une condition de rétention.</td><td><strong>Ton bienveillant promu exigence non-négociable dans le brief Maëlane.</strong></td></tr>
+          <tr><td>Réceptivité prescripteur</td><td>"Si c'est bienveillant et pas intrusif, je pourrais le recommander à mes clientes." Canal prescripteur coach de vie validé.</td><td>Sophie Marchand inscrite comme prescripteur pilote V1 avec lien parrainage dédié.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:0.8rem">
+      <span class="callout-label">Citation directe</span>
+      <span>« Ce qui manque, c'est un outil qui anticipe au lieu d'attendre. Mes clientes ont besoin qu'on pense pour elles parfois, pas qu'on leur rajoute une case à cocher. »</span>
+    </div>
+  </div>
+
+  <!-- ÉCHANGE 2 KARINE TESSIER -->
+  <div class="info-box" style="margin-bottom:1rem">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.8rem;flex-wrap:wrap;gap:0.4rem">
+      <div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--dark)">Karine Tessier</div>
+        <div style="font-size:0.7rem;color:var(--muted)">DRH · Entreprise de 320 collaborateurs · Secteur services · Nantes</div>
+      </div>
+      <div style="text-align:right">
+        <span class="badge bg-blue" style="font-size:0.62rem">Échange 2</span>
+        <div style="font-size:0.62rem;color:var(--muted);margin-top:0.2rem">Entretien présentiel 7 mars 2025 · 40 min</div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Thème abordé</th><th>Ce qu'on a appris</th><th>Décision produit prise</th></tr></thead>
+        <tbody>
+          <tr><td>Charge mentale et absentéisme</td><td>"67% de nos absences longue durée chez les femmes cadres 30-45 ans la source principale est extra-professionnelle." Le travail n'est pas la cause la vie hors bureau l'est.</td><td>Argument B2B QVT renforcé pour V3 avec chiffre DRH terrain.</td></tr>
+          <tr><td>Solutions QVT existantes</td><td>"Yoga, conciergerie, plateforme bien-être taux d'usage à 8% au bout de 6 mois." Les solutions actuelles ne sont pas utilisées parce qu'elles demandent du temps.</td><td>Lumia positionné comme alternative à forte rétention dans le pitch B2B.</td></tr>
+          <tr><td>RGPD en contexte entreprise</td><td>"Si l'employé sent que l'employeur peut voir ses données, c'est terminé." Séparation stricte données perso / reporting RH anonymisé obligatoire.</td><td><strong>Architecture séparation données perso/RH by design intégrée dès V1 par Issa.</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:0.8rem">
+      <span class="callout-label">Enseignement clé</span>
+      <span>La porte d'entrée B2B est la démonstration de l'adoption grand public d'abord. Une DRH veut voir des utilisateurs utiliser le produit pas un pitch.</span>
+    </div>
+  </div>
+
+  <!-- ÉCHANGE 3 DR PRÉVOST -->
+  <div class="info-box" style="margin-bottom:1rem">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.8rem;flex-wrap:wrap;gap:0.4rem">
+      <div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--dark)">Dr. Laurent Prévost</div>
+        <div style="font-size:0.7rem;color:var(--muted)">Pédiatre libéral · Cabinet de groupe · Lyon · Également père de 3 enfants</div>
+      </div>
+      <div style="text-align:right">
+        <span class="badge bg-green" style="font-size:0.62rem">Échange 3</span>
+        <div style="font-size:0.62rem;color:var(--muted);margin-top:0.2rem">Appel téléphonique 2 avril 2025 · 25 min</div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Thème abordé</th><th>Ce qu'on a appris</th><th>Décision produit prise</th></tr></thead>
+        <tbody>
+          <tr><td>Bilans médicaux oubliés</td><td>"10 cas cette semaine de bilans en retard de 8 à 14 mois. Systématique chez les parents actifs." Le cas Clara du bilan oublié est un pattern médical documenté, pas un exemple anecdotique.</td><td><strong>Cas d'usage "rappel bilan" promu de P1 à P0 dans la roadmap Issa.</strong></td></tr>
+          <tr><td>Impact des rappels proactifs</td><td>"SMS de rappel dans notre cabinet : taux de no-show en baisse de 34% en 6 mois." Preuve d'impact mesurable des rappels proactifs dans un cadre médical réel.</td><td>Argument de conversion Premium : "Lumia a rappelé le bilan de votre enfant." Impact chiffré.</td></tr>
+          <tr><td>Canal prescripteur médical</td><td>"Si c'est discret et bienveillant, je pourrais le mentionner à mes patients surchargés." Ouverture pour un canal de prescription médical à coût quasi-nul.</td><td>Dr. Prévost inscrit comme prescripteur pilote V1 avec tracking lien dédié.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout" style="margin-top:0.8rem">
+      <span class="callout-label">Citation directe</span>
+      <span>« Les parents que je vois ne sont pas irresponsables. Ils sont débordés. Un outil qui pense à leur place pour les soins de leurs enfants, c'est une vraie aide médicale indirecte. »</span>
+    </div>
+  </div>
+
+  <!-- ÉCHANGE 4 NADIA FERRARA -->
+  <div class="info-box" style="margin-bottom:1rem">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:0.8rem;flex-wrap:wrap;gap:0.4rem">
+      <div>
+        <div style="font-size:0.82rem;font-weight:700;color:var(--dark)">Nadia Ferrara</div>
+        <div style="font-size:0.7rem;color:var(--muted)">Psychologue clinicienne · Cabinet libéral · Bordeaux · Spécialité : épuisement parental</div>
+      </div>
+      <div style="text-align:right">
+        <span class="badge bg-dark" style="font-size:0.62rem">Échange 4</span>
+        <div style="font-size:0.62rem;color:var(--muted);margin-top:0.2rem">Visioconférence 9 avril 2025 · 30 min</div>
+      </div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Thème abordé</th><th>Ce qu'on a appris</th><th>Décision produit prise</th></tr></thead>
+        <tbody>
+          <tr><td>Épuisement parental et technologies</td><td>"Les patients en burnout parental ont souvent une relation anxiogène aux notifications. Un outil intrusif peut aggraver l'état." La fréquence et le ton des notifications sont cliniquement importants.</td><td>Mode "Lumia en silence" ajouté à la roadmap V1 désactivation temporaire des suggestions.</td></tr>
+          <tr><td>Permission cognitive</td><td>"Pour qu'un outil soit adopté durablement, l'utilisateur doit sentir qu'il garde le contrôle. L'IA doit proposer, jamais imposer." Ce principe structure l'UX de toute la V1.</td><td><strong>Principe "permission cognitive" intégré : Lumia propose, l'utilisateur valide toujours.</strong></td></tr>
+          <tr><td>Indicateur de surcharge</td><td>"Un simple indicateur hebdomadaire 'cette semaine a été chargée, voulez-vous alléger votre agenda du week-end ?' pourrait avoir un vrai impact thérapeutique indirect."</td><td>Feature "détection surcharge + proposition de décompression" confirmée comme P1 V1.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ÉCHANGES 5, 6, 7 résumés -->
+  <div class="info-box" style="margin-bottom:1rem">
+    <h4>Échanges 5, 6 Marc Delacour (mutuelle) & Isabelle Nguyen (association parents)</h4>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Contact</th><th>Enseignement principal</th><th>Impact</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Marc Delacour</strong> Responsable digital mutuelle, Lyon (11 avr.)</td><td>Les mutuelles cherchent des outils de prévention bien-être pour leurs adhérents. Un partenariat distribution B2B2C est possible si le produit est certifiable données de santé.</td><td>Piste partenariat mutuelle documentée pour V3. Condition : certification HDS ou équivalent.</td></tr>
+          <tr><td><strong>Isabelle Nguyen</strong> Association parents d'élèves, Paris (3 avr.)</td><td>"La gestion des agendas scolaires entre parents séparés ou surchargés est un cauchemar hebdomadaire." Le cas d'usage agenda scolaire partagé est cité spontanément, sans qu'on le suggère.</td><td>Cas d'usage agenda scolaire promu dans la roadmap V2. Validation terrain sans biais.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SYNTHÈSE -->
+  <div class="h3">Synthèse des 6 enseignements actionnés</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Enseignement terrain</th><th>Source(s)</th><th>Décision prise dans Lumia</th></tr></thead>
+      <tbody>
+        <tr><td>La charge mentale est la cause principale d'épuisement, pas le travail</td><td>Marchand, Tessier</td><td>Repositionnement discours : outil de vie, pas de productivité pro</td></tr>
+        <tr><td>Les outils existants échouent parce qu'ils demandent encore de l'énergie</td><td>Marchand</td><td>Positionnement proactif validé comme différenciateur réel</td></tr>
+        <tr><td>Le ton et la permission cognitive sont des conditions de rétention</td><td>Marchand, Ferrara</td><td>Ton bienveillant non-négociable · Mode silence · Toujours proposer, jamais imposer</td></tr>
+        <tr><td>Les bilans médicaux oubliés sont un pattern médical documenté (-34% no-show avec rappels)</td><td>Prévost</td><td>Cas d'usage rappel bilan promu P0 · argument conversion Premium chiffré</td></tr>
+        <tr><td>Le B2B passe par l'adoption grand public d'abord</td><td>Tessier</td><td>Séquence freemium → Premium → B2B validée dans l'ordre</td></tr>
+        <tr><td>3 prescripteurs opérationnels identifiés et engagés</td><td>Marchand, Prévost, Ferrara</td><td>Canal acquisition prescripteurs activé dès V1 liens parrainage trackés</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+
+
+<script>
+(function() {
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-link');
+
+  function update() {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) cur = s.id; });
+    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + cur));
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+
+  links.forEach(l => l.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(l.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
+  }));
+})();
+</script>
+
+<!-- DIRECTION ARTISTIQUE -->
+
+<!-- EQUIPE & GESTION DE PROJET -->
+<section id="equipe" class="page">
+<div class="page-inner">
+  <div class="stag">13 Equipe & Gestion de projet</div>
+  <h2 class="stitle">Organisation, roles et pilotage</h2>
+  <p class="intro-text">Trois profils complementaires, un outil centralise (Notion), et une gouvernance claire. La gestion de projet n'est pas un livrable cosmetique : c'est ce qui permet a trois personnes de fillieres differentes de produire un dossier coherent en quatre mois.</p>
+
+  <div class="h3">Repartition des roles par filiere</div>
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Membre</th><th>Filiere MBA</th><th>Role dans Lumia</th><th>Responsabilites principales</th></tr>
+      </thead>
+      <tbody>
+        <tr class="row-lumia">
+          <td><strong>Antonin</strong></td>
+          <td>Marketing Digital + Entrepreneuriat & Digital Business</td>
+          <td>Chef de projet & Strategie</td>
+          <td>Vision produit, etude de marche, BMC, parcours client, finances, networking experts, coordination globale</td>
+        </tr>
+        <tr>
+          <td><strong>Maelane</strong></td>
+          <td>Direction Artistique Digitale</td>
+          <td>Directrice artistique</td>
+          <td>Identite de marque, charte graphique, moodboard, brief creatif, personas visuels, maquettes UI</td>
+        </tr>
+        <tr>
+          <td><strong>Issa</strong></td>
+          <td>Developpeur Full Stack</td>
+          <td>Lead technique</td>
+          <td>Architecture technique, developpement MVP, deploiement Vercel/Supabase, integration Gemini API, tests</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="h3" style="margin-top:1.5rem">Outil de suivi : Notion</div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:1rem">L'ensemble du projet est centralise dans un workspace Notion partage. Chaque membre y accede en temps reel. Le workspace est structure en quatre espaces : un backlog produit avec priorisation, un tableau Kanban pour le suivi des taches, un espace documentation (memos, comptes-rendus, ressources), et un calendrier partage avec les jalons et deadlines.</p>
+
+  <div class="h3">Tableau Kanban — etat des taches Jalon 1</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.6rem;margin-bottom:1.4rem">
+
+    <!-- COLONNE : A FAIRE -->
+    <div style="background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:0.6rem">
+      <div style="font-size:0.62rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;padding-bottom:0.3rem;border-bottom:2px solid #e0d5dc">A faire</div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem;margin-bottom:0.4rem">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">Maquettes UI haute fidelite</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Maelane — S2-S3</div>
+        <div style="display:inline-block;font-size:0.5rem;background:var(--purple-light);color:#6b4c8a;padding:0.1rem 0.4rem;border-radius:10px;margin-top:0.3rem">DA</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem;margin-bottom:0.4rem">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">Auth Supabase + RLS</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Issa — S3-S4</div>
+        <div style="display:inline-block;font-size:0.5rem;background:var(--teal-light);color:#2d7d75;padding:0.1rem 0.4rem;border-radius:10px;margin-top:0.3rem">DEV</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">Test TikTok Ads 200 euros</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Antonin — S5-S6</div>
+        <div style="display:inline-block;font-size:0.5rem;background:var(--rose-light);color:var(--rose-deep);padding:0.1rem 0.4rem;border-radius:10px;margin-top:0.3rem">MKT</div>
+      </div>
+    </div>
+
+    <!-- COLONNE : EN COURS -->
+    <div style="background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:0.6rem">
+      <div style="font-size:0.62rem;font-weight:700;color:#b45309;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;padding-bottom:0.3rem;border-bottom:2px solid #f6b9ae">En cours</div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem;margin-bottom:0.4rem">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">Page precommande Stripe</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Issa + Antonin — S1-S2</div>
+        <div style="display:inline-block;font-size:0.5rem;background:var(--teal-light);color:#2d7d75;padding:0.1rem 0.4rem;border-radius:10px;margin-top:0.3rem">DEV</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem;margin-bottom:0.4rem">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">Retention J14 — suivi testeurs</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Antonin — S1-S2</div>
+        <div style="display:inline-block;font-size:0.5rem;background:var(--rose-light);color:var(--rose-deep);padding:0.1rem 0.4rem;border-radius:10px;margin-top:0.3rem">MKT</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">Elargir tests — 5 nouveaux profils</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Antonin — S2-S4</div>
+        <div style="display:inline-block;font-size:0.5rem;background:var(--rose-light);color:var(--rose-deep);padding:0.1rem 0.4rem;border-radius:10px;margin-top:0.3rem">MKT</div>
+      </div>
+    </div>
+
+    <!-- COLONNE : EN REVIEW -->
+    <div style="background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:0.6rem">
+      <div style="font-size:0.62rem;font-weight:700;color:#3a5a8a;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;padding-bottom:0.3rem;border-bottom:2px solid #96b6dd">En review</div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem;margin-bottom:0.4rem">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">Dossier technique Jalon 1</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Equipe — relecture croisee</div>
+        <div style="display:inline-block;font-size:0.5rem;background:#e8eef6;color:#3a5a8a;padding:0.1rem 0.4rem;border-radius:10px;margin-top:0.3rem">COLLECTIF</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">Brand board V1 final</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Maelane — validation equipe</div>
+        <div style="display:inline-block;font-size:0.5rem;background:var(--purple-light);color:#6b4c8a;padding:0.1rem 0.4rem;border-radius:10px;margin-top:0.3rem">DA</div>
+      </div>
+    </div>
+
+    <!-- COLONNE : FAIT -->
+    <div style="background:var(--cream);border:1px solid var(--border);border-radius:var(--radius);padding:0.6rem">
+      <div style="font-size:0.62rem;font-weight:700;color:#1D9E75;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;padding-bottom:0.3rem;border-bottom:2px solid #9dc0bc">Fait</div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem;margin-bottom:0.4rem;opacity:0.7">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">Questionnaire terrain (65 rep.)</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Antonin — termine</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem;margin-bottom:0.4rem;opacity:0.7">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">MVP vocal V1 deploye</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Issa — termine fev. 2025</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem;margin-bottom:0.4rem;opacity:0.7">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">Tests utilisateurs (7 testeurs)</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Antonin — termine</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem;margin-bottom:0.4rem;opacity:0.7">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">Networking 7 experts</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Antonin — termine</div>
+      </div>
+      <div style="background:white;border:1px solid var(--border);border-radius:6px;padding:0.5rem;opacity:0.7">
+        <div style="font-size:0.68rem;font-weight:600;color:var(--dark)">Charte graphique + moodboard</div>
+        <div style="font-size:0.58rem;color:var(--muted);margin-top:0.2rem">Maelane — termine</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="h3">Gouvernance et coordination</div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">L'equipe se reunit chaque semaine lors de la demi-journee dediee My Digital Start-up. Chaque session suit un format fixe : 15 minutes de stand-up (chacun presente ce qu'il a fait, ce qu'il va faire, ce qui le bloque), puis travail en parallele ou en binome selon les priorites du sprint en cours. Les decisions strategiques (pivot, priorisation, arbitrage budget) sont prises collectivement et documentees dans un memo Notion date et signe.</p>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">La communication courante passe par un groupe WhatsApp pour les echanges rapides, et Notion pour tout ce qui doit etre trace. Chaque livrable passe par une relecture croisee avant integration au dossier : Antonin relit le travail de Maelane, Maelane relit celui d'Issa, Issa relit celui d'Antonin. Ce cycle evite les angles morts et force chaque membre a comprendre le travail des autres filieres.</p>
+
+  <div class="h3">Arbitrage documente : choix de la stack technique</div>
+  <div class="info-box" style="margin-bottom:1rem">
+    <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.6rem"><strong>Contexte :</strong> En janvier 2025, l'equipe devait choisir entre deux approches pour le MVP : un developpement no-code (Bubble/FlutterFlow) permettant un lancement rapide mais limitant la personnalisation, ou un developpement code (Next.js + Supabase) plus long a mettre en place mais offrant le controle total sur le mecanisme de proactivite.</p>
+    <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.6rem"><strong>Discussion :</strong> Antonin privilegiait le no-code pour valider le marche vite. Issa a argumente que le mecanisme de detection des cycles d'achat et les notifications push necessitaient un controle serveur que le no-code ne permettait pas. Maelane a confirme que les contraintes UI du no-code limitaient la coherence avec la charte graphique.</p>
+    <p style="font-size:0.78rem;color:var(--dark);line-height:1.7"><strong>Decision :</strong> L'equipe a choisi le developpement code (Next.js + Vercel + Supabase + Gemini API). Le MVP a ete deploye en production en fevrier 2025, soit 6 semaines apres le kick-off. La decision s'est averee pertinente : le mecanisme de proactivite (detection + cycles) n'aurait pas ete realisable en no-code.</p>
+  </div>
+
+  <div class="h3">Resilience et adaptation</div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">L'equipe a fait face a plusieurs ajustements en cours de projet. Le scope initial envisageait cinq modules des la V1 (agenda, courses, taches, enfants, budget). Apres les premiers tests utilisateurs, la valeur percue s'est concentree sur le chat vocal intelligent et la detection proactive des besoins en courses (les deux niveaux de proactivite). L'equipe a recentre la V1 sur ces deux modules, repoussant les trois autres en V2-V3. Ce n'est pas un echec : c'est un pivot de scope, coherent avec la methodologie Lean Start-up enseignee dans le programme.</p>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7">Par ailleurs, l'equipe de 3 personnes (au lieu des 4-6 recommandes) a impose une repartition des charges plus lourde par membre. Antonin cumule les casquettes marketing et entrepreneuriat. Cette contrainte a ete geree par une priorisation stricte : ce qui est note dans la grille d'evaluation passe en premier, le reste est documente comme prevu pour la suite.</p>
+
+</div>
+</section>
+
+<section id="moodboard" class="page">
+<div class="page-inner">
+  <div class="stag">16 Direction artistique</div>
+  <h2 class="stitle">Identite de marque</h2>
+
+  <div class="h3">Cible</div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">La cible de Lumia, ce sont des personnes actives, souvent occupees, qui doivent gerer beaucoup de choses en meme temps : travail, organisation perso, taches du quotidien. Elles utilisent deja pas mal d'outils digitaux, donc elles savent ce qu'elles veulent : quelque chose de rapide, efficace et simple.</p>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:1.2rem">Cote design, elles aiment les interfaces faciles a comprendre, sans effort. Elles ne veulent pas reflechir pour utiliser une appli. Tout doit etre instinctif. L'ideal, c'est une interface qui se fait oublier : elle est la quand il faut, mais elle ne derange pas. Elle doit aller droit au but et leur faire gagner du temps, sans jamais les ralentir.</p>
+
+  <div class="h3">Notre promesse</div>
+  <div class="dark-box" style="margin-bottom:1.2rem">
+    <strong>Lumia vous simplifie la vie en pensant a votre place.</strong> L'application anticipe vos besoins et organise votre quotidien, sans que vous ayez besoin d'y reflechir.
+  </div>
+
+  <div class="h3">Contraintes</div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">Les utilisateurs sont tres exigeants sur le temps. Si l'application leur fait perdre du temps, ils ne resteront pas. Si l'interface est compliquee, s'ils doivent chercher ou cliquer ou comment trouver une information, ils vont abandonner. Et s'il y a trop d'informations d'un coup, ils peuvent vite se sentir perdus ou oppresses.</p>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:1.2rem">Le but, c'est donc de faire simple : peu d'elements, mais les bons. Tout doit etre clair, rapide a comprendre, et facile a utiliser.</p>
+
+  <div class="h3">Axe creatif</div>
+  <div style="background:var(--rose-ultra);border:1px solid var(--rose);border-radius:var(--radius);padding:1rem;margin-bottom:0.8rem">
+    <div style="font-size:0.82rem;font-weight:700;color:var(--rose-deep);margin-bottom:0.4rem;font-family:var(--font-display)">Faire apparaitre l'invisible, avec legerete.</div>
+  </div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">Lumia, c'est comme un assistant discret qui vous accompagne au quotidien sans s'imposer. L'idee, c'est de creer une interface tres legere, presque invisible, qui s'adapte a vos habitudes.</p>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">Je me suis inspiree des aurores boreales : elles sont la, mais on ne les voit pas toujours. Et pourtant, quand elles apparaissent, elles sont belles et apaisantes. C'est la meme idee ici : liberer les utilisateurs de la charge mentale, mais de facon douce et visuelle, sans culpabilite.</p>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:1.2rem">On joue avec la transparence, les flous, les couleurs legeres. L'interface ne doit pas etre lourde, elle doit etre agreable, presque naturelle. Elle accompagne sans prendre de place.</p>
+
+  <div class="h3">Big Idée</div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">Arrêtez de penser votre vie, commencez à la vivre. Votre assistant de vie pense à tout, tout le temps, avant même que vous même n'y pensiez pour alléger votre charge mentale</p>
+
+
+  <div class="h3">Moodboard</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.2rem 0">
+    <div>
+      <div style="font-size:0.68rem;font-weight:700;color:var(--rose-deep);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Moodboard</div>
+      <div style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:white">
+        <img src="/dossier/moodboard.png" alt="Lumia Moodboard - Univers visuel" style="width:100%;height:auto;display:block">
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <div class="h3">Logo et isotype</div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">Le logo utilise un dégradé de couleurs chaudes et claires, pensé pour créer une impression de réconfort et d’apaisement. Le travail de dégradé sur le m joue avec la profondeur et la transparence pour donner plus de relief. Le logo peut aussi se décliner en blanc et en noir pour rester lisible dans tous les contextes.</p>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">L’isotype reprend la lettre centrale du mot, le “m”. Ce choix crée un repère simple et fort. Il apporte de l’équilibre à l’ensemble du mot et renforce l’idée de stabilité et de confiance.</p>
+
+
+  <div class="h3">Typographie</div>
+  <div class="two-col" style="margin-bottom:1.4rem">
+    <div class="info-box">
+      <div style="font-weight:700;font-size:1.8rem;color:var(--dark);line-height:1.1;margin-bottom:0.4rem">All Round Gothic</div>
+      <div style="font-size:0.68rem;color:var(--muted);margin-bottom:0.5rem">Utilisée pour les titres et les éléments importants. Forme ronde, moderne et accessible.</div>
+      <div style="font-weight:700;font-size:1rem;color:var(--dark)">Lumia pense a ta place.</div>
+      <div style="font-size:0.68rem;color:var(--muted);margin-top:0.3rem">Bold pour les titres, accroches et elements de marque</div>
+    </div>
+    <div class="info-box">
+      <div style="font-weight:300;font-size:1.8rem;color:var(--dark);line-height:1.1;margin-bottom:0.4rem">Arbotek Light</div>
+      <div style="font-size:0.68rem;color:var(--muted);margin-bottom:0.5rem">Utilisée pour les textes. Claire, simple et facile à lire.</div>
+      <div style="font-weight:300;font-size:1rem;color:var(--dark)">Un assistant de vie bienveillant.</div>
+      <div style="font-size:0.68rem;color:var(--muted);margin-top:0.3rem">Light pour le corps, les labels et les descriptions</div>
+    </div>
+  </div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:1.2rem">Le choix des polices est volontaire. All Round Gothic est ronde et douce, à l’inverse des polices froides de la tech. Arbotek Light rend la lecture plus légère. Le contraste entre Bold et Light organise le contenu simplement. La typographie est claire, légère et bienveillante.</p>
+
+  <div class="h3">Palette de marque</div>
+  <p style="font-size:0.78rem;color:var(--dark);line-height:1.7;margin-bottom:0.8rem">La palette Lumia contient 8 couleurs. Elles ont été choisies pour évoquer la douceur, la bienveillance et la clarté. Pas de bleu trop “corporate”, ni de rouge trop fort.</p>
+  <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-bottom:1.2rem">
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin:1.2rem 0">
+    <div>
+      <div style="font-size:0.68rem;font-weight:700;color:var(--rose-deep);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.5rem">Brand Board</div>
+      <div style="border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);background:white">
+        <img src="/dossier/brandboard.png" alt="Lumia Brand Board - Charte graphique" style="width:100%;height:auto;display:block">
+      </div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- ROADMAP SUITE -->
+<section id="suite" class="page">
+<div class="page-inner">
+  <div class="stag">17 Plan de travail</div>
+  <h2 class="stitle">Ce qu&#39;on fait ensuite</h2>
+  <p class="intro-text">Ce que le Jalon 1 a prouve, ce qu&#39;il ne prouve pas encore, et le plan de travail precis pour les 8 semaines a venir. Ce n&#39;est pas une roadmap produit c&#39;est un plan de preuve.</p>
+
+  <div class="h3">Bilan valide vs non valide</div>
+  <div class="two-col" style="margin-bottom:1.4rem">
+    <div>
+      <div style="font-size:0.68rem;font-weight:700;color:#15803d;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem">Ce qui est valide</div>
+      <ul class="check-list green">
+        <li>Le besoin est reel 65 questionnaires + 7 experts interroges</li>
+        <li>Le concept est compris valeur percue 8,9/10 sur 7 testeurs</li>
+        <li>L&#39;intention d&#39;usage est forte 5/7 relancent l&#39;app seuls a J7</li>
+        <li>L&#39;architecture technique tient MVP en production depuis fev. 2025</li>
+        <li>3 prescripteurs engages a recommander Lumia des la V1</li>
+        <li>Positionnement differenciant aucun concurrent ne combine proactivite + famille + bienveillance</li>
+      </ul>
+    </div>
+    <div>
+      <div style="font-size:0.68rem;font-weight:700;color:#dc2626;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem">Ce qui reste a prouver</div>
+      <ul class="check-list red">
+        <li>Retention J30 mesuree seulement jusqu&#39;a J7</li>
+        <li>Paiement reel intention declaree 54%, transaction reelle = 0</li>
+        <li>CPA reel estime 3-5 euros, non teste en conditions reelles</li>
+        <li>Scalabilite IA cout Gemini sous usage intensif non mesure en prod</li>
+        <li>Maquettes UI finales Maelane a integrer avant Jalon 2</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="h3">Plan de travail 8 semaines</div>
+  <div class="tbl-wrap" style="margin-bottom:1.4rem">
+    <table>
+      <thead><tr><th>Semaine</th><th>Action prioritaire</th><th>Resp.</th><th>Livrable</th><th>Succes si</th></tr></thead>
+      <tbody>
+        <tr style="background:var(--rose-ultra)"><td><strong>S1-S2</strong></td><td>Lancer page precommande Premium Stripe, 9,99/mois, bouton liste d&#39;attente</td><td>Issa + Antonin</td><td>Landing page + tracking UTM</td><td>3+ clics sur 30 contacts = WTP reelle documentee</td></tr>
+        <tr><td><strong>S1-S2</strong></td><td>Mesurer retention J14 sur les 7 testeurs relance douce, tracking usage</td><td>Antonin</td><td>Tableau J7/J14 par testeur</td><td>5/7 testeurs actifs a J14</td></tr>
+        <tr style="background:var(--purple-light)"><td><strong>S2-S3</strong></td><td>Maelane : moodboard V1 finalize + 2 maquettes UI haute fidelite (accueil + onboarding)</td><td>Maelane</td><td>Figma 2 ecrans HF</td><td>Integres dans le dossier + projetes en soutenance</td></tr>
+        <tr><td><strong>S2-S4</strong></td><td>Elargir les tests 5 nouveaux profils, protocole structure par hypothese testee</td><td>Antonin</td><td>Rapport test structure</td><td>12 testeurs total, J7 retention &gt; 60%</td></tr>
+        <tr><td><strong>S3-S4</strong></td><td>Implementer Supabase Auth + RLS supprimer DEMO_USER_ID de toutes les routes API</td><td>Issa</td><td>Auth live en production</td><td>0 donnee non isolee RGPD effectif</td></tr>
+        <tr style="background:var(--rose-ultra)"><td><strong>S4-S5</strong></td><td>Activer canal prescripteurs liens parrainage UTM pour Sophie Marchand, Dr. Prevost, Nadia Ferrara</td><td>Antonin</td><td>3 liens trackes actifs</td><td>1er parrainage organique documente avant Jalon 2</td></tr>
+        <tr><td><strong>S5-S6</strong></td><td>Test paid micro-budget 200 euros TikTok Ads, femmes 28-38 ans France</td><td>Antonin</td><td>Rapport CPA reel 2 semaines</td><td>CPA mesure (peu importe le chiffre)</td></tr>
+        <tr><td><strong>S6-S7</strong></td><td>Issa : Text-to-Speech live + latence Gemini garantie sous 1,5s</td><td>Issa</td><td>Feature TTS en production</td><td>Latence mediane sous 1,5s sur 100 requetes</td></tr>
+        <tr style="background:var(--purple-light)"><td><strong>S6-S8</strong></td><td>Assemblage dossier Jalon 2 Business Plan + contributions finales + maquettes Maelane</td><td>Equipe</td><td>Dossier Jalon 2 complet</td><td>Rendu 48h avant soutenance, valide a 3</td></tr>
+        <tr><td><strong>S7-S8</strong></td><td>2 repetitions completes demo MVP 90 sec, pitch Why-How-What, gestion questions jury</td><td>Equipe</td><td>2 runs chronometres</td><td>Chacun sait ce qu&#39;il prouve et ce qu&#39;il assume ne pas prouver</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="dark-box" style="font-size:0.8rem;line-height:1.9;margin-bottom:1.2rem">
+    <strong>North Star :</strong> avant la soutenance Jalon 2, Lumia doit avoir prouve une seule chose de facon irrefutable :<br>
+    <strong>Au moins une personne a paye, est revenue a J30, et a recommande.</strong><br>
+    Une transaction reelle + J30 actif + un parrainage organique = ce jury ne peut plus dire que la traction est insuffisante.
+  </div>
+
+  <div class="h3">KPIs cibles Jalon 2</div>
+  <div class="ue-grid">
+    <div class="ue accent"><div class="ue-v">1+</div><div class="ue-l">Transaction Premium reelle documentee</div></div>
+    <div class="ue"><div class="ue-v">12+</div><div class="ue-l">Testeurs total J7 retention &gt; 60%</div></div>
+    <div class="ue"><div class="ue-v">J30</div><div class="ue-l">Retention reelle mesuree sur 5 profils min.</div></div>
+    <div class="ue accent"><div class="ue-v">CPA</div><div class="ue-l">Cout par acquisition reel mesure sur paid 200 euros</div></div>
+    <div class="ue"><div class="ue-v">3</div><div class="ue-l">Liens parrainage prescripteurs actifs et trackes</div></div>
+    <div class="ue"><div class="ue-v">2</div><div class="ue-l">Maquettes UI haute fidelite Maelane integrees</div></div>
+  </div>
+</div>
+</section>
+
+</main>
+</body>
+</html>
