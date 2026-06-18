@@ -107,11 +107,36 @@ function AuthForm() {
   return (
     <div className="
       app-shell
+      relative
       min-h-screen
       aurora-bg
       flex flex-col items-center justify-center
       px-4
     ">
+      {/* Retour vers le site vitrine — évite de rester bloqué sur la page d'auth */}
+      <Link
+        href="/accueil"
+        aria-label="Retour à l'accueil"
+        className="
+          absolute top-4 left-4 z-10
+          inline-flex items-center gap-1.5
+          glass
+          rounded-full
+          pl-2.5 pr-3.5 py-2
+          text-sm font-medium
+          text-[var(--color-brand-black)]
+          cursor-pointer
+          hover:scale-[1.03]
+          transition-all duration-200
+          focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)]
+        "
+      >
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+        </svg>
+        Retour
+      </Link>
+
       {/* Logo */}
       <div className="mb-8">
         <Link href="/accueil">
