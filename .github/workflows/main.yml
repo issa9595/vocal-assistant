@@ -1,0 +1,44 @@
+name: 🚀 CI/CD Lumia
+
+# Pipeline principal : lint → tests → build+push GHCR → scan Trivy → deploy VPS
+# Les jobs lint/tests tournent aussi sur les PR (sans build ni deploy).
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*.*.*"
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  lint:
+    uses: ./.github/workflows/lint.yml
+    secrets: inherit
+
+  tests:
+    uses: ./.github/workflows/tests.yml
+    secrets: inherit
+
+  build-and-push:
+    # Build + push uniquement sur main / tags (pas sur les PR)
+    if: github.event_name != 'pull_request'
+    uses: ./.github/workflows/build.yml
+    needs: [lint, tests]
+    secrets: inherit
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    uses: ./.github/workflows/deploy.yml
+    needs: build-and-push
+    secrets: inherit
+    permissions:
+      contents: read
+      packages: read

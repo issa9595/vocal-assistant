@@ -32,6 +32,21 @@ import type {
 } from "@/types/message";
 
 /**
+ * Événement tel que renvoyé par l'API (dates sérialisées en string JSON)
+ */
+interface ApiEvent {
+  id: string;
+  title: string;
+  start: string;
+  end: string;
+  createdAt: string;
+  source?: "voice" | "manual" | "ai";
+  description?: string;
+  location?: string;
+  meta?: { groupId?: string };
+}
+
+/**
  * Props du composant AiModal
  */
 interface AiModalProps {
@@ -136,7 +151,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
             
             // Mettre à jour le store avec les événements créés (avec leurs IDs Supabase)
             if (createdEvents.length > 0) {
-              const eventsToAdd = createdEvents.map((evt: any) => ({
+              const eventsToAdd = createdEvents.map((evt: ApiEvent) => ({
                 id: evt.id,
                 title: evt.title,
                 start: new Date(evt.start),
@@ -232,7 +247,7 @@ export function AiModal({ isOpen, onClose }: AiModalProps) {
             
             // Mettre à jour le store avec les événements créés (avec leurs IDs Supabase)
             if (createdEvents.length > 0) {
-              const eventsToAdd = createdEvents.map((evt: any) => ({
+              const eventsToAdd = createdEvents.map((evt: ApiEvent) => ({
                 id: evt.id,
                 title: evt.title,
                 start: new Date(evt.start),

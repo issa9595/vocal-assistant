@@ -1,0 +1,53 @@
+# ============================================================
+# .dockerignore — tout ce qui ne doit JAMAIS entrer dans le
+# contexte de build (poids, cache, et surtout SECRETS).
+# ============================================================
+
+# Dépendances (réinstallées proprement dans l'image via npm ci)
+node_modules
+
+# Builds précédents
+.next
+out
+build
+coverage
+*.tsbuildinfo
+
+# Secrets & environnement — CRITIQUE : ne jamais copier dans l'image
+.env
+.env.*
+!.env.example
+*.pem
+
+# Git & CI
+.git
+.github
+.gitignore
+
+# IDE / OS
+.vscode
+.idea
+.DS_Store
+
+# Docker lui-même
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Documentation & fichiers projet non nécessaires au build
+README.md
+docs
+design-system
+*.pdf
+*.html
+Instruction.md
+PROMPT-*.md
+SUPABASE_SETUP.md
+
+# Monitoring (configs montées en volume, pas dans l'image)
+monitoring
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

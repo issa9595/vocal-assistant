@@ -1,0 +1,66 @@
+# ============================================================
+# Règles d'alerte Lumia — 5 alertes actionnables.
+# Chaque alerte pointe vers son runbook (docs/runbooks/).
+# severity: critical → notification Discord immédiate
+# severity: warning  → notification Discord groupée (info)
+# ============================================================
+
+groups:
+  - name: lumia-availability
+    rules:
+      # 1. Conteneur applicatif down (plus vu par cAdvisor depuis 1 min)
+      - alert: LumiaAppDown
+        expr: time() - container_last_seen{name="lumia-app"} > 60
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Le conteneur lumia-app est down"
+          description: "cAdvisor ne voit plus le conteneur lumia-app depuis plus d'1 minute."
+          runbook: "docs/runbooks/service-down.md"
+
+      # 2. Un exporter/service de monitoring ne répond plus
+      - alert: MonitoringTargetDown
+        expr: up == 0
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Target Prometheus down : {{ $labels.job }}"
+          description: "La target {{ $labels.instance }} (job {{ $labels.job }}) ne répond plus depuis 2 minutes."
+          runbook: "docs/runbooks/service-down.md"
+
+  - name: lumia-resources
+    rules:
+      # 3. Disque presque plein (< 10% libre) — cause n°1 de VPS qui meurt
+      - alert: DiskSpaceLow
+        expr: (node_filesystem_avail_bytes{mountpoint="/",fstype!="rootfs"} / node_filesystem_size_bytes{mountpoint="/",fstype!="rootfs"}) * 100 < 10
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Disque plein à plus de 90% sur le VPS"
+          description: "Il reste {{ $value | printf \"%.1f\" }}% d'espace disque sur /."
+          runbook: "docs/runbooks/disk-full.md"
+
+      # 4. Mémoire saturée (> 90% pendant 5 min)
+      - alert: HighMemoryUsage
+        expr: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 > 90
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Mémoire VPS > 90%"
+          description: "Utilisation mémoire à {{ $value | printf \"%.1f\" }}% depuis 5 minutes. Risque d'OOM kill."
+          runbook: "docs/runbooks/service-down.md"
+
+      # 5. Conteneur qui redémarre en boucle (crash loop)
+      - alert: ContainerRestarting
+        expr: increase(container_restart_count{name=~"lumia-.*"}[15m]) > 3
+        for: 0m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Conteneur {{ $labels.name }} en crash loop"
+          description: "{{ $labels.name }} a redémarré plus de 3 fois en 15 minutes."
+          runbook: "docs/runbooks/service-down.md"

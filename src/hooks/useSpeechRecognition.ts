@@ -97,8 +97,8 @@ export function useSpeechRecognition(
 
     // Récupération de l'API (avec préfixe webkit pour Safari)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const SpeechRecognition = (window as any).SpeechRecognition || 
-                              (window as any).webkitSpeechRecognition;
+    const w = window as any;
+    const SpeechRecognition = w.SpeechRecognition || w.webkitSpeechRecognition;
 
     if (!SpeechRecognition) {
       setIsSupported(false);

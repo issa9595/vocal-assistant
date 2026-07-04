@@ -22,6 +22,14 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { Message } from "@/types/message";
 
+/** Message tel que renvoyé par l'API (createdAt sérialisé en string JSON) */
+interface ApiMessage {
+  id: string;
+  role: Message["role"];
+  content: string;
+  createdAt: string;
+}
+
 interface ChatStore {
   messages: Message[];
   conversationId: string | null;
@@ -170,7 +178,7 @@ export const useChatStore = create<ChatStore>()(
           }
 
           const data = await response.json();
-          const messages: Message[] = (data.messages || []).map((msg: any) => ({
+          const messages: Message[] = (data.messages || []).map((msg: ApiMessage) => ({
             id: msg.id,
             role: msg.role,
             content: msg.content,

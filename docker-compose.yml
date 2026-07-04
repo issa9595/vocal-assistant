@@ -1,0 +1,91 @@
+# ============================================================
+# Lumia — Stack locale (développement / test du build prod)
+#
+#   docker compose up -d --build     # build + démarrage
+#   docker compose logs -f app       # logs
+#   docker compose down              # arrêt
+#
+# La base de données est Supabase (managée, hors VPS) : il n'y a
+# donc pas de service Postgres ici — voir docs/adr/002.
+# Syntaxe Compose v2 (pas de clé "version:" obsolète).
+# ============================================================
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Inlinées au build dans le bundle client (valeurs publiques, protégées par RLS)
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+    container_name: lumia-app
+    restart: unless-stopped
+    env_file:
+      - .env # secrets runtime (GEMINI_API_KEY) — jamais commités
+    ports:
+      # Port hôte configurable pour cohabiter avec d'autres projets locaux
+      # (ex: le portfolio sur 3000) :  APP_PORT=3005 docker compose up -d
+      - "${APP_PORT:-3000}:3000"
+    networks:
+      - lumia-internal
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+
+  # ----------------------------------------------------------
+  # Profile "monitoring" : permet de tester la stack d'observabilité
+  # en local avant de la déployer sur le VPS.
+  #   docker compose --profile monitoring up -d
+  # ----------------------------------------------------------
+  prometheus:
+    image: prom/prometheus:v3.9.1
+    container_name: lumia-prometheus
+    restart: unless-stopped
+    profiles: ["monitoring"]
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      - lumia-internal
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:9090/-/healthy"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  grafana:
+    image: grafana/grafana:12.3.1
+    container_name: lumia-grafana
+    restart: unless-stopped
+    profiles: ["monitoring"]
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      # Valeur par défaut acceptable en LOCAL uniquement — en prod
+      # (docker-compose.prod.yml) la variable est obligatoire.
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "3001:3000"
+    networks:
+      - lumia-internal
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+networks:
+  lumia-internal:
+    name: lumia-internal
+    driver: bridge
+
+volumes:
+  prometheus_data:
+  grafana_data:

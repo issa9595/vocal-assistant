@@ -1,0 +1,39 @@
+name: 🚀 Deploy
+
+on:
+  workflow_call:
+
+jobs:
+  deploy:
+    name: 🚀 Deploy to VPS (Infomaniak)
+    runs-on: ubuntu-latest
+    # Environment GitHub avec règle de protection possible
+    # (Settings → Environments → production → required reviewers)
+    environment:
+      name: production
+      url: https://${{ vars.LUMIA_DOMAIN }}
+
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script_stop: true
+          script: |
+            cd ~/projects/lumia
+            # Récupère les derniers fichiers compose/monitoring versionnés
+            git pull --ff-only
+            # Pull de la nouvelle image puis bascule (downtime minimal)
+            docker compose -f docker-compose.prod.yml pull
+            docker compose -f docker-compose.prod.yml up -d --remove-orphans
+            # Nettoyage des vieilles images (garde le disque sain)
+            docker image prune -af --filter "until=168h"
+
+      - name: Vérifier que la prod répond (smoke test)
+        run: |
+          sleep 20
+          curl --fail --silent --show-error --max-time 10 \
+            "https://${{ vars.LUMIA_DOMAIN }}/api/health"

@@ -1,0 +1,200 @@
+# ============================================================
+# Lumia — Stack de production (VPS Infomaniak)
+#
+# Déployée dans /home/<user>/projects/lumia par la CI :
+#   docker compose -f docker-compose.prod.yml pull
+#   docker compose -f docker-compose.prod.yml up -d --remove-orphans
+#
+# Réseaux :
+#   - public_network (externe) : réseau du reverse proxy Nginx Proxy
+#     Manager. Seuls les services exposés au public y sont attachés
+#     (app, grafana, uptime-kuma). AUCUN port publié directement :
+#     tout passe par NPM en HTTPS.
+#   - lumia-internal : réseau privé de la stack (Prometheus,
+#     Alertmanager, exporters) — inaccessible depuis Internet.
+# ============================================================
+
+services:
+  # ----------------------------------------------------------
+  # Application Lumia (image construite et poussée par la CI)
+  # ----------------------------------------------------------
+  app:
+    image: ghcr.io/issa9595/vocal-assistant:latest
+    container_name: lumia-app
+    restart: unless-stopped
+    env_file:
+      - .env # présent uniquement sur le VPS (GEMINI_API_KEY…), jamais commité
+    networks:
+      - public_network
+      - lumia-internal
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 20s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ----------------------------------------------------------
+  # Observabilité — Prometheus + Grafana + exporters
+  # ----------------------------------------------------------
+  prometheus:
+    image: prom/prometheus:v3.9.1
+    container_name: lumia-prometheus
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=15d
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/prometheus/alerts.yml:/etc/prometheus/alerts.yml:ro
+      - prometheus_data:/prometheus
+    networks:
+      - lumia-internal
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:9090/-/healthy"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  alertmanager:
+    image: prom/alertmanager:v0.28.1
+    container_name: lumia-alertmanager
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+    volumes:
+      - ./monitoring/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      # Webhook Discord dans un fichier séparé (gitignoré, présent uniquement
+      # sur le VPS) — référencé via webhook_url_file : aucun secret commité.
+      - ./monitoring/alertmanager/discord_webhook:/etc/alertmanager/discord_webhook:ro
+      - alertmanager_data:/alertmanager
+    networks:
+      - lumia-internal
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:9093/-/healthy"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  grafana:
+    image: grafana/grafana:12.3.1
+    container_name: lumia-grafana
+    restart: unless-stopped
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?GRAFANA_ADMIN_PASSWORD requis}
+      GF_SERVER_ROOT_URL: https://grafana.${LUMIA_DOMAIN}
+      GF_USERS_ALLOW_SIGN_UP: "false"
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
+      - grafana_data:/var/lib/grafana
+    networks:
+      - public_network # exposé via NPM → https://grafana.<domaine>
+      - lumia-internal
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  node-exporter:
+    image: prom/node-exporter:v1.10.2
+    container_name: lumia-node-exporter
+    restart: unless-stopped
+    command:
+      - --path.rootfs=/host
+    pid: host
+    volumes:
+      - /:/host:ro,rslave
+    networks:
+      - lumia-internal
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.53.0
+    container_name: lumia-cadvisor
+    restart: unless-stopped
+    privileged: true
+    devices:
+      - /dev/kmsg
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    networks:
+      - lumia-internal
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"
+
+  # ----------------------------------------------------------
+  # Uptime Kuma — monitoring externe (statut + alertes Discord)
+  # Exposé via NPM → https://status.<domaine>
+  # ----------------------------------------------------------
+  uptime-kuma:
+    image: louislam/uptime-kuma:1.23.16
+    container_name: lumia-uptime-kuma
+    restart: unless-stopped
+    volumes:
+      - uptime_kuma_data:/app/data
+    networks:
+      - public_network
+      - lumia-internal
+    healthcheck:
+      test: ["CMD", "extra/healthcheck"]
+      interval: 60s
+      timeout: 30s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "5m"
+        max-file: "2"
+
+networks:
+  # Réseau du reverse proxy NPM (créé au préalable sur le VPS)
+  public_network:
+    name: public_network
+    external: true
+  # Réseau privé de la stack — jamais exposé
+  lumia-internal:
+    name: lumia-internal
+    driver: bridge
+
+volumes:
+  prometheus_data:
+  alertmanager_data:
+  grafana_data:
+  uptime_kuma_data:

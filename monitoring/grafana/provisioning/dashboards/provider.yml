@@ -1,0 +1,13 @@
+# Provider de dashboards : charge tous les JSON de ce dossier au démarrage.
+apiVersion: 1
+
+providers:
+  - name: lumia-dashboards
+    orgId: 1
+    folder: Lumia
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    options:
+      path: /etc/grafana/provisioning/dashboards
+      foldersFromFilesStructure: false

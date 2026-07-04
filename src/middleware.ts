@@ -90,7 +90,8 @@ export const config = {
      * - _next/image (optimisation d'images)
      * - favicon.ico
      * - fichiers avec extension (svg, png, jpg, etc.)
+     * - api/health (healthcheck Docker/monitoring — pas besoin de session Supabase)
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|api/health|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
