@@ -135,7 +135,7 @@ services:
         max-file: "2"
 
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.53.0
+    image: gcr.io/cadvisor/cadvisor:v0.52.1
     container_name: lumia-cadvisor
     restart: unless-stopped
     privileged: true
