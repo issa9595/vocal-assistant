@@ -1,18 +1,19 @@
-# Lumia — Assistant vocal de gestion de calendrier
+# Lumia : Assistant vocal de gestion de calendrier
 
 Lumia est un assistant vocal intelligent : tu lui parles, il organise ton
 calendrier. Reconnaissance vocale dans le navigateur, compréhension du
 langage naturel via **Google Gemini**, données et authentification sur
 **Supabase** (PostgreSQL + RLS).
 
-**Projet MyDigitalStartup — module DevOps-Docker (Sergent.dev School).**
+**Projet MyDigitalStartup, module DevOps-Docker (Sergent.dev School).**
 
 | Ressource | URL |
 |---|---|
-| App (prod) | `https://<LUMIA_DOMAIN>` |
-| Grafana | `https://grafana.<LUMIA_DOMAIN>` |
-| Statut (Uptime Kuma) | `https://status.<LUMIA_DOMAIN>` |
-| Images Docker | `ghcr.io/issa9595/vocal-assistant` |
+| App (prod) | [lumia.issa.madayev.mds-nantes.fr](https://lumia.issa.madayev.mds-nantes.fr) |
+| Grafana | [grafana.lumia.issa.madayev.mds-nantes.fr](https://grafana.lumia.issa.madayev.mds-nantes.fr) |
+| Statut (Uptime Kuma) | [status.lumia.issa.madayev.mds-nantes.fr](https://status.lumia.issa.madayev.mds-nantes.fr) |
+| Images Docker (GHCR) | [ghcr.io/issa9595/vocal-assistant](https://github.com/issa9595/vocal-assistant/pkgs/container/vocal-assistant) |
+| Pipeline CI/CD | [GitHub Actions](https://github.com/issa9595/vocal-assistant/actions) |
 
 ---
 
@@ -57,7 +58,7 @@ flowchart TB
     KUMA -->|HTTP check| APP
 ```
 
-Points clés : **aucune base de données sur le VPS** (Supabase managé —
+Points clés : **aucune base de données sur le VPS** (Supabase managé,
 voir [ADR 002](docs/adr/002-supabase-manage-plutot-que-db-auto-hebergee.md)),
 **aucun port applicatif publié** (tout passe par NPM), monitoring sur un
 **réseau interne** inaccessible depuis Internet.
@@ -129,7 +130,7 @@ push main ──► 🧹 Lint (ESLint + tsc) ──► 🧪 Tests (Vitest + cove
 | Secret | `SSH_PORT` | Port SSH (22 par défaut) |
 | Secret | `SSH_USER` | Utilisateur de déploiement (non-root) |
 | Secret | `SSH_PRIVATE_KEY` | Clé privée dédiée à la CI |
-| Variable | `LUMIA_DOMAIN` | Domaine de prod (ex. `lumia-app.fr`) |
+| Variable | `LUMIA_DOMAIN` | Domaine de prod (`lumia.issa.madayev.mds-nantes.fr`) |
 | Variable | `NEXT_PUBLIC_SUPABASE_URL` | URL du projet Supabase |
 | Variable | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Clé anon (publique, protégée par RLS) |
 
@@ -143,7 +144,7 @@ Procédure complète (première installation + hardening) :
 En résumé, une fois le VPS provisionné :
 
 ```bash
-# Sur le VPS — première fois uniquement
+# Sur le VPS, première installation uniquement
 git clone https://github.com/issa9595/vocal-assistant.git ~/projects/lumia
 cd ~/projects/lumia
 cp .env.example .env && nano .env                 # secrets prod
@@ -170,12 +171,12 @@ bash scripts/check-vps-security.sh
 | Node Exporter | CPU / RAM / disque / réseau du VPS |
 | cAdvisor | Métriques par conteneur (mémoire, restarts…) |
 | Alertmanager | Routage des alertes → Discord (critical vs warning) |
-| Grafana | Dashboard « Lumia — Vue d'ensemble » provisionné automatiquement |
+| Grafana | Dashboard « Lumia / Vue d'ensemble » provisionné automatiquement |
 | Uptime Kuma | Check HTTP externe de `/api/health` + page de statut |
 
 **5 alertes actionnables** (voir `monitoring/prometheus/alerts.yml`) :
 `LumiaAppDown`, `MonitoringTargetDown`, `DiskSpaceLow`, `HighMemoryUsage`,
-`ContainerRestarting` — chacune liée à un runbook :
+`ContainerRestarting`, chacune liée à un runbook :
 
 - [Service down](docs/runbooks/service-down.md)
 - [Disque plein](docs/runbooks/disk-full.md)
@@ -189,8 +190,8 @@ Dashboard complémentaire recommandé : importer **Node Exporter Full**
 ## 🤝 Contribuer
 
 ```bash
-npm run lint            # ESLint (config Next.js) — bloquant en CI
-npx tsc --noEmit        # vérification TypeScript — bloquante en CI
+npm run lint            # ESLint (config Next.js), bloquant en CI
+npx tsc --noEmit        # vérification TypeScript, bloquante en CI
 npm test                # Vitest en mode watch
 npm run test:coverage   # tests + rapport de couverture (lcov + terminal)
 ```

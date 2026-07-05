@@ -1,5 +1,5 @@
 # ============================================================
-# Règles d'alerte Lumia — 5 alertes actionnables.
+# Règles d'alerte Lumia : 5 alertes actionnables.
 # Chaque alerte pointe vers son runbook (docs/runbooks/).
 # severity: critical → notification Discord immédiate
 # severity: warning  → notification Discord groupée (info)
@@ -36,7 +36,7 @@ groups:
 
   - name: lumia-resources
     rules:
-      # 3. Disque presque plein (< 10% libre) — cause n°1 de VPS qui meurt
+      # 3. Disque presque plein (< 10% libre) : cause n°1 de VPS qui meurt
       - alert: DiskSpaceLow
         expr: (node_filesystem_avail_bytes{mountpoint="/",fstype!="rootfs"} / node_filesystem_size_bytes{mountpoint="/",fstype!="rootfs"}) * 100 < 10
         for: 5m

@@ -1,4 +1,4 @@
-# ADR 003 — Nginx Proxy Manager mutualisé plutôt que Traefik dédié
+# ADR 003 : Nginx Proxy Manager mutualisé plutôt que Traefik dédié
 
 **Statut** : accepté · **Date** : 2026-07-04
 
@@ -16,7 +16,7 @@ Les services exposés de Lumia (app, Grafana, Uptime Kuma) rejoignent
 
 ## Conséquences
 
-+ Un seul composant écoute sur 80/443 pour tout le VPS — pas de conflit
++ Un seul composant écoute sur 80/443 pour tout le VPS, donc pas de conflit
   de ports entre projets
 + Certificats Let's Encrypt renouvelés automatiquement, UI simple
 + Headers de sécurité centralisés par proxy host (onglet Advanced),

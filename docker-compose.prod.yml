@@ -1,5 +1,5 @@
 # ============================================================
-# Lumia — Stack de production (VPS Infomaniak)
+# Lumia, stack de production (VPS Infomaniak)
 #
 # Déployée dans /home/<user>/projects/lumia par la CI :
 #   docker compose -f docker-compose.prod.yml pull
@@ -11,7 +11,7 @@
 #     (app, grafana, uptime-kuma). AUCUN port publié directement :
 #     tout passe par NPM en HTTPS.
 #   - lumia-internal : réseau privé de la stack (Prometheus,
-#     Alertmanager, exporters) — inaccessible depuis Internet.
+#     Alertmanager, exporters) : inaccessible depuis Internet.
 # ============================================================
 
 services:
@@ -40,7 +40,7 @@ services:
         max-file: "3"
 
   # ----------------------------------------------------------
-  # Observabilité — Prometheus + Grafana + exporters
+  # Observabilité : Prometheus + Grafana + exporters
   # ----------------------------------------------------------
   prometheus:
     image: prom/prometheus:v3.9.1
@@ -75,7 +75,7 @@ services:
     volumes:
       - ./monitoring/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
       # Webhook Discord dans un fichier séparé (gitignoré, présent uniquement
-      # sur le VPS) — référencé via webhook_url_file : aucun secret commité.
+      # sur le VPS) : référencé via webhook_url_file : aucun secret commité.
       - ./monitoring/alertmanager/discord_webhook:/etc/alertmanager/discord_webhook:ro
       - alertmanager_data:/alertmanager
     networks:
@@ -160,7 +160,7 @@ services:
         max-file: "2"
 
   # ----------------------------------------------------------
-  # Uptime Kuma — monitoring externe (statut + alertes Discord)
+  # Uptime Kuma : monitoring externe (statut + alertes Discord)
   # Exposé via NPM → https://status.<domaine>
   # ----------------------------------------------------------
   uptime-kuma:
@@ -188,7 +188,7 @@ networks:
   public_network:
     name: public_network
     external: true
-  # Réseau privé de la stack — jamais exposé
+  # Réseau privé de la stack : jamais exposé
   lumia-internal:
     name: lumia-internal
     driver: bridge

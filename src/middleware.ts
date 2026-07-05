@@ -1,6 +1,6 @@
 /**
  * @file middleware.ts
- * @description Middleware Next.js — rafraîchit la session Supabase et protège les routes.
+ * @description Middleware Next.js : rafraîchit la session Supabase et protège les routes.
  *
  * Routes protégées : /app (et sous-routes)
  * - Non connecté → redirect /auth
@@ -41,9 +41,9 @@ export async function middleware(request: NextRequest) {
     }
   );
 
-  // IMPORTANT : utiliser getUser() et non getSession() — getUser() vérifie côté serveur Supabase.
+  // IMPORTANT : utiliser getUser() et non getSession() : getUser() vérifie côté serveur Supabase.
   // Résilience : si Supabase est injoignable (réseau, projet en pause, URL invalide),
-  // on ne plante pas — on traite l'utilisateur comme déconnecté (fail-closed).
+  // on ne plante pas : on traite l'utilisateur comme déconnecté (fail-closed).
   let user = null;
   try {
     const { data } = await supabase.auth.getUser();
@@ -90,7 +90,7 @@ export const config = {
      * - _next/image (optimisation d'images)
      * - favicon.ico
      * - fichiers avec extension (svg, png, jpg, etc.)
-     * - api/health (healthcheck Docker/monitoring — pas besoin de session Supabase)
+     * - api/health (healthcheck Docker/monitoring : pas besoin de session Supabase)
      */
     "/((?!_next/static|_next/image|favicon.ico|api/health|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],

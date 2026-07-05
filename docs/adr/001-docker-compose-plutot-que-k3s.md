@@ -1,4 +1,4 @@
-# ADR 001 — Docker Compose plutôt que K3s pour la production
+# ADR 001 : Docker Compose plutôt que K3s pour la production
 
 **Statut** : accepté · **Date** : 2026-07-04
 
@@ -18,7 +18,7 @@ Orchestration en production avec **Docker Compose** (fichier
 ## Conséquences
 
 + Simplicité : un seul fichier YAML, déploiement en 2 commandes (`pull` + `up -d`)
-+ ~300 Mo de RAM économisés par rapport à K3s — significatif sur un VPS mutualisé avec un autre projet
++ ~300 Mo de RAM économisés par rapport à K3s, significatif sur un VPS mutualisé avec un autre projet
 + Cohérent avec l'existant du VPS (le portfolio est déjà en Compose + NPM)
 + Rollback trivial : `docker compose up -d` avec un tag d'image précédent
 - Pas de scaling multi-nodes ni de rolling update natif (bref downtime au `up -d`)

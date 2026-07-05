@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ============================================================
-# Lumia — Assistant vocal (Next.js 16, App Router)
+# Lumia, assistant vocal (Next.js 16, App Router)
 # Image multi-stage : deps → build → runtime alpine non-root
 # ============================================================
 
@@ -10,7 +10,7 @@
 ARG NODE_VERSION=24.13.0-alpine
 
 # ============================================================
-# Stage 1 — Installation des dépendances
+# Stage 1 : Installation des dépendances
 # ============================================================
 FROM node:${NODE_VERSION} AS deps
 
@@ -26,7 +26,7 @@ RUN --mount=type=cache,target=/root/.npm \
     npm ci --no-audit --no-fund
 
 # ============================================================
-# Stage 2 — Build Next.js (mode standalone)
+# Stage 2 : Build Next.js (mode standalone)
 # ============================================================
 FROM node:${NODE_VERSION} AS builder
 
@@ -49,7 +49,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 # ============================================================
-# Stage 3 — Runtime minimal
+# Stage 3 : Runtime minimal
 # ============================================================
 FROM node:${NODE_VERSION} AS runner
 

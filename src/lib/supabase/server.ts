@@ -4,7 +4,7 @@
  * Utilise createServerClient de @supabase/ssr pour lire/écrire la session via cookies.
  *
  * IMPORTANT : appeler createClient() à l'intérieur de chaque handler,
- * jamais en dehors — cookies() est contextuel à la requête.
+ * jamais en dehors : cookies() est contextuel à la requête.
  */
 
 import { createServerClient } from "@supabase/ssr";
@@ -36,7 +36,7 @@ export async function createClient() {
               cookieStore.set(name, value, options)
             );
           } catch {
-            // Appelé depuis un Server Component — lecture seule, pas d'erreur à remonter.
+            // Appelé depuis un Server Component : lecture seule, pas d'erreur à remonter.
           }
         },
       },

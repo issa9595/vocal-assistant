@@ -1,6 +1,6 @@
 /**
  * @file route.ts
- * @description Endpoint de healthcheck — utilisé par le HEALTHCHECK Docker,
+ * @description Endpoint de healthcheck : utilisé par le HEALTHCHECK Docker,
  * Prometheus (blackbox) et Uptime Kuma. Ne dépend d'aucun service externe
  * pour éviter les faux positifs (si Supabase est down, l'app tourne quand même).
  */

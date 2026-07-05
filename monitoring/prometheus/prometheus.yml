@@ -1,5 +1,5 @@
 # ============================================================
-# Prometheus — configuration Lumia
+# Prometheus : configuration Lumia
 # Scrape les exporters sur le réseau privé lumia-internal.
 # ============================================================
 

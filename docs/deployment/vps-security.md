@@ -1,4 +1,4 @@
-# Sécurité du VPS (Infomaniak) — hardening & configuration NPM
+# Sécurité du VPS (Infomaniak) : hardening et configuration NPM
 
 Le VPS héberge déjà le portfolio derrière **Nginx Proxy Manager (NPM)**.
 Ce document décrit le durcissement appliqué et comment le **vérifier**
@@ -73,36 +73,68 @@ sudo fail2ban-client status sshd   # vérifie le jail actif
 
 | Domaine | Forward Hostname | Port | Options |
 |---|---|---|---|
-| `<LUMIA_DOMAIN>` | `lumia-app` | 3000 | Websockets ON, Block Common Exploits ON |
-| `grafana.<LUMIA_DOMAIN>` | `lumia-grafana` | 3000 | Websockets ON |
-| `status.<LUMIA_DOMAIN>` | `lumia-uptime-kuma` | 3001 | Websockets ON |
+| `lumia.issa.madayev.mds-nantes.fr` | `lumia-app` | 3000 | Websockets ON, Block Common Exploits ON |
+| `grafana.lumia.issa.madayev.mds-nantes.fr` | `lumia-grafana` | 3000 | Websockets ON |
+| `status.lumia.issa.madayev.mds-nantes.fr` | `lumia-uptime-kuma` | 3001 | Websockets ON |
 
 Pour chaque host, onglet **SSL** :
 - Certificat **Let's Encrypt** (Request a new certificate)
 - ✅ Force SSL (redirect HTTP → HTTPS)
 - ✅ HTTP/2 Support
-- ✅ HSTS Enabled (+ subdomains)
+- ⬜ HSTS Enabled : laissé décoché. Le header HSTS est posé par le bloc
+  Advanced ci-dessous (version plus complète avec includeSubDomains et
+  preload) ; cocher la case créerait un header en double.
 
 > NPM joint les conteneurs par leur **nom** car ils partagent le réseau
 > Docker externe `public_network`.
 
 ### Headers de sécurité (onglet Advanced de chaque Proxy Host)
 
+Piège nginx important : NPM ajoute son propre `add_header X-Served-By` dans
+le bloc `location /` qu'il génère. Or en nginx, dès qu'un bloc location
+contient un `add_header`, il ignore tous ceux du niveau serveur. Des
+`add_header` posés "nus" dans l'onglet Advanced ne sortent donc jamais.
+La solution : déclarer soi-même le `location /` (NPM le détecte et ne
+génère pas le sien) avec les headers à l'intérieur, et laisser
+`include conf.d/include/proxy.conf` gérer le proxy_pass et les en-têtes
+de forwarding (ne PAS ajouter de proxy_pass manuel : il est déjà dans
+l'include, le doubler invalide la config).
+
+Bloc Advanced du host de **l'app Lumia** (CSP complète, micro autorisé
+pour l'assistant vocal) :
+
 ```nginx
-# Headers de sécurité — vise la note A sur Mozilla Observatory
-add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
-add_header X-Frame-Options "DENY" always;
-add_header X-Content-Type-Options "nosniff" always;
-add_header Referrer-Policy "strict-origin-when-cross-origin" always;
-add_header Permissions-Policy "camera=(), geolocation=(), payment=()" always;
-# Note : microphone non bloqué sur l'app (assistant vocal !)
-add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://generativelanguage.googleapis.com; font-src 'self' data:; frame-ancestors 'none'" always;
+location / {
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+    add_header X-Frame-Options "DENY" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "camera=(), geolocation=(), payment=(), microphone=(self)" always;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; font-src 'self' data:; frame-ancestors 'none'" always;
+
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $http_connection;
+    include conf.d/include/proxy.conf;
+}
 ```
 
-Sur le proxy host de **l'app Lumia**, remplacer la ligne Permissions-Policy par :
+Bloc Advanced des hosts **Grafana** et **Uptime Kuma** (sans CSP, qui
+casserait leurs interfaces ; micro bloqué) :
 
 ```nginx
-add_header Permissions-Policy "camera=(), geolocation=(), payment=(), microphone=(self)" always;
+location / {
+    add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+    add_header X-Frame-Options "DENY" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Permissions-Policy "camera=(), geolocation=(), payment=(), microphone=()" always;
+
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $http_connection;
+    include conf.d/include/proxy.conf;
+}
 ```
 
 ### Port d'admin NPM (81)
@@ -132,11 +164,11 @@ nmap -Pn <VPS_IP>
 # Attendu : seuls 22, 80, 443 open
 
 # Headers HTTPS
-curl -sI https://<LUMIA_DOMAIN> | grep -iE "strict-transport|x-frame|content-security"
+curl -sI https://lumia.issa.madayev.mds-nantes.fr | grep -iE "strict-transport|x-frame|content-security"
 ```
 
-- Mozilla Observatory : https://developer.mozilla.org/en-US/observatory — viser **A**
-- SSL Labs : https://www.ssllabs.com/ssltest/ — viser **A**
+- Mozilla Observatory : https://developer.mozilla.org/en-US/observatory : viser **A**
+- SSL Labs : https://www.ssllabs.com/ssltest/ : viser **A**
 
 ## 7. Installation initiale de Lumia sur le VPS
 
@@ -160,4 +192,4 @@ docker compose -f docker-compose.prod.yml ps          # tous "healthy"
 ```
 
 Ensuite : créer les Proxy Hosts dans NPM (§4), configurer Uptime Kuma
-(monitor HTTPS sur `https://<LUMIA_DOMAIN>/api/health` + notification Discord).
+(monitor HTTPS sur `https://lumia.issa.madayev.mds-nantes.fr/api/health` + notification Discord).

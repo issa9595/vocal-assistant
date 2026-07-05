@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ============================================================
-# check-vps-security.sh — audit rapide du hardening du VPS.
+# check-vps-security.sh : audit rapide du hardening du VPS.
 # À exécuter SUR le VPS :  bash scripts/check-vps-security.sh
 # ============================================================
 set -u

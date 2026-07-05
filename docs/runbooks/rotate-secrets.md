@@ -19,7 +19,7 @@
 # b. Sur le VPS :
 cd ~/projects/lumia && nano .env      # remplacer GEMINI_API_KEY
 docker compose -f docker-compose.prod.yml up -d app
-curl -s https://<LUMIA_DOMAIN>/api/health
+curl -s https://lumia.issa.madayev.mds-nantes.fr/api/health
 # c. Révoquer l'ancienne clé dans AI Studio SEULEMENT après vérification
 ```
 

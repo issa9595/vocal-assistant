@@ -1,12 +1,12 @@
 # ============================================================
-# Lumia — Stack locale (développement / test du build prod)
+# Lumia, stack locale (développement / test du build prod)
 #
 #   docker compose up -d --build     # build + démarrage
 #   docker compose logs -f app       # logs
 #   docker compose down              # arrêt
 #
 # La base de données est Supabase (managée, hors VPS) : il n'y a
-# donc pas de service Postgres ici — voir docs/adr/002.
+# donc pas de service Postgres ici : voir docs/adr/002.
 # Syntaxe Compose v2 (pas de clé "version:" obsolète).
 # ============================================================
 
@@ -22,7 +22,7 @@ services:
     container_name: lumia-app
     restart: unless-stopped
     env_file:
-      - .env # secrets runtime (GEMINI_API_KEY) — jamais commités
+      - .env # secrets runtime (GEMINI_API_KEY) : jamais commités
     ports:
       # Port hôte configurable pour cohabiter avec d'autres projets locaux
       # (ex: le portfolio sur 3000) :  APP_PORT=3005 docker compose up -d
@@ -65,7 +65,7 @@ services:
     profiles: ["monitoring"]
     environment:
       GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
-      # Valeur par défaut acceptable en LOCAL uniquement — en prod
+      # Valeur par défaut acceptable en LOCAL uniquement : en prod
       # (docker-compose.prod.yml) la variable est obligatoire.
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:-admin}
     volumes:

@@ -16,7 +16,7 @@ const eslintConfig = defineConfig([
   {
     rules: {
       // Règle stylistique : les apostrophes du texte français (l', d', n'…)
-      // sont valides en JSX — les échapper en &apos; nuit à la lisibilité.
+      // sont valides en JSX : les échapper en &apos; nuit à la lisibilité.
       "react/no-unescaped-entities": "off",
       // Passé en warning (non bloquant en CI) : le refactoring de ces
       // composants (setState dans useEffect) est suivi comme dette technique,

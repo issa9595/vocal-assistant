@@ -1,5 +1,5 @@
 # ============================================================
-# .dockerignore — tout ce qui ne doit JAMAIS entrer dans le
+# .dockerignore : tout ce qui ne doit JAMAIS entrer dans le
 # contexte de build (poids, cache, et surtout SECRETS).
 # ============================================================
 
@@ -13,7 +13,7 @@ build
 coverage
 *.tsbuildinfo
 
-# Secrets & environnement — CRITIQUE : ne jamais copier dans l'image
+# Secrets & environnement : CRITIQUE : ne jamais copier dans l'image
 .env
 .env.*
 !.env.example

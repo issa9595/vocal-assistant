@@ -1,12 +1,12 @@
 # ============================================================
-# Alertmanager — routage des alertes Lumia vers Discord.
+# Alertmanager : routage des alertes Lumia vers Discord.
 #
 # Routage par sévérité :
 #   critical → canal Discord, renotifié toutes les 30 min (urgence)
 #   warning  → canal Discord, groupé, renotifié toutes les 4 h (info)
 #
 # Le webhook est lu depuis un FICHIER (discord_webhook, gitignoré)
-# présent uniquement sur le VPS — aucun secret dans ce fichier.
+# présent uniquement sur le VPS : aucun secret dans ce fichier.
 # ============================================================
 
 route:
