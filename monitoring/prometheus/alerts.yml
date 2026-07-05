@@ -8,9 +8,11 @@
 groups:
   - name: lumia-availability
     rules:
-      # 1. Conteneur applicatif down (plus vu par cAdvisor depuis 1 min)
+      # 1. Conteneur applicatif down : quand un conteneur s'arrête, sa série
+      # cAdvisor disparaît (staleness) — absent() est le seul pattern fiable,
+      # une comparaison sur container_last_seen ne renverrait aucune donnée.
       - alert: LumiaAppDown
-        expr: time() - container_last_seen{name="lumia-app"} > 60
+        expr: absent(container_last_seen{name="lumia-app"})
         for: 1m
         labels:
           severity: critical
