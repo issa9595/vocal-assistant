@@ -224,3 +224,6 @@ Le fichier `.env` ne doit **jamais** être commité.
   [disque plein](docs/runbooks/disk-full.md) ·
   [rotation secrets](docs/runbooks/rotate-secrets.md)
 - **Sécurité VPS & NPM** : [docs/deployment/vps-security.md](docs/deployment/vps-security.md)
+
+
+Proof of deployment
