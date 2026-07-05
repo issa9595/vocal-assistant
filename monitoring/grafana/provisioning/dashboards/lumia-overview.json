@@ -13,7 +13,7 @@
       "datasource": { "type": "prometheus", "uid": "prometheus" },
       "targets": [
         {
-          "expr": "clamp_max(60 - (time() - container_last_seen{name=\"lumia-app\"}), 1)",
+          "expr": "(time() - container_last_seen{name=\"lumia-app\"} < bool 90) or on() vector(0)",
           "legendFormat": "app up"
         }
       ],
@@ -27,8 +27,7 @@
             ]
           },
           "mappings": [
-            { "type": "range", "options": { "from": 1, "to": 1000, "result": { "text": "UP" } } },
-            { "type": "range", "options": { "from": -100000, "to": 0.99, "result": { "text": "DOWN" } } }
+            { "type": "value", "options": { "1": { "text": "UP" }, "0": { "text": "DOWN" } } }
           ]
         }
       }
@@ -126,7 +125,8 @@
           "expr": "increase(container_restart_count{name=~\"lumia-.*\"}[15m])",
           "legendFormat": "{{name}}"
         }
-      ]
+      ],
+      "fieldConfig": { "defaults": { "noValue": "0" } }
     },
     {
       "id": 8,
