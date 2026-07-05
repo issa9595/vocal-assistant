@@ -226,4 +226,4 @@ Le fichier `.env` ne doit **jamais** être commité.
 - **Sécurité VPS & NPM** : [docs/deployment/vps-security.md](docs/deployment/vps-security.md)
 
 
-Proof of deployment
+Proof of deployment 2
