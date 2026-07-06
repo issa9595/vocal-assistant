@@ -21,8 +21,9 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script_stop: true
           script: |
+            # set -e remplace script_stop (déprécié) : stoppe à la 1re erreur
+            set -euo pipefail
             cd ~/projects/lumia
             # Récupère les derniers fichiers compose/monitoring versionnés
             git pull --ff-only

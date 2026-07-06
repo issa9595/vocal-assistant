@@ -23,3 +23,8 @@ jobs:
 
       - name: Type check
         run: npx tsc --noEmit
+
+      # Gate sécurité : échoue si une dépendance de PROD a une vuln high/critical.
+      # (Les vulns dev-only ne bloquent pas : elles ne partent pas en prod.)
+      - name: Audit des dépendances (prod, high+)
+        run: npm audit --omit=dev --audit-level=high

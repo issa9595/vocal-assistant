@@ -9,6 +9,10 @@
 
 import { NextResponse } from "next/server";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
+import { checkRateLimit } from "@/lib/rate-limit";
+
+/** Taille max du titre d'une conversation. */
+const MAX_TITLE_LENGTH = 200;
 
 /**
  * GET /api/conversations
@@ -72,8 +76,29 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
     }
 
+    // Rate limit : borne la création de conversations par utilisateur.
+    const rate = checkRateLimit(`conversations-write:${user.id}`, {
+      limit: 30,
+      windowMs: 60_000,
+    });
+    if (!rate.allowed) {
+      return NextResponse.json(
+        { error: "Trop de requêtes, réessayez dans quelques instants." },
+        { status: 429, headers: { "Retry-After": String(rate.retryAfterSeconds) } }
+      );
+    }
+
     const body = await request.json();
     const { title } = body;
+
+    if (title !== undefined && title !== null) {
+      if (typeof title !== "string" || title.length > MAX_TITLE_LENGTH) {
+        return NextResponse.json(
+          { error: `title invalide (chaîne de ${MAX_TITLE_LENGTH} caractères max)` },
+          { status: 400 }
+        );
+      }
+    }
 
     const { data, error } = await supabase
       .from("conversations")

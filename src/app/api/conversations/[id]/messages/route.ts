@@ -9,6 +9,10 @@
 
 import { NextResponse } from "next/server";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
+import { checkRateLimit } from "@/lib/rate-limit";
+
+/** Taille max d'un message stocké (anti-abus stockage). */
+const MAX_CONTENT_LENGTH = 10_000;
 
 /**
  * GET /api/conversations/[id]/messages
@@ -80,13 +84,32 @@ export async function POST(
       return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
     }
 
+    // Rate limit : borne le volume d'écritures par utilisateur.
+    const rate = checkRateLimit(`messages-write:${user.id}`, {
+      limit: 60,
+      windowMs: 60_000,
+    });
+    if (!rate.allowed) {
+      return NextResponse.json(
+        { error: "Trop de requêtes, réessayez dans quelques instants." },
+        { status: 429, headers: { "Retry-After": String(rate.retryAfterSeconds) } }
+      );
+    }
+
     const { id } = await params;
     const body = await request.json();
     const { role, content } = body;
 
-    if (!role || !content) {
+    if (!role || !content || typeof content !== "string") {
       return NextResponse.json(
         { error: "role et content sont requis" },
+        { status: 400 }
+      );
+    }
+
+    if (content.length > MAX_CONTENT_LENGTH) {
+      return NextResponse.json(
+        { error: `content trop long (max ${MAX_CONTENT_LENGTH} caractères)` },
         { status: 400 }
       );
     }

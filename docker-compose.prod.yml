@@ -96,10 +96,16 @@ services:
     container_name: lumia-grafana
     restart: unless-stopped
     environment:
-      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      # User admin requis explicitement (pas de fallback "admin" : Grafana est
+      # exposé publiquement, un identifiant devinable facilite le bruteforce).
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:?GRAFANA_ADMIN_USER requis (éviter "admin")}
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?GRAFANA_ADMIN_PASSWORD requis}
       GF_SERVER_ROOT_URL: https://grafana.${LUMIA_DOMAIN}
       GF_USERS_ALLOW_SIGN_UP: "false"
+      # Durcissement session/cookies
+      GF_SECURITY_COOKIE_SECURE: "true"
+      GF_SECURITY_DISABLE_GRAVATAR: "true"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
     volumes:
       - ./monitoring/grafana/provisioning:/etc/grafana/provisioning:ro
       - grafana_data:/var/lib/grafana

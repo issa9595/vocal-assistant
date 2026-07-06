@@ -9,7 +9,13 @@
 
 import { NextResponse } from "next/server";
 import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 import type { CalendarEvent } from "@/types/message";
+
+/** Bornes anti-abus sur les écritures. */
+const MAX_EVENTS_PER_REQUEST = 50;
+const MAX_TITLE_LENGTH = 300;
+const MAX_TEXT_LENGTH = 2_000;
 
 /**
  * GET /api/events
@@ -98,10 +104,45 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
     }
 
+    // Rate limit : borne le volume d'écritures par utilisateur.
+    const rate = checkRateLimit(`events-write:${user.id}`, {
+      limit: 60,
+      windowMs: 60_000,
+    });
+    if (!rate.allowed) {
+      return NextResponse.json(
+        { error: "Trop de requêtes, réessayez dans quelques instants." },
+        { status: 429, headers: { "Retry-After": String(rate.retryAfterSeconds) } }
+      );
+    }
+
     const body = await request.json();
     const { events } = body;
 
     const eventsToInsert = Array.isArray(events) ? events : [events];
+
+    // Validation : nombre d'évènements et taille des champs bornés.
+    if (eventsToInsert.length === 0 || eventsToInsert.length > MAX_EVENTS_PER_REQUEST) {
+      return NextResponse.json(
+        { error: `Entre 1 et ${MAX_EVENTS_PER_REQUEST} évènements par requête` },
+        { status: 400 }
+      );
+    }
+    for (const event of eventsToInsert) {
+      if (
+        !event ||
+        typeof event.title !== "string" ||
+        !event.title.trim() ||
+        event.title.length > MAX_TITLE_LENGTH ||
+        (typeof event.description === "string" && event.description.length > MAX_TEXT_LENGTH) ||
+        (typeof event.location === "string" && event.location.length > MAX_TEXT_LENGTH)
+      ) {
+        return NextResponse.json(
+          { error: "Évènement invalide (titre requis, tailles maximales dépassées)" },
+          { status: 400 }
+        );
+      }
+    }
 
     const insertData = eventsToInsert.map((event: Omit<CalendarEvent, "id" | "createdAt">) => ({
       id: `evt_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,

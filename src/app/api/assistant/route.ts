@@ -16,6 +16,8 @@ import { NextResponse } from "next/server";
 import { GoogleGenAI, type FunctionDeclaration } from "@google/genai";
 import type { AssistantResponse, AssistantAction, GeminiRequestPayload } from "@/types/message";
 import { getCurrentDateTimeEuropeParis } from "@/lib/date-utils";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase/server";
+import { checkRateLimit } from "@/lib/rate-limit";
 
 /**
  * Configuration de l'API Gemini
@@ -391,26 +393,141 @@ function getFallbackResponse(userMessage: string): AssistantResponse {
   };
 }
 
+/** Bornes de validation du payload (anti-abus : taille, nombre d'items). */
+const LIMITS = {
+  userMessage: 4_000,
+  historyItems: 20,
+  historyContent: 4_000,
+  events: 200,
+  eventField: 300,
+} as const;
+
+const VIEW_MODES = ["day", "week", "month", "year"] as const;
+
+/** Date ISO valide et raisonnable (évite les valeurs absurdes injectées dans le prompt). */
+function isValidIsoDate(value: unknown): value is string {
+  if (typeof value !== "string" || value.length > 40) return false;
+  const time = Date.parse(value);
+  return !isNaN(time);
+}
+
+/**
+ * Validation stricte du payload de /api/assistant, sans dépendance externe.
+ * Tout ce qui est interpolé dans le prompt système est typé et borné.
+ */
+function parseAssistantPayload(
+  raw: unknown
+): { ok: true; payload: GeminiRequestPayload } | { ok: false; error: string } {
+  if (typeof raw !== "object" || raw === null) {
+    return { ok: false, error: "Body JSON invalide" };
+  }
+  const b = raw as Record<string, unknown>;
+
+  if (typeof b.userMessage !== "string" || !b.userMessage.trim()) {
+    return { ok: false, error: "Message utilisateur requis" };
+  }
+  if (b.userMessage.length > LIMITS.userMessage) {
+    return { ok: false, error: `Message trop long (max ${LIMITS.userMessage} caractères)` };
+  }
+
+  if (!Array.isArray(b.conversationHistory)) {
+    return { ok: false, error: "conversationHistory doit être un tableau" };
+  }
+  // On ne garde que les N derniers messages : borne le coût Gemini
+  // et la surface d'injection de prompt.
+  const history = b.conversationHistory.slice(-LIMITS.historyItems);
+  for (const msg of history) {
+    const m = msg as Record<string, unknown>;
+    if (
+      (m.role !== "user" && m.role !== "assistant") ||
+      typeof m.content !== "string" ||
+      m.content.length > LIMITS.historyContent
+    ) {
+      return { ok: false, error: "conversationHistory contient un message invalide" };
+    }
+  }
+
+  if (!Array.isArray(b.currentEvents) || b.currentEvents.length > LIMITS.events) {
+    return { ok: false, error: `currentEvents invalide (max ${LIMITS.events} évènements)` };
+  }
+  for (const ev of b.currentEvents) {
+    const e = ev as Record<string, unknown>;
+    if (
+      typeof e.id !== "string" ||
+      typeof e.title !== "string" ||
+      e.id.length > LIMITS.eventField ||
+      e.title.length > LIMITS.eventField ||
+      !isValidIsoDate(e.start) ||
+      !isValidIsoDate(e.end)
+    ) {
+      return { ok: false, error: "currentEvents contient un évènement invalide" };
+    }
+  }
+
+  if (!VIEW_MODES.includes(b.viewMode as (typeof VIEW_MODES)[number])) {
+    return { ok: false, error: "viewMode invalide" };
+  }
+  if (!isValidIsoDate(b.referenceDate)) {
+    return { ok: false, error: "referenceDate invalide" };
+  }
+
+  return {
+    ok: true,
+    payload: {
+      userMessage: b.userMessage,
+      conversationHistory: history as GeminiRequestPayload["conversationHistory"],
+      currentEvents: b.currentEvents as GeminiRequestPayload["currentEvents"],
+      viewMode: b.viewMode as GeminiRequestPayload["viewMode"],
+      referenceDate: b.referenceDate as string,
+    },
+  };
+}
+
 /**
  * Route POST pour traiter les messages de l'utilisateur
  */
 export async function POST(request: Request) {
   try {
-    // Parse le body de la requête
-    const body: GeminiRequestPayload = await request.json();
-    const { userMessage, conversationHistory, currentEvents, viewMode, referenceDate } = body;
-    
-    // Calculer la date/heure actuelle en Europe/Paris
-    // Si `now` n'est pas fourni dans le payload, on le calcule côté serveur
-    const now = body.now || getCurrentDateTimeEuropeParis();
-
-    // Validation
-    if (!userMessage || typeof userMessage !== "string") {
+    // --- Authentification : cette route consomme la clé Gemini (coûteuse),
+    // elle est donc réservée aux utilisateurs connectés. ---
+    if (!isSupabaseConfigured()) {
       return NextResponse.json(
-        { error: "Message utilisateur requis" },
-        { status: 400 }
+        { error: "Supabase n'est pas configuré." },
+        { status: 503 }
       );
     }
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: "Non autorisé" }, { status: 401 });
+    }
+
+    // --- Rate limiting : protège le quota Gemini (par utilisateur) ---
+    const rate = checkRateLimit(`assistant:${user.id}`, {
+      limit: 10,
+      windowMs: 60_000,
+    });
+    if (!rate.allowed) {
+      return NextResponse.json(
+        { error: "Trop de requêtes, réessayez dans quelques instants." },
+        {
+          status: 429,
+          headers: { "Retry-After": String(rate.retryAfterSeconds) },
+        }
+      );
+    }
+
+    // Parse et validation stricte du body (types, tailles, bornes)
+    const parsed = parseAssistantPayload(await request.json());
+    if (!parsed.ok) {
+      return NextResponse.json({ error: parsed.error }, { status: 400 });
+    }
+    const body: GeminiRequestPayload = parsed.payload;
+    const { userMessage, conversationHistory, currentEvents, viewMode, referenceDate } = body;
+
+    // Date/heure de référence : TOUJOURS calculée côté serveur
+    // (le client ne doit pas pouvoir falsifier "maintenant").
+    const now = getCurrentDateTimeEuropeParis();
 
     // Si l'API Gemini n'est pas configurée, utilise le fallback
     if (!genAI || !API_KEY) {
